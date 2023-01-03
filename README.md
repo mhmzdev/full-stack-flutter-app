@@ -1,4 +1,4 @@
-### Full Stack Chat App
+### Full Stack Social Media App (in-progress)
 Trying to develop full-stack flutter application with `dart_frog` as backend
 
 - client/
