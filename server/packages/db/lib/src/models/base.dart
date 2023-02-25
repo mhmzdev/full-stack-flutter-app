@@ -1,2 +1,2 @@
-export 'user.dart';
-export 'user.schema.g.dart';
+export 'user/user.dart';
+export 'user/user.schema.g.dart';
