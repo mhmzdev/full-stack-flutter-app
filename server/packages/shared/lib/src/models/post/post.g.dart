@@ -1,0 +1,37 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'post.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
+      id: json['id'] as int,
+      uid: json['uid'] as int,
+      caption: json['caption'] as String,
+      hasImage: json['hasImage'] as bool? ?? false,
+      imageUrl: json['imageUrl'] as String? ?? '',
+      hasVideo: json['hasVideo'] as bool? ?? false,
+      videoUrl: json['videoUrl'] as String? ?? '',
+      likes: (json['likes'] as List<dynamic>?)?.map((e) => e as int).toList() ??
+          const [],
+      comments: (json['comments'] as List<dynamic>?)
+              ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      createdAt: DateTime.parse(json['createdAt'] as String),
+    );
+
+Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
+      'id': instance.id,
+      'uid': instance.uid,
+      'caption': instance.caption,
+      'hasImage': instance.hasImage,
+      'imageUrl': instance.imageUrl,
+      'hasVideo': instance.hasVideo,
+      'videoUrl': instance.videoUrl,
+      'likes': instance.likes,
+      'comments': instance.comments,
+      'createdAt': instance.createdAt.toIso8601String(),
+    };
