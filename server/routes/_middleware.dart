@@ -9,7 +9,7 @@ ENV variables
 
 */
 
-final db = Database(
+final database = Database(
   host: 'localhost',
   port: 5432,
   database: 'postgres',
@@ -20,5 +20,5 @@ final db = Database(
 );
 
 Handler middleware(Handler handler) {
-  return handler.use(provider<Database>((_) => db));
+  return handler.use(provider<Database>((_) => database));
 }
