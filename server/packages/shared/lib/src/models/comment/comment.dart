@@ -8,6 +8,7 @@ part 'comment.g.dart';
 class Comment with _$Comment {
   const factory Comment({
     required int id,
+    required int uid,
     required String content,
   }) = _Comment;
 
@@ -15,5 +16,5 @@ class Comment with _$Comment {
       _$CommentFromJson(json);
 
   factory Comment.fromDb(db.Comment comment) =>
-      Comment(id: comment.id, content: comment.content);
+      Comment(id: comment.id, uid: comment.uid, content: comment.content);
 }

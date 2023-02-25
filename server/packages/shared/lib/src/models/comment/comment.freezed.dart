@@ -21,6 +21,7 @@ Comment _$CommentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Comment {
   int get id => throw _privateConstructorUsedError;
+  int get uid => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -33,7 +34,7 @@ abstract class $CommentCopyWith<$Res> {
   factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
       _$CommentCopyWithImpl<$Res, Comment>;
   @useResult
-  $Res call({int id, String content});
+  $Res call({int id, int uid, String content});
 }
 
 /// @nodoc
@@ -50,12 +51,17 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   @override
   $Res call({
     Object? id = null,
+    Object? uid = null,
     Object? content = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as int,
       content: null == content
           ? _value.content
@@ -72,7 +78,7 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
       __$$_CommentCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String content});
+  $Res call({int id, int uid, String content});
 }
 
 /// @nodoc
@@ -86,12 +92,17 @@ class __$$_CommentCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? uid = null,
     Object? content = null,
   }) {
     return _then(_$_Comment(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as int,
       content: null == content
           ? _value.content
@@ -104,7 +115,8 @@ class __$$_CommentCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Comment implements _Comment {
-  const _$_Comment({required this.id, required this.content});
+  const _$_Comment(
+      {required this.id, required this.uid, required this.content});
 
   factory _$_Comment.fromJson(Map<String, dynamic> json) =>
       _$$_CommentFromJson(json);
@@ -112,11 +124,13 @@ class _$_Comment implements _Comment {
   @override
   final int id;
   @override
+  final int uid;
+  @override
   final String content;
 
   @override
   String toString() {
-    return 'Comment(id: $id, content: $content)';
+    return 'Comment(id: $id, uid: $uid, content: $content)';
   }
 
   @override
@@ -125,12 +139,13 @@ class _$_Comment implements _Comment {
         (other.runtimeType == runtimeType &&
             other is _$_Comment &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.content, content) || other.content == content));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, content);
+  int get hashCode => Object.hash(runtimeType, id, uid, content);
 
   @JsonKey(ignore: true)
   @override
@@ -148,12 +163,16 @@ class _$_Comment implements _Comment {
 
 abstract class _Comment implements Comment {
   const factory _Comment(
-      {required final int id, required final String content}) = _$_Comment;
+      {required final int id,
+      required final int uid,
+      required final String content}) = _$_Comment;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
 
   @override
   int get id;
+  @override
+  int get uid;
   @override
   String get content;
   @override
