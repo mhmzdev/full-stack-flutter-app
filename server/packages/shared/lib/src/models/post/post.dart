@@ -26,12 +26,8 @@ class Post with _$Post {
         id: post.id,
         uid: post.uid,
         caption: post.caption,
-        hasImage: post.hasImage ?? false,
-        imageUrl: post.imageUrl ?? '',
-        hasVideo: post.hasVideo ?? false,
-        videoUrl: post.videoUrl ?? '',
         likes: post.likes,
-        comments: post.comments.map((e) => Comment.fromDb(e)).toList(),
+        comments: post.comments.map(Comment.fromDb).toList(),
         createdAt: post.createdAt,
       );
 }

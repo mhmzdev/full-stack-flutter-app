@@ -65,10 +65,8 @@ Future<Response> _put(RequestContext context, int id, db.User user) async {
 
   await database.users.updateOne(request);
 
-  final sharedUser = User.fromDb(userToBeUpdated);
-
   return Response.json(
-    body: sharedUser.toJson(),
+    body: userToBeUpdated.toJson(),
   );
 }
 
