@@ -1,3 +1,3 @@
 ---
-sh: dart format lib/cubits/<%= h.changeCase.snake(name) %> app.dart
+sh: dart format lib/cubits/<%= h.changeCase.snake(name) %> main.dart
 ---
