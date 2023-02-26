@@ -1,6 +1,10 @@
 import 'dart:convert';
 
+import 'package:client/configs/configs.dart';
+import 'package:client/router/router.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation_history_observer/navigation_history_observer.dart';
+import 'package:provider/provider.dart';
 import 'package:shared/shared.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,12 +17,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Chat',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        // bloc-initiate-start
+
+        // bloc-initiate-end
+      ],
+      child: MaterialApp(
+        title: 'Flutteram',
+        navigatorObservers: [
+          NavigationHistoryObserver(),
+        ],
+        theme: AppTheme.lightTheme(context),
+        darkTheme: AppTheme.darkTheme(context),
+        themeMode: ThemeMode.dark, // TODO: Manage dynamic themes later
+        initialRoute: AppRoutes.splash,
+        routes: appRoutes,
       ),
-      home: const MyHomePage(title: 'Chat App'),
     );
   }
 }
