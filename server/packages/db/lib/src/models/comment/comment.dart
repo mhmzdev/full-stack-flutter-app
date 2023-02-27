@@ -9,4 +9,5 @@ abstract class Comment {
 
   int get uid;
   String get content;
+  DateTime get createdAt;
 }

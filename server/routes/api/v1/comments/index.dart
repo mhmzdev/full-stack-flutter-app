@@ -56,6 +56,7 @@ Future<Response> _post(RequestContext context, Comment comment) async {
   final request = db.CommentInsertRequest(
     uid: comment.uid,
     content: comment.content,
+    createdAt: DateTime.now(),
   );
 
   final id = await database.comments.insertOne(request);

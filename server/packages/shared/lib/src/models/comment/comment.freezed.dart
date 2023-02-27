@@ -23,6 +23,7 @@ mixin _$Comment {
   int get id => throw _privateConstructorUsedError;
   int get uid => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $CommentCopyWith<$Res> {
   factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
       _$CommentCopyWithImpl<$Res, Comment>;
   @useResult
-  $Res call({int id, int uid, String content});
+  $Res call({int id, int uid, String content, DateTime createdAt});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
     Object? id = null,
     Object? uid = null,
     Object? content = null,
+    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -67,6 +69,10 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -78,7 +84,7 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
       __$$_CommentCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, int uid, String content});
+  $Res call({int id, int uid, String content, DateTime createdAt});
 }
 
 /// @nodoc
@@ -94,6 +100,7 @@ class __$$_CommentCopyWithImpl<$Res>
     Object? id = null,
     Object? uid = null,
     Object? content = null,
+    Object? createdAt = null,
   }) {
     return _then(_$_Comment(
       id: null == id
@@ -108,6 +115,10 @@ class __$$_CommentCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -116,7 +127,10 @@ class __$$_CommentCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Comment implements _Comment {
   const _$_Comment(
-      {required this.id, required this.uid, required this.content});
+      {required this.id,
+      required this.uid,
+      required this.content,
+      required this.createdAt});
 
   factory _$_Comment.fromJson(Map<String, dynamic> json) =>
       _$$_CommentFromJson(json);
@@ -127,10 +141,12 @@ class _$_Comment implements _Comment {
   final int uid;
   @override
   final String content;
+  @override
+  final DateTime createdAt;
 
   @override
   String toString() {
-    return 'Comment(id: $id, uid: $uid, content: $content)';
+    return 'Comment(id: $id, uid: $uid, content: $content, createdAt: $createdAt)';
   }
 
   @override
@@ -140,12 +156,14 @@ class _$_Comment implements _Comment {
             other is _$_Comment &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.uid, uid) || other.uid == uid) &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, uid, content);
+  int get hashCode => Object.hash(runtimeType, id, uid, content, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -165,7 +183,8 @@ abstract class _Comment implements Comment {
   const factory _Comment(
       {required final int id,
       required final int uid,
-      required final String content}) = _$_Comment;
+      required final String content,
+      required final DateTime createdAt}) = _$_Comment;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
 
@@ -175,6 +194,8 @@ abstract class _Comment implements Comment {
   int get uid;
   @override
   String get content;
+  @override
+  DateTime get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$_CommentCopyWith<_$_Comment> get copyWith =>

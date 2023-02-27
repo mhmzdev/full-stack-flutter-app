@@ -39,8 +39,8 @@ class _CommentRepository extends BaseRepository
     if (requests.isEmpty) return [];
     var values = QueryValues();
     var rows = await db.query(
-      'INSERT INTO "comments" ( "uid", "content" )\n'
-      'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.content)}:text )').join(', ')}\n'
+      'INSERT INTO "comments" ( "uid", "content", "created_at" )\n'
+      'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.createdAt)}:timestamp )').join(', ')}\n'
       'RETURNING "id"',
       values.values,
     );
@@ -55,9 +55,9 @@ class _CommentRepository extends BaseRepository
     var values = QueryValues();
     await db.query(
       'UPDATE "comments"\n'
-      'SET "uid" = COALESCE(UPDATED."uid", "comments"."uid"), "content" = COALESCE(UPDATED."content", "comments"."content")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.uid)}:int8, ${values.add(r.content)}:text )').join(', ')} )\n'
-      'AS UPDATED("id", "uid", "content")\n'
+      'SET "uid" = COALESCE(UPDATED."uid", "comments"."uid"), "content" = COALESCE(UPDATED."content", "comments"."content"), "created_at" = COALESCE(UPDATED."created_at", "comments"."created_at")\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.createdAt)}:timestamp )').join(', ')} )\n'
+      'AS UPDATED("id", "uid", "content", "created_at")\n'
       'WHERE "comments"."id" = UPDATED."id"',
       values.values,
     );
@@ -68,10 +68,12 @@ class CommentInsertRequest {
   CommentInsertRequest({
     required this.uid,
     required this.content,
+    required this.createdAt,
   });
 
   int uid;
   String content;
+  DateTime createdAt;
 }
 
 class CommentUpdateRequest {
@@ -79,11 +81,13 @@ class CommentUpdateRequest {
     required this.id,
     this.uid,
     this.content,
+    this.createdAt,
   });
 
   int id;
   int? uid;
   String? content;
+  DateTime? createdAt;
 }
 
 class CommentQueryable extends KeyedViewQueryable<Comment, int> {
@@ -101,8 +105,11 @@ class CommentQueryable extends KeyedViewQueryable<Comment, int> {
   String get tableAlias => 'comments';
 
   @override
-  Comment decode(TypedMap map) =>
-      CommentView(id: map.get('id'), uid: map.get('uid'), content: map.get('content'));
+  Comment decode(TypedMap map) => CommentView(
+      id: map.get('id'),
+      uid: map.get('uid'),
+      content: map.get('content'),
+      createdAt: map.get('created_at'));
 }
 
 class CommentView with Comment {
@@ -110,6 +117,7 @@ class CommentView with Comment {
     required this.id,
     required this.uid,
     required this.content,
+    required this.createdAt,
   });
 
   @override
@@ -118,4 +126,6 @@ class CommentView with Comment {
   final int uid;
   @override
   final String content;
+  @override
+  final DateTime createdAt;
 }
