@@ -12,11 +12,11 @@ dependencies:
   db:
     path: packages/db
 
-  postgres: ^2.5.2
+  postgres: ^2.6.1
 
   shared:
     path: packages/shared
-  stormberry: 0.11.0
+  stormberry: ^0.11.0
 
 dev_dependencies:
   mocktail: ^0.3.0
