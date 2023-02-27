@@ -1,5 +1,5 @@
 name: client
-description: A new Flutter project.
+description: Client side of this social app.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -62,6 +62,9 @@ dependencies:
   # forms
   flutter_form_builder: ^7.7.0
   form_builder_validators: ^8.4.0
+
+  # utils
+  dotted_border: ^2.0.0+3
 
   shared:
     path: ../server/packages/shared
