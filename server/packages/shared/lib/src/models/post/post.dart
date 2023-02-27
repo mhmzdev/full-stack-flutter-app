@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:db/db.dart' as db;
-import 'package:shared/shared.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';
