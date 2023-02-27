@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
+      providers: const [
         // bloc-initiate-start
 
         // bloc-initiate-end
@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
               const CircularProgressIndicator()
             else
               Text(
-                user!.name,
+                user!.username,
                 style: Theme.of(context).textTheme.headline4,
               ),
           ],
