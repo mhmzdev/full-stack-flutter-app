@@ -21,8 +21,15 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get firstName => throw _privateConstructorUsedError;
+  String get lastName => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
+  String get imageURL => throw _privateConstructorUsedError;
+  String get coverURL => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String get bio => throw _privateConstructorUsedError;
+  List<int> get following => throw _privateConstructorUsedError;
+  List<int> get followers => throw _privateConstructorUsedError;
   List<int> get posts => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +42,18 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({int id, String name, String email, List<int> posts});
+  $Res call(
+      {int id,
+      String firstName,
+      String lastName,
+      String username,
+      String imageURL,
+      String coverURL,
+      String email,
+      String bio,
+      List<int> following,
+      List<int> followers,
+      List<int> posts});
 }
 
 /// @nodoc
@@ -52,8 +70,15 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? username = null,
+    Object? imageURL = null,
+    Object? coverURL = null,
     Object? email = null,
+    Object? bio = null,
+    Object? following = null,
+    Object? followers = null,
     Object? posts = null,
   }) {
     return _then(_value.copyWith(
@@ -61,14 +86,42 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageURL: null == imageURL
+          ? _value.imageURL
+          : imageURL // ignore: cast_nullable_to_non_nullable
+              as String,
+      coverURL: null == coverURL
+          ? _value.coverURL
+          : coverURL // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      bio: null == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String,
+      following: null == following
+          ? _value.following
+          : following // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      followers: null == followers
+          ? _value.followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       posts: null == posts
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
@@ -83,7 +136,18 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String email, List<int> posts});
+  $Res call(
+      {int id,
+      String firstName,
+      String lastName,
+      String username,
+      String imageURL,
+      String coverURL,
+      String email,
+      String bio,
+      List<int> following,
+      List<int> followers,
+      List<int> posts});
 }
 
 /// @nodoc
@@ -96,8 +160,15 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? username = null,
+    Object? imageURL = null,
+    Object? coverURL = null,
     Object? email = null,
+    Object? bio = null,
+    Object? following = null,
+    Object? followers = null,
     Object? posts = null,
   }) {
     return _then(_$_User(
@@ -105,14 +176,42 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageURL: null == imageURL
+          ? _value.imageURL
+          : imageURL // ignore: cast_nullable_to_non_nullable
+              as String,
+      coverURL: null == coverURL
+          ? _value.coverURL
+          : coverURL // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      bio: null == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String,
+      following: null == following
+          ? _value._following
+          : following // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      followers: null == followers
+          ? _value._followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       posts: null == posts
           ? _value._posts
           : posts // ignore: cast_nullable_to_non_nullable
@@ -126,21 +225,61 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 class _$_User implements _User {
   const _$_User(
       {required this.id,
-      required this.name,
+      required this.firstName,
+      required this.lastName,
+      required this.username,
+      this.imageURL = '',
+      this.coverURL = '',
       required this.email,
-      required final List<int> posts})
-      : _posts = posts;
+      required this.bio,
+      final List<int> following = const [],
+      final List<int> followers = const [],
+      final List<int> posts = const []})
+      : _following = following,
+        _followers = followers,
+        _posts = posts;
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
   final int id;
   @override
-  final String name;
+  final String firstName;
+  @override
+  final String lastName;
+  @override
+  final String username;
+  @override
+  @JsonKey()
+  final String imageURL;
+  @override
+  @JsonKey()
+  final String coverURL;
   @override
   final String email;
+  @override
+  final String bio;
+  final List<int> _following;
+  @override
+  @JsonKey()
+  List<int> get following {
+    if (_following is EqualUnmodifiableListView) return _following;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_following);
+  }
+
+  final List<int> _followers;
+  @override
+  @JsonKey()
+  List<int> get followers {
+    if (_followers is EqualUnmodifiableListView) return _followers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_followers);
+  }
+
   final List<int> _posts;
   @override
+  @JsonKey()
   List<int> get posts {
     if (_posts is EqualUnmodifiableListView) return _posts;
     // ignore: implicit_dynamic_type
@@ -149,7 +288,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, posts: $posts)';
+    return 'User(id: $id, firstName: $firstName, lastName: $lastName, username: $username, imageURL: $imageURL, coverURL: $coverURL, email: $email, bio: $bio, following: $following, followers: $followers, posts: $posts)';
   }
 
   @override
@@ -158,14 +297,39 @@ class _$_User implements _User {
         (other.runtimeType == runtimeType &&
             other is _$_User &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.imageURL, imageURL) ||
+                other.imageURL == imageURL) &&
+            (identical(other.coverURL, coverURL) ||
+                other.coverURL == coverURL) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.bio, bio) || other.bio == bio) &&
+            const DeepCollectionEquality()
+                .equals(other._following, _following) &&
+            const DeepCollectionEquality()
+                .equals(other._followers, _followers) &&
             const DeepCollectionEquality().equals(other._posts, _posts));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email,
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      firstName,
+      lastName,
+      username,
+      imageURL,
+      coverURL,
+      email,
+      bio,
+      const DeepCollectionEquality().hash(_following),
+      const DeepCollectionEquality().hash(_followers),
       const DeepCollectionEquality().hash(_posts));
 
   @JsonKey(ignore: true)
@@ -185,18 +349,39 @@ class _$_User implements _User {
 abstract class _User implements User {
   const factory _User(
       {required final int id,
-      required final String name,
+      required final String firstName,
+      required final String lastName,
+      required final String username,
+      final String imageURL,
+      final String coverURL,
       required final String email,
-      required final List<int> posts}) = _$_User;
+      required final String bio,
+      final List<int> following,
+      final List<int> followers,
+      final List<int> posts}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
   int get id;
   @override
-  String get name;
+  String get firstName;
+  @override
+  String get lastName;
+  @override
+  String get username;
+  @override
+  String get imageURL;
+  @override
+  String get coverURL;
   @override
   String get email;
+  @override
+  String get bio;
+  @override
+  List<int> get following;
+  @override
+  List<int> get followers;
   @override
   List<int> get posts;
   @override
