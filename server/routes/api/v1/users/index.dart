@@ -53,8 +53,15 @@ Future<Response> _post(RequestContext context, User user) async {
   final database = context.read<Database>();
 
   final request = db.UserInsertRequest(
-    name: user.name,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    username: user.username,
     email: user.email,
+    imageURL: '',
+    coverURL: '',
+    bio: '',
+    followers: [],
+    following: [],
     posts: [],
   );
   final id = await database.users.insertOne(request);

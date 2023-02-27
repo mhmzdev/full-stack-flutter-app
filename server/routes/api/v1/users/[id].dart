@@ -54,13 +54,28 @@ Future<Response> _get(RequestContext context, db.User? dbUser) async {
 Future<Response> _put(RequestContext context, int id, db.User user) async {
   final database = context.read<Database>();
 
+  final users = await database.users.queryUsers();
+  for (final u in users) {
+    if (u.username == user.username) {
+      return Response.json(
+        body: {
+          'error': 'username ${user.username} is already taken!',
+        },
+      );
+    }
+  }
+
   final userToBeUpdated =
       User.fromJson(await context.request.json() as Map<String, dynamic>);
 
   final request = db.UserUpdateRequest(
     id: id,
-    email: userToBeUpdated.email,
-    name: userToBeUpdated.name,
+    firstName: userToBeUpdated.firstName,
+    lastName: userToBeUpdated.lastName,
+    bio: userToBeUpdated.bio,
+    username: userToBeUpdated.username,
+    imageURL: userToBeUpdated.imageURL,
+    coverURL: userToBeUpdated.coverURL,
   );
 
   await database.users.updateOne(request);
