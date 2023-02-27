@@ -1,6 +1,4 @@
 import 'package:stormberry/stormberry.dart';
-
-import '../base.dart';
 part 'post.schema.dart';
 
 @Model()
