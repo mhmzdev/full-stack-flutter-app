@@ -5,7 +5,8 @@ import 'package:db/db.dart' as db;
 import 'package:shared/shared.dart';
 import 'package:stormberry/stormberry.dart';
 
-Future<Response> onRequest(RequestContext context, int id) async {
+Future<Response> onRequest(RequestContext context, String stringId) async {
+  final id = int.parse(stringId);
   final database = context.read<Database>();
   final dbPost = await database.posts.queryPost(id);
 

@@ -28,7 +28,7 @@ mixin _$Post {
   bool get hasVideo => throw _privateConstructorUsedError;
   String get videoUrl => throw _privateConstructorUsedError;
   List<int> get likes => throw _privateConstructorUsedError;
-  List<Comment> get comments => throw _privateConstructorUsedError;
+  List<int> get comments => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $PostCopyWith<$Res> {
       bool hasVideo,
       String videoUrl,
       List<int> likes,
-      List<Comment> comments,
+      List<int> comments,
       DateTime createdAt});
 }
 
@@ -114,7 +114,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       comments: null == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>,
+              as List<int>,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -138,7 +138,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       bool hasVideo,
       String videoUrl,
       List<int> likes,
-      List<Comment> comments,
+      List<int> comments,
       DateTime createdAt});
 }
 
@@ -198,7 +198,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
       comments: null == comments
           ? _value._comments
           : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>,
+              as List<int>,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -219,7 +219,7 @@ class _$_Post implements _Post {
       this.hasVideo = false,
       this.videoUrl = '',
       final List<int> likes = const [],
-      final List<Comment> comments = const [],
+      final List<int> comments = const [],
       required this.createdAt})
       : _likes = likes,
         _comments = comments;
@@ -253,10 +253,10 @@ class _$_Post implements _Post {
     return EqualUnmodifiableListView(_likes);
   }
 
-  final List<Comment> _comments;
+  final List<int> _comments;
   @override
   @JsonKey()
-  List<Comment> get comments {
+  List<int> get comments {
     if (_comments is EqualUnmodifiableListView) return _comments;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_comments);
@@ -331,7 +331,7 @@ abstract class _Post implements Post {
       final bool hasVideo,
       final String videoUrl,
       final List<int> likes,
-      final List<Comment> comments,
+      final List<int> comments,
       required final DateTime createdAt}) = _$_Post;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
@@ -353,7 +353,7 @@ abstract class _Post implements Post {
   @override
   List<int> get likes;
   @override
-  List<Comment> get comments;
+  List<int> get comments;
   @override
   DateTime get createdAt;
   @override

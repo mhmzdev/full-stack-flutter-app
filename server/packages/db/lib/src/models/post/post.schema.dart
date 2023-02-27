@@ -39,8 +39,8 @@ class _PostRepository extends BaseRepository
     if (requests.isEmpty) return [];
     var values = QueryValues();
     var rows = await db.query(
-      'INSERT INTO "posts" ( "uid", "caption", "has_image", "image_url", "has_video", "video_url", "likes", "created_at" )\n'
-      'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.caption)}:text, ${values.add(r.hasImage)}:bool, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:bool, ${values.add(r.videoUrl)}:text, ${values.add(r.likes)}:_int8, ${values.add(r.createdAt)}:timestamp )').join(', ')}\n'
+      'INSERT INTO "posts" ( "uid", "caption", "has_image", "image_url", "has_video", "video_url", "likes", "comments", "created_at" )\n'
+      'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.caption)}:text, ${values.add(r.hasImage)}:bool, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:bool, ${values.add(r.videoUrl)}:text, ${values.add(r.likes)}:_int8, ${values.add(r.comments)}:_int8, ${values.add(r.createdAt)}:timestamp )').join(', ')}\n'
       'RETURNING "id"',
       values.values,
     );
@@ -55,9 +55,9 @@ class _PostRepository extends BaseRepository
     var values = QueryValues();
     await db.query(
       'UPDATE "posts"\n'
-      'SET "uid" = COALESCE(UPDATED."uid", "posts"."uid"), "caption" = COALESCE(UPDATED."caption", "posts"."caption"), "has_image" = COALESCE(UPDATED."has_image", "posts"."has_image"), "image_url" = COALESCE(UPDATED."image_url", "posts"."image_url"), "has_video" = COALESCE(UPDATED."has_video", "posts"."has_video"), "video_url" = COALESCE(UPDATED."video_url", "posts"."video_url"), "likes" = COALESCE(UPDATED."likes", "posts"."likes"), "created_at" = COALESCE(UPDATED."created_at", "posts"."created_at")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.uid)}:int8, ${values.add(r.caption)}:text, ${values.add(r.hasImage)}:bool, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:bool, ${values.add(r.videoUrl)}:text, ${values.add(r.likes)}:_int8, ${values.add(r.createdAt)}:timestamp )').join(', ')} )\n'
-      'AS UPDATED("id", "uid", "caption", "has_image", "image_url", "has_video", "video_url", "likes", "created_at")\n'
+      'SET "uid" = COALESCE(UPDATED."uid", "posts"."uid"), "caption" = COALESCE(UPDATED."caption", "posts"."caption"), "has_image" = COALESCE(UPDATED."has_image", "posts"."has_image"), "image_url" = COALESCE(UPDATED."image_url", "posts"."image_url"), "has_video" = COALESCE(UPDATED."has_video", "posts"."has_video"), "video_url" = COALESCE(UPDATED."video_url", "posts"."video_url"), "likes" = COALESCE(UPDATED."likes", "posts"."likes"), "comments" = COALESCE(UPDATED."comments", "posts"."comments"), "created_at" = COALESCE(UPDATED."created_at", "posts"."created_at")\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.uid)}:int8, ${values.add(r.caption)}:text, ${values.add(r.hasImage)}:bool, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:bool, ${values.add(r.videoUrl)}:text, ${values.add(r.likes)}:_int8, ${values.add(r.comments)}:_int8, ${values.add(r.createdAt)}:timestamp )').join(', ')} )\n'
+      'AS UPDATED("id", "uid", "caption", "has_image", "image_url", "has_video", "video_url", "likes", "comments", "created_at")\n'
       'WHERE "posts"."id" = UPDATED."id"',
       values.values,
     );
@@ -73,6 +73,7 @@ class PostInsertRequest {
     this.hasVideo,
     this.videoUrl,
     required this.likes,
+    required this.comments,
     required this.createdAt,
   });
 
@@ -83,6 +84,7 @@ class PostInsertRequest {
   bool? hasVideo;
   String? videoUrl;
   List<int> likes;
+  List<int> comments;
   DateTime createdAt;
 }
 
@@ -96,6 +98,7 @@ class PostUpdateRequest {
     this.hasVideo,
     this.videoUrl,
     this.likes,
+    this.comments,
     this.createdAt,
   });
 
@@ -107,6 +110,7 @@ class PostUpdateRequest {
   bool? hasVideo;
   String? videoUrl;
   List<int>? likes;
+  List<int>? comments;
   DateTime? createdAt;
 }
 
@@ -118,15 +122,8 @@ class PostQueryable extends KeyedViewQueryable<Post, int> {
   String encodeKey(int key) => TextEncoder.i.encode(key);
 
   @override
-  String get query => 'SELECT "posts".*, "comments"."data" as "comments"'
-      'FROM "posts"'
-      'LEFT JOIN ('
-      '  SELECT "comments"."post_id",'
-      '    to_jsonb(array_agg("comments".*)) as data'
-      '  FROM (${CommentQueryable().query}) "comments"'
-      '  GROUP BY "comments"."post_id"'
-      ') "comments"'
-      'ON "posts"."id" = "comments"."post_id"';
+  String get query => 'SELECT "posts".*'
+      'FROM "posts"';
 
   @override
   String get tableAlias => 'posts';
@@ -141,7 +138,7 @@ class PostQueryable extends KeyedViewQueryable<Post, int> {
       hasVideo: map.getOpt('has_video'),
       videoUrl: map.getOpt('video_url'),
       likes: map.getListOpt('likes') ?? const [],
-      comments: map.getListOpt('comments', CommentQueryable().decoder) ?? const [],
+      comments: map.getListOpt('comments') ?? const [],
       createdAt: map.get('created_at'));
 }
 
@@ -176,7 +173,7 @@ class PostView with Post {
   @override
   final List<int> likes;
   @override
-  final List<Comment> comments;
+  final List<int> comments;
   @override
   final DateTime createdAt;
 }

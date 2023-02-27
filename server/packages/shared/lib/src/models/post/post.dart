@@ -16,7 +16,7 @@ class Post with _$Post {
     @Default(false) bool hasVideo,
     @Default('') String videoUrl,
     @Default([]) List<int> likes,
-    @Default([]) List<Comment> comments,
+    @Default([]) List<int> comments,
     required DateTime createdAt,
   }) = _Post;
 
@@ -27,7 +27,7 @@ class Post with _$Post {
         uid: post.uid,
         caption: post.caption,
         likes: post.likes,
-        comments: post.comments.map(Comment.fromDb).toList(),
+        comments: post.comments,
         createdAt: post.createdAt,
       );
 }

@@ -16,7 +16,7 @@ abstract class Post {
   bool? get hasVideo;
   String? get videoUrl;
   List<int> get likes;
-  List<Comment> get comments;
+  List<int> get comments;
 
   DateTime get createdAt;
 }

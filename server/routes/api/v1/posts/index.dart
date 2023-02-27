@@ -57,6 +57,7 @@ Future<Response> _post(RequestContext context, Post post) async {
     uid: post.uid,
     caption: post.caption,
     likes: [],
+    comments: [],
     createdAt: DateTime.now(),
   );
 

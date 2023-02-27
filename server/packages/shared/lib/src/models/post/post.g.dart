@@ -16,10 +16,9 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       videoUrl: json['videoUrl'] as String? ?? '',
       likes: (json['likes'] as List<dynamic>?)?.map((e) => e as int).toList() ??
           const [],
-      comments: (json['comments'] as List<dynamic>?)
-              ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      comments:
+          (json['comments'] as List<dynamic>?)?.map((e) => e as int).toList() ??
+              const [],
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
 

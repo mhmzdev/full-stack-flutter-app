@@ -39,8 +39,8 @@ class _CommentRepository extends BaseRepository
     if (requests.isEmpty) return [];
     var values = QueryValues();
     var rows = await db.query(
-      'INSERT INTO "comments" ( "uid", "content", "post_id" )\n'
-      'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.postId)}:int8 )').join(', ')}\n'
+      'INSERT INTO "comments" ( "uid", "content" )\n'
+      'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.content)}:text )').join(', ')}\n'
       'RETURNING "id"',
       values.values,
     );
@@ -55,9 +55,9 @@ class _CommentRepository extends BaseRepository
     var values = QueryValues();
     await db.query(
       'UPDATE "comments"\n'
-      'SET "uid" = COALESCE(UPDATED."uid", "comments"."uid"), "content" = COALESCE(UPDATED."content", "comments"."content"), "post_id" = COALESCE(UPDATED."post_id", "comments"."post_id")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.postId)}:int8 )').join(', ')} )\n'
-      'AS UPDATED("id", "uid", "content", "post_id")\n'
+      'SET "uid" = COALESCE(UPDATED."uid", "comments"."uid"), "content" = COALESCE(UPDATED."content", "comments"."content")\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.uid)}:int8, ${values.add(r.content)}:text )').join(', ')} )\n'
+      'AS UPDATED("id", "uid", "content")\n'
       'WHERE "comments"."id" = UPDATED."id"',
       values.values,
     );
@@ -68,12 +68,10 @@ class CommentInsertRequest {
   CommentInsertRequest({
     required this.uid,
     required this.content,
-    this.postId,
   });
 
   int uid;
   String content;
-  int? postId;
 }
 
 class CommentUpdateRequest {
@@ -81,13 +79,11 @@ class CommentUpdateRequest {
     required this.id,
     this.uid,
     this.content,
-    this.postId,
   });
 
   int id;
   int? uid;
   String? content;
-  int? postId;
 }
 
 class CommentQueryable extends KeyedViewQueryable<Comment, int> {
