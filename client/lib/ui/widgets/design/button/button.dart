@@ -67,7 +67,7 @@ class AppButton extends StatelessWidget {
                           ? Colors.black.withOpacity(0.1)
                           : color.withOpacity(0.5),
                       blurRadius: 8,
-                      offset: const Offset(0, 8),
+                      offset: const Offset(0, 4),
                     ),
                   ],
           ),
