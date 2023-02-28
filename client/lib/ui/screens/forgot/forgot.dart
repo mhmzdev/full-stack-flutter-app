@@ -1,12 +1,10 @@
 import 'package:client/configs/configs.dart';
 import 'package:client/ui/painter/icons/email.dart';
-import 'package:client/ui/painter/icons/lock.dart';
-import 'package:client/ui/painter/icons/person_broken.dart';
-import 'package:client/ui/painter/icons/person_outline.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:client/ui/widgets/design/button/button.dart';
 import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:client/ui/widgets/design/input/app_input_field.dart';
+import 'package:client/utils/assets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -21,8 +19,8 @@ part 'widgets/_body.dart';
 
 part '_state.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class ForgotScreen extends StatelessWidget {
+  const ForgotScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

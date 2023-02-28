@@ -66,7 +66,7 @@ class _Body extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => AppRoutes.forgot.push(context),
                   child: Text(
                     'Forgot Password?',
                     style: AppText.b3 + FontWeight.w700,
