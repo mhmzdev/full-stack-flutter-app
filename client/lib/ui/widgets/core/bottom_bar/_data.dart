@@ -11,7 +11,7 @@ List<_ItemModel> get _items => [
           size: HomeFilledIconPainter.s(10.un()),
         ),
         label: 'Home',
-        path: '',
+        path: AppRoutes.home,
       ),
       _ItemModel(
         active: CustomPaint(
@@ -35,6 +35,6 @@ List<_ItemModel> get _items => [
           size: PersonOutlineIconPainter.s(10.un()),
         ),
         label: 'Profile',
-        path: '',
+        path: AppRoutes.profile,
       ),
     ];
