@@ -1,12 +1,11 @@
 import 'dart:io';
 
 import 'package:client/configs/configs.dart';
-import 'package:client/ui/widgets/bottom_bar/bottom_bar.dart';
+import 'package:client/ui/widgets/core/bottom_bar/bottom_bar.dart';
 import 'package:client/ui/widgets/headless/focus_handler.dart';
 import 'package:cupertino_will_pop_scope/cupertino_will_pop_scope.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class Screen extends StatelessWidget {
