@@ -1,9 +1,19 @@
+import 'dart:ui';
+
 import 'package:client/configs/configs.dart';
+import 'package:client/static/posts.dart';
+import 'package:client/static/profiles.dart';
+import 'package:client/ui/painter/icons/chat.dart';
+import 'package:client/ui/painter/icons/notification.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
+import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared/shared.dart';
 
 part 'widgets/_body.dart';
+part 'widgets/_story_card.dart';
+part 'widgets/_header.dart';
 
 part '_state.dart';
 

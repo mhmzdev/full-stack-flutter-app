@@ -1,5 +1,7 @@
 import 'package:client/configs/configs.dart';
 import 'package:client/router/router.dart';
+import 'package:client/ui/screens/home/home.dart';
+import 'package:client/ui/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 
@@ -23,6 +25,22 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark, // TODO: Manage dynamic themes later
       initialRoute: AppRoutes.welcome,
       routes: appRoutes,
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case AppRoutes.home:
+            return FadeRoute(
+              child: const HomeScreen(),
+              settings: settings,
+            );
+          case AppRoutes.profile:
+            return FadeRoute(
+              child: const ProfileScreen(),
+              settings: settings,
+            );
+          default:
+            return null;
+        }
+      },
     );
   }
 }

@@ -499,11 +499,11 @@ class PersonFilledIconPainter extends CustomPainter {
     Paint paint0Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
-    paint0Stroke.color = const Color(0xffABABAB).withOpacity(1.0);
+    paint0Stroke.color = color ?? const Color(0xffABABAB).withOpacity(1.0);
     canvas.drawPath(path_0, paint0Stroke);
 
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = const Color(0xff292D32).withOpacity(1.0);
+    paint0Fill.color = color ?? const Color(0xff292D32).withOpacity(1.0);
     canvas.drawPath(path_0, paint0Fill);
 
     Path path_1 = Path();
@@ -570,11 +570,11 @@ class PersonFilledIconPainter extends CustomPainter {
     Paint paint1Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
-    paint1Stroke.color = const Color(0xffABABAB).withOpacity(1.0);
+    paint1Stroke.color = color ?? const Color(0xffABABAB).withOpacity(1.0);
     canvas.drawPath(path_1, paint1Stroke);
 
     Paint paint1Fill = Paint()..style = PaintingStyle.fill;
-    paint1Fill.color = const Color(0xff292D32).withOpacity(1.0);
+    paint1Fill.color = color ?? const Color(0xff292D32).withOpacity(1.0);
     canvas.drawPath(path_1, paint1Fill);
   }
 

@@ -69,7 +69,7 @@ class ChatIconPainter extends CustomPainter {
     canvas.drawPath(path_0, paint0Stroke);
 
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint0Fill.color = Colors.transparent;
     canvas.drawPath(path_0, paint0Fill);
 
     Path path_1 = Path();
@@ -113,7 +113,7 @@ class ChatIconPainter extends CustomPainter {
     canvas.drawPath(path_1, paint1Stroke);
 
     Paint paint1Fill = Paint()..style = PaintingStyle.fill;
-    paint1Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint1Fill.color = Colors.transparent;
     canvas.drawPath(path_1, paint1Fill);
 
     Path path_2 = Path();
@@ -129,7 +129,7 @@ class ChatIconPainter extends CustomPainter {
     canvas.drawPath(path_2, paint2Stroke);
 
     Paint paint2Fill = Paint()..style = PaintingStyle.fill;
-    paint2Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint2Fill.color = Colors.transparent;
     canvas.drawPath(path_2, paint2Fill);
 
     Path path_3 = Path();
@@ -145,7 +145,7 @@ class ChatIconPainter extends CustomPainter {
     canvas.drawPath(path_3, paint3Stroke);
 
     Paint paint3Fill = Paint()..style = PaintingStyle.fill;
-    paint3Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint3Fill.color = Colors.transparent;
     canvas.drawPath(path_3, paint3Fill);
 
     Path path_4 = Path();
@@ -161,7 +161,7 @@ class ChatIconPainter extends CustomPainter {
     canvas.drawPath(path_4, paint4Stroke);
 
     Paint paint4Fill = Paint()..style = PaintingStyle.fill;
-    paint4Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint4Fill.color = Colors.transparent;
     canvas.drawPath(path_4, paint4Fill);
   }
 

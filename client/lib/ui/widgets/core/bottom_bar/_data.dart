@@ -27,7 +27,9 @@ List<_ItemModel> get _items => [
       ),
       _ItemModel(
         active: CustomPaint(
-          painter: const PersonFilledIconPainter(),
+          painter: const PersonFilledIconPainter(
+            color: AppTheme.primary,
+          ),
           size: PersonFilledIconPainter.s(11.un()),
         ),
         inActive: CustomPaint(

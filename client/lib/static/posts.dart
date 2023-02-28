@@ -5,7 +5,8 @@ import 'package:shared/shared.dart';
 
 final faker = Faker.instance;
 
-final _images = List.generate(10, (index) => 'assets/utils/util-${index + 1}');
+final _images =
+    List.generate(10, (index) => 'assets/utils/util-${index + 1}.png');
 
 final posts = List.generate(10, (index) {
   final uid = Random().nextInt(10 + 1);

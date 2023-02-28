@@ -7,6 +7,7 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Screen(
       keyboardHandler: true,
+      bottomBar: true,
       child: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,

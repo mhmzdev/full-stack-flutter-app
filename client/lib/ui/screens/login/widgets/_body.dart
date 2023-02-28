@@ -77,7 +77,7 @@ class _Body extends StatelessWidget {
               AppButton(
                 state: AppButtonState.elevated,
                 label: 'Sign In',
-                onPressed: () {},
+                onPressed: () => AppRoutes.home.pushReplace(context),
               ),
               const DividerOr(),
               const _SocialLogin(),
