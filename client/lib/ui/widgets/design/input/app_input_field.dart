@@ -76,7 +76,7 @@ class AppInputFieldState extends State<AppInputField> {
               widget.label!,
               style: AppText.b2,
             ),
-            Space.y.s15,
+            Space.y.t15,
           ],
           FormBuilderTextField(
             name: widget.name,

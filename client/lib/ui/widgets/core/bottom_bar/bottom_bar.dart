@@ -35,7 +35,7 @@ class BottomBar extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Container(
-                  padding: Space.a.s15 + Space.t.s15,
+                  padding: Space.a.t15 + Space.t.t15,
                   decoration: BoxDecoration(
                     color: AppTheme.backgroundDark.withOpacity(.9),
                     borderRadius: BorderRadius.vertical(

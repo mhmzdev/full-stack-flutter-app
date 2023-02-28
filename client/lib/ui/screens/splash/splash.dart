@@ -21,12 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
           FlutterLogo(
             size: 50.un(),
           ),
-          Space.y.s30,
+          Space.y.t30,
           Text(
             'Flutteram',
             style: AppText.h3,
           ),
-          Space.y.s10,
+          Space.y.t10,
           Text(
             "Let's socialize while fluttering",
             style: AppText.b3 + AppTheme.grey,

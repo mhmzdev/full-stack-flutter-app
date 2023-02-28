@@ -83,14 +83,14 @@ class AppButton extends StatelessWidget {
                           size: iconSize,
                           color: textColor,
                         ),
-                        Space.x.s10,
+                        Space.x.t10,
                       ],
                       Text(
                         label!,
                         style: AppText.b1 + textColor,
                       ),
                       if (icon != null && iconToEnd) ...[
-                        Space.x.s10,
+                        Space.x.t10,
                         Icon(
                           icon,
                           size: iconSize,
