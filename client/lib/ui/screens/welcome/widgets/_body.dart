@@ -70,7 +70,8 @@ class _Body extends StatelessWidget {
             Space.y.t100,
             AppButton(
               label: 'Get Started',
-              onPressed: () {},
+              state: AppButtonState.elevated,
+              onPressed: () => AppRoutes.login.push(context),
             ),
           ],
         ),
