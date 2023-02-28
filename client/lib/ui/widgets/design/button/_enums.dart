@@ -9,7 +9,7 @@ enum AppButtonStyle {
 }
 
 enum AppButtonState {
-  def,
+  elevated,
   disabled,
   plain,
 }
