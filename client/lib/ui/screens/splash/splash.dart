@@ -1,5 +1,5 @@
 import 'package:client/configs/configs.dart';
-import 'package:client/ui/widgets/screen/screen.dart';
+import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
