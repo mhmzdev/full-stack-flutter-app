@@ -1,23 +1,23 @@
 part of '../configs.dart';
 
 class SpaceToken {
-  static late double s05;
-  static late double s10;
-  static late double s15;
-  static late double s20;
-  static late double s25;
-  static late double s30;
-  static late double s60;
-  static late double s100;
+  static late double t05;
+  static late double t10;
+  static late double t15;
+  static late double t20;
+  static late double t25;
+  static late double t30;
+  static late double t60;
+  static late double t100;
 
   static void init() {
-    s05 = 0.5.sp();
-    s10 = 1.0.sp();
-    s15 = 1.5.sp();
-    s20 = 2.0.sp();
-    s25 = 2.5.sp();
-    s30 = 3.0.sp();
-    s60 = 6.0.sp();
-    s100 = 10.0.sp();
+    t05 = 0.5.sp();
+    t10 = 1.0.sp();
+    t15 = 1.5.sp();
+    t20 = 2.0.sp();
+    t25 = 2.5.sp();
+    t30 = 3.0.sp();
+    t60 = 6.0.sp();
+    t100 = 10.0.sp();
   }
 }

@@ -1,23 +1,23 @@
 part of '../configs.dart';
 
 class _SpaceModelEdgeInsets {
-  final EdgeInsets s05;
-  final EdgeInsets s10;
-  final EdgeInsets s15;
-  final EdgeInsets s20;
-  final EdgeInsets s25;
-  final EdgeInsets s30;
-  final EdgeInsets s60;
-  final EdgeInsets s100;
+  final EdgeInsets t05;
+  final EdgeInsets t10;
+  final EdgeInsets t15;
+  final EdgeInsets t20;
+  final EdgeInsets t25;
+  final EdgeInsets t30;
+  final EdgeInsets t60;
+  final EdgeInsets t100;
 
   _SpaceModelEdgeInsets({
-    required this.s05,
-    required this.s10,
-    required this.s15,
-    required this.s20,
-    required this.s25,
-    required this.s30,
-    required this.s60,
-    required this.s100,
+    required this.t05,
+    required this.t10,
+    required this.t15,
+    required this.t20,
+    required this.t25,
+    required this.t30,
+    required this.t60,
+    required this.t100,
   });
 }

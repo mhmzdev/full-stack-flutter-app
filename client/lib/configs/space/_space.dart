@@ -45,7 +45,7 @@ class Space {
   static Widget xf(double x) => SizedBox(width: x.sp());
 
   static EdgeInsets sym([double? h, double? v]) {
-    final u = SpaceToken.s15;
+    final u = SpaceToken.t15;
     return EdgeInsets.symmetric(
       vertical: v ?? u,
       horizontal: h ?? u,
