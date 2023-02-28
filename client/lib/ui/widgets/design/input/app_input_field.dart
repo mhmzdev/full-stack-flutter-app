@@ -91,7 +91,7 @@ class AppInputFieldState extends State<AppInputField> {
             focusNode: widget.node,
             cursorColor: AppTheme.primary,
             inputFormatters: widget.inputFormatters,
-            style: AppText.b1,
+            style: AppText.b2,
             decoration: InputDecoration(
               errorText: widget.errorText,
               prefixIcon: widget.prefixIcon,
