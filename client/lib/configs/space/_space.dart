@@ -17,6 +17,9 @@ class Space {
   static late _SpaceModelEdgeInsets l;
   static const EdgeInsets z = EdgeInsets.zero;
 
+  static late Widget top;
+  static late Widget bottom;
+
   static void init() {
     SpaceToken.init();
 
@@ -33,6 +36,9 @@ class Space {
     r = _r();
     b = _b();
     l = _l();
+
+    top = SizedBox(height: AppMedia.padding.top);
+    bottom = SizedBox(height: AppMedia.padding.bottom);
   }
 
   static Widget yf(double y) => SizedBox(height: y.sp());

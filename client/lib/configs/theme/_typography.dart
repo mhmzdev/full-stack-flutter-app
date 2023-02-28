@@ -46,17 +46,17 @@ abstract class AppText {
       id: "b2",
     );
     b3 = TextStyleRef(
-      base.copyWith(fontSize: 6.font()).ratioHeight(),
+      base.copyWith(fontSize: 7.font()).ratioHeight(),
       id: "b3",
     );
 
     //
     s1 = TextStyleRef(
-      base.copyWith(fontSize: 5.font()).ratioHeight(),
+      base.copyWith(fontSize: 6.font()).ratioHeight(),
       id: "s1",
     );
     s2 = TextStyleRef(
-      base.copyWith(fontSize: 4.font()).ratioHeight(),
+      base.copyWith(fontSize: 5.font()).ratioHeight(),
       id: "s2",
     );
   }

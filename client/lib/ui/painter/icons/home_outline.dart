@@ -1,3 +1,4 @@
+import 'package:client/configs/configs.dart';
 import 'package:flutter/material.dart';
 
 class HomeOutlineIconPainter extends CustomPainter {
@@ -95,7 +96,7 @@ class HomeOutlineIconPainter extends CustomPainter {
     path_0.close();
 
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = const Color(0xff292D32).withOpacity(1.0);
+    paint0Fill.color = AppTheme.grey;
     canvas.drawPath(path_0, paint0Fill);
 
     Path path_1 = Path();
@@ -133,7 +134,7 @@ class HomeOutlineIconPainter extends CustomPainter {
     path_1.close();
 
     Paint paint1Fill = Paint()..style = PaintingStyle.fill;
-    paint1Fill.color = const Color(0xff292D32).withOpacity(1.0);
+    paint1Fill.color = AppTheme.grey;
     canvas.drawPath(path_1, paint1Fill);
   }
 

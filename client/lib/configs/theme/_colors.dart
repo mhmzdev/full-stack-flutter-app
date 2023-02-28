@@ -9,7 +9,11 @@ abstract class AppTheme {
       ColorRef(Color(0xff2C2E2F), id: 'backgroundLight');
 
   static const text = ColorRef(Colors.white, id: 'text');
+
   static const grey = ColorRef(Color(0xffABABAB), id: 'grey');
+  static const greyDark = ColorRef(Color(0xff3D3F41), id: 'greyDark');
+
+  static const danger = ColorRef(Color(0xffE74C3C), id: 'danger');
 
   static ThemeData lightTheme(BuildContext context) => ThemeData(
         useMaterial3: false,
@@ -26,6 +30,9 @@ abstract class AppTheme {
   static ThemeData darkTheme(BuildContext context) => ThemeData(
         useMaterial3: false,
         primarySwatch: Colors.blue,
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: primary,
+        ),
         brightness: Brightness.dark,
         highlightColor: text.withOpacity(0.1),
         splashColor: Colors.transparent,
