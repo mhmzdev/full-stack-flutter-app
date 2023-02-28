@@ -71,7 +71,7 @@ class _Body extends StatelessWidget {
             AppButton(
               label: 'Get Started',
               state: AppButtonState.elevated,
-              onPressed: () => AppRoutes.login.push(context),
+              onPressed: () => AppRoutes.login.pushReplace(context),
             ),
           ],
         ),

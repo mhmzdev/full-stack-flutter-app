@@ -69,7 +69,7 @@ class _Body extends StatelessWidget {
                   onPressed: () {},
                   child: Text(
                     'Forgot Password?',
-                    style: AppText.s1 + FontWeight.w700,
+                    style: AppText.b3 + FontWeight.w700,
                   ),
                 ),
               ),
