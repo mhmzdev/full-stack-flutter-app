@@ -31,7 +31,7 @@ class _StoryCard extends StatelessWidget {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
               child: Container(
-                height: 17.un(),
+                height: 25.un(),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: AppTheme.backgroundLight.withOpacity(0.8),
@@ -50,14 +50,16 @@ class _StoryCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               CircleAvatar(
+                radius: 10.un(),
                 backgroundImage: AssetImage(
                   user.imageURL,
                 ),
               ),
+              Space.y.t10,
               Text(
                 '${user.firstName} ${user.lastName.substring(0, 1)}.',
               ),
-              Space.y.t20,
+              Space.y.t30,
             ],
           ),
         ],
