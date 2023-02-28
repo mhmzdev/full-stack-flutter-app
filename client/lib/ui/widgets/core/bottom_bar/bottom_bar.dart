@@ -51,7 +51,7 @@ class BottomBar extends StatelessWidget {
                           final isSelected = currentPath == e.value.path;
 
                           if (e.key == 1) {
-                            return const SizedBox.shrink();
+                            return Space.x.t100;
                           }
 
                           return Expanded(

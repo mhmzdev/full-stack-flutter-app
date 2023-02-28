@@ -4,11 +4,11 @@ List<_ItemModel> get _items => [
       _ItemModel(
         active: CustomPaint(
           painter: const HomeFilledIconPainter(color: AppTheme.primary),
-          size: HomeFilledIconPainter.s(10.un()),
+          size: HomeFilledIconPainter.s(11.un()),
         ),
         inActive: CustomPaint(
           painter: const HomeOutlineIconPainter(),
-          size: HomeFilledIconPainter.s(10.un()),
+          size: HomeFilledIconPainter.s(11.un()),
         ),
         label: 'Home',
         path: AppRoutes.home,
@@ -28,11 +28,11 @@ List<_ItemModel> get _items => [
       _ItemModel(
         active: CustomPaint(
           painter: const PersonFilledIconPainter(),
-          size: PersonFilledIconPainter.s(10.un()),
+          size: PersonFilledIconPainter.s(11.un()),
         ),
         inActive: CustomPaint(
           painter: const PersonOutlineIconPainter(),
-          size: PersonOutlineIconPainter.s(10.un()),
+          size: PersonOutlineIconPainter.s(11.un()),
         ),
         label: 'Profile',
         path: AppRoutes.profile,

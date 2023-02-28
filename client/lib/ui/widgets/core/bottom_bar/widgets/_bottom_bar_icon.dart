@@ -17,7 +17,7 @@ class _BottomBarIcon extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         isSelected ? item.active : item.inActive,
-        Space.yf(0.2),
+        Space.y.t10,
         Text(
           item.label,
           style: AppText.s1 + (isSelected ? AppTheme.primary : AppTheme.grey),
