@@ -5,15 +5,15 @@ import 'package:shared/shared.dart';
 
 final faker = Faker.instance;
 
-final _images = List.generate(6, (index) {
+String generateImage(int index) {
   final i = index + 1;
   final type = i.isEven ? 'boy' : 'girl';
 
-  final image = 'assets/pictures/$type-$i';
+  final image = 'assets/pictures/$type-$i.png';
   return image;
-});
+}
 
-final profiles = List.generate(10, (index) {
+User generateProfile(int index) {
   final isMale = index.isEven;
 
   final firstName =
@@ -31,19 +31,19 @@ final profiles = List.generate(10, (index) {
   final randomFollowersLen = Random().nextInt(10 + 1);
   final followers = List.generate(
     randomFollowersLen,
-    (index) => faker.datatype.number(min: 0, max: 10),
+    (index) => faker.datatype.number(min: 1, max: 10),
   );
 
   final randomFollowingLen = Random().nextInt(10 + 1);
   final following = List.generate(
     randomFollowingLen,
-    (index) => faker.datatype.number(min: 0, max: 10),
+    (index) => faker.datatype.number(min: 1, max: 10),
   );
 
   final randomPostsLen = Random().nextInt(10 + 1);
   final posts = List.generate(
     randomPostsLen,
-    (index) => faker.datatype.number(min: 0, max: 10),
+    (index) => faker.datatype.number(min: 1, max: 10),
   );
 
   return User(
@@ -59,4 +59,9 @@ final profiles = List.generate(10, (index) {
     imageURL: imageURL,
     coverURL: '',
   );
-});
+}
+
+final _images = List.generate(6, (index) => index).map(generateImage).toList();
+
+final profiles =
+    List.generate(6, (index) => index).map(generateProfile).toList();
