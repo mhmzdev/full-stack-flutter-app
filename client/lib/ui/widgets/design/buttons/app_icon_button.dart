@@ -9,6 +9,7 @@ class AppIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(360),
       onTap: onTap,
       child: Container(
         padding: Space.a.t15,

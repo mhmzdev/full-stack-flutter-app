@@ -9,6 +9,7 @@ class AppBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(360),
       onTap: () => onTap ?? Navigator.pop(context),
       child: Container(
         padding: Space.a.t15,
