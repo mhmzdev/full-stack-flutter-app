@@ -55,7 +55,7 @@ class PersonBrokenIconPainter extends CustomPainter {
     canvas.drawPath(path_0, paint0Stroke);
 
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint0Fill.color = Colors.transparent;
     canvas.drawPath(path_0, paint0Fill);
 
     Path path_1 = Path();
@@ -99,7 +99,7 @@ class PersonBrokenIconPainter extends CustomPainter {
     canvas.drawPath(path_1, paint1Stroke);
 
     Paint paint1Fill = Paint()..style = PaintingStyle.fill;
-    paint1Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint1Fill.color = Colors.transparent;
     canvas.drawPath(path_1, paint1Fill);
   }
 

@@ -7,7 +7,11 @@ class _FormData {
     }
 
     return {
-      _FormKeys.email: "value",
+      _FormKeys.firstName: "Hamza",
+      _FormKeys.lastName: "Shakeel",
+      _FormKeys.username: "mhmzdev",
+      _FormKeys.email: "hamza.6.shakeel@gmail.com",
+      _FormKeys.password: "hamza123",
     };
   }
 }

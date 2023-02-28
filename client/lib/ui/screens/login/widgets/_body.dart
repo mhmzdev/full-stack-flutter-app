@@ -36,6 +36,7 @@ class _Body extends StatelessWidget {
               Space.y.t100,
               AppInputField(
                 name: _FormKeys.email,
+                hint: 'Email address',
                 prefixIcon: Padding(
                   padding: Space.a.t20,
                   child: const CustomPaint(
@@ -49,6 +50,7 @@ class _Body extends StatelessWidget {
               Space.y.t20,
               AppInputField(
                 name: _FormKeys.password,
+                hint: 'Password',
                 isPass: true,
                 prefixIcon: Padding(
                   padding: Space.a.t20,
@@ -89,10 +91,10 @@ class _Body extends StatelessWidget {
                     style: AppText.b2,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => AppRoutes.register.push(context),
                     child: Text(
                       'Sign Up',
-                      style: AppText.s1 + FontWeight.w700,
+                      style: AppText.b2 + FontWeight.w700,
                     ),
                   ),
                 ],
