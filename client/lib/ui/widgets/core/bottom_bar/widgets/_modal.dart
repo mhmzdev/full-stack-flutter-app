@@ -64,7 +64,7 @@ class _Modal extends StatelessWidget {
                 )
               ],
             ),
-            onPressed: () {},
+            onPressed: () => AppRoutes.createStory.push(context),
           ),
           Space.bottom,
         ],
