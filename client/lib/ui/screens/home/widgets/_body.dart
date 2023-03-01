@@ -27,6 +27,24 @@ class _Body extends StatelessWidget {
                   children: profiles.map((e) => _StoryCard(user: e)).toList(),
                 ),
               ),
+              Space.y.t30,
+              const _CapsuleSwitch(),
+              Space.y.t60,
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                separatorBuilder: (context, index) => Space.y.t30,
+                itemCount: profiles.first.posts.length,
+                itemBuilder: (context, index) {
+                  final id = profiles.first.posts[index];
+                  final post = posts.firstWhere(
+                    (element) => element.id == id,
+                  );
+                  return PostCard(post: post);
+                },
+              ),
+              Space.y.t100,
+              Space.y.t100,
             ],
           ),
         ),

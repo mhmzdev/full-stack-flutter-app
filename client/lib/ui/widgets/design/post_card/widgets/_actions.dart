@@ -31,23 +31,12 @@ class _Actions extends StatelessWidget {
                 Expanded(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CustomPaint(
-                        painter:
-                            const HeartOutlineIconPainter(color: Colors.white),
-                        size: HeartOutlineIconPainter.s(12.un()),
-                      ),
-                      Space.x.t25,
-                      CustomPaint(
-                        painter: const CommentIconPainter(color: Colors.white),
-                        size: CommentIconPainter.s(12.un()),
-                      ),
-                      Space.x.t25,
-                      CustomPaint(
-                        painter: const SendIconPainter(color: Colors.white),
-                        size: SendIconPainter.s(12.un()),
-                      ),
-                    ],
+                    children: _actions(context).map((e) {
+                      return Padding(
+                        padding: Space.r.t20,
+                        child: e.icon,
+                      );
+                    }).toList(),
                   ),
                 ),
                 Space.y.t10,

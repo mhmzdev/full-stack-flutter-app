@@ -6,12 +6,15 @@ import 'package:client/static/profiles.dart';
 import 'package:client/ui/painter/icons/chat.dart';
 import 'package:client/ui/painter/icons/notification.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
+import 'package:client/ui/widgets/design/button/button.dart';
 import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
+import 'package:client/ui/widgets/design/post_card/post_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared/shared.dart';
 
 part 'widgets/_body.dart';
+part 'widgets/_capsule_switch.dart';
 part 'widgets/_story_card.dart';
 part 'widgets/_header.dart';
 

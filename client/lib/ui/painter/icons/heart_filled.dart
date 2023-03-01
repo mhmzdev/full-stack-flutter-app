@@ -76,7 +76,7 @@ class HeartFilledIconPainter extends CustomPainter {
     path_0.close();
 
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = const Color(0xff292D32).withOpacity(1.0);
+    paint0Fill.color = color ?? const Color(0xff292D32).withOpacity(1.0);
     canvas.drawPath(path_0, paint0Fill);
   }
 

@@ -1,7 +1,8 @@
 part of '../post_card.dart';
 
 class _Header extends StatelessWidget {
-  const _Header();
+  final User user;
+  const _Header({required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class _Header extends StatelessWidget {
             child: CircleAvatar(
               radius: 10.un(),
               backgroundImage: AssetImage(
-                profiles.first.imageURL,
+                user.imageURL,
               ),
             ),
           ),
@@ -25,11 +26,11 @@ class _Header extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${profiles.first.firstName} ${profiles.first.lastName}',
+                '${user.firstName} ${user.lastName}',
                 style: AppText.b2 + FontWeight.w500,
               ),
               Text(
-                profiles.first.username,
+                user.username,
                 style: AppText.s1 + AppTheme.grey,
               )
             ],
