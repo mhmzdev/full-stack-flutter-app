@@ -1,4 +1,5 @@
 abstract class AppRoutes {
+  static const createPost = '/create-post';
   static const profile = '/profile';
   static const home = '/home';
   static const forgot = '/forgot';
