@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class VideoIconPainter extends CustomPainter {
   const VideoIconPainter({this.color});

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class CalendarIconPainter extends CustomPainter {
   const CalendarIconPainter({this.color});

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class CommentIconPainter extends CustomPainter {
   const CommentIconPainter({this.color});

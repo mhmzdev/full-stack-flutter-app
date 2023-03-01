@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class PersonEditIconPainter extends CustomPainter {
   const PersonEditIconPainter({this.color});

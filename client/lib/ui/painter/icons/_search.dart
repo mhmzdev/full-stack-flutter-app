@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class SearchIconPainter extends CustomPainter {
   const SearchIconPainter({this.color});

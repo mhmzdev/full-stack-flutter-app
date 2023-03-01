@@ -1,5 +1,4 @@
-import 'package:client/configs/configs.dart';
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class HomeOutlineIconPainter extends CustomPainter {
   const HomeOutlineIconPainter({this.color});

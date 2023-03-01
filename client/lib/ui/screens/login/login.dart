@@ -1,8 +1,5 @@
 import 'package:client/configs/configs.dart';
-import 'package:client/ui/painter/facebook_icon.dart';
-import 'package:client/ui/painter/google_icon.dart';
-import 'package:client/ui/painter/icons/email.dart';
-import 'package:client/ui/painter/icons/lock.dart';
+import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:client/ui/widgets/design/button/button.dart';
 import 'package:client/ui/widgets/design/divider/divider_or.dart';
@@ -19,8 +16,8 @@ part 'static/_form_data.dart';
 part 'static/_form_keys.dart';
 
 part 'widgets/_body.dart';
-part 'widgets/_social_login.dart';
 part 'widgets/_social_button.dart';
+part 'widgets/_social_login.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);

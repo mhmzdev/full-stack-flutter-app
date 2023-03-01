@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class HeartFilledIconPainter extends CustomPainter {
   const HeartFilledIconPainter({this.color});

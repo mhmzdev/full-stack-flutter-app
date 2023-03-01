@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 //Copy this CustomPainter code to the Bottom of the File
 class PersonFilledIconPainter extends CustomPainter {

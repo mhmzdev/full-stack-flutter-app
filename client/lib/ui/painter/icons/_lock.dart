@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class LockIconPainter extends CustomPainter {
   const LockIconPainter({this.color});

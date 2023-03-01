@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class CameraIconPainter extends CustomPainter {
   const CameraIconPainter({this.color});

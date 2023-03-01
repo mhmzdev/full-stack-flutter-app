@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class PersonCircleIconPainter extends CustomPainter {
   const PersonCircleIconPainter({this.color});

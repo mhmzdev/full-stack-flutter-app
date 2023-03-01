@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class NotificationIconPainter extends CustomPainter {
   const NotificationIconPainter({this.color});

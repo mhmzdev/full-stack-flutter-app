@@ -1,13 +1,7 @@
 import 'dart:ui';
 
 import 'package:client/configs/configs.dart';
-import 'package:client/ui/painter/icons/add.dart';
-import 'package:client/ui/painter/icons/camera.dart';
-import 'package:client/ui/painter/icons/home_filled.dart';
-import 'package:client/ui/painter/icons/home_outline.dart';
-import 'package:client/ui/painter/icons/person_circle.dart';
-import 'package:client/ui/painter/icons/person_filled.dart';
-import 'package:client/ui/painter/icons/person_outline.dart';
+import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/design/button/button.dart';
 import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class ArrowLeftIconPainter extends CustomPainter {
   const ArrowLeftIconPainter({this.color});

@@ -1,6 +1,5 @@
 import 'package:client/configs/configs.dart';
-import 'package:client/ui/painter/icons/eye.dart';
-import 'package:client/ui/painter/icons/eye_close.dart';
+import 'package:client/ui/painter/base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';

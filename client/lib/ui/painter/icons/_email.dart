@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class EmailIconPainter extends CustomPainter {
   const EmailIconPainter({this.color});

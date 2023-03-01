@@ -1,8 +1,5 @@
 import 'package:client/configs/configs.dart';
-import 'package:client/ui/painter/icons/email.dart';
-import 'package:client/ui/painter/icons/lock.dart';
-import 'package:client/ui/painter/icons/person_broken.dart';
-import 'package:client/ui/painter/icons/person_outline.dart';
+import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:client/ui/widgets/design/button/button.dart';
 import 'package:client/ui/widgets/design/buttons/app_back_button.dart';

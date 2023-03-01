@@ -1,5 +1,5 @@
 import 'package:client/configs/configs.dart';
-import 'package:client/ui/painter/icons/arrow_left.dart';
+import 'package:client/ui/painter/base.dart';
 import 'package:flutter/material.dart';
 
 class AppBackButton extends StatelessWidget {

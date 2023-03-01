@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class SendIconPainter extends CustomPainter {
   const SendIconPainter({this.color});

@@ -2,10 +2,7 @@ import 'dart:ui';
 
 import 'package:client/configs/configs.dart';
 import 'package:client/static/profiles.dart';
-import 'package:client/ui/painter/icons/comment.dart';
-import 'package:client/ui/painter/icons/heart_outline.dart';
-import 'package:client/ui/painter/icons/more.dart';
-import 'package:client/ui/painter/icons/send.dart';
+import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/design/avatar/avatar.dart';
 import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
 import 'package:flutter/material.dart';

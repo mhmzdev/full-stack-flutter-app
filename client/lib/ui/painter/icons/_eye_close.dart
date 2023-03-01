@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../base.dart';
 
 class EyeCloseIconPainter extends CustomPainter {
   const EyeCloseIconPainter({this.color});
