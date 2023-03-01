@@ -8,8 +8,8 @@ _AppButtonModel _ghost() {
       AppButtonState.disabled: AppTheme.grey,
     },
     backgroundColor: {
-      AppButtonState.elevated: AppTheme.backgroundDark,
-      AppButtonState.plain: AppTheme.backgroundDark,
+      AppButtonState.elevated: Colors.transparent,
+      AppButtonState.plain: Colors.transparent,
       AppButtonState.disabled: AppTheme.greyDark,
     },
   );
