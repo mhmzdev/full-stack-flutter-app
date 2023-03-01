@@ -4,6 +4,6 @@ class _FormKeys {
   static const firstName = "firstName";
   static const lastName = "lastName";
   static const username = "username";
-  static const email = "email";
+  static const bio = "bio";
   static const dob = "dob";
 }

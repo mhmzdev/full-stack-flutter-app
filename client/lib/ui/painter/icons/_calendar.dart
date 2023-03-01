@@ -21,7 +21,7 @@ class CalendarIconPainter extends CustomPainter {
     canvas.drawPath(path_0, paint0Stroke);
 
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint0Fill.color = Colors.transparent;
     canvas.drawPath(path_0, paint0Fill);
 
     Path path_1 = Path();
@@ -37,7 +37,7 @@ class CalendarIconPainter extends CustomPainter {
     canvas.drawPath(path_1, paint1Stroke);
 
     Paint paint1Fill = Paint()..style = PaintingStyle.fill;
-    paint1Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint1Fill.color = Colors.transparent;
     canvas.drawPath(path_1, paint1Fill);
 
     Path path_2 = Path();
@@ -53,7 +53,7 @@ class CalendarIconPainter extends CustomPainter {
     canvas.drawPath(path_2, paint2Stroke);
 
     Paint paint2Fill = Paint()..style = PaintingStyle.fill;
-    paint2Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint2Fill.color = Colors.transparent;
     canvas.drawPath(path_2, paint2Fill);
 
     Path path_3 = Path();
@@ -101,7 +101,7 @@ class CalendarIconPainter extends CustomPainter {
     canvas.drawPath(path_3, paint3Stroke);
 
     Paint paint3Fill = Paint()..style = PaintingStyle.fill;
-    paint3Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint3Fill.color = Colors.transparent;
     canvas.drawPath(path_3, paint3Fill);
 
     Path path_4 = Path();
@@ -117,7 +117,7 @@ class CalendarIconPainter extends CustomPainter {
     canvas.drawPath(path_4, paint4Stroke);
 
     Paint paint4Fill = Paint()..style = PaintingStyle.fill;
-    paint4Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint4Fill.color = Colors.transparent;
     canvas.drawPath(path_4, paint4Fill);
 
     Path path_5 = Path();
@@ -133,7 +133,7 @@ class CalendarIconPainter extends CustomPainter {
     canvas.drawPath(path_5, paint5Stroke);
 
     Paint paint5Fill = Paint()..style = PaintingStyle.fill;
-    paint5Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint5Fill.color = Colors.transparent;
     canvas.drawPath(path_5, paint5Fill);
 
     Path path_6 = Path();
@@ -149,7 +149,7 @@ class CalendarIconPainter extends CustomPainter {
     canvas.drawPath(path_6, paint6Stroke);
 
     Paint paint6Fill = Paint()..style = PaintingStyle.fill;
-    paint6Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint6Fill.color = Colors.transparent;
     canvas.drawPath(path_6, paint6Fill);
 
     Path path_7 = Path();
@@ -165,7 +165,7 @@ class CalendarIconPainter extends CustomPainter {
     canvas.drawPath(path_7, paint7Stroke);
 
     Paint paint7Fill = Paint()..style = PaintingStyle.fill;
-    paint7Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint7Fill.color = Colors.transparent;
     canvas.drawPath(path_7, paint7Fill);
 
     Path path_8 = Path();
@@ -181,7 +181,7 @@ class CalendarIconPainter extends CustomPainter {
     canvas.drawPath(path_8, paint8Stroke);
 
     Paint paint8Fill = Paint()..style = PaintingStyle.fill;
-    paint8Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint8Fill.color = Colors.transparent;
     canvas.drawPath(path_8, paint8Fill);
 
     Path path_9 = Path();
@@ -197,7 +197,7 @@ class CalendarIconPainter extends CustomPainter {
     canvas.drawPath(path_9, paint9Stroke);
 
     Paint paint9Fill = Paint()..style = PaintingStyle.fill;
-    paint9Fill.color = const Color(0xff000000).withOpacity(1.0);
+    paint9Fill.color = Colors.transparent;
     canvas.drawPath(path_9, paint9Fill);
   }
 

@@ -22,7 +22,7 @@ class _Body extends StatelessWidget {
                       painter: const PersonEditIconPainter(),
                       size: PersonEditIconPainter.s(10.un()),
                     ),
-                    onTap: () {},
+                    onTap: () => AppRoutes.editProfile.push(context),
                   ),
                 ],
               ),

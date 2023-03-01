@@ -6,7 +6,8 @@ class _FormData {
       _FormKeys.firstName: user.firstName,
       _FormKeys.lastName: user.lastName,
       _FormKeys.username: user.username,
-      _FormKeys.email: user.email,
+      _FormKeys.bio: user.bio,
+      _FormKeys.dob: DateTime.now(),
     };
   }
 }

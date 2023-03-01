@@ -1,4 +1,5 @@
 import 'package:client/configs/configs.dart';
+import 'package:client/ui/painter/base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -36,7 +37,12 @@ class AppDateTimeInput extends StatelessWidget {
         filled: true,
         fillColor: AppTheme.backgroundLight,
         hintText: hint,
-        suffixIcon: const Icon(Icons.date_range),
+        prefixIcon: Padding(
+          padding: Space.a.t20,
+          child: const CustomPaint(
+            painter: CalendarIconPainter(),
+          ),
+        ),
         hintStyle: AppText.b2 + AppTheme.grey,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
