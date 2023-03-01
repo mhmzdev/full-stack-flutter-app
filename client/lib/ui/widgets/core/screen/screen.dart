@@ -71,8 +71,6 @@ class Screen extends StatelessWidget {
     return Scaffold(
       backgroundColor: scaffoldBackgroundColor,
       floatingActionButton: floatingActionButton,
-      bottomNavigationBar:
-          bottomBar ? const BottomBar() : const SizedBox.shrink(),
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -86,6 +84,13 @@ class Screen extends StatelessWidget {
             ),
           ),
           if (overlayBuilders != null) ...overlayBuilders!,
+          if (bottomBar)
+            const Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: BottomBar(),
+            ),
         ],
       ),
     );

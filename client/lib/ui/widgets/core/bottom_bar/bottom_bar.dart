@@ -22,18 +22,18 @@ class BottomBar extends StatelessWidget {
     final currentRoute = NavigationHistoryObserver().top;
     final currentPath = currentRoute!.settings.name;
 
-    return ClipRRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-        child: SizedBox(
-          height: 140,
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
+    return SizedBox(
+      height: 140,
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
                 child: Container(
                   padding: Space.a.t15 + Space.t.t15,
                   decoration: BoxDecoration(
@@ -75,24 +75,24 @@ class BottomBar extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
-                borderRadius: BorderRadius.circular(360),
-                onTap: () {},
-                child: Container(
-                  height: 30.un(),
-                  width: 30.un(),
-                  decoration: const BoxDecoration(
-                    color: AppTheme.primary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: _items[1].active,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          InkWell(
+            borderRadius: BorderRadius.circular(360),
+            onTap: () {},
+            child: Container(
+              height: 30.un(),
+              width: 30.un(),
+              decoration: const BoxDecoration(
+                color: AppTheme.primary,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: _items[1].active,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
