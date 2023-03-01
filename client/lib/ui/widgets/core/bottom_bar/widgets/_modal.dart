@@ -45,7 +45,7 @@ class _Modal extends StatelessWidget {
                 )
               ],
             ),
-            onPressed: () {},
+            onPressed: () => AppRoutes.createPost.push(context),
           ),
           Space.y.t25,
           AppButton(
