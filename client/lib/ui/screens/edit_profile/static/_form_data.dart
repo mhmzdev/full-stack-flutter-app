@@ -7,7 +7,7 @@ class _FormData {
       _FormKeys.lastName: user.lastName,
       _FormKeys.username: user.username,
       _FormKeys.bio: user.bio,
-      _FormKeys.dob: DateTime.now(),
+      _FormKeys.birthday: user.birthday,
     };
   }
 }

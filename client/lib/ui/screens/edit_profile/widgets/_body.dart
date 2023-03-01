@@ -133,7 +133,7 @@ class _Body extends StatelessWidget {
               ),
               Space.y.t20,
               AppDateTimeInput(
-                name: _FormKeys.dob,
+                name: _FormKeys.birthday,
                 hint: 'Date of birth',
                 firstDate: DateTime(1950, 1, 1),
                 lastDate: DateTime.now(),

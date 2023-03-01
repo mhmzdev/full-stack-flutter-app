@@ -5,5 +5,5 @@ class _FormKeys {
   static const lastName = "lastName";
   static const username = "username";
   static const bio = "bio";
-  static const dob = "dob";
+  static const birthday = "birthday";
 }

@@ -6,6 +6,7 @@ import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:client/ui/widgets/design/avatar/avatar.dart';
 import 'package:client/ui/widgets/design/button/button.dart';
 import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
+import 'package:client/ui/widgets/design/empty_results/empty_results.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

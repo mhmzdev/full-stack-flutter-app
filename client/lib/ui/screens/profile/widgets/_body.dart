@@ -99,32 +99,36 @@ class _Body extends StatelessWidget {
               Space.y.t30,
               const _ContentCapsule(),
               Space.y.t25,
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 0.85,
-                ),
-                itemCount: profiles.first.posts.length,
-                itemBuilder: (context, index) {
-                  final id = profiles.first.posts[index];
-                  final post = posts.firstWhere((element) => element.id == id);
+              if (profiles.first.posts.isEmpty)
+                const Empty(result: EmptyResult.emptyFeed)
+              else
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 0.85,
+                  ),
+                  itemCount: profiles.first.posts.length,
+                  itemBuilder: (context, index) {
+                    final id = profiles.first.posts[index];
+                    final post =
+                        posts.firstWhere((element) => element.id == id);
 
-                  return Container(
-                    margin: Space.a.t10,
-                    decoration: BoxDecoration(
-                      borderRadius: 12.radius(),
-                      image: DecorationImage(
-                        image: AssetImage(
-                          post.imageUrl,
+                    return Container(
+                      margin: Space.a.t10,
+                      decoration: BoxDecoration(
+                        borderRadius: 12.radius(),
+                        image: DecorationImage(
+                          image: AssetImage(
+                            post.imageUrl,
+                          ),
+                          fit: BoxFit.cover,
                         ),
-                        fit: BoxFit.cover,
                       ),
-                    ),
-                  );
-                },
-              ),
+                    );
+                  },
+                ),
               Space.y.t100,
               Space.y.t100,
               Space.bottom,

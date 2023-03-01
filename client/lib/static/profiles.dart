@@ -27,6 +27,7 @@ User generateProfile(int index) {
 
   final email = faker.internet.email();
   final bio = faker.lorem.sentence(wordCount: 10);
+  final birthday = faker.datatype.dateTime(max: 2022, min: 1980);
 
   final randomFollowersLen = Random().nextInt(10 + 1);
   final followers = List.generate(
@@ -53,6 +54,7 @@ User generateProfile(int index) {
     username: username,
     email: email,
     bio: bio,
+    birthday: birthday,
     posts: posts,
     followers: followers,
     following: following,
