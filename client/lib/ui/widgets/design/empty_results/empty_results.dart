@@ -3,9 +3,11 @@ import 'package:client/utils/assets.dart';
 import 'package:flutter/material.dart';
 
 part 'variants/_empty_news_feed.dart';
+part 'variants/_empty_content.dart';
 
 enum EmptyResult {
   emptyFeed,
+  emptyContent,
 }
 
 class Empty extends StatelessWidget {
@@ -21,6 +23,10 @@ class Empty extends StatelessWidget {
 
     if (result == EmptyResult.emptyFeed) {
       return const _EmptyNewsFeed();
+    }
+
+    if (result == EmptyResult.emptyContent) {
+      return const _EmptyContent();
     }
 
     return const SizedBox.shrink();
