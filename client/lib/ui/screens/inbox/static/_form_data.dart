@@ -1,9 +1,9 @@
-part of '../chat.dart';
+part of '../inbox.dart';
 
 class _FormData {
   static Map<String, dynamic> initialValues() {
     return {
-      _FormKeys.search: "",
+      _FormKeys.message: "",
     };
   }
 }
