@@ -1,3 +1,4 @@
+import 'package:client/ui/screens/chat/chat.dart';
 import 'package:client/ui/screens/edit_profile/edit_profile.dart';
 import 'package:client/ui/screens/create_story/create_story.dart';
 import 'package:client/ui/screens/create_post/create_post.dart';
@@ -10,6 +11,7 @@ import 'package:client/ui/screens/splash/splash.dart';
 import 'package:flutter/material.dart';
 
 final appRoutes = {
+  AppRoutes.chat: (_) => const ChatScreen(),
   AppRoutes.editProfile: (_) => const EditProfileScreen(),
   AppRoutes.createStory: (_) => const CreateStoryScreen(),
   AppRoutes.createPost: (_) => const CreatePostScreen(),
