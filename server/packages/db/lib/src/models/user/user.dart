@@ -12,6 +12,7 @@ abstract class User {
   String get username;
   String get email;
   String get bio;
+  DateTime? get birthday;
   String get imageURL;
   String get coverURL;
   List<int> get followers;

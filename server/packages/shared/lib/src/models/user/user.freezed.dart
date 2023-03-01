@@ -28,6 +28,7 @@ mixin _$User {
   String get coverURL => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get bio => throw _privateConstructorUsedError;
+  DateTime? get birthday => throw _privateConstructorUsedError;
   List<int> get following => throw _privateConstructorUsedError;
   List<int> get followers => throw _privateConstructorUsedError;
   List<int> get posts => throw _privateConstructorUsedError;
@@ -51,6 +52,7 @@ abstract class $UserCopyWith<$Res> {
       String coverURL,
       String email,
       String bio,
+      DateTime? birthday,
       List<int> following,
       List<int> followers,
       List<int> posts});
@@ -77,6 +79,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? coverURL = null,
     Object? email = null,
     Object? bio = null,
+    Object? birthday = freezed,
     Object? following = null,
     Object? followers = null,
     Object? posts = null,
@@ -114,6 +117,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       following: null == following
           ? _value.following
           : following // ignore: cast_nullable_to_non_nullable
@@ -145,6 +152,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String coverURL,
       String email,
       String bio,
+      DateTime? birthday,
       List<int> following,
       List<int> followers,
       List<int> posts});
@@ -167,6 +175,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? coverURL = null,
     Object? email = null,
     Object? bio = null,
+    Object? birthday = freezed,
     Object? following = null,
     Object? followers = null,
     Object? posts = null,
@@ -204,6 +213,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       following: null == following
           ? _value._following
           : following // ignore: cast_nullable_to_non_nullable
@@ -232,6 +245,7 @@ class _$_User implements _User {
       this.coverURL = '',
       required this.email,
       required this.bio,
+      this.birthday,
       final List<int> following = const [],
       final List<int> followers = const [],
       final List<int> posts = const []})
@@ -259,6 +273,8 @@ class _$_User implements _User {
   final String email;
   @override
   final String bio;
+  @override
+  final DateTime? birthday;
   final List<int> _following;
   @override
   @JsonKey()
@@ -288,7 +304,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, firstName: $firstName, lastName: $lastName, username: $username, imageURL: $imageURL, coverURL: $coverURL, email: $email, bio: $bio, following: $following, followers: $followers, posts: $posts)';
+    return 'User(id: $id, firstName: $firstName, lastName: $lastName, username: $username, imageURL: $imageURL, coverURL: $coverURL, email: $email, bio: $bio, birthday: $birthday, following: $following, followers: $followers, posts: $posts)';
   }
 
   @override
@@ -309,6 +325,8 @@ class _$_User implements _User {
                 other.coverURL == coverURL) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.bio, bio) || other.bio == bio) &&
+            (identical(other.birthday, birthday) ||
+                other.birthday == birthday) &&
             const DeepCollectionEquality()
                 .equals(other._following, _following) &&
             const DeepCollectionEquality()
@@ -328,6 +346,7 @@ class _$_User implements _User {
       coverURL,
       email,
       bio,
+      birthday,
       const DeepCollectionEquality().hash(_following),
       const DeepCollectionEquality().hash(_followers),
       const DeepCollectionEquality().hash(_posts));
@@ -356,6 +375,7 @@ abstract class _User implements User {
       final String coverURL,
       required final String email,
       required final String bio,
+      final DateTime? birthday,
       final List<int> following,
       final List<int> followers,
       final List<int> posts}) = _$_User;
@@ -378,6 +398,8 @@ abstract class _User implements User {
   String get email;
   @override
   String get bio;
+  @override
+  DateTime? get birthday;
   @override
   List<int> get following;
   @override

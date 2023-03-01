@@ -11,7 +11,6 @@ import 'package:client/ui/widgets/design/input/app_input_field.dart';
 import 'package:client/ui/widgets/design/input/app_multiline_input.dart';
 import 'package:client/ui/widgets/design/modals/upload_media.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
