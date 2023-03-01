@@ -21,7 +21,7 @@ User generateProfile(int index) {
   final lastName =
       faker.name.lastName(gender: isMale ? Gender.male : Gender.female);
 
-  final username = faker.lorem.word(length: 1);
+  final username = faker.lorem.word();
 
   final imageURL = _images[index];
 
