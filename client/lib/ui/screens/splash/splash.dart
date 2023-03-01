@@ -1,4 +1,5 @@
 import 'package:client/configs/configs.dart';
+import 'package:client/ui/animations/entrance_fader.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  Future<void> _next() async {
+    await 3.seconds.delay;
+    if (!mounted) return;
+    AppRoutes.welcome.pushReplace(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _next();
+  }
+
   @override
   Widget build(BuildContext context) {
     App.init(context);
@@ -18,8 +32,12 @@ class _SplashScreenState extends State<SplashScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FlutterLogo(
-            size: 50.un(),
+          EntranceFader(
+            offset: const Offset(0, 30),
+            duration: const Duration(seconds: 1),
+            child: FlutterLogo(
+              size: 50.un(),
+            ),
           ),
           Space.y.t30,
           Text(
