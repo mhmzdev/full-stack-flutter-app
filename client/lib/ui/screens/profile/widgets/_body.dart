@@ -54,20 +54,45 @@ class _Body extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    for (int i = 0; i < 3; i++)
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            '120',
-                            style: AppText.b1,
-                          ),
-                          Text(
-                            'Posts',
-                            style: AppText.b3 + AppTheme.grey,
-                          )
-                        ],
-                      )
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          profiles.first.posts.length.toString(),
+                          style: AppText.b1,
+                        ),
+                        Text(
+                          'Posts',
+                          style: AppText.b3 + AppTheme.grey,
+                        )
+                      ],
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          profiles.first.followers.length.toString(),
+                          style: AppText.b1,
+                        ),
+                        Text(
+                          'Followers',
+                          style: AppText.b3 + AppTheme.grey,
+                        )
+                      ],
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          profiles.first.following.length.toString(),
+                          style: AppText.b1,
+                        ),
+                        Text(
+                          'Following',
+                          style: AppText.b3 + AppTheme.grey,
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
