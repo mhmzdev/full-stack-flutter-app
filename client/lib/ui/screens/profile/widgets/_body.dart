@@ -15,8 +15,13 @@ class _Body extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  AppIconButton(
+                    color: AppTheme.danger,
+                    icon: const Icon(Icons.logout_rounded),
+                    onTap: () => AppRoutes.login.pushReplace(context),
+                  ),
                   AppIconButton(
                     icon: CustomPaint(
                       painter: const PersonEditIconPainter(),
