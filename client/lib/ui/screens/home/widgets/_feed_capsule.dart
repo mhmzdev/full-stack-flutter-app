@@ -1,7 +1,7 @@
 part of '../home.dart';
 
-class _CapsuleSwitch extends StatelessWidget {
-  const _CapsuleSwitch();
+class _FeedCapsule extends StatelessWidget {
+  const _FeedCapsule();
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class _CapsuleSwitch extends StatelessWidget {
       height: 23.un(),
       padding: Space.a.t10,
       decoration: BoxDecoration(
-        color: AppTheme.greyDark,
+        color: AppTheme.backgroundLight,
         borderRadius: 12.radius(),
       ),
       child: Row(

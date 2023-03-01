@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:shared/shared.dart';
 
 part 'widgets/_body.dart';
-part 'widgets/_capsule_switch.dart';
+part 'widgets/_feed_capsule.dart';
 part 'widgets/_story_card.dart';
 part 'widgets/_header.dart';
 

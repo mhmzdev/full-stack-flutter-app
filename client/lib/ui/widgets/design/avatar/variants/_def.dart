@@ -10,7 +10,7 @@ class _Def extends StatelessWidget {
       radius: 25.un(),
       backgroundColor: AppTheme.primary,
       child: CircleAvatar(
-        radius: 23.un(),
+        radius: 24.un(),
         backgroundImage: AssetImage(
           user.imageURL,
         ),
