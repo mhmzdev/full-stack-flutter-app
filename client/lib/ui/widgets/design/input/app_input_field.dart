@@ -26,7 +26,7 @@ class AppInputField extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
 
-  final String Function(String?)? onChanged;
+  final void Function(String?)? onChanged;
   final String? Function(String?)? validator;
 
   const AppInputField({

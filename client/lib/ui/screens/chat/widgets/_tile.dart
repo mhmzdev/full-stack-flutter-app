@@ -7,6 +7,12 @@ class _Tile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => AppRoutes.inbox.push(
+        context,
+        arguments: {
+          'user': user,
+        },
+      ),
       shape: RoundedRectangleBorder(
         borderRadius: 12.radius(),
       ),
