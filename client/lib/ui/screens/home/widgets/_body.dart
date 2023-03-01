@@ -29,7 +29,7 @@ class _Body extends StatelessWidget {
               ),
               Space.y.t30,
               const _CapsuleSwitch(),
-              Space.y.t60,
+              Space.y.t30,
               ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
