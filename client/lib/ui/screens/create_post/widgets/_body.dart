@@ -46,7 +46,7 @@ class _Body extends StatelessWidget {
                       showModalBottomSheet(
                         context: context,
                         backgroundColor: Colors.transparent,
-                        builder: (_) => const _Modal(),
+                        builder: (_) => const UploadMediaModal(),
                       );
                     },
                     child: DottedBorder(
@@ -58,13 +58,22 @@ class _Body extends StatelessWidget {
                       child: SizedBox(
                         height: 65.un(),
                         width: 50.un(),
-                        child: Center(
-                          child: CustomPaint(
-                            painter: const GalleryIconPainter(),
-                            size: GalleryIconPainter.s(
-                              15.un(),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomPaint(
+                              painter: const GalleryIconPainter(),
+                              size: GalleryIconPainter.s(
+                                15.un(),
+                              ),
                             ),
-                          ),
+                            Space.y.t20,
+                            Text(
+                              'Add Photo',
+                              style: AppText.b3 + AppTheme.grey,
+                            )
+                          ],
                         ),
                       ),
                     ),
