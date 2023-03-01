@@ -34,9 +34,11 @@ class _Body extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, index) => Space.y.t30,
-                itemCount: profiles.first.posts.length,
+                itemCount: profiles.length,
                 itemBuilder: (context, index) {
-                  final id = profiles.first.posts[index];
+                  final id = profiles[index].posts.firstOrNull;
+                  if (id == null) return const SizedBox.shrink();
+
                   final post = posts.firstWhere(
                     (element) => element.id == id,
                   );

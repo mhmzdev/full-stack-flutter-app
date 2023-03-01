@@ -10,7 +10,7 @@ final _images =
     List.generate(10, (index) => 'assets/utils/util-${index + 1}.png');
 
 final posts = List.generate(10, (index) {
-  final uid = Random().nextInt(profiles.length + 1);
+  final uid = profiles[Random().nextInt(profiles.length)].id;
 
   final caption = faker.lorem.sentence(wordCount: 20);
   final imageURL = _images[Random().nextInt(10)];
