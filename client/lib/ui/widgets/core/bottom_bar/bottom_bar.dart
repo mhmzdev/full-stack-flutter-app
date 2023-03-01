@@ -2,15 +2,21 @@ import 'dart:ui';
 
 import 'package:client/configs/configs.dart';
 import 'package:client/ui/painter/icons/add.dart';
+import 'package:client/ui/painter/icons/camera.dart';
 import 'package:client/ui/painter/icons/home_filled.dart';
 import 'package:client/ui/painter/icons/home_outline.dart';
+import 'package:client/ui/painter/icons/person_circle.dart';
 import 'package:client/ui/painter/icons/person_filled.dart';
 import 'package:client/ui/painter/icons/person_outline.dart';
+import 'package:client/ui/widgets/design/button/button.dart';
+import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 
 part '_data.dart';
 part '_model.dart';
+
+part 'widgets/_modal.dart';
 part 'widgets/_bottom_bar_icon.dart';
 
 class BottomBar extends StatelessWidget {
@@ -79,7 +85,15 @@ class BottomBar extends StatelessWidget {
           ),
           InkWell(
             borderRadius: BorderRadius.circular(360),
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (_) {
+                  return const _Modal();
+                },
+              );
+            },
             child: Container(
               height: 30.un(),
               width: 30.un(),
