@@ -1,17 +1,24 @@
 import 'package:client/configs/configs.dart';
+import 'package:client/static/profiles.dart';
+import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
+import 'package:client/ui/widgets/design/avatar/avatar.dart';
+import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
+import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
+import 'package:client/ui/widgets/design/input/app_input_field.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:provider/provider.dart';
+import 'package:shared/shared.dart';
+
+part '_state.dart';
 
 part 'static/_form_data.dart';
 part 'static/_form_keys.dart';
 
 part 'widgets/_body.dart';
-
-part '_state.dart';
+part 'widgets/_tile.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);

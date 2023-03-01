@@ -25,7 +25,7 @@ class _Header extends StatelessWidget {
             painter: const ChatIconPainter(),
             size: ChatIconPainter.s(10.un()),
           ),
-          onTap: () {},
+          onTap: () => AppRoutes.chat.push(context),
         ),
       ],
     );
