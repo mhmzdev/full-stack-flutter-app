@@ -8,16 +8,16 @@ import 'package:stormberry/stormberry.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
-    case HttpMethod.get:
+    case HttpMethod.put:
       final request = await context.request.body();
       final map = jsonDecode(request) as Map<String, dynamic>;
       final user = User.fromJson(map);
       return _update(context, user);
 
     //
-    case HttpMethod.post:
+    case HttpMethod.get:
       return Response(statusCode: HttpStatus.methodNotAllowed);
-    case HttpMethod.put:
+    case HttpMethod.post:
       return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.delete:
       return Response(statusCode: HttpStatus.methodNotAllowed);
@@ -30,10 +30,7 @@ Future<Response> onRequest(RequestContext context) async {
   }
 }
 
-Future<Response> _update(
-  RequestContext context,
-  User user,
-) async {
+Future<Response> _update(RequestContext context, User user) async {
   final database = context.read<Database>();
   final users = await database.users.queryUsers();
   for (final u in users) {
