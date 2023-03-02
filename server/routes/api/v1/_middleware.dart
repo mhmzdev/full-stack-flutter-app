@@ -39,7 +39,6 @@ Future<Response?> auth(RequestContext context) async {
 
   final secretKey = env['JWT_SECRET']!;
   final jwt = JWT.verify(token, SecretKey(secretKey));
-  print(jwt.payload);
   return null;
 
   // if TOKEN is invalid
