@@ -7,13 +7,14 @@ import 'package:stormberry/stormberry.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
-    case HttpMethod.get:
-      return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.post:
       final req = await context.request.body();
       final map = jsonDecode(req) as Map<String, dynamic>;
       return _forgotPassword(context, map['email'] as String);
 
+    //
+    case HttpMethod.get:
+      return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.put:
       return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.delete:

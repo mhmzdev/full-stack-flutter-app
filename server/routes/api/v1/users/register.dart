@@ -13,6 +13,7 @@ Future<Response> onRequest(RequestContext context) async {
       final map = jsonDecode(request) as Map<String, dynamic>;
       return _register(context, map);
 
+    //
     case HttpMethod.get:
       return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.put:

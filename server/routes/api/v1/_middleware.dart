@@ -1,6 +1,4 @@
 import 'package:dart_frog/dart_frog.dart';
-import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
-import 'package:dotenv/dotenv.dart';
 import 'package:stormberry/stormberry.dart';
 
 /*
@@ -22,7 +20,7 @@ final database = Database(
 );
 
 Future<Response?> auth(RequestContext context) async {
-  final env = DotEnv()..load();
+  // final env = DotEnv()..load();
 
   final headers = context.request.headers;
   final auth = headers['Authorization'];
@@ -37,8 +35,8 @@ Future<Response?> auth(RequestContext context) async {
     );
   }
 
-  final secretKey = env['JWT_SECRET']!;
-  final jwt = JWT.verify(token, SecretKey(secretKey));
+  // final secretKey = env['JWT_SECRET']!;
+  // final jwt = JWT.verify(token, SecretKey(secretKey));
   return null;
 
   // if TOKEN is invalid

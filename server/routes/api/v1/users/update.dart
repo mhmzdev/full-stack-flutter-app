@@ -14,6 +14,7 @@ Future<Response> onRequest(RequestContext context) async {
       final user = User.fromJson(map);
       return _update(context, user);
 
+    //
     case HttpMethod.post:
       return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.put:
