@@ -11,8 +11,11 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
   final dbComment = await database.comments.queryComment(id);
 
   if (dbComment == null) {
-    return Response(
-      body: 'Comment not found',
+    return Response.json(
+      body: {
+        'status': 'failure',
+        'message': 'Comment not found',
+      },
       statusCode: HttpStatus.notFound,
     );
   }
@@ -37,14 +40,7 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
   }
 }
 
-Future<Response> _get(RequestContext context, db.Comment? dbComment) async {
-  if (dbComment == null) {
-    return Response(
-      statusCode: 404,
-      body: 'Comment not found!',
-    );
-  }
-
+Future<Response> _get(RequestContext context, db.Comment dbComment) async {
   final sharedComment = Comment.fromDb(dbComment);
 
   return Response.json(

@@ -11,8 +11,11 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
   final dbPost = await database.posts.queryPost(id);
 
   if (dbPost == null) {
-    return Response(
-      body: 'Post not found',
+    return Response.json(
+      body: {
+        'status': 'failure',
+        'message': 'Post not found',
+      },
       statusCode: HttpStatus.notFound,
     );
   }
@@ -37,14 +40,7 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
   }
 }
 
-Future<Response> _get(RequestContext context, db.Post? dbPost) async {
-  if (dbPost == null) {
-    return Response(
-      statusCode: 404,
-      body: 'Post not found!',
-    );
-  }
-
+Future<Response> _get(RequestContext context, db.Post dbPost) async {
   final sharedPost = Post.fromDb(dbPost);
 
   return Response.json(

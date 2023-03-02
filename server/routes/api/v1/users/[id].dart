@@ -42,6 +42,7 @@ Future<Response> _get(RequestContext context, db.User? dbUser) async {
     return Response.json(
       statusCode: 404,
       body: {
+        'status': 'failure',
         'message': 'User not found!',
       },
     );
@@ -62,6 +63,7 @@ Future<Response> _put(RequestContext context, int id, db.User user) async {
     if (u.username == user.username) {
       return Response.json(
         body: {
+          'status': 'failure',
           'message': 'username ${user.username} is already taken!',
         },
       );
