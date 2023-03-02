@@ -53,6 +53,7 @@ User generateProfile(int index) {
     lastName: lastName,
     username: username,
     email: email,
+    password: '',
     bio: bio,
     birthday: birthday,
     posts: posts,
