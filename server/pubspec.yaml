@@ -7,15 +7,30 @@ environment:
   sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
+  # hashing
+  crypt: ^4.2.1
+  
+  # server
   dart_frog: ^0.3.0
 
+  # jwt
+  dart_jsonwebtoken: ^2.7.1
+
+  # local
   db:
     path: packages/db
 
+  # env
+  dotenv: ^4.1.0
+
+  # DB (PostgresSQL)
   postgres: ^2.6.1
 
+  # local
   shared:
     path: packages/shared
+
+  # ORM
   stormberry: ^0.11.0
 
 dev_dependencies:
