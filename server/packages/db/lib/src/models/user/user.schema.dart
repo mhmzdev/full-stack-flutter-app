@@ -39,8 +39,8 @@ class _UserRepository extends BaseRepository
     if (requests.isEmpty) return [];
     var values = QueryValues();
     var rows = await db.query(
-      'INSERT INTO "users" ( "first_name", "following", "posts", "last_name", "username", "email", "bio", "birthday", "image_url", "cover_url", "followers" )\n'
-      'VALUES ${requests.map((r) => '( ${values.add(r.firstName)}:text, ${values.add(r.following)}:_int8, ${values.add(r.posts)}:_int8, ${values.add(r.lastName)}:text, ${values.add(r.username)}:text, ${values.add(r.email)}:text, ${values.add(r.bio)}:text, ${values.add(r.birthday)}:timestamp, ${values.add(r.imageURL)}:text, ${values.add(r.coverURL)}:text, ${values.add(r.followers)}:_int8 )').join(', ')}\n'
+      'INSERT INTO "users" ( "first_name", "followers", "following", "posts", "last_name", "username", "email", "password", "bio", "birthday", "image_url", "cover_url" )\n'
+      'VALUES ${requests.map((r) => '( ${values.add(r.firstName)}:text, ${values.add(r.followers)}:_int8, ${values.add(r.following)}:_int8, ${values.add(r.posts)}:_int8, ${values.add(r.lastName)}:text, ${values.add(r.username)}:text, ${values.add(r.email)}:text, ${values.add(r.password)}:text, ${values.add(r.bio)}:text, ${values.add(r.birthday)}:timestamp, ${values.add(r.imageURL)}:text, ${values.add(r.coverURL)}:text )').join(', ')}\n'
       'RETURNING "id"',
       values.values,
     );
@@ -55,9 +55,9 @@ class _UserRepository extends BaseRepository
     var values = QueryValues();
     await db.query(
       'UPDATE "users"\n'
-      'SET "first_name" = COALESCE(UPDATED."first_name", "users"."first_name"), "following" = COALESCE(UPDATED."following", "users"."following"), "posts" = COALESCE(UPDATED."posts", "users"."posts"), "last_name" = COALESCE(UPDATED."last_name", "users"."last_name"), "username" = COALESCE(UPDATED."username", "users"."username"), "email" = COALESCE(UPDATED."email", "users"."email"), "bio" = COALESCE(UPDATED."bio", "users"."bio"), "birthday" = COALESCE(UPDATED."birthday", "users"."birthday"), "image_url" = COALESCE(UPDATED."image_url", "users"."image_url"), "cover_url" = COALESCE(UPDATED."cover_url", "users"."cover_url"), "followers" = COALESCE(UPDATED."followers", "users"."followers")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.firstName)}:text, ${values.add(r.following)}:_int8, ${values.add(r.posts)}:_int8, ${values.add(r.lastName)}:text, ${values.add(r.username)}:text, ${values.add(r.email)}:text, ${values.add(r.bio)}:text, ${values.add(r.birthday)}:timestamp, ${values.add(r.imageURL)}:text, ${values.add(r.coverURL)}:text, ${values.add(r.followers)}:_int8 )').join(', ')} )\n'
-      'AS UPDATED("id", "first_name", "following", "posts", "last_name", "username", "email", "bio", "birthday", "image_url", "cover_url", "followers")\n'
+      'SET "first_name" = COALESCE(UPDATED."first_name", "users"."first_name"), "followers" = COALESCE(UPDATED."followers", "users"."followers"), "following" = COALESCE(UPDATED."following", "users"."following"), "posts" = COALESCE(UPDATED."posts", "users"."posts"), "last_name" = COALESCE(UPDATED."last_name", "users"."last_name"), "username" = COALESCE(UPDATED."username", "users"."username"), "email" = COALESCE(UPDATED."email", "users"."email"), "password" = COALESCE(UPDATED."password", "users"."password"), "bio" = COALESCE(UPDATED."bio", "users"."bio"), "birthday" = COALESCE(UPDATED."birthday", "users"."birthday"), "image_url" = COALESCE(UPDATED."image_url", "users"."image_url"), "cover_url" = COALESCE(UPDATED."cover_url", "users"."cover_url")\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.firstName)}:text, ${values.add(r.followers)}:_int8, ${values.add(r.following)}:_int8, ${values.add(r.posts)}:_int8, ${values.add(r.lastName)}:text, ${values.add(r.username)}:text, ${values.add(r.email)}:text, ${values.add(r.password)}:text, ${values.add(r.bio)}:text, ${values.add(r.birthday)}:timestamp, ${values.add(r.imageURL)}:text, ${values.add(r.coverURL)}:text )').join(', ')} )\n'
+      'AS UPDATED("id", "first_name", "followers", "following", "posts", "last_name", "username", "email", "password", "bio", "birthday", "image_url", "cover_url")\n'
       'WHERE "users"."id" = UPDATED."id"',
       values.values,
     );
@@ -67,59 +67,63 @@ class _UserRepository extends BaseRepository
 class UserInsertRequest {
   UserInsertRequest({
     required this.firstName,
+    required this.followers,
     required this.following,
     required this.posts,
     required this.lastName,
     required this.username,
     required this.email,
-    required this.bio,
+    required this.password,
+    this.bio,
     this.birthday,
     required this.imageURL,
     required this.coverURL,
-    required this.followers,
   });
 
   String firstName;
+  List<int> followers;
   List<int> following;
   List<int> posts;
   String lastName;
   String username;
   String email;
-  String bio;
+  String password;
+  String? bio;
   DateTime? birthday;
   String imageURL;
   String coverURL;
-  List<int> followers;
 }
 
 class UserUpdateRequest {
   UserUpdateRequest({
     required this.id,
     this.firstName,
+    this.followers,
     this.following,
     this.posts,
     this.lastName,
     this.username,
     this.email,
+    this.password,
     this.bio,
     this.birthday,
     this.imageURL,
     this.coverURL,
-    this.followers,
   });
 
   int id;
   String? firstName;
+  List<int>? followers;
   List<int>? following;
   List<int>? posts;
   String? lastName;
   String? username;
   String? email;
+  String? password;
   String? bio;
   DateTime? birthday;
   String? imageURL;
   String? coverURL;
-  List<int>? followers;
 }
 
 class UserQueryable extends KeyedViewQueryable<User, int> {
@@ -140,38 +144,42 @@ class UserQueryable extends KeyedViewQueryable<User, int> {
   User decode(TypedMap map) => UserView(
       id: map.get('id'),
       firstName: map.get('first_name'),
+      followers: map.getListOpt('followers') ?? const [],
       following: map.getListOpt('following') ?? const [],
       posts: map.getListOpt('posts') ?? const [],
       lastName: map.get('last_name'),
       username: map.get('username'),
       email: map.get('email'),
-      bio: map.get('bio'),
+      password: map.get('password'),
+      bio: map.getOpt('bio'),
       birthday: map.getOpt('birthday'),
       imageURL: map.get('image_url'),
-      coverURL: map.get('cover_url'),
-      followers: map.getListOpt('followers') ?? const []);
+      coverURL: map.get('cover_url'));
 }
 
 class UserView with User {
   UserView({
     required this.id,
     required this.firstName,
+    required this.followers,
     required this.following,
     required this.posts,
     required this.lastName,
     required this.username,
     required this.email,
-    required this.bio,
+    required this.password,
+    this.bio,
     this.birthday,
     required this.imageURL,
     required this.coverURL,
-    required this.followers,
   });
 
   @override
   final int id;
   @override
   final String firstName;
+  @override
+  final List<int> followers;
   @override
   final List<int> following;
   @override
@@ -183,13 +191,13 @@ class UserView with User {
   @override
   final String email;
   @override
-  final String bio;
+  final String password;
+  @override
+  final String? bio;
   @override
   final DateTime? birthday;
   @override
   final String imageURL;
   @override
   final String coverURL;
-  @override
-  final List<int> followers;
 }

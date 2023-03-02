@@ -27,7 +27,8 @@ mixin _$User {
   String get imageURL => throw _privateConstructorUsedError;
   String get coverURL => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get bio => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  String? get bio => throw _privateConstructorUsedError;
   DateTime? get birthday => throw _privateConstructorUsedError;
   List<int> get following => throw _privateConstructorUsedError;
   List<int> get followers => throw _privateConstructorUsedError;
@@ -51,7 +52,8 @@ abstract class $UserCopyWith<$Res> {
       String imageURL,
       String coverURL,
       String email,
-      String bio,
+      String password,
+      String? bio,
       DateTime? birthday,
       List<int> following,
       List<int> followers,
@@ -78,7 +80,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? imageURL = null,
     Object? coverURL = null,
     Object? email = null,
-    Object? bio = null,
+    Object? password = null,
+    Object? bio = freezed,
     Object? birthday = freezed,
     Object? following = null,
     Object? followers = null,
@@ -113,10 +116,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      bio: null == bio
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: freezed == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       birthday: freezed == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
@@ -151,7 +158,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String imageURL,
       String coverURL,
       String email,
-      String bio,
+      String password,
+      String? bio,
       DateTime? birthday,
       List<int> following,
       List<int> followers,
@@ -174,7 +182,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? imageURL = null,
     Object? coverURL = null,
     Object? email = null,
-    Object? bio = null,
+    Object? password = null,
+    Object? bio = freezed,
     Object? birthday = freezed,
     Object? following = null,
     Object? followers = null,
@@ -209,10 +218,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      bio: null == bio
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: freezed == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       birthday: freezed == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
@@ -244,7 +257,8 @@ class _$_User implements _User {
       this.imageURL = '',
       this.coverURL = '',
       required this.email,
-      required this.bio,
+      required this.password,
+      this.bio,
       this.birthday,
       final List<int> following = const [],
       final List<int> followers = const [],
@@ -272,7 +286,9 @@ class _$_User implements _User {
   @override
   final String email;
   @override
-  final String bio;
+  final String password;
+  @override
+  final String? bio;
   @override
   final DateTime? birthday;
   final List<int> _following;
@@ -304,7 +320,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, firstName: $firstName, lastName: $lastName, username: $username, imageURL: $imageURL, coverURL: $coverURL, email: $email, bio: $bio, birthday: $birthday, following: $following, followers: $followers, posts: $posts)';
+    return 'User(id: $id, firstName: $firstName, lastName: $lastName, username: $username, imageURL: $imageURL, coverURL: $coverURL, email: $email, password: $password, bio: $bio, birthday: $birthday, following: $following, followers: $followers, posts: $posts)';
   }
 
   @override
@@ -324,6 +340,8 @@ class _$_User implements _User {
             (identical(other.coverURL, coverURL) ||
                 other.coverURL == coverURL) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
             (identical(other.bio, bio) || other.bio == bio) &&
             (identical(other.birthday, birthday) ||
                 other.birthday == birthday) &&
@@ -345,6 +363,7 @@ class _$_User implements _User {
       imageURL,
       coverURL,
       email,
+      password,
       bio,
       birthday,
       const DeepCollectionEquality().hash(_following),
@@ -374,7 +393,8 @@ abstract class _User implements User {
       final String imageURL,
       final String coverURL,
       required final String email,
-      required final String bio,
+      required final String password,
+      final String? bio,
       final DateTime? birthday,
       final List<int> following,
       final List<int> followers,
@@ -397,7 +417,9 @@ abstract class _User implements User {
   @override
   String get email;
   @override
-  String get bio;
+  String get password;
+  @override
+  String? get bio;
   @override
   DateTime? get birthday;
   @override

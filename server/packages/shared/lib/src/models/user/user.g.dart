@@ -14,7 +14,8 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       imageURL: json['imageURL'] as String? ?? '',
       coverURL: json['coverURL'] as String? ?? '',
       email: json['email'] as String,
-      bio: json['bio'] as String,
+      password: json['password'] as String,
+      bio: json['bio'] as String?,
       birthday: json['birthday'] == null
           ? null
           : DateTime.parse(json['birthday'] as String),
@@ -38,6 +39,7 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'imageURL': instance.imageURL,
       'coverURL': instance.coverURL,
       'email': instance.email,
+      'password': instance.password,
       'bio': instance.bio,
       'birthday': instance.birthday?.toIso8601String(),
       'following': instance.following,

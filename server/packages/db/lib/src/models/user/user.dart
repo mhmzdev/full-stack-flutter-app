@@ -11,7 +11,8 @@ abstract class User {
   String get lastName;
   String get username;
   String get email;
-  String get bio;
+  String get password;
+  String? get bio;
   DateTime? get birthday;
   String get imageURL;
   String get coverURL;
