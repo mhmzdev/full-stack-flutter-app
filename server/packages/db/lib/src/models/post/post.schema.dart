@@ -40,7 +40,7 @@ class _PostRepository extends BaseRepository
     var values = QueryValues();
     var rows = await db.query(
       'INSERT INTO "posts" ( "uid", "caption", "has_image", "image_url", "has_video", "video_url", "likes", "comments", "created_at" )\n'
-      'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.caption)}:text, ${values.add(r.hasImage)}:bool, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:bool, ${values.add(r.videoUrl)}:text, ${values.add(r.likes)}:_int8, ${values.add(r.comments)}:_int8, ${values.add(r.createdAt)}:timestamp )').join(', ')}\n'
+      'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.caption)}:text, ${values.add(r.hasImage)}:boolean, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:boolean, ${values.add(r.videoUrl)}:text, ${values.add(r.likes)}:_int8, ${values.add(r.comments)}:_int8, ${values.add(r.createdAt)}:timestamp )').join(', ')}\n'
       'RETURNING "id"',
       values.values,
     );
@@ -56,7 +56,7 @@ class _PostRepository extends BaseRepository
     await db.query(
       'UPDATE "posts"\n'
       'SET "uid" = COALESCE(UPDATED."uid", "posts"."uid"), "caption" = COALESCE(UPDATED."caption", "posts"."caption"), "has_image" = COALESCE(UPDATED."has_image", "posts"."has_image"), "image_url" = COALESCE(UPDATED."image_url", "posts"."image_url"), "has_video" = COALESCE(UPDATED."has_video", "posts"."has_video"), "video_url" = COALESCE(UPDATED."video_url", "posts"."video_url"), "likes" = COALESCE(UPDATED."likes", "posts"."likes"), "comments" = COALESCE(UPDATED."comments", "posts"."comments"), "created_at" = COALESCE(UPDATED."created_at", "posts"."created_at")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.uid)}:int8, ${values.add(r.caption)}:text, ${values.add(r.hasImage)}:bool, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:bool, ${values.add(r.videoUrl)}:text, ${values.add(r.likes)}:_int8, ${values.add(r.comments)}:_int8, ${values.add(r.createdAt)}:timestamp )').join(', ')} )\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.uid)}:int8, ${values.add(r.caption)}:text, ${values.add(r.hasImage)}:boolean, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:boolean, ${values.add(r.videoUrl)}:text, ${values.add(r.likes)}:_int8, ${values.add(r.comments)}:_int8, ${values.add(r.createdAt)}:timestamp )').join(', ')} )\n'
       'AS UPDATED("id", "uid", "caption", "has_image", "image_url", "has_video", "video_url", "likes", "comments", "created_at")\n'
       'WHERE "posts"."id" = UPDATED."id"',
       values.values,
