@@ -4,7 +4,6 @@ import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:client/ui/widgets/design/avatar/avatar.dart';
 import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
-import 'package:client/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
