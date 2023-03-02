@@ -5,7 +5,8 @@ import 'package:db/db.dart' as db;
 import 'package:shared/shared.dart';
 import 'package:stormberry/stormberry.dart';
 
-Future<Response> onRequest(RequestContext context, int id) async {
+Future<Response> onRequest(RequestContext context, String stringId) async {
+  final id = int.parse(stringId);
   final database = context.read<Database>();
   final dbUser = await database.users.queryUser(id);
 
@@ -38,9 +39,11 @@ Future<Response> onRequest(RequestContext context, int id) async {
 
 Future<Response> _get(RequestContext context, db.User? dbUser) async {
   if (dbUser == null) {
-    return Response(
+    return Response.json(
       statusCode: 404,
-      body: 'User not found!',
+      body: {
+        'message': 'User not found!',
+      },
     );
   }
 
@@ -59,7 +62,7 @@ Future<Response> _put(RequestContext context, int id, db.User user) async {
     if (u.username == user.username) {
       return Response.json(
         body: {
-          'error': 'username ${user.username} is already taken!',
+          'message': 'username ${user.username} is already taken!',
         },
       );
     }

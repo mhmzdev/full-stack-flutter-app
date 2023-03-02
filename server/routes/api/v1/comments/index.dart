@@ -15,9 +15,7 @@ Future<Response> onRequest(RequestContext context) async {
     case HttpMethod.post:
       final request = await context.request.body();
       final map = jsonDecode(request) as Map<String, dynamic>;
-      final comment = Comment.fromJson(map);
-
-      return _post(context, comment);
+      return _post(context, map);
 
     //
     case HttpMethod.put:
@@ -50,12 +48,15 @@ Future<Response> _get(RequestContext context) async {
   );
 }
 
-Future<Response> _post(RequestContext context, Comment comment) async {
+Future<Response> _post(
+  RequestContext context,
+  Map<String, dynamic> comment,
+) async {
   final database = context.read<Database>();
 
   final request = db.CommentInsertRequest(
-    uid: comment.uid,
-    content: comment.content,
+    uid: comment['uid'] as int,
+    content: comment['content'] as String,
     createdAt: DateTime.now(),
   );
 
@@ -63,7 +64,8 @@ Future<Response> _post(RequestContext context, Comment comment) async {
 
   return Response.json(
     body: {
-      'comment': 'Comment has been added with ID: $id',
+      'status': 'success',
+      'message': 'Comment has been added with ID: $id',
     },
   );
 }

@@ -15,9 +15,7 @@ Future<Response> onRequest(RequestContext context) async {
     case HttpMethod.post:
       final request = await context.request.body();
       final map = jsonDecode(request) as Map<String, dynamic>;
-      final post = Post.fromJson(map);
-
-      return _post(context, post);
+      return _post(context, map);
 
     //
     case HttpMethod.put:
@@ -50,12 +48,19 @@ Future<Response> _get(RequestContext context) async {
   );
 }
 
-Future<Response> _post(RequestContext context, Post post) async {
+Future<Response> _post(
+  RequestContext context,
+  Map<String, dynamic> post,
+) async {
   final database = context.read<Database>();
 
   final request = db.PostInsertRequest(
-    uid: post.uid,
-    caption: post.caption,
+    uid: post['uid'] as int,
+    caption: post['caption'] as String,
+    hasImage: post['hasImage'] as bool?,
+    imageUrl: post['imageURL'] as String?,
+    hasVideo: post['hasVideo'] as bool?,
+    videoUrl: post['videoURL'] as String?,
     likes: [],
     comments: [],
     createdAt: DateTime.now(),

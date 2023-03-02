@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:crypt/crypt.dart';
 import 'package:dart_frog/dart_frog.dart';
 import 'package:db/db.dart' as db;
 import 'package:shared/shared.dart';
@@ -14,9 +15,7 @@ Future<Response> onRequest(RequestContext context) async {
     case HttpMethod.post:
       final request = await context.request.body();
       final map = jsonDecode(request) as Map<String, dynamic>;
-      final user = User.fromJson(map);
-
-      return _post(context, user);
+      return _post(context, map);
 
     //
     case HttpMethod.put:
@@ -49,14 +48,33 @@ Future<Response> _get(RequestContext context) async {
   );
 }
 
-Future<Response> _post(RequestContext context, User user) async {
+Future<Response> _post(
+  RequestContext context,
+  Map<String, dynamic> user,
+) async {
   final database = context.read<Database>();
 
+  final users = await database.users.queryUsers();
+  for (final u in users) {
+    if (u.username == user['username']) {
+      return Response.json(
+        statusCode: 205,
+        body: {
+          'status': 'failed',
+          'message': 'username ${user['username']} is already taken!',
+        },
+      );
+    }
+  }
+
+  final hashedPassword = Crypt.sha256(user['password'] as String);
+
   final request = db.UserInsertRequest(
-    firstName: user.firstName,
-    lastName: user.lastName,
-    username: user.username,
-    email: user.email,
+    firstName: user['firstName'] as String,
+    lastName: user['lastName'] as String,
+    username: user['username'] as String,
+    email: user['email'] as String,
+    password: hashedPassword.toString(),
     imageURL: '',
     coverURL: '',
     bio: '',
@@ -64,11 +82,13 @@ Future<Response> _post(RequestContext context, User user) async {
     following: [],
     posts: [],
   );
+
   final id = await database.users.insertOne(request);
 
   return Response.json(
     body: {
-      'user': 'User has been added with ID: $id',
+      'status': 'success',
+      'message': 'User has been added with ID: $id',
     },
   );
 }
