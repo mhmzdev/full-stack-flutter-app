@@ -23,13 +23,13 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
   switch (context.request.method) {
     case HttpMethod.get:
       return _get(context, dbUser);
-    case HttpMethod.delete:
-      return _delete(context, id);
 
     //
     case HttpMethod.put:
       return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.post:
+      return Response(statusCode: HttpStatus.methodNotAllowed);
+    case HttpMethod.delete:
       return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.patch:
       return Response(statusCode: HttpStatus.methodNotAllowed);
@@ -58,18 +58,6 @@ Future<Response> _get(RequestContext context, db.User? dbUser) async {
       'status': 'success',
       'message': 'User found',
       'data': sharedUser.toJson(),
-    },
-  );
-}
-
-Future<Response> _delete(RequestContext context, int id) async {
-  final database = context.read<Database>();
-  await database.users.deleteOne(id);
-
-  return Response.json(
-    body: {
-      'status': 'success',
-      'message': 'Profile has been deleted successfully!',
     },
   );
 }
