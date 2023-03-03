@@ -1,5 +1,5 @@
 ---
-to: routes/api/v1/<%= h.changeCase.snake(name) %>/[id].dart
+to: "<%= dynamic ? `routes/api/v1/${h.changeCase.snake(name)}/[id].dart` : null %>"
 ---
 import 'dart:io';
 
@@ -34,12 +34,12 @@ Future<Response> _get(RequestContext context, int id) async {
 
 Future<Response> _put(RequestContext context, int id) async {
   return Response.json(
-    body: 'Something updated at $id',
+    body: 'Something Updated at $id',
   );
 }
 
 Future<Response> _delete(RequestContext context, int id) async {
   return Response.json(
-    body: 'Something deleted at $id',
+    body: 'Something Deleted at $id',
   );
 }
