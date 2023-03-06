@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:crypt/crypt.dart';
@@ -10,9 +9,9 @@ import 'package:stormberry/stormberry.dart';
 Future<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
     case HttpMethod.post:
-      final request = await context.request.body();
-      final map = jsonDecode(request) as Map<String, dynamic>;
-      return _register(context, map);
+      final request = context.request;
+      final body = await request.json() as Map<String, dynamic>;
+      return _register(context, body);
 
     //
     case HttpMethod.get:
@@ -67,7 +66,10 @@ Future<Response> _register(
 
   final id = await database.users.insertOne(request);
 
-  final sharedUser = User.fromJson(body);
+  final sharedUser = User.fromJson({
+    ...body,
+    'id': id,
+  });
 
   return Response.json(
     body: {
