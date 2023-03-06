@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:client/services/api.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,8 +30,13 @@ class AuthCubit extends Cubit<AuthState> {
       register: AuthRegisterLoading(),
     ));
     try {
-      final data =
-          await repo.register(firstName, lastName, username, email, password);
+      final data = await repo.register(
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+      );
 
       emit(state.copyWith(
         user: data,

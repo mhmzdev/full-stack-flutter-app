@@ -1,7 +1,7 @@
 part of 'cubit.dart';
 
 class _AuthRepository {
-  Future<User> register(
+  Future<User?> register(
     String firstName,
     String lastName,
     String username,

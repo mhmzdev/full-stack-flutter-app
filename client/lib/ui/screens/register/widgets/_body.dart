@@ -5,12 +5,14 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authCubit = AuthCubit.c(context);
     final screenState = _ScreenState.s(context, true);
 
     return Screen(
       keyboardHandler: true,
       formKey: screenState.formKey,
       initialFormValue: _FormData.initialValues(),
+      overlayBuilders: const [_Listener()],
       child: SafeArea(
         child: SingleChildScrollView(
           padding: Space.h.t25,
@@ -111,7 +113,27 @@ class _Body extends StatelessWidget {
               Space.y.t100,
               AppButton(
                 label: 'Sign Up',
-                onPressed: () {},
+                onPressed: () {
+                  final isValid =
+                      screenState.formKey.currentState!.saveAndValidate();
+
+                  if (!isValid) return;
+
+                  final form = screenState.formKey.currentState!;
+                  final data = form.value;
+
+                  final values = data.map(
+                    (key, value) => MapEntry(key, value.toString().trim()),
+                  );
+
+                  authCubit.register(
+                    values[_FormKeys.firstName]!,
+                    values[_FormKeys.lastName]!,
+                    values[_FormKeys.username]!,
+                    values[_FormKeys.email]!,
+                    values[_FormKeys.password]!,
+                  );
+                },
               ),
               Space.y.t20,
               Row(
