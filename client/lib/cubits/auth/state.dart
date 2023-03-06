@@ -4,17 +4,14 @@ part of 'cubit.dart';
 class AuthRegisterState extends Equatable {
   static bool match(AuthState a, AuthState b) => a.register != b.register;
 
-  final User? data;
   final String? message;
 
   const AuthRegisterState({
-    this.data,
     this.message,
   });
 
   @override
   List<Object?> get props => [
-        data,
         message,
       ];
 }
@@ -27,7 +24,7 @@ class AuthRegisterLoading extends AuthRegisterState {}
 
 @immutable
 class AuthRegisterSuccess extends AuthRegisterState {
-  const AuthRegisterSuccess({required User data}) : super(data: data);
+  const AuthRegisterSuccess() : super();
 }
 
 @immutable
@@ -38,9 +35,11 @@ class AuthRegisterFailed extends AuthRegisterState {
 // root-state
 @immutable
 class AuthState extends Equatable {
+  final User? user;
   final AuthRegisterState register;
 
   const AuthState({
+    this.user,
     required this.register,
   });
 
@@ -51,9 +50,11 @@ class AuthState extends Equatable {
       ];
 
   AuthState copyWith({
+    User? user,
     AuthRegisterState? register,
   }) {
     return AuthState(
+      user: user ?? this.user,
       register: register ?? this.register,
     );
   }

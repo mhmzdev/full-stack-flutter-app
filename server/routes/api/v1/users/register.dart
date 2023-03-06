@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:crypt/crypt.dart';
 import 'package:dart_frog/dart_frog.dart';
 import 'package:db/db.dart' as db;
+import 'package:shared/shared.dart';
 import 'package:stormberry/stormberry.dart';
 
 Future<Response> onRequest(RequestContext context) async {
@@ -66,10 +67,13 @@ Future<Response> _register(
 
   final id = await database.users.insertOne(request);
 
+  final sharedUser = User.fromJson(body);
+
   return Response.json(
     body: {
       'status': 'success',
       'message': 'User has been added with ID: $id',
+      'data': sharedUser.toJson(),
     },
   );
 }
