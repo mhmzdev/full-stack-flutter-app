@@ -3,7 +3,14 @@ import 'package:client/router/router.dart';
 import 'package:client/ui/screens/home/home.dart';
 import 'package:client/ui/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
+import 'package:provider/provider.dart';
+
+// bloc-imports-start
+import 'cubits/auth/cubit.dart';
+
+// bloc-imports-end
 
 void main() {
   runApp(const MyApp());
@@ -14,33 +21,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutteram',
-      navigatorObservers: [
-        NavigationHistoryObserver(),
+    return MultiProvider(
+      providers: [
+        // bloc-initiate-start
+        BlocProvider(create: (_) => AuthCubit()),
+
+        // bloc-initiate-end
       ],
-      theme: AppTheme.lightTheme(context),
-      darkTheme: AppTheme.darkTheme(context),
-      themeMode: ThemeMode.dark,
-      initialRoute: AppRoutes.splash,
-      routes: appRoutes,
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case AppRoutes.home:
-            return FadeRoute(
-              child: const HomeScreen(),
-              settings: settings,
-            );
-          case AppRoutes.profile:
-            return FadeRoute(
-              child: const ProfileScreen(),
-              settings: settings,
-            );
-          default:
-            return null;
-        }
-      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutteram',
+        navigatorObservers: [
+          NavigationHistoryObserver(),
+        ],
+        theme: AppTheme.lightTheme(context),
+        darkTheme: AppTheme.darkTheme(context),
+        themeMode: ThemeMode.dark,
+        initialRoute: AppRoutes.splash,
+        routes: appRoutes,
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case AppRoutes.home:
+              return FadeRoute(
+                child: const HomeScreen(),
+                settings: settings,
+              );
+            case AppRoutes.profile:
+              return FadeRoute(
+                child: const ProfileScreen(),
+                settings: settings,
+              );
+            default:
+              return null;
+          }
+        },
+      ),
     );
   }
 }
