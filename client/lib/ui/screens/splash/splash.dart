@@ -1,4 +1,5 @@
 import 'package:client/configs/configs.dart';
+import 'package:client/cubits/auth/cubit.dart';
 import 'package:client/services/cache.dart';
 import 'package:client/ui/animations/entrance_fader.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
@@ -13,11 +14,15 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> _next() async {
+    final authCubit = AuthCubit.c(context);
     await 3.seconds.delay;
     if (!mounted) return;
 
     final uid = Cache.uid;
     if (uid != null) {
+      await authCubit.fetch(uid);
+
+      if (!mounted) return;
       AppRoutes.home.pushReplace(context);
       return;
     }
