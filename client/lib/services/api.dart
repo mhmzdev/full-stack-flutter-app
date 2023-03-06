@@ -7,9 +7,6 @@ class Api {
     contentType: "application/json",
     connectTimeout: const Duration(seconds: 60),
     receiveTimeout: const Duration(seconds: 60),
-    headers: {
-      'user-agent': 'SastaticketMobileApp',
-    },
   );
 
   static final Dio _ins = Dio(_options);
