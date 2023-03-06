@@ -4,7 +4,7 @@ class _AuthProvider {
   static Future<User> fetch(Map<String, dynamic> body) async {
     try {
       final uid = body['uid'];
-      final resp = await Api.ins.post(
+      final resp = await Api.ins.get(
         '/v1/users/$uid',
         data: body,
       );
