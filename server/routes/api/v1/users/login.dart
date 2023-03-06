@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:crypt/crypt.dart';
@@ -9,13 +8,13 @@ import 'package:stormberry/stormberry.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
-    case HttpMethod.get:
-      final request = await context.request.body();
-      final map = jsonDecode(request) as Map<String, dynamic>;
-      return _login(context, map);
+    case HttpMethod.post:
+      final request = context.request;
+      final body = await request.json() as Map<String, dynamic>;
+      return _login(context, body);
 
     //
-    case HttpMethod.post:
+    case HttpMethod.get:
       return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.put:
       return Response(statusCode: HttpStatus.methodNotAllowed);
@@ -50,7 +49,8 @@ Future<Response> _login(
       statusCode: 205,
       body: {
         'status': 'failure',
-        'message': "Account doesn't exist for this email. Please try again!",
+        'message':
+            'Account does not exist for this email address. Please try again!',
       },
     );
   }
@@ -64,17 +64,16 @@ Future<Response> _login(
       statusCode: 203,
       body: {
         'status': 'failure',
-        'message': 'Email/Password do not match!',
+        'message': 'Email & Password combination do not match. Try again!',
       },
     );
   }
 
   return Response.json(
     body: {
-      'status': 'Success',
-      body: {
-        'user': User.fromDb(user),
-      },
+      'status': 'success',
+      'message': '',
+      'data': User.fromDb(user),
     },
   );
 }
