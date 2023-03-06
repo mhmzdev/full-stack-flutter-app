@@ -40,17 +40,7 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
   }
 }
 
-Future<Response> _get(RequestContext context, db.User? dbUser) async {
-  if (dbUser == null) {
-    return Response.json(
-      statusCode: 404,
-      body: {
-        'status': 'failure',
-        'message': 'User not found!',
-      },
-    );
-  }
-
+Future<Response> _get(RequestContext context, db.User dbUser) async {
   final sharedUser = User.fromDb(dbUser);
 
   return Response.json(

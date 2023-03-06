@@ -37,7 +37,7 @@ Future<Response> _register(
   final users = await database.users.queryUsers();
 
   for (final u in users) {
-    if (u.username == body['username']) {
+    if (u.username == body['username'] || u.email == body['email']) {
       return Response.json(
         statusCode: 205,
         body: {
