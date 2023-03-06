@@ -5,9 +5,12 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authCubit = AuthCubit.c(context);
+
     return Screen(
       keyboardHandler: true,
       bottomBar: true,
+      overlayBuilders: const [_AuthListener()],
       child: SafeArea(
         child: SingleChildScrollView(
           padding: Space.a.t25,
@@ -20,7 +23,7 @@ class _Body extends StatelessWidget {
                   AppIconButton(
                     color: AppTheme.danger,
                     icon: const Icon(Icons.logout_rounded),
-                    onTap: () => AppRoutes.login.pushReplace(context),
+                    onTap: () => authCubit.logout(),
                   ),
                   AppIconButton(
                     icon: CustomPaint(

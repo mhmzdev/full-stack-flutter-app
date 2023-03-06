@@ -6,12 +6,14 @@ class AuthState extends Equatable {
   final User? user;
   final AuthFetchState fetch;
   final AuthLoginState login;
+  final AuthLogoutState logout;
   final AuthRegisterState register;
 
   const AuthState({
     this.user,
     required this.fetch,
     required this.login,
+    required this.logout,
     required this.register,
   });
 
@@ -20,6 +22,7 @@ class AuthState extends Equatable {
         // root-state-props
         fetch,
         login,
+        logout,
         register,
       ];
 
@@ -27,12 +30,14 @@ class AuthState extends Equatable {
     User? user,
     AuthFetchState? fetch,
     AuthLoginState? login,
+    AuthLogoutState? logout,
     AuthRegisterState? register,
   }) {
     return AuthState(
       user: user ?? this.user,
       fetch: fetch ?? this.fetch,
       login: login ?? this.login,
+      logout: logout ?? this.logout,
       register: register ?? this.register,
     );
   }
@@ -45,6 +50,7 @@ class AuthStateDefault extends AuthState {
           // root-state-init
           fetch: const AuthFetchState(),
           login: const AuthLoginState(),
+          logout: const AuthLogoutState(),
           register: const AuthRegisterState(),
         );
 }

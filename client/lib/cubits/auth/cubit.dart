@@ -9,6 +9,7 @@ import 'package:shared/shared.dart';
 
 part '_login_state.dart';
 part '_fetch_state.dart';
+part '_logout_state.dart';
 part '_register_state.dart';
 
 part 'data_provider.dart';
@@ -40,10 +41,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> login(
-    String email,
-    String password,
-  ) async {
+  Future<void> login(String email, String password) async {
     emit(state.copyWith(
       login: AuthLoginLoading(),
     ));
@@ -90,6 +88,24 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(state.copyWith(
         register: AuthRegisterFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> logout() async {
+    emit(state.copyWith(
+      logout: AuthLogoutLoading(),
+    ));
+
+    try {
+      Cache.resetUid();
+
+      emit(state.copyWith(
+        logout: const AuthLogoutSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        logout: AuthLogoutFailed(message: e.toString()),
       ));
     }
   }
