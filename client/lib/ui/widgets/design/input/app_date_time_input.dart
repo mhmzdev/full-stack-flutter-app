@@ -34,6 +34,7 @@ class AppDateTimeInput extends StatelessWidget {
       initialDate: initialDate ?? DateTime(1998, 1, 1),
       style: AppText.b2,
       decoration: InputDecoration(
+        errorStyle: AppText.s1 + AppTheme.danger,
         filled: true,
         fillColor: AppTheme.backgroundLight,
         hintText: hint,

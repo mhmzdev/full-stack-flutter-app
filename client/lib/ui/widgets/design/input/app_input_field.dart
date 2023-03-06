@@ -92,6 +92,7 @@ class AppInputFieldState extends State<AppInputField> {
             inputFormatters: widget.inputFormatters,
             style: AppText.b2,
             decoration: InputDecoration(
+              errorStyle: AppText.s1 + AppTheme.danger,
               errorText: widget.errorText,
               prefixIcon: widget.prefixIcon,
               suffixIcon: widget.isPass
@@ -135,14 +136,14 @@ class AppInputFieldState extends State<AppInputField> {
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
                 borderSide: BorderSide(
-                  color: Colors.red.withAlpha(200),
+                  color: AppTheme.danger,
                   width: 1.un(),
                 ),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
                 borderSide: BorderSide(
-                  color: Colors.red.withAlpha(200),
+                  color: AppTheme.danger,
                   width: 1.un(),
                 ),
               ),
