@@ -8,7 +8,7 @@ class _<%= h.changeCase.pascal(name) %>Provider {
   static Future< <%= pmodel %>> fetch() async {
     try {
       final Map<String, dynamic> raw = {};
-      return <%= pmodel %>.fromMap(raw);
+      return <%= pmodel %>.fromJson(raw);
     } catch (e) {
       throw Exception("Internal Server Error");
     }

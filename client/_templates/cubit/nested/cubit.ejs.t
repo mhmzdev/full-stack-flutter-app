@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 <% args.forEach(function(arg){ %>
-import 'package:client/models/<%= h.changeCase.snake(arg.model) %>.dart';
+import 'package:shared/shared.dart';
 <% }); %>
 
 part 'data_provider.dart';

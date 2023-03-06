@@ -8,7 +8,7 @@ class _<%= h.changeCase.pascal(name) %>Provider {
   static Future< <%= h.changeCase.pascal(arg.model) %>> <%= h.changeCase.camel(arg.module) %>() async {
     try {
       final Map<String, dynamic> raw = {};
-      return <%= h.changeCase.pascal(arg.model) %>.fromMap(raw);
+      return <%= h.changeCase.pascal(arg.model) %>.fromJson(raw);
     } catch (e) {
       throw Exception("Internal Server Error");
     }

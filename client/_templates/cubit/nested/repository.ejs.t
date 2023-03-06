@@ -5,6 +5,6 @@ part of 'cubit.dart';
 
 class _<%= h.changeCase.pascal(name) %>Repository {
 <% args.forEach(function(arg){ %>
-  Future< <%= h.changeCase.pascal(arg.model) %>> fetch() => _<%= h.changeCase.pascal(name) %>Provider.fetch();
+  Future< <%= h.changeCase.pascal(arg.model) %>> <%= h.changeCase.camel(arg.module) %>() => _<%= h.changeCase.pascal(name) %>Provider.<%= h.changeCase.camel(arg.module) %>();
 <% }); %>
 }
