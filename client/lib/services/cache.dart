@@ -19,5 +19,3 @@ class Cache {
     _prefs?.remove(_uidKey);
   }
 }
-
-final cache = Cache();
