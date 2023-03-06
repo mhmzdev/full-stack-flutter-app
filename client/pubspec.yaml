@@ -51,6 +51,9 @@ dependencies:
   # network
   dio: ^5.0.1
 
+  # cache
+  shared_preferences: ^2.0.18
+
   # state mangament
   equatable: ^2.0.5
   provider: ^6.0.4
