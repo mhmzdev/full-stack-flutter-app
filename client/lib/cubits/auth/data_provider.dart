@@ -35,7 +35,11 @@ class _AuthProvider {
 
       final raw = resp.data;
       final Map<String, dynamic> data = raw['data'];
-      return User.fromJson(data);
+      final user = User.fromJson(data);
+
+      Cache.setUid(user.id);
+
+      return user;
     } catch (e) {
       debugPrint('------ AuthProvider ------');
       debugPrint('------ $e ------');

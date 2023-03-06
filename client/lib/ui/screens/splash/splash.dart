@@ -1,4 +1,5 @@
 import 'package:client/configs/configs.dart';
+import 'package:client/services/cache.dart';
 import 'package:client/ui/animations/entrance_fader.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _next() async {
     await 3.seconds.delay;
     if (!mounted) return;
+
+    final uid = Cache.uid;
+    if (uid != null) {
+      AppRoutes.home.pushReplace(context);
+      return;
+    }
     AppRoutes.welcome.pushReplace(context);
   }
 

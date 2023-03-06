@@ -1,5 +1,6 @@
 import 'package:client/configs/configs.dart';
 import 'package:client/router/router.dart';
+import 'package:client/services/cache.dart';
 import 'package:client/ui/screens/home/home.dart';
 import 'package:client/ui/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,10 @@ import 'cubits/auth/cubit.dart';
 
 // bloc-imports-end
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Cache.init();
+
   runApp(const MyApp());
 }
 
