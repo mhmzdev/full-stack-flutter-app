@@ -13,9 +13,9 @@ class _Detailed extends StatelessWidget {
           backgroundColor: AppTheme.primary,
           child: CircleAvatar(
             radius: 10.un(),
-            backgroundImage: AssetImage(
-              user.imageURL,
-            ),
+            backgroundImage: user.imageURL.isEmpty
+                ? const AssetImage(StaticAssets.dp) as ImageProvider
+                : NetworkImage(user.imageURL),
           ),
         ),
         Space.x.t10,

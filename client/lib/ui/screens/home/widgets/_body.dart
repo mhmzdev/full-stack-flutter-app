@@ -5,6 +5,9 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authCubit = AuthCubit.c(context);
+    final user = authCubit.state.user!;
+
     return Screen(
       bottomBar: true,
       keyboardHandler: true,

@@ -1,4 +1,5 @@
 import 'package:client/configs/configs.dart';
+import 'package:client/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 

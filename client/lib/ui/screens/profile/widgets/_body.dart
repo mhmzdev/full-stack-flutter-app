@@ -6,6 +6,7 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authCubit = AuthCubit.c(context);
+    final user = authCubit.state.user!;
 
     return Screen(
       keyboardHandler: true,
@@ -36,16 +37,16 @@ class _Body extends StatelessWidget {
               ),
               Space.y.t100,
               Avatar(
-                user: profiles.first,
+                user: user,
               ),
               Space.y.t25,
               Text(
-                '${profiles.first.firstName} ${profiles.first.lastName}',
+                '${user.firstName} ${user.lastName}',
                 style: AppText.h3,
               ),
               Space.y.t10,
               Text(
-                "\"${profiles.first.bio}\"",
+                "\"${user.bio}\"",
                 style: AppText.s1 + AppTheme.grey,
                 textAlign: TextAlign.center,
               ),
@@ -66,7 +67,7 @@ class _Body extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          profiles.first.posts.length.toString(),
+                          user.posts.length.toString(),
                           style: AppText.b1,
                         ),
                         Text(
@@ -79,7 +80,7 @@ class _Body extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          profiles.first.followers.length.toString(),
+                          user.followers.length.toString(),
                           style: AppText.b1,
                         ),
                         Text(
@@ -92,7 +93,7 @@ class _Body extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          profiles.first.following.length.toString(),
+                          user.following.length.toString(),
                           style: AppText.b1,
                         ),
                         Text(
@@ -107,8 +108,10 @@ class _Body extends StatelessWidget {
               Space.y.t30,
               const _ContentCapsule(),
               Space.y.t25,
-              if (profiles.first.posts.isEmpty)
-                const Empty(result: EmptyResult.emptyFeed)
+              if (user.posts.isEmpty)
+                const Empty(
+                  result: EmptyResult.emptyContent,
+                )
               else
                 GridView.builder(
                   shrinkWrap: true,
@@ -117,9 +120,9 @@ class _Body extends StatelessWidget {
                     crossAxisCount: 3,
                     childAspectRatio: 0.85,
                   ),
-                  itemCount: profiles.first.posts.length,
+                  itemCount: user.posts.length,
                   itemBuilder: (context, index) {
-                    final id = profiles.first.posts[index];
+                    final id = user.posts[index];
                     final post =
                         posts.firstWhere((element) => element.id == id);
 
@@ -129,6 +132,7 @@ class _Body extends StatelessWidget {
                         borderRadius: 12.radius(),
                         image: DecorationImage(
                           image: AssetImage(
+                            // TODO: Handle Image here from FirebaseImage
                             post.imageUrl,
                           ),
                           fit: BoxFit.cover,

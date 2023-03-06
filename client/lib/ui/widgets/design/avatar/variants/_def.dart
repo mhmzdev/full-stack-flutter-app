@@ -11,9 +11,9 @@ class _Def extends StatelessWidget {
       backgroundColor: AppTheme.primary,
       child: CircleAvatar(
         radius: 24.un(),
-        backgroundImage: AssetImage(
-          user.imageURL,
-        ),
+        backgroundImage: user.imageURL.isEmpty
+            ? const AssetImage(StaticAssets.dp) as ImageProvider
+            : NetworkImage(user.imageURL),
       ),
     );
   }

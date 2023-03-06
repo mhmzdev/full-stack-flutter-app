@@ -6,11 +6,13 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenState = _ScreenState.s(context, true);
+    final authCubit = AuthCubit.c(context);
+    final user = authCubit.state.user!;
 
     return Screen(
       keyboardHandler: true,
       formKey: screenState.formKey,
-      initialFormValue: _FormData.initialValues(profiles.first),
+      initialFormValue: _FormData.initialValues(user),
       child: SafeArea(
         child: SingleChildScrollView(
           padding: Space.a.t25,
@@ -32,7 +34,7 @@ class _Body extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   Avatar(
-                    user: profiles.first,
+                    user: user,
                   ),
                   Positioned(
                     right: 0,
@@ -89,6 +91,7 @@ class _Body extends StatelessWidget {
               const AppMultilineInputField(
                 name: _FormKeys.bio,
                 label: 'Bio',
+                hint: 'Let others know about you. Write something...',
               ),
               Space.y.t20,
               Row(
