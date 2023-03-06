@@ -12,11 +12,11 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
 
   if (dbUser == null) {
     return Response.json(
+      statusCode: 205,
       body: {
         'status': 'failure',
-        'message': 'User not found',
+        'message': 'User not found or account has been disabled. Try again!',
       },
-      statusCode: HttpStatus.notFound,
     );
   }
 

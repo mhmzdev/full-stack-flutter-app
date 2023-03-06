@@ -3,7 +3,11 @@ import 'package:client/cubits/auth/cubit.dart';
 import 'package:client/services/cache.dart';
 import 'package:client/ui/animations/entrance_fader.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
+import 'package:client/utils/snackbars.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+part '_listener.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,16 +20,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _next() async {
     final authCubit = AuthCubit.c(context);
     await 3.seconds.delay;
-    if (!mounted) return;
 
     final uid = Cache.uid;
     if (uid != null) {
       await authCubit.fetch(uid);
-
-      if (!mounted) return;
-      AppRoutes.home.pushReplace(context);
       return;
     }
+
+    if (!mounted) return;
     AppRoutes.welcome.pushReplace(context);
   }
 
@@ -41,6 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
     App.init(context);
 
     return Screen(
+      overlayBuilders: const [_Listener()],
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

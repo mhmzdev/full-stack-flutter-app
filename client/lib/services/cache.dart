@@ -14,6 +14,10 @@ class Cache {
   static void setUid(int id) {
     _prefs?.setInt(_uidKey, id);
   }
+
+  static void resetUid() {
+    _prefs?.remove(_uidKey);
+  }
 }
 
 final cache = Cache();
