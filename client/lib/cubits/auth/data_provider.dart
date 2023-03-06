@@ -17,8 +17,8 @@ class _AuthProvider {
       return User.fromJson(data);
     } catch (e) {
       debugPrint('------ AuthProvider ------');
-      debugPrint('------ ${e.toString()} ------');
-      throw Exception(e.toString().split(': ').last);
+      debugPrint('------ $e ------');
+      throw Exception(e.toString());
     }
   }
 }

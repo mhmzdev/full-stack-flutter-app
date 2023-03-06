@@ -10,9 +10,16 @@ class _Listener extends StatelessWidget {
       listener: (context, state) {
         if (state.register is AuthRegisterSuccess) {
           ''.pop(context);
+          SnackBars.success(
+            context,
+            'Your account has been created successfully! Please login to continue.',
+          );
         }
 
-        if (state.register is AuthRegisterFailed) {}
+        if (state.register is AuthRegisterFailed) {
+          final msg = state.register.message!.split(": ").last;
+          SnackBars.failure(context, msg);
+        }
       },
       builder: (context, state) {
         final loading = state.register is AuthRegisterLoading;

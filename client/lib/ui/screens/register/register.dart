@@ -6,6 +6,7 @@ import 'package:client/ui/widgets/design/button/button.dart';
 import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:client/ui/widgets/design/input/app_input_field.dart';
 import 'package:client/ui/widgets/design/loader/full_screen_loader.dart';
+import 'package:client/utils/snackbars.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
