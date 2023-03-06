@@ -1,45 +1,15 @@
 part of 'cubit.dart';
 
-@immutable
-class AuthRegisterState extends Equatable {
-  static bool match(AuthState a, AuthState b) => a.register != b.register;
-
-  final String? message;
-
-  const AuthRegisterState({
-    this.message,
-  });
-
-  @override
-  List<Object?> get props => [
-        message,
-      ];
-}
-
-@immutable
-class AuthRegisterDefault extends AuthRegisterState {}
-
-@immutable
-class AuthRegisterLoading extends AuthRegisterState {}
-
-@immutable
-class AuthRegisterSuccess extends AuthRegisterState {
-  const AuthRegisterSuccess() : super();
-}
-
-@immutable
-class AuthRegisterFailed extends AuthRegisterState {
-  const AuthRegisterFailed({String? message}) : super(message: message);
-}
-
 // root-state
 @immutable
 class AuthState extends Equatable {
   final User? user;
   final AuthRegisterState register;
+  final AuthLoginState login;
 
   const AuthState({
     this.user,
+    required this.login,
     required this.register,
   });
 
@@ -47,14 +17,17 @@ class AuthState extends Equatable {
   List<Object> get props => [
         // root-state-props
         register,
+        login,
       ];
 
   AuthState copyWith({
     User? user,
     AuthRegisterState? register,
+    AuthLoginState? login,
   }) {
     return AuthState(
       user: user ?? this.user,
+      login: login ?? this.login,
       register: register ?? this.register,
     );
   }
@@ -65,6 +38,7 @@ class AuthStateDefault extends AuthState {
   const AuthStateDefault()
       : super(
           // root-state-init
+          login: const AuthLoginState(),
           register: const AuthRegisterState(),
         );
 }

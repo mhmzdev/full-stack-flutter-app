@@ -1,7 +1,7 @@
 part of 'cubit.dart';
 
 class _AuthRepository {
-  Future<User?> register(
+  Future<User> register(
     String firstName,
     String lastName,
     String username,
@@ -17,5 +17,14 @@ class _AuthRepository {
     };
 
     return _AuthProvider.register(payload);
+  }
+
+  Future<User> login(String email, String password) {
+    final payload = {
+      'email': email,
+      'password': password,
+    };
+
+    return _AuthProvider.login(payload);
   }
 }

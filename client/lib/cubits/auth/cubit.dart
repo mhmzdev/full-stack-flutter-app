@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:client/services/api.dart';
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:shared/shared.dart';
+
+part '_login_state.dart';
+part '_register_state.dart';
 
 part 'data_provider.dart';
 part 'repository.dart';
@@ -45,6 +46,30 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(state.copyWith(
         register: AuthRegisterFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> login(
+    String email,
+    String password,
+  ) async {
+    emit(state.copyWith(
+      login: AuthLoginLoading(),
+    ));
+    try {
+      final data = await repo.login(
+        email,
+        password,
+      );
+
+      emit(state.copyWith(
+        user: data,
+        login: const AuthLoginSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        login: AuthLoginFailed(message: e.toString()),
       ));
     }
   }
