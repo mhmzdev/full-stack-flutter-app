@@ -35,4 +35,29 @@ class _AuthRepository {
 
     return _AuthProvider.register(payload);
   }
+
+  Future<User> update(
+    int uid,
+    String firstName,
+    String lastName,
+    String username,
+    String newUserName,
+    String bio,
+    DateTime birthday,
+  ) {
+    final payload = {
+      'id': uid,
+      'firstName': firstName,
+      'lastName': lastName,
+      'username': username,
+      'newUserName': newUserName,
+      'bio': bio,
+      'birthday': DateFormat('yyyy-MM-dd HH:MM').format(birthday),
+      // TODO: Cover and DP yet to implement
+      'imageURL': '',
+      'coverURL': '',
+    };
+
+    return _AuthProvider.update(payload);
+  }
 }

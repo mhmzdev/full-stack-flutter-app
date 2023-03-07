@@ -13,6 +13,7 @@ class _Body extends StatelessWidget {
       keyboardHandler: true,
       formKey: screenState.formKey,
       initialFormValue: _FormData.initialValues(user),
+      overlayBuilders: const [_Listener()],
       child: SafeArea(
         child: SingleChildScrollView(
           padding: Space.a.t25,
@@ -144,7 +145,24 @@ class _Body extends StatelessWidget {
               Space.y.t30,
               AppButton(
                 label: 'Update',
-                onPressed: () {},
+                onPressed: () {
+                  final isValid =
+                      screenState.formKey.currentState!.saveAndValidate();
+                  if (!isValid) return;
+
+                  final form = screenState.formKey.currentState!;
+                  final data = form.value;
+
+                  authCubit.update(
+                    user.id,
+                    data[_FormKeys.firstName],
+                    data[_FormKeys.lastName],
+                    user.username,
+                    data[_FormKeys.username],
+                    data[_FormKeys.bio],
+                    data[_FormKeys.birthday],
+                  );
+                },
               ),
               Space.y.t30,
               Space.bottom,

@@ -1,15 +1,19 @@
 import 'dart:async';
 
+import 'package:client/constants/constants.dart';
 import 'package:client/services/api.dart';
 import 'package:client/services/cache.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:shared/shared.dart';
 
 part '_login_state.dart';
 part '_fetch_state.dart';
 part '_logout_state.dart';
+part '_update_state.dart';
 part '_register_state.dart';
 
 part 'data_provider.dart';
@@ -88,6 +92,40 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(state.copyWith(
         register: AuthRegisterFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> update(
+    int uid,
+    String firstName,
+    String lastName,
+    String username,
+    String newUserName,
+    String bio,
+    DateTime birthday,
+  ) async {
+    emit(state.copyWith(
+      update: AuthUpdateLoading(),
+    ));
+    try {
+      final data = await repo.update(
+        uid,
+        firstName,
+        lastName,
+        username,
+        newUserName,
+        bio,
+        birthday,
+      );
+
+      emit(state.copyWith(
+        user: data,
+        update: const AuthUpdateSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        update: AuthUpdateFailed(message: e.toString()),
       ));
     }
   }

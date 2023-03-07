@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
@@ -9,10 +8,9 @@ import 'package:stormberry/stormberry.dart';
 Future<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
     case HttpMethod.put:
-      final request = await context.request.body();
-      final map = jsonDecode(request) as Map<String, dynamic>;
-      final user = User.fromJson(map);
-      return _update(context, user);
+      final request = context.request;
+      final map = await request.json() as Map<String, dynamic>;
+      return _update(context, map);
 
     //
     case HttpMethod.get:
@@ -30,18 +28,39 @@ Future<Response> onRequest(RequestContext context) async {
   }
 }
 
-Future<Response> _update(RequestContext context, User user) async {
+Future<Response> _update(
+  RequestContext context,
+  Map<String, dynamic> body,
+) async {
   final database = context.read<Database>();
-  final users = await database.users.queryUsers();
-  for (final u in users) {
-    if (u.id != user.id && u.username == user.username) {
-      return Response.json(
-        statusCode: 203,
-        body: {
-          'status': 'failure',
-          'message': 'username ${user.username} is already taken!',
-        },
-      );
+
+  final dbUser = await database.users.queryUser(body['id'] as int);
+  final sharedUserTemp = User.fromDb(dbUser!);
+  final email = sharedUserTemp.email;
+  final password = sharedUserTemp.password;
+
+  final raw = {
+    ...body,
+    'email': email,
+    'password': password,
+  };
+
+  final user = User.fromJson(raw);
+  final newUserName = body['newUserName'] as String;
+
+  if (newUserName != user.username) {
+    final users = await database.users.queryUsers();
+
+    for (final u in users) {
+      if (u.username == newUserName) {
+        return Response.json(
+          statusCode: 203,
+          body: {
+            'status': 'failure',
+            'message': 'username $newUserName is already taken. Try again!',
+          },
+        );
+      }
     }
   }
 
@@ -49,7 +68,7 @@ Future<Response> _update(RequestContext context, User user) async {
     id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
-    username: user.username,
+    username: newUserName,
     imageURL: user.imageURL,
     coverURL: user.coverURL,
     birthday: user.birthday,
@@ -63,7 +82,7 @@ Future<Response> _update(RequestContext context, User user) async {
   return Response.json(
     body: {
       'status': 'success',
-      'message': 'Profile has been updated successfully!',
+      'message': 'profile has been updated successfully!',
       'data': sharedUser.toJson(),
     },
   );

@@ -19,6 +19,13 @@ class _AuthProvider {
       final raw = resp.data;
       final Map<String, dynamic> data = raw['data'];
       return User.fromJson(data);
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception(e.toString());
     } catch (e) {
       debugPrint('------ AuthProvider ------');
       debugPrint('------ $e ------');
@@ -44,6 +51,13 @@ class _AuthProvider {
       Cache.setUid(user.id);
 
       return user;
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception(e.toString());
     } catch (e) {
       debugPrint('------ AuthProvider ------');
       debugPrint('------ $e ------');
@@ -65,6 +79,41 @@ class _AuthProvider {
       final raw = resp.data;
       final Map<String, dynamic> data = raw['data'];
       return User.fromJson(data);
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception(e.toString());
+    } catch (e) {
+      debugPrint('------ AuthProvider ------');
+      debugPrint('------ $e ------');
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<User> update(Map<String, dynamic> body) async {
+    try {
+      final resp = await Api.ins.put(
+        '/v1/users/update',
+        data: body,
+      );
+
+      if (resp.statusCode != 200) {
+        throw Exception(resp.data['message']);
+      }
+
+      final raw = resp.data;
+      final Map<String, dynamic> data = raw['data'];
+      return User.fromJson(data);
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception(e.toString());
     } catch (e) {
       debugPrint('------ AuthProvider ------');
       debugPrint('------ $e ------');
