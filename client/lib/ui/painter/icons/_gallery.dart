@@ -47,7 +47,7 @@ class GalleryIconPainter extends CustomPainter {
     Paint paint0Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.04411765;
-    paint0Stroke.color = const Color(0xffABABAB).withOpacity(1.0);
+    paint0Stroke.color = Colors.white;
     paint0Stroke.strokeCap = StrokeCap.round;
     paint0Stroke.strokeJoin = StrokeJoin.round;
     canvas.drawPath(path_0, paint0Stroke);
@@ -91,7 +91,7 @@ class GalleryIconPainter extends CustomPainter {
     Paint paint1Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.04411765;
-    paint1Stroke.color = const Color(0xffABABAB).withOpacity(1.0);
+    paint1Stroke.color = Colors.white;
     paint1Stroke.strokeCap = StrokeCap.round;
     paint1Stroke.strokeJoin = StrokeJoin.round;
     canvas.drawPath(path_1, paint1Stroke);
@@ -131,7 +131,7 @@ class GalleryIconPainter extends CustomPainter {
     Paint paint2Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.04411765;
-    paint2Stroke.color = const Color(0xffABABAB).withOpacity(1.0);
+    paint2Stroke.color = Colors.white;
     paint2Stroke.strokeCap = StrokeCap.round;
     paint2Stroke.strokeJoin = StrokeJoin.round;
     canvas.drawPath(path_2, paint2Stroke);
