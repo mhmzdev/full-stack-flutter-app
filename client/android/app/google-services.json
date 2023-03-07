@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "18545657467",
+    "project_id": "flutteram-2023",
+    "storage_bucket": "flutteram-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18545657467:android:8c54a6d5dec82a6ed104de",
+        "android_client_info": {
+          "package_name": "com.hmz.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18545657467-m3qcsq55g8u03k8ofccvomla11q3je7u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5Jfx4B0d6CUy6jNoMwn7ENXJm9Rn0N5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18545657467-m3qcsq55g8u03k8ofccvomla11q3je7u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

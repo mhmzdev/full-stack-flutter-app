@@ -1,8 +1,10 @@
 import 'package:client/configs/configs.dart';
+import 'package:client/firebase_options.dart';
 import 'package:client/router/router.dart';
 import 'package:client/services/cache.dart';
 import 'package:client/ui/screens/home/home.dart';
 import 'package:client/ui/screens/profile/profile.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
@@ -16,6 +18,10 @@ import 'cubits/auth/cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Cache.init();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(const MyApp());
 }
