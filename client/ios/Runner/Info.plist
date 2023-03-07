@@ -4,6 +4,10 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow Flutteram to access photos and videos in gallery</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow Flutteram to access camera to take image as your Profile picture</string>
 	<key>CFBundleDisplayName</key>
 	<string>Flutteram</string>
 	<key>CFBundleExecutable</key>
