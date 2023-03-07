@@ -1,5 +1,6 @@
 import 'package:client/configs/configs.dart';
 import 'package:client/firebase_options.dart';
+import 'package:client/providers/media_provider.dart';
 import 'package:client/router/router.dart';
 import 'package:client/services/cache.dart';
 import 'package:client/ui/screens/home/home.dart';
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => MediaProvider()),
+
         // bloc-initiate-start
         BlocProvider(create: (_) => AuthCubit()),
 

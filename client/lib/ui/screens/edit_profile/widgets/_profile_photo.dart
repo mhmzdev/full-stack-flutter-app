@@ -7,7 +7,7 @@ class _ProfilePhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     final authCubit = AuthCubit.c(context);
     final user = authCubit.state.user!;
-    final screenState = _ScreenState.s(context, true);
+    final media = MediaProvider.state(context, true);
 
     return Stack(
       alignment: Alignment.center,
@@ -22,7 +22,7 @@ class _ProfilePhoto extends StatelessWidget {
             listenWhen: DPUploadState.match,
             listener: (context, state) {
               if (state.dp is DPUploadSuccess) {
-                screenState.reset();
+                media.reset();
               }
             },
             builder: (context, state) {
@@ -53,18 +53,14 @@ class _ProfilePhoto extends StatelessWidget {
                         builder: (context, child) {
                           return UploadMediaModal(
                             label: 'Profile photo',
-                            cameraCall: () => screenState.camera(context),
-                            galleryCall: () => screenState.gallery(context),
-                            removeCall: hasProfile
-                                ? () => screenState.remove(context)
-                                : null,
+                            hasRemoval: hasProfile,
                           );
                         },
                       );
                     },
                   );
-                  if (value != null && screenState.xFile != null) {
-                    final file = File(screenState.xFile!.path);
+                  if (value != null && media.xFile != null) {
+                    final file = File(media.xFile!.path);
                     authCubit.uploadProfilePhoto(file);
                     return;
                   }
