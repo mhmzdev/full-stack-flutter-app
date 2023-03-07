@@ -3,15 +3,17 @@ part of 'cubit.dart';
 // root-state
 @immutable
 class AuthState extends Equatable {
-  final User? user;
+  final DPUploadState dp;
   final AuthFetchState fetch;
   final AuthLoginState login;
   final AuthLogoutState logout;
   final AuthUpdateState update;
   final AuthRegisterState register;
+  final User? user;
 
   const AuthState({
     this.user,
+    required this.dp,
     required this.fetch,
     required this.login,
     required this.logout,
@@ -22,6 +24,7 @@ class AuthState extends Equatable {
   @override
   List<Object> get props => [
         // root-state-props
+        dp,
         fetch,
         login,
         logout,
@@ -31,6 +34,7 @@ class AuthState extends Equatable {
 
   AuthState copyWith({
     User? user,
+    DPUploadState? dp,
     AuthFetchState? fetch,
     AuthLoginState? login,
     AuthUpdateState? update,
@@ -38,6 +42,7 @@ class AuthState extends Equatable {
     AuthRegisterState? register,
   }) {
     return AuthState(
+      dp: dp ?? this.dp,
       user: user ?? this.user,
       fetch: fetch ?? this.fetch,
       login: login ?? this.login,
@@ -53,6 +58,7 @@ class AuthStateDefault extends AuthState {
   const AuthStateDefault()
       : super(
           // root-state-init
+          dp: const DPUploadState(),
           fetch: const AuthFetchState(),
           login: const AuthLoginState(),
           logout: const AuthLogoutState(),

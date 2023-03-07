@@ -76,6 +76,7 @@ dependencies:
   faker_dart: ^0.1.11
 
   # utils
+  image_picker: ^0.8.6+4
   dotted_border: ^2.0.0+3
   awesome_snackbar_content: ^0.1.2
 
