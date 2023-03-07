@@ -1,26 +1,25 @@
 import 'package:client/configs/configs.dart';
+import 'package:client/providers/media_provider.dart';
 import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/design/button/button.dart';
 import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:flutter/material.dart';
 
 class UploadMediaModal extends StatelessWidget {
-  final void Function() cameraCall;
-  final void Function() galleryCall;
-  final void Function()? removeCall;
+  final bool hasRemoval;
   final String label;
 
   const UploadMediaModal({
     super.key,
     required this.label,
-    required this.cameraCall,
-    required this.galleryCall,
-    this.removeCall,
+    this.hasRemoval = false,
   });
 
   @override
   Widget build(BuildContext context) {
     App.init(context);
+
+    final media = MediaProvider.state(context, true);
 
     return Container(
       padding: Space.a.t25,
@@ -46,7 +45,7 @@ class UploadMediaModal extends StatelessWidget {
           ),
           Space.y.t30,
           AppButton(
-            onPressed: cameraCall,
+            onPressed: () => media.camera(context),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -65,7 +64,7 @@ class UploadMediaModal extends StatelessWidget {
           Space.y.t25,
           AppButton(
             style: AppButtonStyle.dark,
-            onPressed: galleryCall,
+            onPressed: () => media.gallery(context),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -81,7 +80,7 @@ class UploadMediaModal extends StatelessWidget {
               ],
             ),
           ),
-          if (removeCall != null) ...[
+          if (hasRemoval) ...[
             Divider(
               height: 12.un(),
             ),
@@ -89,7 +88,7 @@ class UploadMediaModal extends StatelessWidget {
               style: AppButtonStyle.danger,
               icon: Icons.delete_outline_rounded,
               label: 'Remove',
-              onPressed: removeCall!,
+              onPressed: () => media.remove(context),
             ),
           ],
           Space.y.t20,
