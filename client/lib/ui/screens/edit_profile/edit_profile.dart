@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:client/configs/configs.dart';
 import 'package:client/cubits/auth/cubit.dart';
 import 'package:client/ui/painter/base.dart';
@@ -15,6 +17,7 @@ import 'package:client/utils/snackbars.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -24,6 +27,8 @@ part 'static/_form_data.dart';
 part 'static/_form_keys.dart';
 
 part 'widgets/_body.dart';
+part 'widgets/_cover_photo.dart';
+part 'widgets/_profile_photo.dart';
 
 part '_state.dart';
 part '_listener.dart';

@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:client/configs/configs.dart';
-import 'package:client/cubits/auth/cubit.dart';
 import 'package:client/static/posts.dart';
 import 'package:client/static/profiles.dart';
 import 'package:client/ui/painter/base.dart';

@@ -31,63 +31,9 @@ class _Body extends StatelessWidget {
                 ],
               ),
               Space.y.t30,
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Avatar(
-                    user: user,
-                  ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: AppIconButton(
-                      color: AppTheme.primary,
-                      icon: const Icon(
-                        Icons.edit,
-                      ),
-                      onTap: () {},
-                    ),
-                  ),
-                ],
-              ),
+              const _ProfilePhoto(),
               Space.y.t60,
-              GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: (_) => const UploadMediaModal(),
-                  );
-                },
-                child: DottedBorder(
-                  borderType: BorderType.RRect,
-                  radius: const Radius.circular(12),
-                  strokeWidth: 2,
-                  dashPattern: const [10],
-                  color: AppTheme.grey,
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Space.y.t60,
-                        CustomPaint(
-                          painter: const GalleryIconPainter(),
-                          size: GalleryIconPainter.s(
-                            15.un(),
-                          ),
-                        ),
-                        Space.y.t20,
-                        Text(
-                          'Upload cover photo',
-                          style: AppText.b3 + AppTheme.grey,
-                        ),
-                        Space.y.t60,
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              const _CoverPhoto(),
               Space.y.t60,
               const AppMultilineInputField(
                 name: _FormKeys.bio,

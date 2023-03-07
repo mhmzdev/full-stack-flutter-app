@@ -9,12 +9,7 @@ class _Modal extends StatelessWidget {
 
     return Container(
       padding: Space.a.t25,
-      decoration: BoxDecoration(
-        color: AppTheme.backgroundDark,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(6.un()),
-        ),
-      ),
+      decoration: AppProps.modalDec,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
