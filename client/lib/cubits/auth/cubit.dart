@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:shared/shared.dart';
 
 part '_dp_state.dart';
+part '_cover_state.dart';
 part '_login_state.dart';
 part '_fetch_state.dart';
 part '_logout_state.dart';

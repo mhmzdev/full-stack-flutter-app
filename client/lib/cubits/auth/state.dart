@@ -7,6 +7,7 @@ class AuthState extends Equatable {
   final AuthFetchState fetch;
   final AuthLoginState login;
   final AuthLogoutState logout;
+  final CoverUploadState cover;
   final AuthUpdateState update;
   final AuthRegisterState register;
   final User? user;
@@ -15,6 +16,7 @@ class AuthState extends Equatable {
     this.user,
     required this.dp,
     required this.fetch,
+    required this.cover,
     required this.login,
     required this.logout,
     required this.update,
@@ -27,6 +29,7 @@ class AuthState extends Equatable {
         dp,
         fetch,
         login,
+        cover,
         logout,
         update,
         register,
@@ -37,6 +40,7 @@ class AuthState extends Equatable {
     DPUploadState? dp,
     AuthFetchState? fetch,
     AuthLoginState? login,
+    CoverUploadState? cover,
     AuthUpdateState? update,
     AuthLogoutState? logout,
     AuthRegisterState? register,
@@ -45,6 +49,7 @@ class AuthState extends Equatable {
       dp: dp ?? this.dp,
       user: user ?? this.user,
       fetch: fetch ?? this.fetch,
+      cover: cover ?? this.cover,
       login: login ?? this.login,
       logout: logout ?? this.logout,
       update: update ?? this.update,
@@ -62,6 +67,7 @@ class AuthStateDefault extends AuthState {
           fetch: const AuthFetchState(),
           login: const AuthLoginState(),
           logout: const AuthLogoutState(),
+          cover: const CoverUploadState(),
           update: const AuthUpdateState(),
           register: const AuthRegisterState(),
         );
