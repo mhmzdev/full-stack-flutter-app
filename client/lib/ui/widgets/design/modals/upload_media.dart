@@ -5,7 +5,18 @@ import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:flutter/material.dart';
 
 class UploadMediaModal extends StatelessWidget {
-  const UploadMediaModal({super.key});
+  final void Function() cameraCall;
+  final void Function() galleryCall;
+  final void Function()? removeCall;
+  final String label;
+
+  const UploadMediaModal({
+    super.key,
+    required this.label,
+    required this.cameraCall,
+    required this.galleryCall,
+    this.removeCall,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +39,14 @@ class UploadMediaModal extends StatelessWidget {
               const AppBackButton(),
               Space.x.t15,
               Text(
-                'Upload media',
+                label,
                 style: AppText.b1,
               )
             ],
           ),
           Space.y.t30,
           AppButton(
+            onPressed: cameraCall,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -49,11 +61,11 @@ class UploadMediaModal extends StatelessWidget {
                 )
               ],
             ),
-            onPressed: () {},
           ),
           Space.y.t25,
           AppButton(
             style: AppButtonStyle.dark,
+            onPressed: galleryCall,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -68,8 +80,19 @@ class UploadMediaModal extends StatelessWidget {
                 )
               ],
             ),
-            onPressed: () {},
           ),
+          if (removeCall != null) ...[
+            Divider(
+              height: 12.un(),
+            ),
+            AppButton(
+              style: AppButtonStyle.danger,
+              icon: Icons.delete_outline_rounded,
+              label: 'Remove',
+              onPressed: removeCall!,
+            ),
+          ],
+          Space.y.t20,
           Space.bottom,
         ],
       ),

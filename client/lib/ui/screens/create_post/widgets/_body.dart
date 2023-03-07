@@ -46,7 +46,11 @@ class _Body extends StatelessWidget {
                       showModalBottomSheet(
                         context: context,
                         backgroundColor: Colors.transparent,
-                        builder: (_) => const UploadMediaModal(),
+                        builder: (_) => UploadMediaModal(
+                          label: 'Create post',
+                          cameraCall: () {},
+                          galleryCall: () {},
+                        ),
                       );
                     },
                     child: DottedBorder(
