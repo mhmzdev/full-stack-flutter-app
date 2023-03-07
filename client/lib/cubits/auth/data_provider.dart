@@ -1,5 +1,12 @@
 part of 'cubit.dart';
 
+enum PictureType {
+  dp,
+  cover,
+  post,
+  story,
+}
+
 class _AuthProvider {
   static Future<User> fetch(Map<String, dynamic> body) async {
     try {
@@ -117,6 +124,72 @@ class _AuthProvider {
     } catch (e) {
       debugPrint('------ AuthProvider ------');
       debugPrint('------ $e ------');
+      throw Exception(e.toString());
+    }
+  }
+
+  ///
+  static Future<String> uploadMedia(
+    User profile,
+    File? file, {
+    required PictureType type,
+  }) async {
+    try {
+      // storage
+      final storage = FirebaseStorage.instance;
+
+      String path, url = '';
+
+      switch (type) {
+        case PictureType.dp:
+          path = profile.imageURL;
+          break;
+        case PictureType.cover:
+          path = profile.coverURL;
+          break;
+        case PictureType.post:
+          path = 'users/${profile.id}/posts';
+          break;
+        case PictureType.story:
+          path = 'users/${profile.id}/stories';
+          break;
+        default:
+          path = '';
+          break;
+      }
+
+      if (file != null) {
+        // in case of DP or cover, if image is already there
+        // delete the one on storage, and replace it with new one
+        if ((type == PictureType.dp || type == PictureType.cover) &&
+            path.isNotEmpty) {
+          await FirebaseStorage.instance.ref(path).delete();
+        }
+
+        // set path to a base `users/id` to re-upload dp or cover
+        if (type == PictureType.dp || type == PictureType.cover) {
+          path = 'users/${profile.id}';
+        }
+
+        final fileName = DateTime.now().millisecondsSinceEpoch.toString();
+        path = '$path/$fileName';
+
+        final ref = storage.ref(path);
+        final task = await ref.putFile(file);
+        url = await task.ref.getDownloadURL();
+      }
+
+      // if file is null, its means the function is REMOVING image
+      // delete image path from storage and return empty URL
+      // only for DP and Cover case
+      else if ((type == PictureType.dp || type == PictureType.cover) &&
+          file == null) {
+        storage.ref(path).delete();
+        url = path = '';
+      }
+
+      return url;
+    } catch (e) {
       throw Exception(e.toString());
     }
   }
