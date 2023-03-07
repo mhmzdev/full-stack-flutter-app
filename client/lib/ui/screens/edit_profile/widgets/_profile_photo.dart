@@ -1,0 +1,81 @@
+part of '../edit_profile.dart';
+
+class _ProfilePhoto extends StatelessWidget {
+  const _ProfilePhoto();
+
+  @override
+  Widget build(BuildContext context) {
+    final authCubit = AuthCubit.c(context);
+    final user = authCubit.state.user!;
+    final screenState = _ScreenState.s(context, true);
+
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Avatar(
+          user: user,
+        ),
+        Positioned(
+          right: 0,
+          bottom: 0,
+          child: BlocConsumer<AuthCubit, AuthState>(
+            listenWhen: DPUploadState.match,
+            listener: (context, state) {
+              if (state.dp is DPUploadSuccess) {
+                screenState.reset();
+              }
+            },
+            builder: (context, state) {
+              return AppIconButton(
+                color: AppTheme.primary,
+                icon: state.dp is DPUploadLoading
+                    ? SizedBox(
+                        height: 10.un(),
+                        width: 10.un(),
+                        child: const CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 3,
+                        ),
+                      )
+                    : const Icon(
+                        Icons.edit,
+                      ),
+                onTap: () async {
+                  if (state.dp is DPUploadLoading) return;
+
+                  final hasProfile = user.imageURL.isNotEmpty;
+                  final value = await showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (_) {
+                      return ListenableProvider.value(
+                        value: _ScreenState(),
+                        builder: (context, child) {
+                          return UploadMediaModal(
+                            label: 'Profile photo',
+                            cameraCall: () => screenState.camera(context),
+                            galleryCall: () => screenState.gallery(context),
+                            removeCall: hasProfile
+                                ? () => screenState.remove(context)
+                                : null,
+                          );
+                        },
+                      );
+                    },
+                  );
+                  if (value != null && screenState.xFile != null) {
+                    final file = File(screenState.xFile!.path);
+                    authCubit.uploadProfilePhoto(file);
+                    return;
+                  }
+
+                  authCubit.uploadProfilePhoto(null);
+                },
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
