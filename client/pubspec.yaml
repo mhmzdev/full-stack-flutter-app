@@ -78,6 +78,7 @@ dependencies:
   # utils
   image_picker: ^0.8.6+4
   dotted_border: ^2.0.0+3
+  cached_network_image: ^3.2.3
   awesome_snackbar_content: ^0.1.2
 
   shared:
