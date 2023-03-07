@@ -53,11 +53,33 @@ class _AuthRepository {
       'newUserName': newUserName,
       'bio': bio,
       'birthday': DateFormat('yyyy-MM-dd HH:MM').format(birthday),
-      // TODO: Cover and DP yet to implement
-      'imageURL': '',
-      'coverURL': '',
     };
 
     return _AuthProvider.update(payload);
   }
+
+  Future<User> updatePhoto(
+    int uid,
+    String url,
+    bool isProfilePhoto,
+  ) {
+    final payload = {
+      'uid': uid,
+      'url': url,
+      'isProfilePhoto': isProfilePhoto,
+    };
+
+    return _AuthProvider.updatePicture(payload);
+  }
+
+  Future<String> uploadMedia(
+    User profile,
+    File? file,
+    PictureType type,
+  ) =>
+      _AuthProvider.uploadMedia(
+        profile,
+        file,
+        type: type,
+      );
 }

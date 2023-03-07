@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:shared/shared.dart';
@@ -130,6 +131,46 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(state.copyWith(
         update: AuthUpdateFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> uploadProfilePhoto(File? file) async {
+    emit(state.copyWith(
+      dp: DPUploadLoading(),
+    ));
+
+    try {
+      final url = await repo.uploadMedia(state.user!, file, PictureType.dp);
+      final user = await repo.updatePhoto(state.user!.id, url, true);
+
+      emit(state.copyWith(
+        user: user,
+        dp: const DPUploadSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        dp: DPUploadFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> uploadCoverPhoto(File? file) async {
+    emit(state.copyWith(
+      cover: CoverUploadLoading(),
+    ));
+
+    try {
+      final url = await repo.uploadMedia(state.user!, file, PictureType.cover);
+      final user = await repo.updatePhoto(state.user!.id, url, false);
+
+      emit(state.copyWith(
+        user: user,
+        cover: const CoverUploadSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        cover: CoverUploadFailed(message: e.toString()),
       ));
     }
   }

@@ -69,8 +69,6 @@ Future<Response> _update(
     firstName: user.firstName,
     lastName: user.lastName,
     username: newUserName,
-    imageURL: user.imageURL,
-    coverURL: user.coverURL,
     birthday: user.birthday,
     bio: user.bio,
   );

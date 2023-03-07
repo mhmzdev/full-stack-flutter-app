@@ -128,6 +128,30 @@ class _AuthProvider {
     }
   }
 
+  static Future<User> updatePicture(Map<String, dynamic> body) async {
+    try {
+      final resp = await Api.ins.put(
+        '/v1/users/photo',
+        data: body,
+      );
+
+      final raw = resp.data;
+      final Map<String, dynamic> data = raw['data'];
+      return User.fromJson(data);
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception(e.toString());
+    } catch (e) {
+      debugPrint('------ AuthProvider ------');
+      debugPrint('------ $e ------');
+      throw Exception(e.toString());
+    }
+  }
+
   ///
   static Future<String> uploadMedia(
     User profile,
@@ -173,6 +197,15 @@ class _AuthProvider {
 
         final fileName = DateTime.now().millisecondsSinceEpoch.toString();
         path = '$path/$fileName';
+
+        // if image size > 5 Mbs
+        // 5,000,000 bytes == 5 megabytes
+        final size = await file.length();
+        if (size > 5000000) {
+          throw Exception(
+            'File size cannot be more than 5 MBs. Reduce the size and try again!',
+          );
+        }
 
         final ref = storage.ref(path);
         final task = await ref.putFile(file);
