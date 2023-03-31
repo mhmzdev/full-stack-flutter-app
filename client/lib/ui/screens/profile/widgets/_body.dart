@@ -182,7 +182,7 @@ class _Body extends StatelessWidget {
                       ),
                       itemCount: user.posts.length,
                       itemBuilder: (context, index) {
-                        final id = user.posts[index];
+                        final id = user.posts.reversed.toList()[index];
                         final filterImages =
                             screenState.contentType == ContentType.images;
 

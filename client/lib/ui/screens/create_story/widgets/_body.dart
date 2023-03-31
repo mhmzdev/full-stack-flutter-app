@@ -5,6 +5,8 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authCubit = AuthCubit.c(context);
+    final user = authCubit.state.user!;
     return Screen(
       keyboardHandler: true,
       child: SafeArea(
@@ -26,7 +28,7 @@ class _Body extends StatelessWidget {
               ),
               Space.y.t60,
               Avatar(
-                user: profiles.first,
+                user: user,
                 type: AvatarType.detailed,
               ),
               Space.y.t60,
