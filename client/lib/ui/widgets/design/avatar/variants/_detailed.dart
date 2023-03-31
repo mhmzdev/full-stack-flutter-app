@@ -8,17 +8,28 @@ class _Detailed extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 11.un(),
-          backgroundColor: AppTheme.primary,
-          child: CircleAvatar(
-            radius: 10.un(),
-            backgroundImage: user.imageURL.isEmpty
-                ? const AssetImage(StaticAssets.dp) as ImageProvider
-                : NetworkImage(user.imageURL),
+        Container(
+          height: 20.un(),
+          width: 20.un(),
+          padding: const EdgeInsets.all(2),
+          decoration: BoxDecoration(
+            color: AppTheme.primary,
+            borderRadius: BorderRadius.circular(360),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(360),
+            child: user.imageURL.isEmpty
+                ? Image.asset(
+                    StaticAssets.dp,
+                    fit: BoxFit.cover,
+                  )
+                : CachedNetworkImage(
+                    imageUrl: user.imageURL,
+                    fit: BoxFit.cover,
+                  ),
           ),
         ),
-        Space.x.t10,
+        Space.x.t15,
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

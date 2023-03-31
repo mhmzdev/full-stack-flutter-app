@@ -6,14 +6,27 @@ class _Def extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 25.un(),
-      backgroundColor: AppTheme.primary,
-      child: CircleAvatar(
-        radius: 24.un(),
-        backgroundImage: user.imageURL.isEmpty
-            ? const AssetImage(StaticAssets.dp) as ImageProvider
-            : NetworkImage(user.imageURL),
+    return Center(
+      child: Container(
+        height: 50.un(),
+        width: 50.un(),
+        padding: Space.a.t05,
+        decoration: BoxDecoration(
+          color: AppTheme.primary,
+          borderRadius: BorderRadius.circular(360),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(360),
+          child: user.imageURL.isEmpty
+              ? Image.asset(
+                  StaticAssets.dp,
+                  fit: BoxFit.cover,
+                )
+              : CachedNetworkImage(
+                  imageUrl: user.imageURL,
+                  fit: BoxFit.cover,
+                ),
+        ),
       ),
     );
   }
