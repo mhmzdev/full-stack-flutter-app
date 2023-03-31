@@ -73,7 +73,7 @@ class _Actions extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${post.createdAt.hour} hours ago',
+                  timeago.format(post.createdAt),
                   style: AppText.s1 + AppTheme.grey,
                 )
               ],

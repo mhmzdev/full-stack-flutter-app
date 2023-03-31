@@ -27,26 +27,40 @@ class _Body extends StatelessWidget {
                   children: [
                     const _CreateStory(),
                     Space.x.t25,
-                    ...profiles.map((e) => _StoryCard(user: e)),
+                    // ...profiles.map((e) => _StoryCard(user: e)),
                   ],
                 ),
               ),
               Space.y.t30,
               const _FeedCapsule(),
               Space.y.t30,
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                separatorBuilder: (context, index) => Space.y.t30,
-                itemCount: profiles.length,
-                itemBuilder: (context, index) {
-                  final id = profiles[index].posts.firstOrNull;
-                  if (id == null) return const SizedBox.shrink();
+              BlocBuilder<PostCubit, PostState>(
+                builder: (context, state) {
+                  if (state.fetchAll is PostFetchAllLoading) {
+                    return const LinearProgressIndicator();
+                  } else if (state.fetchAll is PostFetchAllSuccess) {
+                    if (state.posts == null || state.posts!.isEmpty) {
+                      return const Empty(
+                        result: EmptyResult.emptyFeed,
+                      );
+                    }
 
-                  final post = posts.firstWhere(
-                    (element) => element.id == id,
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      separatorBuilder: (context, index) => Space.y.t30,
+                      itemCount: state.posts!.length,
+                      itemBuilder: (context, index) {
+                        final post = state.posts![index];
+                        return PostCard(post: post);
+                      },
+                    );
+                  }
+
+                  return Text(
+                    'Something went wrong!',
+                    style: AppText.b1 + AppTheme.danger,
                   );
-                  return PostCard(post: post);
                 },
               ),
               Space.y.t100,

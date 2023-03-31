@@ -9,6 +9,8 @@ class _AuthRepository {
     return _AuthProvider.fetch(payload);
   }
 
+  Future<List<User>> fetchAll() => _AuthProvider.fetchAll();
+
   Future<User> login(String email, String password) {
     final payload = {
       'email': email,

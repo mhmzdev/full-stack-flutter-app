@@ -1,12 +1,15 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:client/configs/configs.dart';
-import 'package:client/static/profiles.dart';
+import 'package:client/cubits/auth/cubit.dart';
 import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/design/avatar/avatar.dart';
 import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
+
+import 'package:timeago/timeago.dart' as timeago;
 
 part 'data/_actions.dart';
 
@@ -22,9 +25,11 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     App.init(context);
+    final authCubit = AuthCubit.c(context, true);
+    final users = authCubit.state.users ?? [];
 
     final uid = post.uid;
-    final user = profiles.firstWhere(
+    final user = users.firstWhere(
       (element) => element.id == uid,
     );
 
@@ -44,15 +49,11 @@ class PostCard extends StatelessWidget {
               _Header(user: user),
               Space.y.t30,
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: 15.radius(),
-                    image: DecorationImage(
-                      image: AssetImage(
-                        post.imageUrl,
-                      ),
-                      fit: BoxFit.cover,
-                    ),
+                child: ClipRRect(
+                  borderRadius: 12.radius(),
+                  child: CachedNetworkImage(
+                    imageUrl: post.imageUrl,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

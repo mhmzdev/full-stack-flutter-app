@@ -45,6 +45,7 @@ class _Body extends StatelessWidget {
                   Expanded(
                     child: AppInputField(
                       name: _FormKeys.firstName,
+                      textCapitalization: TextCapitalization.sentences,
                       hint: 'First name',
                       prefixIcon: Padding(
                         padding: Space.a.t20,
@@ -58,6 +59,7 @@ class _Body extends StatelessWidget {
                   Expanded(
                     child: AppInputField(
                       name: _FormKeys.lastName,
+                      textCapitalization: TextCapitalization.sentences,
                       hint: 'Last name',
                       prefixIcon: Padding(
                         padding: Space.a.t20,

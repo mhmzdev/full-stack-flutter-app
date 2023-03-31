@@ -8,8 +8,6 @@ class _StoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final image = posts.firstWhere((p) => p.id == user.id);
-
     return InkWell(
       highlightColor: Colors.transparent,
       onTap: () {},
@@ -19,9 +17,9 @@ class _StoryCard extends StatelessWidget {
         height: 65.un(),
         decoration: BoxDecoration(
           borderRadius: 12.radius(),
-          image: DecorationImage(
+          image: const DecorationImage(
             image: AssetImage(
-              image.imageUrl,
+              StaticAssets.emptyFeed,
             ),
             fit: BoxFit.cover,
           ),

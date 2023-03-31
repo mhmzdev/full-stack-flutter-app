@@ -107,6 +107,11 @@ class _Body extends StatelessWidget {
               AppButton(
                 label: 'POST',
                 onPressed: () {
+                  if (media.xFile == null &&
+                      screenState
+                              .formKey.currentState!.value[_FormKeys.caption] ==
+                          null) return;
+                          
                   FocusScope.of(context).unfocus();
 
                   final file = File(media.xFile!.path);

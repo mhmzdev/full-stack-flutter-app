@@ -17,6 +17,7 @@ part '_fetch_state.dart';
 part '_logout_state.dart';
 part '_update_state.dart';
 part '_register_state.dart';
+part '_fetch_all_state.dart';
 
 part 'data_provider.dart';
 part 'repository.dart';
@@ -43,6 +44,24 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(state.copyWith(
         fetch: AuthFetchFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> fetchAll() async {
+    emit(state.copyWith(
+      fetchAll: AuthFetchAllLoading(),
+    ));
+    try {
+      final data = await repo.fetchAll();
+
+      emit(state.copyWith(
+        users: data,
+        fetchAll: const AuthFetchAllSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        fetchAll: AuthFetchAllFailed(message: e.toString()),
       ));
     }
   }

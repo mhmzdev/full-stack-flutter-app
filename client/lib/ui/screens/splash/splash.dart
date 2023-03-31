@@ -20,6 +20,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> _next() async {
     final authCubit = AuthCubit.c(context);
+    authCubit.fetchAll();
+
     await 3.seconds.delay;
 
     final uid = Cache.uid;

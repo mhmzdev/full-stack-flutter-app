@@ -210,6 +210,15 @@ class _Body extends StatelessWidget {
                             child: CachedNetworkImage(
                               imageUrl: post.imageUrl,
                               fit: BoxFit.cover,
+                              progressIndicatorBuilder:
+                                  (context, url, progress) {
+                                return Center(
+                                  child: Text(
+                                    'Loading...',
+                                    style: AppText.b2 + AppTheme.grey,
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         );

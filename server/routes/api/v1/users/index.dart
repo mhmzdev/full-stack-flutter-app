@@ -38,7 +38,8 @@ Future<Response> _get(RequestContext context) async {
 
   return Response.json(
     body: {
-      'users': sharedUsers,
+      'status': 'success',
+      'data': sharedUsers,
     },
   );
 }

@@ -46,7 +46,7 @@ class AppInputField extends StatefulWidget {
     this.inputFormatters,
     this.readOnly = false,
     this.textInputAction = TextInputAction.done,
-    this.textCapitalization = TextCapitalization.sentences,
+    this.textCapitalization = TextCapitalization.none,
   }) : super(key: key);
 
   @override
