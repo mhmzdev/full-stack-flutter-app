@@ -23,9 +23,6 @@ dependencies:
   # env
   dotenv: ^4.1.0
 
-  # DB (PostgresSQL)
-  postgres: ^2.6.1
-
   # local
   shared:
     path: packages/shared

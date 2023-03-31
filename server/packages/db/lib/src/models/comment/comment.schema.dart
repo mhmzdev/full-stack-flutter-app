@@ -44,7 +44,9 @@ class _CommentRepository extends BaseRepository
       'RETURNING "id"',
       values.values,
     );
-    var result = rows.map<int>((r) => TextEncoder.i.decode(r.toColumnMap()['id'])).toList();
+    var result = rows
+        .map<int>((r) => TextEncoder.i.decode(r.toColumnMap()['id']))
+        .toList();
 
     return result;
   }
@@ -56,7 +58,7 @@ class _CommentRepository extends BaseRepository
     await db.query(
       'UPDATE "comments"\n'
       'SET "uid" = COALESCE(UPDATED."uid", "comments"."uid"), "content" = COALESCE(UPDATED."content", "comments"."content"), "created_at" = COALESCE(UPDATED."created_at", "comments"."created_at")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8, ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.createdAt)}:timestamp )').join(', ')} )\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.createdAt)}:timestamp )').join(', ')} )\n'
       'AS UPDATED("id", "uid", "content", "created_at")\n'
       'WHERE "comments"."id" = UPDATED."id"',
       values.values,
