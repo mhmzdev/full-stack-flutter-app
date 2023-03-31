@@ -20,4 +20,6 @@ extension SuperDate on DateTime {
   String get dateTimeWords => _dateTimeWords.format(toLocal());
 
   String get dateTimeDigits => _dateTimeDigits.format(toLocal());
+
+  int get age => DateTime.now().year - year;
 }
