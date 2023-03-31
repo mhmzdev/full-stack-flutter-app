@@ -16,67 +16,73 @@ class _Body extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Stack(
-              children: [
-                if (user.coverURL.isNotEmpty)
-                  ShaderMask(
-                    shaderCallback: (rect) {
-                      return const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.black, Colors.transparent],
-                      ).createShader(
-                        Rect.fromLTRB(
-                          0,
-                          0,
-                          rect.width,
-                          rect.height,
-                        ),
-                      );
-                    },
-                    blendMode: BlendMode.dstIn,
-                    child: SizedBox(
-                      height: 110.un(),
-                      width: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: 12.radius(),
-                        child: CachedNetworkImage(
-                          imageUrl: user.coverURL,
-                          fit: BoxFit.cover,
+            SizedBox(
+              height: 110.un(),
+              width: MediaQuery.of(context).size.width,
+              child: Stack(
+                children: [
+                  if (user.coverURL.isNotEmpty)
+                    ShaderMask(
+                      shaderCallback: (rect) {
+                        return const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.black, Colors.transparent],
+                        ).createShader(
+                          Rect.fromLTRB(
+                            0,
+                            0,
+                            rect.width,
+                            rect.height,
+                          ),
+                        );
+                      },
+                      blendMode: BlendMode.dstIn,
+                      child: SizedBox(
+                        height: 110.un(),
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: 12.radius(),
+                          child: CachedNetworkImage(
+                            imageUrl: user.coverURL,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                Padding(
-                  padding: Space.a.t25 + Space.t.t100,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AppIconButton(
-                        color: AppTheme.danger,
-                        icon: const Icon(Icons.logout_rounded),
-                        onTap: () => authCubit.logout(),
-                      ),
-                      AppIconButton(
-                        icon: CustomPaint(
-                          painter: const PersonEditIconPainter(),
-                          size: PersonEditIconPainter.s(10.un()),
+                  Positioned(
+                    top: 30.un(),
+                    left: 8.un(),
+                    right: 8.un(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppIconButton(
+                          color: AppTheme.danger,
+                          icon: const Icon(Icons.logout_rounded),
+                          onTap: () => authCubit.logout(),
                         ),
-                        onTap: () => AppRoutes.editProfile.push(context),
-                      ),
-                    ],
+                        AppIconButton(
+                          icon: CustomPaint(
+                            painter: const PersonEditIconPainter(),
+                            size: PersonEditIconPainter.s(10.un()),
+                          ),
+                          onTap: () => AppRoutes.editProfile.push(context),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Space.y.t100,
-                Positioned(
-                  right: 0,
-                  left: 0,
-                  bottom: 0,
-                  child: Avatar(
-                    user: user,
+                  Space.y.t100,
+                  Positioned(
+                    right: 0,
+                    left: 0,
+                    bottom: 0,
+                    child: Avatar(
+                      user: user,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Padding(
               padding: Space.h.t25,

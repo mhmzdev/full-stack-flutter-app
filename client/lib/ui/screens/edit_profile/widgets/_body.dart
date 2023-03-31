@@ -13,7 +13,7 @@ class _Body extends StatelessWidget {
       keyboardHandler: true,
       formKey: screenState.formKey,
       initialFormValue: _FormData.initialValues(user),
-      overlayBuilders: const [_Listener()],
+      overlayBuilders: const [_Listener(), _DPListener(), _CoverListener()],
       child: SafeArea(
         child: SingleChildScrollView(
           padding: Space.a.t25,

@@ -53,7 +53,7 @@ Future<Response> _post(
   return Response.json(
     body: {
       'status': 'success',
-      'message': 'Profile picture has been updated successfully!',
+      'message': 'Photo has been updated successfully!',
       'data': sharedUser.toJson(),
     },
   );

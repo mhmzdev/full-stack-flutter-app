@@ -49,7 +49,7 @@ class _CoverPhoto extends StatelessWidget {
               authCubit.uploadCoverPhoto(null);
             }
           },
-          child: hasCoverPhoto
+          child: hasCoverPhoto && state.cover is! CoverUploadLoading
               ? Container(
                   height: 80.un(),
                   width: double.infinity,

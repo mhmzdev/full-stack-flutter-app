@@ -25,6 +25,9 @@ import 'package:provider/provider.dart';
 import 'package:shared/shared.dart';
 
 part '_listener.dart';
+part '_dp_listener.dart';
+part '_cover_listener.dart';
+
 part '_state.dart';
 
 part 'static/_form_data.dart';
