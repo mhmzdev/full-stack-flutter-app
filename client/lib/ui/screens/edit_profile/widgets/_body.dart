@@ -45,13 +45,14 @@ class _Body extends StatelessWidget {
                 label: 'Bio',
                 hint: 'Let others know about you. Write something...',
               ),
-              Space.y.t20,
+              Space.y.t30,
               Row(
                 children: [
                   Expanded(
                     child: AppInputField(
+                      label: 'First Name',
                       name: _FormKeys.firstName,
-                      hint: 'First name',
+                      hint: 'Enter your first name',
                       prefixIcon: Padding(
                         padding: Space.a.t20,
                         child: const CustomPaint(
@@ -63,8 +64,9 @@ class _Body extends StatelessWidget {
                   Space.x.t20,
                   Expanded(
                     child: AppInputField(
+                      label: 'Last Name',
                       name: _FormKeys.lastName,
-                      hint: 'Last name',
+                      hint: 'Enter your last name',
                       prefixIcon: Padding(
                         padding: Space.a.t20,
                         child: const CustomPaint(
@@ -75,10 +77,11 @@ class _Body extends StatelessWidget {
                   ),
                 ],
               ),
-              Space.y.t20,
+              Space.y.t30,
               AppInputField(
                 name: _FormKeys.username,
                 hint: 'username',
+                label: 'Username',
                 prefixIcon: Padding(
                   padding: Space.a.t20,
                   child: const CustomPaint(
@@ -86,8 +89,9 @@ class _Body extends StatelessWidget {
                   ),
                 ),
               ),
-              Space.y.t20,
+              Space.y.t30,
               AppDateTimeInput(
+                label: 'Birthday',
                 name: _FormKeys.birthday,
                 hint: 'Date of birth',
                 firstDate: DateTime(1950, 1, 1),
