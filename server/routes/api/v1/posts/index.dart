@@ -54,9 +54,10 @@ Future<Response> _post(
   Map<String, dynamic> body,
 ) async {
   final database = context.read<Database>();
+  final uid = body['uid'] as int;
 
   final request = db.PostInsertRequest(
-    uid: body['uid'] as int,
+    uid: uid,
     caption: body['caption'] as String,
     hasImage: body['hasImage'] as bool?,
     imageUrl: body['imageURL'] as String?,
@@ -69,9 +70,9 @@ Future<Response> _post(
 
   final postId = await database.posts.insertOne(request);
 
-  final user = await database.users.queryUser(body['uid'] as int);
+  final user = await database.users.queryUser(uid);
   final userRequest = db.UserUpdateRequest(
-    id: postId,
+    id: uid,
     posts: [...user!.posts, postId],
   );
   await database.users.updateOne(userRequest);
