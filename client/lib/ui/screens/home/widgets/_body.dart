@@ -24,7 +24,11 @@ class _Body extends StatelessWidget {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: profiles.map((e) => _StoryCard(user: e)).toList(),
+                  children: [
+                    const _CreateStory(),
+                    Space.x.t25,
+                    ...profiles.map((e) => _StoryCard(user: e)),
+                  ],
                 ),
               ),
               Space.y.t30,

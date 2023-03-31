@@ -79,15 +79,7 @@ class BottomBar extends StatelessWidget {
           ),
           InkWell(
             borderRadius: BorderRadius.circular(360),
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                backgroundColor: Colors.transparent,
-                builder: (_) {
-                  return const _Modal();
-                },
-              );
-            },
+            onTap: () => AppRoutes.createPost.push(context),
             child: Container(
               height: 30.un(),
               width: 30.un(),

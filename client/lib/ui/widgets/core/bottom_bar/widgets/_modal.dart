@@ -1,5 +1,6 @@
 part of '../bottom_bar.dart';
 
+@Deprecated("Create story moved to body")
 class _Modal extends StatelessWidget {
   const _Modal();
 
