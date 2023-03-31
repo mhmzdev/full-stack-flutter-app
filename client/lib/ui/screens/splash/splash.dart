@@ -1,5 +1,6 @@
 import 'package:client/configs/configs.dart';
 import 'package:client/cubits/auth/cubit.dart';
+import 'package:client/cubits/post/cubit.dart';
 import 'package:client/services/cache.dart';
 import 'package:client/ui/animations/entrance_fader.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';

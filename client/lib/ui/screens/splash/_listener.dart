@@ -10,6 +10,7 @@ class _Listener extends StatelessWidget {
       listener: (context, state) {
         if (state.fetch is AuthFetchSuccess) {
           if (state.user != null) {
+            PostCubit.c(context).fetchAll();
             AppRoutes.home.pushReplace(context);
             return;
           }
