@@ -56,6 +56,7 @@ dependencies:
 
   # network
   dio: ^5.0.1
+  http: ^0.13.5
 
   # cache
   shared_preferences: ^2.0.18
@@ -75,6 +76,10 @@ dependencies:
   # data
   faker_dart: ^0.1.11
 
+  # icons pack
+  iconsax: ^0.0.8
+
+
   # utils
   image_picker: ^0.8.6+4
   dotted_border: ^2.0.0+3
@@ -83,7 +88,6 @@ dependencies:
 
   shared:
     path: ../server/packages/shared
-  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
