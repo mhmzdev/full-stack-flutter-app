@@ -38,6 +38,7 @@ class MediaProvider extends ChangeNotifier {
   }
 
   void remove(BuildContext context) async {
+    xFile = null;
     ''.pop(context, 'remove');
     notifyListeners();
   }

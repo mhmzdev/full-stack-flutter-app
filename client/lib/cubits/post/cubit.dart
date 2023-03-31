@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:client/constants/constants.dart';
 import 'package:client/services/api.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +45,7 @@ class PostCubit extends Cubit<PostState> {
   }
 
   Future<void> createPost(
-    String uid,
+    int uid,
     String caption, {
     bool? hasImage,
     String? imageURL,

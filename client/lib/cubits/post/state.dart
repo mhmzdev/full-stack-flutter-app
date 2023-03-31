@@ -28,6 +28,7 @@ class PostState extends Equatable {
         // root-state-props
         posts,
         fetchAll,
+        create,
         comment,
         delete,
         edit,

@@ -4,7 +4,7 @@ class _PostRepository {
   Future<List<Post>> fetchAll() => _PostProvider.fetchAll();
 
   Future<void> createPost(
-    String uid,
+    int uid,
     String caption,
     bool? hasImage,
     String? imageURL,
