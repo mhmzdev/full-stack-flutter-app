@@ -74,9 +74,8 @@ Future<Response> _update(
   );
 
   await database.users.updateOne(request);
-
-  final sharedUser = User.fromDb(user);
-  print(sharedUser);
+  final updatedUser = await database.users.queryUser(user.id);
+  final sharedUser = User.fromDb(updatedUser!);
 
   return Response.json(
     body: {
