@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:client/constants/constants.dart';
 import 'package:client/services/api.dart';
 import 'package:client/services/cache.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -134,13 +132,12 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> uploadProfilePhoto(File? file) async {
+  Future<void> uploadProfilePhoto(String url) async {
     emit(state.copyWith(
       dp: DPUploadLoading(),
     ));
 
     try {
-      final url = await repo.uploadMedia(state.user!, file, PictureType.dp);
       final user = await repo.updatePhoto(state.user!.id, url, true);
 
       emit(state.copyWith(
@@ -154,13 +151,12 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> uploadCoverPhoto(File? file) async {
+  Future<void> uploadCoverPhoto(String url) async {
     emit(state.copyWith(
       cover: CoverUploadLoading(),
     ));
 
     try {
-      final url = await repo.uploadMedia(state.user!, file, PictureType.cover);
       final user = await repo.updatePhoto(state.user!.id, url, false);
 
       emit(state.copyWith(

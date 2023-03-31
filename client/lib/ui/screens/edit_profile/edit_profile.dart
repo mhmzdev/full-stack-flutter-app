@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:client/configs/configs.dart';
 import 'package:client/cubits/auth/cubit.dart';
+import 'package:client/cubits/media/cubit.dart';
 import 'package:client/providers/media_provider.dart';
 import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
@@ -27,6 +28,7 @@ import 'package:shared/shared.dart';
 part '_listener.dart';
 part '_dp_listener.dart';
 part '_cover_listener.dart';
+part '_media_listener.dart';
 
 part '_state.dart';
 

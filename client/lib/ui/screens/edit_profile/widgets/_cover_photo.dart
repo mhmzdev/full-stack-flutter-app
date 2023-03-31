@@ -8,6 +8,7 @@ class _CoverPhoto extends StatelessWidget {
     final authCubit = AuthCubit.c(context, true);
     final user = authCubit.state.user!;
     final media = MediaProvider.state(context, true);
+    final mediaCubit = MediaCubit.cubit(context, true);
 
     final hasCoverPhoto = user.coverURL.isNotEmpty;
 
@@ -21,7 +22,8 @@ class _CoverPhoto extends StatelessWidget {
       builder: (context, state) {
         return GestureDetector(
           onTap: () async {
-            if (state.cover is CoverUploadLoading) return;
+            if (state.cover is CoverUploadLoading ||
+                mediaCubit.state is UploadCoverLoading) return;
 
             final hasCover = user.coverURL.isNotEmpty;
             final value = await showModalBottomSheet(
@@ -42,14 +44,16 @@ class _CoverPhoto extends StatelessWidget {
 
             if (value != null && media.xFile != null) {
               final file = File(media.xFile!.path);
-              authCubit.uploadCoverPhoto(file);
+              mediaCubit.uploadCover(user, file);
               return;
             }
             if (value is String && value.toString() == 'remove') {
-              authCubit.uploadCoverPhoto(null);
+              authCubit.uploadCoverPhoto('');
             }
           },
-          child: hasCoverPhoto && state.cover is! CoverUploadLoading
+          child: hasCoverPhoto &&
+                  state.cover is! CoverUploadLoading &&
+                  mediaCubit.state is! UploadCoverLoading
               ? Container(
                   height: 80.un(),
                   width: double.infinity,
@@ -100,7 +104,8 @@ class _CoverPhoto extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Space.y.t100,
-                        state.cover is CoverUploadLoading
+                        state.cover is CoverUploadLoading ||
+                                mediaCubit.state is UploadCoverLoading
                             ? const CircularProgressIndicator(
                                 color: Colors.white,
                               )

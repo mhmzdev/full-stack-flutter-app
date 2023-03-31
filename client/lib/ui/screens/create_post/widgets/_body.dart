@@ -5,6 +5,10 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authCubit = AuthCubit.c(context);
+    final user = authCubit.state.user!;
+    final media = MediaProvider.state(context, true);
+
     final screenState = _ScreenState.s(context, true);
 
     return Screen(
@@ -29,7 +33,7 @@ class _Body extends StatelessWidget {
               ),
               Space.y.t60,
               Avatar(
-                user: profiles.first,
+                user: user,
                 type: AvatarType.detailed,
               ),
               Space.y.t30,
@@ -42,14 +46,20 @@ class _Body extends StatelessWidget {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
+                    onTap: () async {
+                      final value = await showModalBottomSheet(
                         context: context,
                         backgroundColor: Colors.transparent,
                         builder: (_) => const UploadMediaModal(
                           label: 'Create post',
                         ),
                       );
+
+                      if (value != null && media.xFile != null) {
+                        final file = File(media.xFile!.path);
+                        
+                        return;
+                      }
                     },
                     child: DottedBorder(
                       borderType: BorderType.RRect,

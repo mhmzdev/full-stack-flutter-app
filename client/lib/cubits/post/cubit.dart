@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:client/services/api.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,6 +38,37 @@ class PostCubit extends Cubit<PostState> {
     } catch (e) {
       emit(state.copyWith(
         fetchAll: PostFetchAllFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> createPost(
+    String uid,
+    String caption, {
+    bool? hasImage,
+    String? imageURL,
+    bool? hasVideo,
+    String? videoURL,
+  }) async {
+    emit(state.copyWith(
+      create: PostCreateLoading(),
+    ));
+    try {
+      await repo.createPost(
+        uid,
+        caption,
+        hasImage,
+        imageURL,
+        hasVideo,
+        videoURL,
+      );
+
+      emit(state.copyWith(
+        create: const PostCreateSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        create: PostCreateFailed(message: e.toString()),
       ));
     }
   }

@@ -8,7 +8,20 @@ class _PostProvider {
     } catch (e) {
       debugPrint('------ PostProvider ------');
       debugPrint('------ $e ------');
-      throw Exception("Internal Server Error");
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<void> createPost(Map<String, dynamic> body) async {
+    try {
+      await Api.ins.post(
+        '/v1/posts/create',
+        data: body,
+      );
+    } catch (e) {
+      debugPrint('------ PostProvider ------');
+      debugPrint('------ $e ------');
+      throw Exception(e.toString());
     }
   }
 }

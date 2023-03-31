@@ -71,15 +71,4 @@ class _AuthRepository {
 
     return _AuthProvider.updatePicture(payload);
   }
-
-  Future<String> uploadMedia(
-    User profile,
-    File? file,
-    PictureType type,
-  ) =>
-      _AuthProvider.uploadMedia(
-        profile,
-        file,
-        type: type,
-      );
 }

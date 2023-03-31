@@ -7,6 +7,8 @@ class _ProfilePhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     final authCubit = AuthCubit.c(context);
     final user = authCubit.state.user!;
+
+    final mediaCubit = MediaCubit.cubit(context, true);
     final media = MediaProvider.state(context, true);
 
     return Stack(
@@ -28,7 +30,8 @@ class _ProfilePhoto extends StatelessWidget {
             builder: (context, state) {
               return AppIconButton(
                 color: AppTheme.primary,
-                icon: state.dp is DPUploadLoading
+                icon: state.dp is DPUploadLoading ||
+                        mediaCubit.state is UploadDPLoading
                     ? SizedBox(
                         height: 10.un(),
                         width: 10.un(),
@@ -41,7 +44,8 @@ class _ProfilePhoto extends StatelessWidget {
                         Icons.edit,
                       ),
                 onTap: () async {
-                  if (state.dp is DPUploadLoading) return;
+                  if (state.dp is DPUploadLoading ||
+                      mediaCubit.state is UploadDPLoading) return;
 
                   final hasProfile = user.imageURL.isNotEmpty;
                   final value = await showModalBottomSheet(
@@ -61,12 +65,12 @@ class _ProfilePhoto extends StatelessWidget {
                   );
                   if (value != null && media.xFile != null) {
                     final file = File(media.xFile!.path);
-                    authCubit.uploadProfilePhoto(file);
+                    mediaCubit.uploadDP(user, file);
                     return;
                   }
 
                   if (value is String && value.toString() == 'remove') {
-                    authCubit.uploadProfilePhoto(null);
+                    authCubit.uploadProfilePhoto('');
                   }
                 },
               );
