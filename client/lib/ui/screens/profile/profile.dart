@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:client/configs/configs.dart';
 import 'package:client/cubits/auth/cubit.dart';
 import 'package:client/static/posts.dart';
