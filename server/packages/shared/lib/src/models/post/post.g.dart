@@ -10,9 +10,9 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       id: json['id'] as int,
       uid: json['uid'] as int,
       caption: json['caption'] as String,
-      hasImage: json['hasImage'] as bool? ?? false,
+      hasImage: json['hasImage'] as bool?,
       imageUrl: json['imageUrl'] as String? ?? '',
-      hasVideo: json['hasVideo'] as bool? ?? false,
+      hasVideo: json['hasVideo'] as bool?,
       videoUrl: json['videoUrl'] as String? ?? '',
       likes: (json['likes'] as List<dynamic>?)?.map((e) => e as int).toList() ??
           const [],

@@ -43,34 +43,43 @@ Future<Response> _get(RequestContext context) async {
 
   return Response.json(
     body: {
-      'posts': sharedPosts,
+      'status': 'success',
+      'data': sharedPosts,
     },
   );
 }
 
 Future<Response> _post(
   RequestContext context,
-  Map<String, dynamic> post,
+  Map<String, dynamic> body,
 ) async {
   final database = context.read<Database>();
 
   final request = db.PostInsertRequest(
-    uid: post['uid'] as int,
-    caption: post['caption'] as String,
-    hasImage: post['hasImage'] as bool?,
-    imageUrl: post['imageURL'] as String?,
-    hasVideo: post['hasVideo'] as bool?,
-    videoUrl: post['videoURL'] as String?,
+    uid: body['uid'] as int,
+    caption: body['caption'] as String,
+    hasImage: body['hasImage'] as bool?,
+    imageUrl: body['imageURL'] as String?,
+    hasVideo: body['hasVideo'] as bool?,
+    videoUrl: body['videoURL'] as String?,
     likes: [],
     comments: [],
     createdAt: DateTime.now(),
   );
 
-  final id = await database.posts.insertOne(request);
+  final postId = await database.posts.insertOne(request);
+
+  final user = await database.users.queryUser(body['uid'] as int);
+  final userRequest = db.UserUpdateRequest(
+    id: postId,
+    posts: [...user!.posts, postId],
+  );
+  await database.users.updateOne(userRequest);
 
   return Response.json(
     body: {
-      'post': 'Post has been added with ID: $id',
+      'status': 'success',
+      'message': 'Post has been added with ID: $postId',
     },
   );
 }

@@ -23,9 +23,9 @@ mixin _$Post {
   int get id => throw _privateConstructorUsedError;
   int get uid => throw _privateConstructorUsedError;
   String get caption => throw _privateConstructorUsedError;
-  bool get hasImage => throw _privateConstructorUsedError;
+  bool? get hasImage => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
-  bool get hasVideo => throw _privateConstructorUsedError;
+  bool? get hasVideo => throw _privateConstructorUsedError;
   String get videoUrl => throw _privateConstructorUsedError;
   List<int> get likes => throw _privateConstructorUsedError;
   List<int> get comments => throw _privateConstructorUsedError;
@@ -45,9 +45,9 @@ abstract class $PostCopyWith<$Res> {
       {int id,
       int uid,
       String caption,
-      bool hasImage,
+      bool? hasImage,
       String imageUrl,
-      bool hasVideo,
+      bool? hasVideo,
       String videoUrl,
       List<int> likes,
       List<int> comments,
@@ -70,9 +70,9 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? id = null,
     Object? uid = null,
     Object? caption = null,
-    Object? hasImage = null,
+    Object? hasImage = freezed,
     Object? imageUrl = null,
-    Object? hasVideo = null,
+    Object? hasVideo = freezed,
     Object? videoUrl = null,
     Object? likes = null,
     Object? comments = null,
@@ -91,18 +91,18 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.caption
           : caption // ignore: cast_nullable_to_non_nullable
               as String,
-      hasImage: null == hasImage
+      hasImage: freezed == hasImage
           ? _value.hasImage
           : hasImage // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      hasVideo: null == hasVideo
+      hasVideo: freezed == hasVideo
           ? _value.hasVideo
           : hasVideo // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       videoUrl: null == videoUrl
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
@@ -133,9 +133,9 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       {int id,
       int uid,
       String caption,
-      bool hasImage,
+      bool? hasImage,
       String imageUrl,
-      bool hasVideo,
+      bool? hasVideo,
       String videoUrl,
       List<int> likes,
       List<int> comments,
@@ -154,9 +154,9 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? id = null,
     Object? uid = null,
     Object? caption = null,
-    Object? hasImage = null,
+    Object? hasImage = freezed,
     Object? imageUrl = null,
-    Object? hasVideo = null,
+    Object? hasVideo = freezed,
     Object? videoUrl = null,
     Object? likes = null,
     Object? comments = null,
@@ -175,18 +175,18 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.caption
           : caption // ignore: cast_nullable_to_non_nullable
               as String,
-      hasImage: null == hasImage
+      hasImage: freezed == hasImage
           ? _value.hasImage
           : hasImage // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      hasVideo: null == hasVideo
+      hasVideo: freezed == hasVideo
           ? _value.hasVideo
           : hasVideo // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       videoUrl: null == videoUrl
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
@@ -214,9 +214,9 @@ class _$_Post implements _Post {
       {required this.id,
       required this.uid,
       required this.caption,
-      this.hasImage = false,
+      this.hasImage,
       this.imageUrl = '',
-      this.hasVideo = false,
+      this.hasVideo,
       this.videoUrl = '',
       final List<int> likes = const [],
       final List<int> comments = const [],
@@ -233,14 +233,12 @@ class _$_Post implements _Post {
   @override
   final String caption;
   @override
-  @JsonKey()
-  final bool hasImage;
+  final bool? hasImage;
   @override
   @JsonKey()
   final String imageUrl;
   @override
-  @JsonKey()
-  final bool hasVideo;
+  final bool? hasVideo;
   @override
   @JsonKey()
   final String videoUrl;
@@ -326,9 +324,9 @@ abstract class _Post implements Post {
       {required final int id,
       required final int uid,
       required final String caption,
-      final bool hasImage,
+      final bool? hasImage,
       final String imageUrl,
-      final bool hasVideo,
+      final bool? hasVideo,
       final String videoUrl,
       final List<int> likes,
       final List<int> comments,
@@ -343,11 +341,11 @@ abstract class _Post implements Post {
   @override
   String get caption;
   @override
-  bool get hasImage;
+  bool? get hasImage;
   @override
   String get imageUrl;
   @override
-  bool get hasVideo;
+  bool? get hasVideo;
   @override
   String get videoUrl;
   @override
