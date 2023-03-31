@@ -187,7 +187,7 @@ class _AuthProvider {
         // delete the one on storage, and replace it with new one
         if ((type == PictureType.dp || type == PictureType.cover) &&
             path.isNotEmpty) {
-          await FirebaseStorage.instance.ref(path).delete();
+          await FirebaseStorage.instance.refFromURL(path).delete();
         }
 
         // set path to a base `users/id` to re-upload dp or cover
