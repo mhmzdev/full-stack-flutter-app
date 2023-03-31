@@ -58,7 +58,7 @@ class _CommentRepository extends BaseRepository
     await db.query(
       'UPDATE "comments"\n'
       'SET "uid" = COALESCE(UPDATED."uid", "comments"."uid"), "content" = COALESCE(UPDATED."content", "comments"."content"), "created_at" = COALESCE(UPDATED."created_at", "comments"."created_at")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.createdAt)}:timestamp )').join(', ')} )\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.createdAt)}::timestamp without time zone )').join(', ')} )\n'
       'AS UPDATED("id", "uid", "content", "created_at")\n'
       'WHERE "comments"."id" = UPDATED."id"',
       values.values,
