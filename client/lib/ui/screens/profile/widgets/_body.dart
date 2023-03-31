@@ -5,6 +5,8 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenState = _ScreenState.s(context, true);
+    final postCubit = PostCubit.c(context, true);
     final authCubit = AuthCubit.c(context, true);
     final user = authCubit.state.user!;
 
@@ -170,6 +172,7 @@ class _Body extends StatelessWidget {
                     )
                   else
                     GridView.builder(
+                      padding: Space.z,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       gridDelegate:
@@ -180,18 +183,32 @@ class _Body extends StatelessWidget {
                       itemCount: user.posts.length,
                       itemBuilder: (context, index) {
                         final id = user.posts[index];
+                        final filterImages =
+                            screenState.contentType == ContentType.images;
+
                         final post =
-                            posts.firstWhere((element) => element.id == id);
+                            postCubit.state.posts!.firstWhere((element) {
+                          bool hasImageType = false;
+                          final matchId = element.id == id;
+                          if (filterImages) {
+                            hasImageType = element.hasImage != null;
+                          } else {
+                            hasImageType = element.hasVideo != null;
+                          }
+
+                          return matchId && hasImageType;
+                        });
+
+                        if (!filterImages) {
+                          return const SizedBox.shrink();
+                        }
 
                         return Container(
                           margin: Space.a.t10,
-                          decoration: BoxDecoration(
+                          child: ClipRRect(
                             borderRadius: 12.radius(),
-                            image: DecorationImage(
-                              image: AssetImage(
-                                // TODO: Handle Image here from FirebaseImage
-                                post.imageUrl,
-                              ),
+                            child: CachedNetworkImage(
+                              imageUrl: post.imageUrl,
                               fit: BoxFit.cover,
                             ),
                           ),
