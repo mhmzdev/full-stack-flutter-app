@@ -10,7 +10,9 @@ class _<%= h.changeCase.pascal(name) %>Provider {
       final Map<String, dynamic> raw = {};
       return <%= pmodel %>.fromJson(raw);
     } catch (e) {
-      throw Exception("Internal Server Error");
+      debugPrint('------ <%= h.changeCase.pascal(name) %>Provider ------');
+      debugPrint('------ $e ------');
+      throw Exception(e.toString());
     }
   }
 }
