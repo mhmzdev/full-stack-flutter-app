@@ -12,6 +12,7 @@ import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:provider/provider.dart';
 
 // bloc-imports-start
+import 'cubits/post/cubit.dart';
 import 'cubits/auth/cubit.dart';
 
 // bloc-imports-end
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MediaProvider()),
 
         // bloc-initiate-start
+        BlocProvider(create: (_) => PostCubit()),
         BlocProvider(create: (_) => AuthCubit()),
 
         // bloc-initiate-end
