@@ -5,7 +5,7 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authCubit = AuthCubit.c(context);
+    final authCubit = AuthCubit.c(context, true);
     final user = authCubit.state.user!;
 
     return Screen(
@@ -50,7 +50,14 @@ class _Body extends StatelessWidget {
                 style: AppText.s1 + AppTheme.grey,
                 textAlign: TextAlign.center,
               ),
-              Space.y.t30,
+              Space.y.t20,
+              if (user.birthday != null) ...[
+                Text(
+                  "Birthday: ${DateFormat('dd MMM, yyyy').format(user.birthday!)}",
+                  style: AppText.s1 + AppTheme.grey,
+                ),
+                Space.y.t30,
+              ],
               Container(
                 padding: Space.a.t20,
                 decoration: BoxDecoration(

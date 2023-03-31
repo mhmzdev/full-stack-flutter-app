@@ -5,9 +5,11 @@ class _CoverPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authCubit = AuthCubit.c(context);
+    final authCubit = AuthCubit.c(context, true);
     final user = authCubit.state.user!;
     final media = MediaProvider.state(context, true);
+
+    final hasCoverPhoto = user.coverURL.isNotEmpty;
 
     return BlocConsumer<AuthCubit, AuthState>(
       listenWhen: CoverUploadState.match,
@@ -21,7 +23,7 @@ class _CoverPhoto extends StatelessWidget {
           onTap: () async {
             if (state.cover is CoverUploadLoading) return;
 
-            final hasCover = user.imageURL.isNotEmpty;
+            final hasCover = user.coverURL.isNotEmpty;
             final value = await showModalBottomSheet(
               context: context,
               backgroundColor: Colors.transparent,
@@ -43,41 +45,81 @@ class _CoverPhoto extends StatelessWidget {
               authCubit.uploadCoverPhoto(file);
               return;
             }
-
-            authCubit.uploadCoverPhoto(null);
+            if (value is String && value.toString() == 'remove') {
+              authCubit.uploadCoverPhoto(null);
+            }
           },
-          child: DottedBorder(
-            borderType: BorderType.RRect,
-            radius: const Radius.circular(12),
-            strokeWidth: 2,
-            dashPattern: const [10],
-            color: AppTheme.grey,
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Space.y.t60,
-                  state.cover is CoverUploadLoading
-                      ? const CircularProgressIndicator(
-                          color: Colors.white,
-                        )
-                      : CustomPaint(
-                          painter: const GalleryIconPainter(),
-                          size: GalleryIconPainter.s(
-                            15.un(),
+          child: hasCoverPhoto
+              ? Container(
+                  height: 80.un(),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: 12.radius(),
+                    border: Border.all(
+                      color: AppTheme.primary,
+                      width: 1.un(),
+                    ),
+                  ),
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: ClipRRect(
+                          borderRadius: 12.radius(),
+                          child: CachedNetworkImage(
+                            imageUrl: user.coverURL,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                  Space.y.t20,
-                  Text(
-                    'Upload cover photo',
-                    style: AppText.b3 + AppTheme.grey,
+                      ),
+                      Positioned(
+                        bottom: 10,
+                        right: 10,
+                        child: SizedBox(
+                          height: 20.un(),
+                          child: const AppIconButton(
+                            color: AppTheme.primary,
+                            icon: Icon(
+                              Iconsax.gallery_add,
+                            ),
+                            onTap: null,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                  Space.y.t60,
-                ],
-              ),
-            ),
-          ),
+                )
+              : DottedBorder(
+                  borderType: BorderType.RRect,
+                  radius: const Radius.circular(12),
+                  strokeWidth: 2,
+                  dashPattern: const [10],
+                  color: AppTheme.grey,
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Space.y.t100,
+                        state.cover is CoverUploadLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : CustomPaint(
+                                painter: const GalleryIconPainter(),
+                                size: GalleryIconPainter.s(
+                                  15.un(),
+                                ),
+                              ),
+                        Space.y.t20,
+                        Text(
+                          'Upload cover photo',
+                          style: AppText.b3 + AppTheme.grey,
+                        ),
+                        Space.y.t100,
+                      ],
+                    ),
+                  ),
+                ),
         );
       },
     );

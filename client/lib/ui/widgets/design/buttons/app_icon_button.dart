@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class AppIconButton extends StatelessWidget {
   final Widget icon;
   final Color? color;
-  final void Function() onTap;
+  final void Function()? onTap;
   const AppIconButton({
     super.key,
     required this.icon,

@@ -65,7 +65,9 @@ class _ProfilePhoto extends StatelessWidget {
                     return;
                   }
 
-                  authCubit.uploadProfilePhoto(null);
+                  if (value is String && value.toString() == 'remove') {
+                    authCubit.uploadProfilePhoto(null);
+                  }
                 },
               );
             },
