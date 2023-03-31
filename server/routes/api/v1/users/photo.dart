@@ -38,10 +38,12 @@ Future<Response> _post(
   final url = body['url'] as String;
   final isProfilePhoto = body['isProfilePhoto'] as bool;
 
+  final oldUser = await database.users.queryUser(id);
+
   final request = db.UserUpdateRequest(
     id: id,
-    imageURL: isProfilePhoto ? url : '',
-    coverURL: !isProfilePhoto ? url : '',
+    imageURL: isProfilePhoto ? url : oldUser?.imageURL,
+    coverURL: !isProfilePhoto ? url : oldUser?.coverURL,
   );
 
   await database.users.updateOne(request);
