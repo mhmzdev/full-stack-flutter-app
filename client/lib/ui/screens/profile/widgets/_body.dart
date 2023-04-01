@@ -203,22 +203,28 @@ class _Body extends StatelessWidget {
                           return const SizedBox.shrink();
                         }
 
-                        return Container(
-                          margin: Space.a.t10,
-                          child: ClipRRect(
-                            borderRadius: 12.radius(),
-                            child: CachedNetworkImage(
-                              imageUrl: post.imageUrl,
-                              fit: BoxFit.cover,
-                              progressIndicatorBuilder:
-                                  (context, url, progress) {
-                                return Center(
-                                  child: Text(
-                                    'Loading...',
-                                    style: AppText.b2 + AppTheme.grey,
-                                  ),
-                                );
-                              },
+                        return GestureDetector(
+                          onTap: () => AppRoutes.postView.push(
+                            context,
+                            arguments: {'post': post},
+                          ),
+                          child: Container(
+                            margin: Space.a.t10,
+                            child: ClipRRect(
+                              borderRadius: 12.radius(),
+                              child: CachedNetworkImage(
+                                imageUrl: post.imageUrl,
+                                fit: BoxFit.cover,
+                                progressIndicatorBuilder:
+                                    (context, url, progress) {
+                                  return Center(
+                                    child: Text(
+                                      'Loading...',
+                                      style: AppText.b2 + AppTheme.grey,
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         );
