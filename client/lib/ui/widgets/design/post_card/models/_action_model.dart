@@ -1,9 +1,9 @@
 part of '../post_card.dart';
 
-class _ActionModel {
+class ActionModel {
   final Widget icon;
   final void Function() onTap;
-  _ActionModel({
+  ActionModel({
     required this.icon,
     required this.onTap,
   });

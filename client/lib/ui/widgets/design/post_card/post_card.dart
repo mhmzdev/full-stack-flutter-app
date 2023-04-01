@@ -6,6 +6,7 @@ import 'package:client/cubits/auth/cubit.dart';
 import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/design/avatar/avatar.dart';
 import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
@@ -34,7 +35,6 @@ class PostCard extends StatelessWidget {
     );
 
     return Container(
-      height: 200.un(),
       decoration: BoxDecoration(
         color: AppTheme.greyDark,
         borderRadius: 12.radius(),
@@ -48,12 +48,19 @@ class PostCard extends StatelessWidget {
               Space.y.t20,
               _Header(user: user),
               Space.y.t30,
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: 12.radius(),
-                  child: CachedNetworkImage(
-                    imageUrl: post.imageUrl,
-                    fit: BoxFit.cover,
+              GestureDetector(
+                onTap: () => AppRoutes.postView.push(
+                  context,
+                  arguments: {'post': post},
+                ),
+                child: SizedBox(
+                  height: 170.un(),
+                  child: ClipRRect(
+                    borderRadius: 12.radius(),
+                    child: CachedNetworkImage(
+                      imageUrl: post.imageUrl,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
