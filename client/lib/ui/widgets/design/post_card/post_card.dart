@@ -4,8 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:client/configs/configs.dart';
 import 'package:client/cubits/auth/cubit.dart';
 import 'package:client/ui/painter/base.dart';
-import 'package:client/ui/widgets/design/avatar/avatar.dart';
-import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
+import 'package:client/ui/widgets/design/post_card/widgets/header.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
@@ -17,7 +16,6 @@ part 'data/_actions.dart';
 part 'models/_action_model.dart';
 
 part 'widgets/_actions.dart';
-part 'widgets/_header.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
@@ -46,7 +44,10 @@ class PostCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Space.y.t20,
-              _Header(user: user),
+              PostHeader(
+                user: user,
+                post: post,
+              ),
               Space.y.t30,
               GestureDetector(
                 onTap: () => AppRoutes.postView.push(
