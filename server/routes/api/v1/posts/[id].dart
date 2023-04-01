@@ -26,7 +26,7 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
     case HttpMethod.put:
       return _put(context, id, dbPost);
     case HttpMethod.delete:
-      return _delete(context, id);
+      return _delete(context, id, dbPost);
 
     //
     case HttpMethod.post:
@@ -69,15 +69,30 @@ Future<Response> _put(RequestContext context, int id, db.Post post) async {
   await database.posts.updateOne(request);
 
   return Response.json(
-    body: postToBeUpdated.toJson(),
+    body: {
+      'status': 'success',
+      'data': postToBeUpdated.toJson(),
+    },
   );
 }
 
-Future<Response> _delete(RequestContext context, int id) async {
+Future<Response> _delete(RequestContext context, int id, db.Post post) async {
   final database = context.read<Database>();
-  await database.posts.deleteOne(id);
+  final user = await database.users.queryUser(post.uid);
+  user!.posts.remove(id);
 
-  return Response(
-    statusCode: HttpStatus.noContent,
+  final updateUserReq = db.UserUpdateRequest(
+    id: post.uid,
+    posts: user.posts,
+  );
+
+  await database.posts.deleteOne(id);
+  await database.users.updateOne(updateUserReq);
+
+  return Response.json(
+    body: {
+      'status': 'success',
+      'message': 'Post has been deleted successfully!',
+    },
   );
 }

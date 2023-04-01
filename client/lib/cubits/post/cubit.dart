@@ -74,4 +74,23 @@ class PostCubit extends Cubit<PostState> {
       ));
     }
   }
+
+  Future<void> deletePost(int postId) async {
+    emit(state.copyWith(
+      delete: PostDeleteLoading(),
+    ));
+    try {
+      await repo.deletePost(postId);
+      final data = await repo.fetchAll();
+
+      emit(state.copyWith(
+        posts: data,
+        delete: const PostDeleteSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        delete: PostDeleteFailed(message: e.toString()),
+      ));
+    }
+  }
 }

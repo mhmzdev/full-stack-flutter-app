@@ -6,10 +6,12 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authCubit = AuthCubit.c(context);
+    final currentUser = authCubit.state.user!;
     final screenState = _ScreenState.s(context, true);
     final post = screenState.post;
 
     final user = authCubit.state.users!.firstWhere((usr) => usr.id == post.uid);
+    final isOwner = currentUser.id == post.uid;
 
     return Screen(
       keyboardHandler: true,
@@ -20,18 +22,10 @@ class _Body extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(
-                padding: Space.h.t25,
-                child: Row(
-                  children: [
-                    const AppBackButton(),
-                    Space.x.t20,
-                    Avatar(
-                      user: user,
-                      type: AvatarType.detailed,
-                    ),
-                  ],
-                ),
+              _Header(
+                user: user,
+                post: post,
+                isOwner: isOwner,
               ),
               Space.y.t30,
               SizedBox(
@@ -92,8 +86,10 @@ class _Body extends StatelessWidget {
                       ],
                     ),
                     Space.y.t10,
-                    Text(post.caption),
-                    Space.y.t15,
+                    if (post.caption.isNotEmpty) ...[
+                      Text(post.caption),
+                      Space.y.t15,
+                    ],
                     Text(
                       timeago.format(post.createdAt),
                       style: AppText.s1 + AppTheme.grey,

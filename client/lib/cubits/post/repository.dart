@@ -22,4 +22,6 @@ class _PostRepository {
 
     return _PostProvider.createPost(payload);
   }
+
+  Future<void> deletePost(int postId) => _PostProvider.deletePost(postId);
 }

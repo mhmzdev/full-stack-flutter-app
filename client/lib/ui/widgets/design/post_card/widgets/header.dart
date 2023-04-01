@@ -59,7 +59,7 @@ class PostHeader extends StatelessWidget {
                     ),
                     onTap: () {
                       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                        postCubit.deletePost(post.id); // listener to HOME //
+                        postCubit.deletePost(post.id);
                       });
                     },
                   ),

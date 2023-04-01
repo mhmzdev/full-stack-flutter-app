@@ -36,6 +36,34 @@ class _PostProvider {
       );
 
       debugPrint(resp.data.toString());
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception(e.toString());
+    } catch (e) {
+      debugPrint('------ PostProvider ------');
+      debugPrint('------ $e ------');
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<void> deletePost(int postId) async {
+    try {
+      final resp = await Api.ins.delete(
+        '/v1/posts/$postId',
+      );
+
+      debugPrint(resp.data.toString());
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception(e.toString());
     } catch (e) {
       debugPrint('------ PostProvider ------');
       debugPrint('------ $e ------');

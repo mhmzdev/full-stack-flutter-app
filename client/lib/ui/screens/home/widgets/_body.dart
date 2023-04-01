@@ -7,7 +7,7 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Screen(
       bottomBar: true,
-      keyboardHandler: true,
+      overlayBuilders: const [_DeleteListener()],
       child: SafeArea(
         child: SingleChildScrollView(
           padding: Space.a.t30,
@@ -44,6 +44,9 @@ class _Body extends StatelessWidget {
                         result: EmptyResult.emptyFeed,
                       );
                     }
+
+                    state.posts!
+                        .sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
                     return ListView.separated(
                       shrinkWrap: true,
