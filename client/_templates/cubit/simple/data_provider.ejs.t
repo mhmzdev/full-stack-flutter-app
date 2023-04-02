@@ -12,7 +12,7 @@ class _<%= h.changeCase.pascal(name) %>Provider {
     } catch (e) {
       debugPrint('------ <%= h.changeCase.pascal(name) %>Provider ------');
       debugPrint('------ $e ------');
-      throw Exception(e.toString());
+      throw Exception("Internal server error. Please try again!");
     }
   }
 }
