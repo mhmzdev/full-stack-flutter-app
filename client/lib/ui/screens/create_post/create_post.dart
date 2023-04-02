@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:client/configs/configs.dart';
 import 'package:client/cubits/auth/cubit.dart';
 import 'package:client/cubits/media/cubit.dart';
@@ -21,6 +22,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:shared/shared.dart';
 
 part 'static/_form_data.dart';
 part 'static/_form_keys.dart';
@@ -28,6 +30,7 @@ part 'static/_form_keys.dart';
 part 'widgets/_body.dart';
 
 part '_state.dart';
+part '_edit_listener.dart';
 part '_post_listener.dart';
 part '_media_listener.dart';
 
@@ -38,8 +41,11 @@ class CreatePostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     App.init(context);
 
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
     return ChangeNotifierProvider<_ScreenState>(
-      create: (_) => _ScreenState(),
+      create: (_) => _ScreenState(args: args),
       child: const _Body(),
     );
   }

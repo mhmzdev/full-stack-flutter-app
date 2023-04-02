@@ -1,4 +1,4 @@
-part of 'home.dart';
+part of 'post_view.dart';
 
 class _DeleteListener extends StatelessWidget {
   const _DeleteListener();
@@ -13,6 +13,7 @@ class _DeleteListener extends StatelessWidget {
       listener: (context, state) {
         if (state.delete is PostDeleteSuccess) {
           authCubit.fetch(uid);
+          ''.pop(context);
         } else if (state.delete is PostDeleteFailed) {
           final msg = state.delete.message!.split(": ").last;
           SnackBars.failure(context, msg);

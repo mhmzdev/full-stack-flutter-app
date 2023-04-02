@@ -15,6 +15,7 @@ class _Body extends StatelessWidget {
 
     return Screen(
       keyboardHandler: true,
+      overlayBuilders: const [_DeleteListener()],
       child: SafeArea(
         child: SingleChildScrollView(
           padding: Space.v.t25,

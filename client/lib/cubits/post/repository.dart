@@ -3,7 +3,7 @@ part of 'cubit.dart';
 class _PostRepository {
   Future<List<Post>> fetchAll() => _PostProvider.fetchAll();
 
-  Future<void> createPost(
+  Future<Post> createPost(
     int uid,
     String caption,
     bool? hasImage,
@@ -23,5 +23,21 @@ class _PostRepository {
     return _PostProvider.createPost(payload);
   }
 
-  Future<void> deletePost(int postId) => _PostProvider.deletePost(postId);
+  Future<void> editPost(int postId, String caption) async {
+    final payload = {
+      'id': postId,
+      'caption': caption,
+    };
+
+    return _PostProvider.editPost(payload);
+  }
+
+  Future<void> deletePost(int postId, String imageUrl) {
+    final payload = {
+      'postId': postId,
+      'imageURL': imageUrl,
+    };
+
+    return _PostProvider.deletePost(payload);
+  }
 }

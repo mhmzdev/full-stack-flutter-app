@@ -7,7 +7,6 @@ class _PostListener extends StatelessWidget {
   Widget build(BuildContext context) {
     final media = MediaProvider.state(context);
     final authCubit = AuthCubit.c(context);
-    final postCubit = PostCubit.c(context);
 
     final uid = Cache.uid!;
 
@@ -15,7 +14,6 @@ class _PostListener extends StatelessWidget {
       listenWhen: PostCreateState.match,
       listener: (context, state) {
         if (state.create is PostCreateSuccess) {
-          postCubit.fetchAll();
           authCubit.fetch(uid);
           media.reset();
 

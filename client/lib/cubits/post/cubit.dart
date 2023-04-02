@@ -4,6 +4,7 @@ import 'package:client/constants/constants.dart';
 import 'package:client/services/api.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared/shared.dart';
@@ -56,7 +57,7 @@ class PostCubit extends Cubit<PostState> {
       create: PostCreateLoading(),
     ));
     try {
-      await repo.createPost(
+      final data = await repo.createPost(
         uid,
         caption,
         hasImage,
@@ -64,6 +65,8 @@ class PostCubit extends Cubit<PostState> {
         hasVideo,
         videoURL,
       );
+
+      state.posts!.add(data);
 
       emit(state.copyWith(
         create: const PostCreateSuccess(),
@@ -75,16 +78,40 @@ class PostCubit extends Cubit<PostState> {
     }
   }
 
-  Future<void> deletePost(int postId) async {
+  Future<void> editPost(int postId, String caption) async {
+    emit(state.copyWith(
+      edit: PostEditLoading(),
+    ));
+    try {
+      await repo.editPost(postId, caption);
+
+      final post = state.posts!.firstWhere((post) => post.id == postId);
+      final postIndex = state.posts!.indexOf(post);
+      final updatedPost = post.copyWith(caption: caption);
+      state.posts![postIndex] = updatedPost;
+
+      emit(state.copyWith(
+        edit: const PostEditSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        edit: PostEditFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> deletePost(int postId, String url) async {
     emit(state.copyWith(
       delete: PostDeleteLoading(),
     ));
     try {
-      await repo.deletePost(postId);
-      final data = await repo.fetchAll();
+      await repo.deletePost(postId, url);
+
+      state.posts!.removeWhere(
+        (post) => post.id == postId,
+      );
 
       emit(state.copyWith(
-        posts: data,
         delete: const PostDeleteSuccess(),
       ));
     } catch (e) {

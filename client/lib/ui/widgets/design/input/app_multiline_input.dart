@@ -8,6 +8,7 @@ class AppMultilineInputField extends StatelessWidget {
   final String? hint;
   final String? label;
   final int maxLines;
+  final bool autoFocus;
 
   final bool? enabled;
   final FocusNode? node;
@@ -43,6 +44,7 @@ class AppMultilineInputField extends StatelessWidget {
     this.initialValue,
     this.textInputType,
     this.isPass = false,
+    this.autoFocus = false,
     this.inputFormatters,
     this.readOnly = false,
     this.textCapitalization = TextCapitalization.sentences,
@@ -70,7 +72,7 @@ class AppMultilineInputField extends StatelessWidget {
             textCapitalization: textCapitalization,
             enabled: enabled ?? true,
             initialValue: initialValue,
-            autofocus: false,
+            autofocus: autoFocus,
             maxLines: maxLines,
             textInputAction: TextInputAction.newline,
             keyboardType: textInputType,

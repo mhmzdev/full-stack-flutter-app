@@ -51,6 +51,14 @@ class PostHeader extends StatelessWidget {
                       "Edit",
                       style: AppText.b2,
                     ),
+                    onTap: () {
+                      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                        AppRoutes.createPost.push(
+                          context,
+                          arguments: {'post': post},
+                        );
+                      });
+                    },
                   ),
                   PopupMenuItem(
                     child: Text(
@@ -59,7 +67,7 @@ class PostHeader extends StatelessWidget {
                     ),
                     onTap: () {
                       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                        postCubit.deletePost(post.id);
+                        postCubit.deletePost(post.id, post.imageUrl);
                       });
                     },
                   ),
