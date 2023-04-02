@@ -105,11 +105,10 @@ class _Body extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      CustomPaint(
-                                        painter: const GalleryIconPainter(),
-                                        size: GalleryIconPainter.s(
-                                          15.un(),
-                                        ),
+                                      Icon(
+                                        Iconsax.gallery_add,
+                                        color: AppTheme.grey,
+                                        size: 12.un(),
                                       ),
                                       Space.y.t20,
                                       Text(
