@@ -69,7 +69,6 @@ Future<Response> _post(
   );
 
   final postId = await database.posts.insertOne(request);
-
   final user = await database.users.queryUser(uid);
   final userRequest = db.UserUpdateRequest(
     id: uid,
@@ -77,10 +76,13 @@ Future<Response> _post(
   );
   await database.users.updateOne(userRequest);
 
+  final dbPost = await database.posts.queryPost(postId);
+  final sharedPost = Post.fromDb(dbPost!);
+
   return Response.json(
     body: {
       'status': 'success',
-      'message': 'Post has been added with ID: $postId',
+      'data': sharedPost.toJson(),
     },
   );
 }
