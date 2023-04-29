@@ -14,6 +14,7 @@ part 'repository.dart';
 part 'state.dart';
 
 part 'states/_fetch_all.dart';
+part 'states/_create.dart';
 
 class StoryCubit extends Cubit<StoryState> {
   static StoryCubit c(BuildContext context, [bool listen = false]) =>
@@ -35,6 +36,37 @@ class StoryCubit extends Cubit<StoryState> {
     } catch (e) {
       emit(state.copyWith(
         fetchAll: StoryFetchAllFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> createStory(
+    int uid, {
+    bool? hasImage,
+    String? imageURL,
+    bool? hasVideo,
+    String? videoURL,
+  }) async {
+    emit(state.copyWith(
+      create: StoryCreateLoading(),
+    ));
+    try {
+      final data = await repo.createStory(
+        uid,
+        hasImage,
+        imageURL,
+        hasVideo,
+        videoURL,
+      );
+
+      (state.stories ?? []).add(data);
+
+      emit(state.copyWith(
+        create: const StoryCreateSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        create: StoryCreateFailed(message: e.toString()),
       ));
     }
   }

@@ -9,8 +9,11 @@ class _Body extends StatelessWidget {
     final user = authCubit.state.user!;
     final media = MediaProvider.state(context, true);
 
+    final mediaCubit = MediaCubit.cubit(context);
+
     return Screen(
       keyboardHandler: true,
+      overlayBuilders: const [_MediaListener(), _StoryListener()],
       child: SafeArea(
         child: SingleChildScrollView(
           padding: Space.a.t25,
@@ -98,6 +101,9 @@ class _Body extends StatelessWidget {
                     : AppButtonState.plain,
                 onPressed: () {
                   if (media.xFile == null) return;
+
+                  final file = File(media.xFile!.path);
+                  mediaCubit.uploadMedia(user, file, PictureType.story);
                 },
               )
             ],

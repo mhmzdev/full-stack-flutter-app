@@ -8,6 +8,11 @@ class _StoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storyCubit = StoryCubit.c(context, true);
+    final stories = storyCubit.state.stories ?? [];
+    final userStories =
+        stories.where((element) => user.stories.contains(element.id)).toList();
+
     return InkWell(
       highlightColor: Colors.transparent,
       onTap: () {},
@@ -15,18 +20,18 @@ class _StoryCard extends StatelessWidget {
         margin: Space.r.t25,
         width: 50.un(),
         height: 65.un(),
-        decoration: BoxDecoration(
-          borderRadius: 12.radius(),
-          image: const DecorationImage(
-            image: AssetImage(
-              StaticAssets.emptyFeed,
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: 12.radius(),
+                child: CachedNetworkImage(
+                  imageUrl: userStories.last.imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             ClipRRect(
               borderRadius: 12.radius(),
               child: BackdropFilter(
@@ -50,10 +55,15 @@ class _StoryCard extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CircleAvatar(
-                  radius: 10.un(),
-                  backgroundImage: AssetImage(
-                    user.imageURL,
+                SizedBox(
+                  height: 15.un(),
+                  width: 15.un(),
+                  child: ClipRRect(
+                    borderRadius: 150.radius(),
+                    child: CachedNetworkImage(
+                      imageUrl: user.imageURL,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Space.y.t10,

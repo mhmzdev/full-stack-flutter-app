@@ -27,4 +27,32 @@ class _StoryProvider {
       throw Exception("Internal server error. Please try again!");
     }
   }
+
+  static Future<Story> createStory(Map<String, dynamic> body) async {
+    try {
+      final resp = await Api.ins.post(
+        '/v1/stories',
+        data: body,
+      );
+
+      final raw = resp.data as Map<String, dynamic>;
+      final data = raw['data'] as Map<String, dynamic>;
+
+      final story = Story.fromJson(data);
+      return story;
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      debugPrint('------ PostProvider ------');
+      debugPrint('------ $e ------');
+      throw Exception("Internal server error. Please try again!");
+    } catch (e) {
+      debugPrint('------ PostProvider ------');
+      debugPrint('------ $e ------');
+      throw Exception("Internal server error. Please try again!");
+    }
+  }
 }
