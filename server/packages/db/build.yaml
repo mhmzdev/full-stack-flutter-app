@@ -7,4 +7,5 @@ targets:
           # path of model classes
           - lib/src/models/user/user.dart
           - lib/src/models/post/post.dart
+          - lib/src/models/story/story.dart
           - lib/src/models/comment/comment.dart

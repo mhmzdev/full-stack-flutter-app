@@ -1,3 +1,5 @@
+// ignore_for_file: annotate_overrides
+
 part of 'user.dart';
 
 extension UserRepositories on Database {
