@@ -35,7 +35,7 @@ Future<Response> _update(
   final database = context.read<Database>();
 
   final dbUser = await database.users.queryUser(body['id'] as int);
-  final sharedUserTemp = User.fromDb(dbUser!);
+  final sharedUserTemp = User.fromUserView(dbUser!);
   final email = sharedUserTemp.email;
   final password = sharedUserTemp.password;
 
@@ -75,7 +75,7 @@ Future<Response> _update(
 
   await database.users.updateOne(request);
   final updatedUser = await database.users.queryUser(user.id);
-  final sharedUser = User.fromDb(updatedUser!);
+  final sharedUser = User.fromUserView(updatedUser!);
 
   return Response.json(
     body: {

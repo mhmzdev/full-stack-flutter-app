@@ -38,7 +38,7 @@ Future<Response> _get(RequestContext context) async {
   var sharedComments = <Comment>[];
 
   if (dbComments.isNotEmpty) {
-    sharedComments = dbComments.map(Comment.fromDb).toList();
+    sharedComments = dbComments.map(Comment.fromCommentView).toList();
   }
 
   return Response.json(

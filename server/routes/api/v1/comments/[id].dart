@@ -40,8 +40,8 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
   }
 }
 
-Future<Response> _get(RequestContext context, db.Comment dbComment) async {
-  final sharedComment = Comment.fromDb(dbComment);
+Future<Response> _get(RequestContext context, db.CommentView dbComment) async {
+  final sharedComment = Comment.fromCommentView(dbComment);
 
   return Response.json(
     body: sharedComment.toJson(),
@@ -51,7 +51,7 @@ Future<Response> _get(RequestContext context, db.Comment dbComment) async {
 Future<Response> _put(
   RequestContext context,
   int id,
-  db.Comment comment,
+  db.CommentView comment,
 ) async {
   final database = context.read<Database>();
 

@@ -33,7 +33,7 @@ Future<Response> _login(
   RequestContext context,
   Map<String, dynamic> body,
 ) async {
-  db.User? user;
+  db.UserView? user;
 
   final database = context.read<Database>();
   final users = await database.users.queryUsers();
@@ -73,7 +73,7 @@ Future<Response> _login(
     body: {
       'status': 'success',
       'message': '',
-      'data': User.fromDb(user),
+      'data': User.fromUserView(user).toJson(),
     },
   );
 }

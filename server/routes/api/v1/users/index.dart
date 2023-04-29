@@ -33,7 +33,7 @@ Future<Response> _get(RequestContext context) async {
   var sharedUsers = <User>[];
 
   if (dbUsers.isNotEmpty) {
-    sharedUsers = dbUsers.map(User.fromDb).toList();
+    sharedUsers = dbUsers.map(User.fromUserView).toList();
   }
 
   return Response.json(

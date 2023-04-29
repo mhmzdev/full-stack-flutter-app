@@ -38,7 +38,7 @@ Future<Response> _get(RequestContext context) async {
   var sharedPosts = <Post>[];
 
   if (dbPosts.isNotEmpty) {
-    sharedPosts = dbPosts.map(Post.fromDb).toList();
+    sharedPosts = dbPosts.map(Post.fromPostView).toList();
   }
 
   return Response.json(
@@ -77,7 +77,7 @@ Future<Response> _post(
   await database.users.updateOne(userRequest);
 
   final dbPost = await database.posts.queryPost(postId);
-  final sharedPost = Post.fromDb(dbPost!);
+  final sharedPost = Post.fromPostView(dbPost!);
 
   return Response.json(
     body: {

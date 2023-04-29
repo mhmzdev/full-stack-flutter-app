@@ -40,8 +40,8 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
   }
 }
 
-Future<Response> _get(RequestContext context, db.User dbUser) async {
-  final sharedUser = User.fromDb(dbUser);
+Future<Response> _get(RequestContext context, db.UserView dbUser) async {
+  final sharedUser = User.fromUserView(dbUser);
 
   return Response.json(
     body: {
