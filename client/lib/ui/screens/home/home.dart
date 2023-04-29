@@ -9,6 +9,7 @@ import 'package:client/services/cache.dart';
 import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:client/ui/widgets/design/button/button.dart';
+import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
 import 'package:client/ui/widgets/design/empty_results/empty_results.dart';
 import 'package:client/ui/widgets/design/loader/full_screen_loader.dart';
@@ -27,6 +28,7 @@ part 'widgets/_create_story.dart';
 part 'widgets/_story_card.dart';
 part 'widgets/_header.dart';
 part 'widgets/_stories.dart';
+part 'widgets/_story_modal.dart';
 
 part '_state.dart';
 part '_delete_listener.dart';

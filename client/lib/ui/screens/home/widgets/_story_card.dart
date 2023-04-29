@@ -13,14 +13,29 @@ class _StoryCard extends StatelessWidget {
     final userStories =
         stories.where((element) => user.stories.contains(element.id)).toList();
 
+    final currentUser = user.id == userStories.first.uid;
+
     return InkWell(
       highlightColor: Colors.transparent,
-      onTap: () => AppRoutes.storyView.push(
-        context,
-        arguments: {
-          'stories': userStories,
-        },
-      ),
+      onTap: () async {
+        if (currentUser) {
+          final viewStory = await showModalBottomSheet<bool?>(
+            context: context,
+            backgroundColor: Colors.transparent,
+            builder: (_) => const _StoryModal(),
+          );
+          if (viewStory == null || !viewStory) return;
+        }
+
+        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+          AppRoutes.storyView.push(
+            context,
+            arguments: {
+              'stories': userStories,
+            },
+          );
+        });
+      },
       child: Container(
         margin: Space.r.t25,
         width: 50.un(),

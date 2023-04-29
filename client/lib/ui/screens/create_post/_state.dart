@@ -3,7 +3,7 @@ part of 'create_post.dart';
 class _ScreenState extends ChangeNotifier {
   _ScreenState({required Map<String, dynamic> args}) {
     _post = args['post'] as Post?;
-    source = args['source'] as String;
+    source = args['source'] as String? ?? AppRoutes.home;
   }
 
   static _ScreenState s(BuildContext context, [listen = false]) =>
