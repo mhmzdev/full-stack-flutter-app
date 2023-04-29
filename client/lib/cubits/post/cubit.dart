@@ -10,13 +10,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared/shared.dart';
 
 part 'state.dart';
-part '_comment_state.dart';
-part '_create_state.dart';
-part '_delete_state.dart';
-part '_edit_state.dart';
-part '_fetch_all_state.dart';
-part '_like_state.dart';
-part '_share_state.dart';
+part 'states/_comment.dart';
+part 'states/_create.dart';
+part 'states/_delete.dart';
+part 'states/_edit.dart';
+part 'states/_fetch_all.dart';
+part 'states/_like.dart';
+part 'states/_share.dart';
 
 part 'data_provider.dart';
 part 'repository.dart';

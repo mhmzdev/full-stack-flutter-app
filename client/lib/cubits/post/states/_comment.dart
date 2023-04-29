@@ -1,4 +1,4 @@
-part of 'cubit.dart';
+part of '../cubit.dart';
 
 @immutable
 class PostCommentState extends Equatable {

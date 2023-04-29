@@ -11,14 +11,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:shared/shared.dart';
 
-part '_dp_state.dart';
-part '_cover_state.dart';
-part '_login_state.dart';
-part '_fetch_state.dart';
-part '_logout_state.dart';
-part '_update_state.dart';
-part '_register_state.dart';
-part '_fetch_all_state.dart';
+part 'states/_dp.dart';
+part 'states/_cover.dart';
+part 'states/_login.dart';
+part 'states/_fetch.dart';
+part 'states/_logout.dart';
+part 'states/_update.dart';
+part 'states/_register.dart';
+part 'states/_fetch_all.dart';
 
 part 'data_provider.dart';
 part 'repository.dart';
