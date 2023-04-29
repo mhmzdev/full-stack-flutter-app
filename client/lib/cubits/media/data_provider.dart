@@ -60,7 +60,7 @@ class _MediaProvider {
         url = await task.ref.getDownloadURL();
       }
 
-      // if file is null, its means the function is REMOVING image
+      // if file is null, it means the function is REMOVING image
       // delete image path from storage and return empty URL
       // only for DP and Cover case
       else if ((type == PictureType.dp || type == PictureType.cover) &&

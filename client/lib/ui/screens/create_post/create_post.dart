@@ -7,7 +7,6 @@ import 'package:client/cubits/media/cubit.dart';
 import 'package:client/cubits/post/cubit.dart';
 import 'package:client/providers/media_provider.dart';
 import 'package:client/services/cache.dart';
-import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:client/ui/widgets/design/avatar/avatar.dart';
 import 'package:client/ui/widgets/design/button/button.dart';

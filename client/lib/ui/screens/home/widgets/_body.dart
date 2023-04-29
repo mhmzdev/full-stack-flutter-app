@@ -60,9 +60,11 @@ class _Body extends StatelessWidget {
                     );
                   }
 
-                  return Text(
-                    'Something went wrong!',
-                    style: AppText.b1 + AppTheme.danger,
+                  return Center(
+                    child: Text(
+                      'Something went wrong!',
+                      style: AppText.b1 + AppTheme.danger,
+                    ),
                   );
                 },
               ),

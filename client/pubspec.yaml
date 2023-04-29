@@ -79,7 +79,6 @@ dependencies:
   # icons pack
   iconsax: ^0.0.8
 
-
   # utils
   timeago: ^3.1.0
   image_picker: ^0.8.6+4
