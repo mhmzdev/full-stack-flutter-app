@@ -13,7 +13,7 @@ class _StoryCard extends StatelessWidget {
     final userStories =
         stories.where((element) => user.stories.contains(element.id)).toList();
 
-    final currentUser = user.id == userStories.first.uid;
+    final currentUser = user.id == userStories.firstOrNull?.uid;
 
     return InkWell(
       highlightColor: Colors.transparent,
@@ -43,15 +43,16 @@ class _StoryCard extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Positioned.fill(
-              child: ClipRRect(
-                borderRadius: 12.radius(),
-                child: CachedNetworkImage(
-                  imageUrl: userStories.last.imageUrl,
-                  fit: BoxFit.cover,
+            if (userStories.isNotEmpty)
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: 12.radius(),
+                  child: CachedNetworkImage(
+                    imageUrl: userStories.last.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
             ClipRRect(
               borderRadius: 12.radius(),
               child: BackdropFilter(

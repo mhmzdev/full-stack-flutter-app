@@ -5,6 +5,11 @@ class _Stories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = AuthCubit.c(context, true);
+    final current = auth.state.user!;
+    final profiles =
+        auth.state.users!.where((u) => u.id != current.id).toList();
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: BlocConsumer<StoryCubit, StoryState>(
@@ -35,8 +40,10 @@ class _Stories extends StatelessWidget {
             return Row(
               children: [
                 const _CreateStory(),
-                Space.x.t25,
-                // ...profiles.map((e) => _StoryCard(user: e)),
+                if (profiles.isNotEmpty) ...[
+                  Space.x.t25,
+                  ...profiles.map((e) => _StoryCard(user: e)),
+                ],
               ],
             );
           } else if (state.fetchAll is StoryFetchAllFailed) {
