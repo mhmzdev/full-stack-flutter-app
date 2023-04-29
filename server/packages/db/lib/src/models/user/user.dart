@@ -19,4 +19,5 @@ abstract class User {
   List<int> get followers;
   List<int> get following;
   List<int> get posts;
+  List<int> get stories;
 }

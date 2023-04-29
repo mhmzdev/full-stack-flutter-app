@@ -21,6 +21,7 @@ class User with _$User implements db.UserView {
     @Default([]) List<int> following,
     @Default([]) List<int> followers,
     @Default([]) List<int> posts,
+    @Default([]) List<int> stories,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -39,5 +40,6 @@ class User with _$User implements db.UserView {
         followers: user.followers,
         following: user.following,
         posts: user.posts,
+        stories: user.stories,
       );
 }

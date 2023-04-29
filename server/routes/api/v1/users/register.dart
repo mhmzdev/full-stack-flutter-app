@@ -62,6 +62,7 @@ Future<Response> _register(
     followers: [],
     following: [],
     posts: [],
+    stories: [],
   );
 
   final id = await database.users.insertOne(request);

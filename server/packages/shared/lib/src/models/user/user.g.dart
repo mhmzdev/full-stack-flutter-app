@@ -29,6 +29,9 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
           const [],
       posts: (json['posts'] as List<dynamic>?)?.map((e) => e as int).toList() ??
           const [],
+      stories:
+          (json['stories'] as List<dynamic>?)?.map((e) => e as int).toList() ??
+              const [],
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -45,4 +48,5 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'following': instance.following,
       'followers': instance.followers,
       'posts': instance.posts,
+      'stories': instance.stories,
     };

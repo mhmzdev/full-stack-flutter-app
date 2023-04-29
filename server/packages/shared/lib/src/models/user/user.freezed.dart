@@ -33,6 +33,7 @@ mixin _$User {
   List<int> get following => throw _privateConstructorUsedError;
   List<int> get followers => throw _privateConstructorUsedError;
   List<int> get posts => throw _privateConstructorUsedError;
+  List<int> get stories => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +58,8 @@ abstract class $UserCopyWith<$Res> {
       DateTime? birthday,
       List<int> following,
       List<int> followers,
-      List<int> posts});
+      List<int> posts,
+      List<int> stories});
 }
 
 /// @nodoc
@@ -86,6 +88,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? following = null,
     Object? followers = null,
     Object? posts = null,
+    Object? stories = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -140,6 +143,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      stories: null == stories
+          ? _value.stories
+          : stories // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 }
@@ -163,7 +170,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       DateTime? birthday,
       List<int> following,
       List<int> followers,
-      List<int> posts});
+      List<int> posts,
+      List<int> stories});
 }
 
 /// @nodoc
@@ -188,6 +196,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? following = null,
     Object? followers = null,
     Object? posts = null,
+    Object? stories = null,
   }) {
     return _then(_$_User(
       id: null == id
@@ -242,6 +251,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value._posts
           : posts // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      stories: null == stories
+          ? _value._stories
+          : stories // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -262,10 +275,12 @@ class _$_User implements _User {
       this.birthday,
       final List<int> following = const [],
       final List<int> followers = const [],
-      final List<int> posts = const []})
+      final List<int> posts = const [],
+      final List<int> stories = const []})
       : _following = following,
         _followers = followers,
-        _posts = posts;
+        _posts = posts,
+        _stories = stories;
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -318,9 +333,18 @@ class _$_User implements _User {
     return EqualUnmodifiableListView(_posts);
   }
 
+  final List<int> _stories;
+  @override
+  @JsonKey()
+  List<int> get stories {
+    if (_stories is EqualUnmodifiableListView) return _stories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_stories);
+  }
+
   @override
   String toString() {
-    return 'User(id: $id, firstName: $firstName, lastName: $lastName, username: $username, imageURL: $imageURL, coverURL: $coverURL, email: $email, password: $password, bio: $bio, birthday: $birthday, following: $following, followers: $followers, posts: $posts)';
+    return 'User(id: $id, firstName: $firstName, lastName: $lastName, username: $username, imageURL: $imageURL, coverURL: $coverURL, email: $email, password: $password, bio: $bio, birthday: $birthday, following: $following, followers: $followers, posts: $posts, stories: $stories)';
   }
 
   @override
@@ -349,7 +373,8 @@ class _$_User implements _User {
                 .equals(other._following, _following) &&
             const DeepCollectionEquality()
                 .equals(other._followers, _followers) &&
-            const DeepCollectionEquality().equals(other._posts, _posts));
+            const DeepCollectionEquality().equals(other._posts, _posts) &&
+            const DeepCollectionEquality().equals(other._stories, _stories));
   }
 
   @JsonKey(ignore: true)
@@ -368,7 +393,8 @@ class _$_User implements _User {
       birthday,
       const DeepCollectionEquality().hash(_following),
       const DeepCollectionEquality().hash(_followers),
-      const DeepCollectionEquality().hash(_posts));
+      const DeepCollectionEquality().hash(_posts),
+      const DeepCollectionEquality().hash(_stories));
 
   @JsonKey(ignore: true)
   @override
@@ -398,7 +424,8 @@ abstract class _User implements User {
       final DateTime? birthday,
       final List<int> following,
       final List<int> followers,
-      final List<int> posts}) = _$_User;
+      final List<int> posts,
+      final List<int> stories}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -428,6 +455,8 @@ abstract class _User implements User {
   List<int> get followers;
   @override
   List<int> get posts;
+  @override
+  List<int> get stories;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
