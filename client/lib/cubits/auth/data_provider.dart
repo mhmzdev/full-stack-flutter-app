@@ -87,6 +87,8 @@ class _AuthProvider {
 
       Cache.setUid(user.id);
 
+      await auth.FirebaseAuth.instance.signInAnonymously();
+
       return user;
     } on DioError catch (e) {
       if (e.type == DioErrorType.connectionError ||

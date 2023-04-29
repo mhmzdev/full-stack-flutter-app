@@ -5,6 +5,7 @@ import 'package:client/services/api.dart';
 import 'package:client/services/cache.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -196,6 +197,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     try {
       Cache.resetUid();
+      await auth.FirebaseAuth.instance.signOut();
 
       emit(state.copyWith(
         logout: const AuthLogoutSuccess(),
