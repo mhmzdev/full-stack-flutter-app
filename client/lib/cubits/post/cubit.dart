@@ -92,6 +92,7 @@ class PostCubit extends Cubit<PostState> {
 
       emit(state.copyWith(
         edit: const PostEditSuccess(),
+        posts: state.posts,
       ));
     } catch (e) {
       emit(state.copyWith(

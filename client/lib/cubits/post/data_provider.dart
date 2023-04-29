@@ -46,6 +46,8 @@ class _PostProvider {
           e.type == DioErrorType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
+      debugPrint('------ PostProvider ------');
+      debugPrint('------ $e ------');
       throw Exception("Internal server error. Please try again!");
     } catch (e) {
       debugPrint('------ PostProvider ------');
