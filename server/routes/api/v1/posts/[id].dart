@@ -40,30 +40,22 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
   }
 }
 
-Future<Response> _get(RequestContext context, db.Post dbPost) async {
-  final sharedPost = Post.fromDb(dbPost);
+Future<Response> _get(RequestContext context, db.PostView dbPost) async {
+  final sharedPost = Post.fromPostView(dbPost);
 
   return Response.json(
     body: sharedPost.toJson(),
   );
 }
 
-Future<Response> _put(RequestContext context, int id, db.Post post) async {
+Future<Response> _put(RequestContext context, int id, db.PostView post) async {
   final database = context.read<Database>();
 
-  final postToBeUpdated =
-      Post.fromJson(await context.request.json() as Map<String, dynamic>);
+  final body = await context.request.json() as Map<String, dynamic>;
 
   final request = db.PostUpdateRequest(
     id: id,
-    uid: postToBeUpdated.uid,
-    likes: postToBeUpdated.likes,
-    videoUrl: postToBeUpdated.videoUrl,
-    hasVideo: postToBeUpdated.hasVideo,
-    imageUrl: postToBeUpdated.imageUrl,
-    hasImage: postToBeUpdated.hasImage,
-    caption: postToBeUpdated.caption,
-    createdAt: postToBeUpdated.createdAt,
+    caption: body['caption'] as String,
   );
 
   await database.posts.updateOne(request);
@@ -71,12 +63,16 @@ Future<Response> _put(RequestContext context, int id, db.Post post) async {
   return Response.json(
     body: {
       'status': 'success',
-      'data': postToBeUpdated.toJson(),
+      'data': 'post has been updated with ID $id',
     },
   );
 }
 
-Future<Response> _delete(RequestContext context, int id, db.Post post) async {
+Future<Response> _delete(
+  RequestContext context,
+  int id,
+  db.PostView post,
+) async {
   final database = context.read<Database>();
   final user = await database.users.queryUser(post.uid);
   user!.posts.remove(id);
