@@ -2,8 +2,6 @@ import 'dart:ui';
 
 import 'package:client/configs/configs.dart';
 import 'package:client/ui/painter/base.dart';
-import 'package:client/ui/widgets/design/button/button.dart';
-import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 
@@ -78,7 +76,12 @@ class BottomBar extends StatelessWidget {
           ),
           InkWell(
             borderRadius: BorderRadius.circular(360),
-            onTap: () => AppRoutes.createPost.push(context),
+            onTap: () => AppRoutes.createPost.push(
+              context,
+              arguments: {
+                'source': currentPath,
+              },
+            ),
             child: Container(
               height: 30.un(),
               width: 30.un(),

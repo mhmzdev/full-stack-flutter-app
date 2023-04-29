@@ -5,6 +5,7 @@ class _PostListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenState = _ScreenState.s(context);
     final media = MediaProvider.state(context);
     final authCubit = AuthCubit.c(context);
 
@@ -17,7 +18,7 @@ class _PostListener extends StatelessWidget {
           authCubit.fetch(uid);
           media.reset();
 
-          ''.pop(context);
+          screenState.source.pushReplace(context);
         } else if (state.create is PostCreateFailed) {
           final msg = state.create.message!.split(": ").last;
           SnackBars.failure(context, msg);

@@ -9,6 +9,7 @@ class _Listener extends StatelessWidget {
       listenWhen: AuthUpdateState.match,
       listener: (context, state) {
         if (state.update is AuthUpdateSuccess) {
+          AuthCubit.c(context).fetchAll();
           ''.pop(context);
           SnackBars.success(
             context,

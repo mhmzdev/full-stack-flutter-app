@@ -5,6 +5,7 @@ import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/design/avatar/avatar.dart';
 import 'package:client/ui/widgets/design/buttons/app_icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:shared/shared.dart';
 
 class PostHeader extends StatelessWidget {
@@ -20,6 +21,9 @@ class PostHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentRoute = NavigationHistoryObserver().top;
+    final currentPath = currentRoute!.settings.name;
+
     final authCubit = AuthCubit.c(context, true);
     final currentUser = authCubit.state.user!;
     final isOwner = currentUser.id == post.uid;
@@ -55,7 +59,10 @@ class PostHeader extends StatelessWidget {
                       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                         AppRoutes.createPost.push(
                           context,
-                          arguments: {'post': post},
+                          arguments: {
+                            'post': post,
+                            'source': currentPath,
+                          },
                         );
                       });
                     },

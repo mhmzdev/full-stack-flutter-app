@@ -5,11 +5,13 @@ class _EditListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenState = _ScreenState.s(context);
+
     return BlocConsumer<PostCubit, PostState>(
       listenWhen: PostEditState.match,
       listener: (context, state) {
         if (state.edit is PostEditSuccess) {
-          ''.pop(context);
+          screenState.source.pushReplace(context);
         } else if (state.edit is PostEditFailed) {
           final msg = state.edit.message!.split(": ").last;
           SnackBars.failure(context, msg);

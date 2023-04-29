@@ -9,6 +9,7 @@ class _CoverListener extends StatelessWidget {
       listenWhen: CoverUploadState.match,
       listener: (context, state) {
         if (state.cover is CoverUploadSuccess) {
+          AuthCubit.c(context).fetchAll();
           SnackBars.success(
             context,
             "Cover photo has been updated successfully!",

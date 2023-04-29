@@ -42,7 +42,7 @@ class CreatePostScreen extends StatelessWidget {
     App.init(context);
 
     final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
     return ChangeNotifierProvider<_ScreenState>(
       create: (_) => _ScreenState(args: args),

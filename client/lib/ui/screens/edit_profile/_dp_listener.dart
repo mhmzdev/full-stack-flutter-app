@@ -9,6 +9,7 @@ class _DPListener extends StatelessWidget {
       listenWhen: DPUploadState.match,
       listener: (context, state) {
         if (state.dp is DPUploadSuccess) {
+          AuthCubit.c(context).fetchAll();
           SnackBars.success(
             context,
             "Profile picture has been updated successfully!",
