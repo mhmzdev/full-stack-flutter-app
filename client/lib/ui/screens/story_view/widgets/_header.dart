@@ -7,7 +7,8 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = AuthCubit.c(context, true);
-    final user = auth.state.user!;
+    final users = auth.state.users ?? [];
+    final user = users.firstWhere((element) => element.id == story.uid);
 
     return Row(
       children: [

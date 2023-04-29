@@ -22,6 +22,8 @@ class _BodyState extends State<_Body> {
     final story = state.stories[state.current];
 
     final storyCubit = StoryCubit.c(context);
+    final auth = AuthCubit.c(context, true);
+    final isOwner = auth.state.user!.id == story.uid;
 
     return Screen(
       onBackPressed: () async {
@@ -101,18 +103,19 @@ class _BodyState extends State<_Body> {
                     ],
                   ),
                 ),
-                Positioned(
-                  bottom: 20.un(),
-                  right: 10.un(),
-                  child: AppIconButton(
-                    color: AppTheme.danger,
-                    icon: const Icon(Icons.delete),
-                    onTap: () => storyCubit.deleteStory(
-                      story.id,
-                      story.imageUrl,
+                if (isOwner)
+                  Positioned(
+                    bottom: 20.un(),
+                    right: 10.un(),
+                    child: AppIconButton(
+                      color: AppTheme.danger,
+                      icon: const Icon(Icons.delete),
+                      onTap: () => storyCubit.deleteStory(
+                        story.id,
+                        story.imageUrl,
+                      ),
                     ),
-                  ),
-                )
+                  )
               ],
             ),
           ),

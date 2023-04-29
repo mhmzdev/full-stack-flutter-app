@@ -8,17 +8,20 @@ class _StoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = AuthCubit.c(context, true);
+    final currentUser = auth.state.user!;
+
     final storyCubit = StoryCubit.c(context, true);
     final stories = storyCubit.state.stories ?? [];
     final userStories =
         stories.where((element) => user.stories.contains(element.id)).toList();
 
-    final currentUser = user.id == userStories.firstOrNull?.uid;
+    final isCurrentUser = currentUser.id == userStories.firstOrNull?.uid;
 
     return InkWell(
       highlightColor: Colors.transparent,
       onTap: () async {
-        if (currentUser) {
+        if (isCurrentUser) {
           final viewStory = await showModalBottomSheet<bool?>(
             context: context,
             backgroundColor: Colors.transparent,
@@ -81,10 +84,15 @@ class _StoryCard extends StatelessWidget {
                   width: 15.un(),
                   child: ClipRRect(
                     borderRadius: 150.radius(),
-                    child: CachedNetworkImage(
-                      imageUrl: user.imageURL,
-                      fit: BoxFit.cover,
-                    ),
+                    child: user.imageURL.isEmpty
+                        ? Image.asset(
+                            StaticAssets.dp,
+                            fit: BoxFit.cover,
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: user.imageURL,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
                 Space.y.t10,
