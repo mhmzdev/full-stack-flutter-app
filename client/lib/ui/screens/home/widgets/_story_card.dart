@@ -15,7 +15,12 @@ class _StoryCard extends StatelessWidget {
 
     return InkWell(
       highlightColor: Colors.transparent,
-      onTap: () {},
+      onTap: () => AppRoutes.storyView.push(
+        context,
+        arguments: {
+          'stories': userStories,
+        },
+      ),
       child: Container(
         margin: Space.r.t25,
         width: 50.un(),

@@ -1,4 +1,5 @@
 abstract class AppRoutes {
+  static const storyView = '/story-view';
   static const postView = '/post-view';
   static const inbox = '/inbox';
   static const chat = '/chat';
