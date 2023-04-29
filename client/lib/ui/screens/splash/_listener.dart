@@ -5,20 +5,24 @@ class _Listener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final firebaseAuth = FirebaseAuth.instance;
     return BlocListener<AuthCubit, AuthState>(
       listenWhen: AuthFetchState.match,
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state.fetch is AuthFetchSuccess) {
+          final navigator = Navigator.of(context);
+
           if (state.user != null) {
             PostCubit.c(context).fetchAll();
-            AppRoutes.home.pushReplace(context);
-            return;
+            if (firebaseAuth.currentUser == null) {
+              await FirebaseAuth.instance.signInAnonymously();
+            }
+
+            navigator.pushNamed(AppRoutes.home);
+          } else {
+            AppRoutes.welcome.push(context);
           }
-
-          AppRoutes.welcome.push(context);
-        }
-
-        if (state.fetch is AuthFetchFailed) {
+        } else if (state.fetch is AuthFetchFailed) {
           final msg = state.fetch.message!.split(": ").last;
           SnackBars.failure(context, msg);
         }

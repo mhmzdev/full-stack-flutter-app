@@ -5,6 +5,7 @@ import 'package:client/services/cache.dart';
 import 'package:client/ui/animations/entrance_fader.dart';
 import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:client/utils/snackbars.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
