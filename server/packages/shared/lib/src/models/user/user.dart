@@ -25,7 +25,7 @@ class User with _$User implements db.UserView {
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-  factory User.fromDb(db.User user) => User(
+  factory User.fromUserView(db.UserView user) => User(
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,

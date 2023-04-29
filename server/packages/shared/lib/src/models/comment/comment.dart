@@ -16,7 +16,7 @@ class Comment with _$Comment {
   factory Comment.fromJson(Map<String, dynamic> json) =>
       _$CommentFromJson(json);
 
-  factory Comment.fromDb(db.Comment comment) => Comment(
+  factory Comment.fromCommentView(db.CommentView comment) => Comment(
         id: comment.id,
         uid: comment.uid,
         content: comment.content,

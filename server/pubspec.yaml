@@ -28,7 +28,7 @@ dependencies:
     path: packages/shared
 
   # ORM
-  stormberry: ^0.12.1
+  stormberry: ^0.13.0
 
 dev_dependencies:
   mocktail: ^0.3.0

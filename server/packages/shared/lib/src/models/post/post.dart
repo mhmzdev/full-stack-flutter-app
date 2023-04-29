@@ -21,7 +21,7 @@ class Post with _$Post {
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
-  factory Post.fromDb(db.Post post) => Post(
+  factory Post.fromPostView(db.PostView post) => Post(
         id: post.id,
         uid: post.uid,
         caption: post.caption,

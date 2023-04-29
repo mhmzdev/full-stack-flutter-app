@@ -12,8 +12,8 @@ abstract class UserRepository
         ModelRepositoryDelete<int> {
   factory UserRepository._(Database db) = _UserRepository;
 
-  Future<User?> queryUser(int id);
-  Future<List<User>> queryUsers([QueryParams? params]);
+  Future<UserView?> queryUser(int id);
+  Future<List<UserView>> queryUsers([QueryParams? params]);
 }
 
 class _UserRepository extends BaseRepository
@@ -25,13 +25,13 @@ class _UserRepository extends BaseRepository
   _UserRepository(super.db) : super(tableName: 'users', keyName: 'id');
 
   @override
-  Future<User?> queryUser(int id) {
-    return queryOne(id, UserQueryable());
+  Future<UserView?> queryUser(int id) {
+    return queryOne(id, UserViewQueryable());
   }
 
   @override
-  Future<List<User>> queryUsers([QueryParams? params]) {
-    return queryMany(UserQueryable(), params);
+  Future<List<UserView>> queryUsers([QueryParams? params]) {
+    return queryMany(UserViewQueryable(), params);
   }
 
   @override
@@ -58,7 +58,7 @@ class _UserRepository extends BaseRepository
     await db.query(
       'UPDATE "users"\n'
       'SET "first_name" = COALESCE(UPDATED."first_name", "users"."first_name"), "followers" = COALESCE(UPDATED."followers", "users"."followers"), "following" = COALESCE(UPDATED."following", "users"."following"), "posts" = COALESCE(UPDATED."posts", "users"."posts"), "last_name" = COALESCE(UPDATED."last_name", "users"."last_name"), "username" = COALESCE(UPDATED."username", "users"."username"), "email" = COALESCE(UPDATED."email", "users"."email"), "password" = COALESCE(UPDATED."password", "users"."password"), "bio" = COALESCE(UPDATED."bio", "users"."bio"), "birthday" = COALESCE(UPDATED."birthday", "users"."birthday"), "image_url" = COALESCE(UPDATED."image_url", "users"."image_url"), "cover_url" = COALESCE(UPDATED."cover_url", "users"."cover_url")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.firstName)}:text, ${values.add(r.followers)}:_int8::_int8, ${values.add(r.following)}:_int8::_int8, ${values.add(r.posts)}:_int8::_int8, ${values.add(r.lastName)}:text, ${values.add(r.username)}:text, ${values.add(r.email)}:text, ${values.add(r.password)}:text, ${values.add(r.bio)}:text, ${values.add(r.birthday)}::timestamp without time zone, ${values.add(r.imageURL)}:text, ${values.add(r.coverURL)}:text )').join(', ')} )\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.firstName)}:text::text, ${values.add(r.followers)}:_int8::_int8, ${values.add(r.following)}:_int8::_int8, ${values.add(r.posts)}:_int8::_int8, ${values.add(r.lastName)}:text::text, ${values.add(r.username)}:text::text, ${values.add(r.email)}:text::text, ${values.add(r.password)}:text::text, ${values.add(r.bio)}:text::text, ${values.add(r.birthday)}:timestamp::timestamp, ${values.add(r.imageURL)}:text::text, ${values.add(r.coverURL)}:text::text )').join(', ')} )\n'
       'AS UPDATED("id", "first_name", "followers", "following", "posts", "last_name", "username", "email", "password", "bio", "birthday", "image_url", "cover_url")\n'
       'WHERE "users"."id" = UPDATED."id"',
       values.values,
@@ -82,18 +82,18 @@ class UserInsertRequest {
     required this.coverURL,
   });
 
-  String firstName;
-  List<int> followers;
-  List<int> following;
-  List<int> posts;
-  String lastName;
-  String username;
-  String email;
-  String password;
-  String? bio;
-  DateTime? birthday;
-  String imageURL;
-  String coverURL;
+  final String firstName;
+  final List<int> followers;
+  final List<int> following;
+  final List<int> posts;
+  final String lastName;
+  final String username;
+  final String email;
+  final String password;
+  final String? bio;
+  final DateTime? birthday;
+  final String imageURL;
+  final String coverURL;
 }
 
 class UserUpdateRequest {
@@ -113,22 +113,22 @@ class UserUpdateRequest {
     this.coverURL,
   });
 
-  int id;
-  String? firstName;
-  List<int>? followers;
-  List<int>? following;
-  List<int>? posts;
-  String? lastName;
-  String? username;
-  String? email;
-  String? password;
-  String? bio;
-  DateTime? birthday;
-  String? imageURL;
-  String? coverURL;
+  final int id;
+  final String? firstName;
+  final List<int>? followers;
+  final List<int>? following;
+  final List<int>? posts;
+  final String? lastName;
+  final String? username;
+  final String? email;
+  final String? password;
+  final String? bio;
+  final DateTime? birthday;
+  final String? imageURL;
+  final String? coverURL;
 }
 
-class UserQueryable extends KeyedViewQueryable<User, int> {
+class UserViewQueryable extends KeyedViewQueryable<UserView, int> {
   @override
   String get keyName => 'id';
 
@@ -143,7 +143,7 @@ class UserQueryable extends KeyedViewQueryable<User, int> {
   String get tableAlias => 'users';
 
   @override
-  User decode(TypedMap map) => UserView(
+  UserView decode(TypedMap map) => UserView(
       id: map.get('id'),
       firstName: map.get('first_name'),
       followers: map.getListOpt('followers') ?? const [],
@@ -159,7 +159,7 @@ class UserQueryable extends KeyedViewQueryable<User, int> {
       coverURL: map.get('cover_url'));
 }
 
-class UserView with User {
+class UserView {
   UserView({
     required this.id,
     required this.firstName,
@@ -176,30 +176,17 @@ class UserView with User {
     required this.coverURL,
   });
 
-  @override
   final int id;
-  @override
   final String firstName;
-  @override
   final List<int> followers;
-  @override
   final List<int> following;
-  @override
   final List<int> posts;
-  @override
   final String lastName;
-  @override
   final String username;
-  @override
   final String email;
-  @override
   final String password;
-  @override
   final String? bio;
-  @override
   final DateTime? birthday;
-  @override
   final String imageURL;
-  @override
   final String coverURL;
 }

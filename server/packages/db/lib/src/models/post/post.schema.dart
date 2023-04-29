@@ -1,3 +1,5 @@
+// ignore_for_file: annotate_overrides
+
 part of 'post.dart';
 
 extension PostRepositories on Database {
@@ -12,8 +14,8 @@ abstract class PostRepository
         ModelRepositoryDelete<int> {
   factory PostRepository._(Database db) = _PostRepository;
 
-  Future<Post?> queryPost(int id);
-  Future<List<Post>> queryPosts([QueryParams? params]);
+  Future<PostView?> queryPost(int id);
+  Future<List<PostView>> queryPosts([QueryParams? params]);
 }
 
 class _PostRepository extends BaseRepository
@@ -25,13 +27,13 @@ class _PostRepository extends BaseRepository
   _PostRepository(super.db) : super(tableName: 'posts', keyName: 'id');
 
   @override
-  Future<Post?> queryPost(int id) {
-    return queryOne(id, PostQueryable());
+  Future<PostView?> queryPost(int id) {
+    return queryOne(id, PostViewQueryable());
   }
 
   @override
-  Future<List<Post>> queryPosts([QueryParams? params]) {
-    return queryMany(PostQueryable(), params);
+  Future<List<PostView>> queryPosts([QueryParams? params]) {
+    return queryMany(PostViewQueryable(), params);
   }
 
   @override
@@ -44,9 +46,7 @@ class _PostRepository extends BaseRepository
       'RETURNING "id"',
       values.values,
     );
-    var result = rows
-        .map<int>((r) => TextEncoder.i.decode(r.toColumnMap()['id']))
-        .toList();
+    var result = rows.map<int>((r) => TextEncoder.i.decode(r.toColumnMap()['id'])).toList();
 
     return result;
   }
@@ -58,7 +58,7 @@ class _PostRepository extends BaseRepository
     await db.query(
       'UPDATE "posts"\n'
       'SET "uid" = COALESCE(UPDATED."uid", "posts"."uid"), "caption" = COALESCE(UPDATED."caption", "posts"."caption"), "has_image" = COALESCE(UPDATED."has_image", "posts"."has_image"), "image_url" = COALESCE(UPDATED."image_url", "posts"."image_url"), "has_video" = COALESCE(UPDATED."has_video", "posts"."has_video"), "video_url" = COALESCE(UPDATED."video_url", "posts"."video_url"), "likes" = COALESCE(UPDATED."likes", "posts"."likes"), "comments" = COALESCE(UPDATED."comments", "posts"."comments"), "created_at" = COALESCE(UPDATED."created_at", "posts"."created_at")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8, ${values.add(r.caption)}:text, ${values.add(r.hasImage)}:boolean, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:boolean, ${values.add(r.videoUrl)}:text, ${values.add(r.likes)}:_int8, ${values.add(r.comments)}:_int8, ${values.add(r.createdAt)}::timestamp without time zone )').join(', ')} )\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8::int8, ${values.add(r.caption)}:text::text, ${values.add(r.hasImage)}:boolean::boolean, ${values.add(r.imageUrl)}:text::text, ${values.add(r.hasVideo)}:boolean::boolean, ${values.add(r.videoUrl)}:text::text, ${values.add(r.likes)}:_int8::_int8, ${values.add(r.comments)}:_int8::_int8, ${values.add(r.createdAt)}:timestamp::timestamp )').join(', ')} )\n'
       'AS UPDATED("id", "uid", "caption", "has_image", "image_url", "has_video", "video_url", "likes", "comments", "created_at")\n'
       'WHERE "posts"."id" = UPDATED."id"',
       values.values,
@@ -79,15 +79,15 @@ class PostInsertRequest {
     required this.createdAt,
   });
 
-  int uid;
-  String caption;
-  bool? hasImage;
-  String? imageUrl;
-  bool? hasVideo;
-  String? videoUrl;
-  List<int> likes;
-  List<int> comments;
-  DateTime createdAt;
+  final int uid;
+  final String caption;
+  final bool? hasImage;
+  final String? imageUrl;
+  final bool? hasVideo;
+  final String? videoUrl;
+  final List<int> likes;
+  final List<int> comments;
+  final DateTime createdAt;
 }
 
 class PostUpdateRequest {
@@ -104,19 +104,19 @@ class PostUpdateRequest {
     this.createdAt,
   });
 
-  int id;
-  int? uid;
-  String? caption;
-  bool? hasImage;
-  String? imageUrl;
-  bool? hasVideo;
-  String? videoUrl;
-  List<int>? likes;
-  List<int>? comments;
-  DateTime? createdAt;
+  final int id;
+  final int? uid;
+  final String? caption;
+  final bool? hasImage;
+  final String? imageUrl;
+  final bool? hasVideo;
+  final String? videoUrl;
+  final List<int>? likes;
+  final List<int>? comments;
+  final DateTime? createdAt;
 }
 
-class PostQueryable extends KeyedViewQueryable<Post, int> {
+class PostViewQueryable extends KeyedViewQueryable<PostView, int> {
   @override
   String get keyName => 'id';
 
@@ -131,7 +131,7 @@ class PostQueryable extends KeyedViewQueryable<Post, int> {
   String get tableAlias => 'posts';
 
   @override
-  Post decode(TypedMap map) => PostView(
+  PostView decode(TypedMap map) => PostView(
       id: map.get('id'),
       uid: map.get('uid'),
       caption: map.get('caption'),
@@ -144,7 +144,7 @@ class PostQueryable extends KeyedViewQueryable<Post, int> {
       createdAt: map.get('created_at'));
 }
 
-class PostView with Post {
+class PostView {
   PostView({
     required this.id,
     required this.uid,
@@ -158,24 +158,14 @@ class PostView with Post {
     required this.createdAt,
   });
 
-  @override
   final int id;
-  @override
   final int uid;
-  @override
   final String caption;
-  @override
   final bool? hasImage;
-  @override
   final String? imageUrl;
-  @override
   final bool? hasVideo;
-  @override
   final String? videoUrl;
-  @override
   final List<int> likes;
-  @override
   final List<int> comments;
-  @override
   final DateTime createdAt;
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: annotate_overrides
+
 part of 'comment.dart';
 
 extension CommentRepositories on Database {
@@ -12,8 +14,8 @@ abstract class CommentRepository
         ModelRepositoryDelete<int> {
   factory CommentRepository._(Database db) = _CommentRepository;
 
-  Future<Comment?> queryComment(int id);
-  Future<List<Comment>> queryComments([QueryParams? params]);
+  Future<CommentView?> queryComment(int id);
+  Future<List<CommentView>> queryComments([QueryParams? params]);
 }
 
 class _CommentRepository extends BaseRepository
@@ -25,13 +27,13 @@ class _CommentRepository extends BaseRepository
   _CommentRepository(super.db) : super(tableName: 'comments', keyName: 'id');
 
   @override
-  Future<Comment?> queryComment(int id) {
-    return queryOne(id, CommentQueryable());
+  Future<CommentView?> queryComment(int id) {
+    return queryOne(id, CommentViewQueryable());
   }
 
   @override
-  Future<List<Comment>> queryComments([QueryParams? params]) {
-    return queryMany(CommentQueryable(), params);
+  Future<List<CommentView>> queryComments([QueryParams? params]) {
+    return queryMany(CommentViewQueryable(), params);
   }
 
   @override
@@ -44,9 +46,7 @@ class _CommentRepository extends BaseRepository
       'RETURNING "id"',
       values.values,
     );
-    var result = rows
-        .map<int>((r) => TextEncoder.i.decode(r.toColumnMap()['id']))
-        .toList();
+    var result = rows.map<int>((r) => TextEncoder.i.decode(r.toColumnMap()['id'])).toList();
 
     return result;
   }
@@ -58,7 +58,7 @@ class _CommentRepository extends BaseRepository
     await db.query(
       'UPDATE "comments"\n'
       'SET "uid" = COALESCE(UPDATED."uid", "comments"."uid"), "content" = COALESCE(UPDATED."content", "comments"."content"), "created_at" = COALESCE(UPDATED."created_at", "comments"."created_at")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.createdAt)}::timestamp without time zone )').join(', ')} )\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8::int8, ${values.add(r.content)}:text::text, ${values.add(r.createdAt)}:timestamp::timestamp )').join(', ')} )\n'
       'AS UPDATED("id", "uid", "content", "created_at")\n'
       'WHERE "comments"."id" = UPDATED."id"',
       values.values,
@@ -73,9 +73,9 @@ class CommentInsertRequest {
     required this.createdAt,
   });
 
-  int uid;
-  String content;
-  DateTime createdAt;
+  final int uid;
+  final String content;
+  final DateTime createdAt;
 }
 
 class CommentUpdateRequest {
@@ -86,13 +86,13 @@ class CommentUpdateRequest {
     this.createdAt,
   });
 
-  int id;
-  int? uid;
-  String? content;
-  DateTime? createdAt;
+  final int id;
+  final int? uid;
+  final String? content;
+  final DateTime? createdAt;
 }
 
-class CommentQueryable extends KeyedViewQueryable<Comment, int> {
+class CommentViewQueryable extends KeyedViewQueryable<CommentView, int> {
   @override
   String get keyName => 'id';
 
@@ -107,14 +107,14 @@ class CommentQueryable extends KeyedViewQueryable<Comment, int> {
   String get tableAlias => 'comments';
 
   @override
-  Comment decode(TypedMap map) => CommentView(
+  CommentView decode(TypedMap map) => CommentView(
       id: map.get('id'),
       uid: map.get('uid'),
       content: map.get('content'),
       createdAt: map.get('created_at'));
 }
 
-class CommentView with Comment {
+class CommentView {
   CommentView({
     required this.id,
     required this.uid,
@@ -122,12 +122,8 @@ class CommentView with Comment {
     required this.createdAt,
   });
 
-  @override
   final int id;
-  @override
   final int uid;
-  @override
   final String content;
-  @override
   final DateTime createdAt;
 }
