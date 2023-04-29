@@ -21,16 +21,7 @@ class _Body extends StatelessWidget {
                 style: AppText.b2,
               ),
               Space.y.t20,
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    const _CreateStory(),
-                    Space.x.t25,
-                    // ...profiles.map((e) => _StoryCard(user: e)),
-                  ],
-                ),
-              ),
+              const _Stories(),
               Space.y.t30,
               const _FeedCapsule(),
               Space.y.t30,

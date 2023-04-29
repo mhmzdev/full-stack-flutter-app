@@ -26,6 +26,7 @@ part 'widgets/_feed_capsule.dart';
 part 'widgets/_create_story.dart';
 part 'widgets/_story_card.dart';
 part 'widgets/_header.dart';
+part 'widgets/_stories.dart';
 
 part '_state.dart';
 part '_delete_listener.dart';
