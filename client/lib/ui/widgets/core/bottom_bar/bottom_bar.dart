@@ -10,7 +10,6 @@ import 'package:navigation_history_observer/navigation_history_observer.dart';
 part '_data.dart';
 part '_model.dart';
 
-part 'widgets/_modal.dart';
 part 'widgets/_bottom_bar_icon.dart';
 
 class BottomBar extends StatelessWidget {
