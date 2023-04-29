@@ -4,17 +4,14 @@ part of '../cubit.dart';
 class StoryFetchAllState extends Equatable {
   static bool match(StoryState a, StoryState b) => a.fetchAll != b.fetchAll;
 
-  final Story? data;
   final String? message;
 
   const StoryFetchAllState({
-    this.data,
     this.message,
   });
 
   @override
   List<Object?> get props => [
-        data,
         message,
       ];
 }
@@ -27,7 +24,7 @@ class StoryFetchAllLoading extends StoryFetchAllState {}
 
 @immutable
 class StoryFetchAllSuccess extends StoryFetchAllState {
-  const StoryFetchAllSuccess({required Story data}) : super(data: data);
+  const StoryFetchAllSuccess() : super();
 }
 
 @immutable

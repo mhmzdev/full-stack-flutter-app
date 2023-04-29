@@ -1,5 +1,5 @@
 part of 'cubit.dart';
 
 class _StoryRepository {
-  Future<Story> fetchAll() => _StoryProvider.fetchAll();
+  Future<List<Story>> fetchAll() => _StoryProvider.fetchAll();
 }
