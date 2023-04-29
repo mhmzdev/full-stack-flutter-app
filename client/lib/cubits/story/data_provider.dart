@@ -55,4 +55,30 @@ class _StoryProvider {
       throw Exception("Internal server error. Please try again!");
     }
   }
+
+  static Future<void> deleteStory(Map<String, dynamic> body) async {
+    try {
+      final storyId = body['storyId'] as int;
+      final imageUrl = body['imageURL'] as String;
+
+      final resp = await Api.ins.delete(
+        '/v1/stories/$storyId',
+      );
+
+      FirebaseStorage.instance.refFromURL(imageUrl).delete();
+
+      debugPrint(resp.data.toString());
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception("Internal server error. Please try again!");
+    } catch (e) {
+      debugPrint('------ StoryProvider ------');
+      debugPrint('------ $e ------');
+      throw Exception("Internal server error. Please try again!");
+    }
+  }
 }

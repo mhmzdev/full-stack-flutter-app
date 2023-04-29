@@ -20,4 +20,13 @@ class _StoryRepository {
 
     return _StoryProvider.createStory(payload);
   }
+
+  Future<void> deleteStory(int storyId, String imageUrl) {
+    final payload = {
+      'storyId': storyId,
+      'imageURL': imageUrl,
+    };
+
+    return _StoryProvider.deleteStory(payload);
+  }
 }

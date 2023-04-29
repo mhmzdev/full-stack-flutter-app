@@ -21,6 +21,8 @@ class _BodyState extends State<_Body> {
     final state = _ScreenState.s(context, true);
     final story = state.stories[state.current];
 
+    final storyCubit = StoryCubit.c(context);
+
     return Screen(
       onBackPressed: () async {
         state.cancelTimer();
@@ -29,6 +31,7 @@ class _BodyState extends State<_Body> {
         return true;
       },
       keyboardHandler: true,
+      overlayBuilders: const [_DeleteListener()],
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -104,7 +107,10 @@ class _BodyState extends State<_Body> {
                   child: AppIconButton(
                     color: AppTheme.danger,
                     icon: const Icon(Icons.delete),
-                    onTap: () {},
+                    onTap: () => storyCubit.deleteStory(
+                      story.id,
+                      story.imageUrl,
+                    ),
                   ),
                 )
               ],

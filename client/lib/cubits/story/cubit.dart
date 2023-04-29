@@ -4,6 +4,7 @@ import 'package:client/constants/constants.dart';
 import 'package:client/services/api.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +16,7 @@ part 'state.dart';
 
 part 'states/_fetch_all.dart';
 part 'states/_create.dart';
+part 'states/_delete.dart';
 
 class StoryCubit extends Cubit<StoryState> {
   static StoryCubit c(BuildContext context, [bool listen = false]) =>
@@ -67,6 +69,27 @@ class StoryCubit extends Cubit<StoryState> {
     } catch (e) {
       emit(state.copyWith(
         create: StoryCreateFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> deleteStory(int storyId, String url) async {
+    emit(state.copyWith(
+      delete: StoryDeleteLoading(),
+    ));
+    try {
+      await repo.deleteStory(storyId, url);
+
+      state.stories!.removeWhere(
+        (story) => story.id == storyId,
+      );
+
+      emit(state.copyWith(
+        delete: const StoryDeleteSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        delete: StoryDeleteFailed(message: e.toString()),
       ));
     }
   }

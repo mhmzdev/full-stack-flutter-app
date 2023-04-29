@@ -5,10 +5,12 @@ part of 'cubit.dart';
 class StoryState extends Equatable {
   final StoryFetchAllState fetchAll;
   final StoryCreateState create;
+  final StoryDeleteState delete;
   final List<Story>? stories;
 
   const StoryState({
     required this.create,
+    required this.delete,
     required this.fetchAll,
     this.stories,
   });
@@ -16,6 +18,7 @@ class StoryState extends Equatable {
   @override
   List<Object?> get props => [
         // root-state-props
+        delete,
         create,
         fetchAll,
         stories,
@@ -23,10 +26,12 @@ class StoryState extends Equatable {
 
   StoryState copyWith({
     StoryFetchAllState? fetchAll,
+    StoryDeleteState? delete,
     StoryCreateState? create,
     List<Story>? stories,
   }) {
     return StoryState(
+      delete: delete ?? this.delete,
       create: create ?? this.create,
       fetchAll: fetchAll ?? this.fetchAll,
       stories: stories ?? this.stories,
@@ -39,6 +44,7 @@ class StoryStateDefault extends StoryState {
   const StoryStateDefault()
       : super(
           // root-state-init
+          delete: const StoryDeleteState(),
           create: const StoryCreateState(),
           fetchAll: const StoryFetchAllState(),
         );
