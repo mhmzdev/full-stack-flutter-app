@@ -13,6 +13,9 @@ part 'data_provider.dart';
 part 'repository.dart';
 part 'state.dart';
 
+part 'states/_fetch_all.dart';
+part 'states/_delete.dart';
+
 class CommentCubit extends Cubit<CommentState> {
   static CommentCubit c(BuildContext context, [bool listen = false]) =>
       BlocProvider.of<CommentCubit>(context, listen: listen);
@@ -33,6 +36,26 @@ class CommentCubit extends Cubit<CommentState> {
     } catch (e) {
       emit(state.copyWith(
         fetchAll: CommentFetchAllFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> delete(int commentId, int postId) async {
+    emit(state.copyWith(
+      delete: CommentDeleteLoading(),
+    ));
+    try {
+      await repo.delete(commentId, postId);
+      state.comments!.removeWhere(
+        (element) => element.id == commentId,
+      );
+
+      emit(state.copyWith(
+        delete: const CommentDeleteSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        delete: CommentDeleteFailed(message: e.toString()),
       ));
     }
   }

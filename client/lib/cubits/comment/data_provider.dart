@@ -27,4 +27,26 @@ class _CommentProvider {
       throw Exception("Internal server error. Please try again!");
     }
   }
+
+  static Future<void> deleteComment(Map<String, dynamic> body) async {
+    try {
+      final resp = await Api.ins.delete(
+        '/v1/comments/${body['commentId'] as int}',
+        data: body,
+      );
+
+      debugPrint(resp.data.toString());
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception("Internal server error. Please try again!");
+    } catch (e) {
+      debugPrint('------ CommentProvider ------');
+      debugPrint('------ $e ------');
+      throw Exception("Internal server error. Please try again!");
+    }
+  }
 }

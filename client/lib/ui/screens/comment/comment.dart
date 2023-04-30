@@ -25,6 +25,7 @@ part 'widgets/_body.dart';
 
 part '_state.dart';
 part '_listener.dart';
+part '_delete_listener.dart';
 
 class CommentScreen extends StatelessWidget {
   const CommentScreen({Key? key}) : super(key: key);

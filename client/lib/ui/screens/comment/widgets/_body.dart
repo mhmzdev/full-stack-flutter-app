@@ -12,6 +12,7 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
+    final commentCubit = CommentCubit.c(context);
     final postCubit = PostCubit.c(context, true);
     final screenState = _ScreenState.s(context, true);
 
@@ -29,7 +30,7 @@ class _BodyState extends State<_Body> {
       keyboardHandler: true,
       formKey: screenState.formKey,
       initialFormValue: _FormData.initialValues(),
-      overlayBuilders: const [_Listener()],
+      overlayBuilders: const [_Listener(), _DeleteListener()],
       child: SafeArea(
         child: Padding(
           padding: Space.a.t25,
@@ -140,7 +141,10 @@ class _BodyState extends State<_Body> {
                                 Space.x.t20,
                                 AppIconButton(
                                   icon: const Icon(Icons.delete),
-                                  onTap: () {},
+                                  onTap: () => commentCubit.delete(
+                                    comment.id,
+                                    currentPost.id,
+                                  ),
                                 )
                               ],
                             ],
