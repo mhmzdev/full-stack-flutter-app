@@ -43,7 +43,8 @@ Future<Response> _get(RequestContext context) async {
 
   return Response.json(
     body: {
-      'comments': sharedComments,
+      'status': 'success',
+      'data': sharedComments.map((e) => e.toJson()).toList(),
     },
   );
 }
