@@ -2,14 +2,18 @@ part of '../avatar.dart';
 
 class _Def extends StatelessWidget {
   final User user;
-  const _Def({required this.user});
+  final double? size;
+  const _Def({
+    required this.user,
+    this.size,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 50.un(),
-        width: 50.un(),
+        height: size ?? 50.un(),
+        width: size ?? 50.un(),
         padding: Space.a.t05,
         decoration: BoxDecoration(
           color: AppTheme.primary,

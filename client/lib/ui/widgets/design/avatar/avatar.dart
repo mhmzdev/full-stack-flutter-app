@@ -15,9 +15,11 @@ enum AvatarType {
 class Avatar extends StatelessWidget {
   final AvatarType type;
   final User user;
+  final double? size;
   const Avatar({
     super.key,
     required this.user,
+    this.size,
     this.type = AvatarType.def,
   });
 
@@ -33,6 +35,7 @@ class Avatar extends StatelessWidget {
 
     return _Def(
       user: user,
+      size: size,
     );
   }
 }
