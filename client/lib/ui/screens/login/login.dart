@@ -1,5 +1,6 @@
 import 'package:client/configs/configs.dart';
 import 'package:client/cubits/auth/cubit.dart';
+import 'package:client/cubits/comment/cubit.dart';
 import 'package:client/cubits/post/cubit.dart';
 import 'package:client/cubits/story/cubit.dart';
 import 'package:client/ui/painter/base.dart';

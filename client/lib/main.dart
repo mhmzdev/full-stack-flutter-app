@@ -12,6 +12,7 @@ import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:provider/provider.dart';
 
 // bloc-imports-start
+import 'cubits/comment/cubit.dart';
 import 'cubits/story/cubit.dart';
 import 'cubits/media/cubit.dart';
 import 'cubits/post/cubit.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MediaProvider()),
 
         // bloc-initiate-start
+        BlocProvider(create: (_) => CommentCubit()),
         BlocProvider(create: (_) => StoryCubit()),
         BlocProvider(create: (_) => MediaCubit()),
         BlocProvider(create: (_) => PostCubit()),
