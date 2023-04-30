@@ -72,10 +72,47 @@ Future<Response> _put(
 }
 
 Future<Response> _delete(RequestContext context, int id) async {
+  final request = context.request;
+  final body = await request.json() as Map<String, dynamic>;
+  final postId = body['postId'] as int;
+
   final database = context.read<Database>();
+  final comment = await database.comments.queryComment(id);
+  if (comment == null) {
+    return Response.json(
+      statusCode: 204,
+      body: {
+        'status': 'failure',
+        'message': 'No comment found!',
+      },
+    );
+  }
   await database.comments.deleteOne(id);
 
-  return Response(
-    statusCode: HttpStatus.noContent,
+  final post = await database.posts.queryPost(postId);
+  if (post == null) {
+    return Response.json(
+      statusCode: 204,
+      body: {
+        'status': 'failure',
+        'message': 'No post found!',
+      },
+    );
+  }
+
+  post.comments.remove(id);
+
+  final updatedPost = db.PostUpdateRequest(
+    id: postId,
+    comments: post.comments,
+  );
+
+  await database.posts.updateOne(updatedPost);
+
+  return Response.json(
+    body: {
+      'status': 'success',
+      'message': 'Comment has been delete successfully!',
+    },
   );
 }
