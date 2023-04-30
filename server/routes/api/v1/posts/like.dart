@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
 import 'package:db/db.dart' as db;
-import 'package:db/db.dart';
+import 'package:shared/shared.dart';
 import 'package:stormberry/stormberry.dart';
 
 Future<Response> onRequest(RequestContext context) async {
@@ -29,33 +29,34 @@ Future<Response> onRequest(RequestContext context) async {
 }
 
 Future<Response> _put(RequestContext context) async {
-  final db = context.read<Database>();
+  final database = context.read<Database>();
   final body = await context.request.json() as Map<String, dynamic>;
   final postId = body['postId'] as int;
   final uid = body['uid'] as int;
   final doLike = body['doLike'] as bool;
 
-  final post = await db.posts.queryPost(postId);
-  var likes = <int>[];
+  final post = await database.posts.queryPost(postId);
 
   if (doLike) {
-    likes = [...post!.likes, uid];
+    post!.likes.add(uid);
   } else {
     post!.likes.remove(uid);
-    likes = post.likes;
   }
 
-  final postUpdate = PostUpdateRequest(
+  final postUpdate = db.PostUpdateRequest(
     id: postId,
-    likes: likes,
+    likes: post.likes,
   );
 
-  await db.posts.updateOne(postUpdate);
+  await database.posts.updateOne(postUpdate);
+
+  final sharedPost = Post.fromPostView(post);
 
   return Response.json(
     body: {
       'status': 'success',
       'message': 'Post has been updated!',
+      'data': sharedPost.toJson(),
     },
   );
 }

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:client/configs/configs.dart';
 import 'package:client/cubits/auth/cubit.dart';
+import 'package:client/cubits/post/cubit.dart';
 import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/design/post_card/widgets/header.dart';
 import 'package:flutter/gestures.dart';

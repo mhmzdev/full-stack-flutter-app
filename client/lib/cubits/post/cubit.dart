@@ -101,6 +101,34 @@ class PostCubit extends Cubit<PostState> {
     }
   }
 
+  Future<void> like(int postId, int uid) async {
+    emit(state.copyWith(
+      like: PostLikeLoading(),
+    ));
+    try {
+      final post = state.posts!.firstWhere((element) => element.id == postId);
+      final index = state.posts!.indexOf(post);
+
+      bool doLike = true;
+
+      if (post.likes.contains(uid)) {
+        doLike = false;
+      }
+
+      final updatedPost = await repo.like(postId, uid, doLike);
+      state.posts!.removeAt(index);
+      state.posts!.insert(index, updatedPost);
+
+      emit(state.copyWith(
+        like: const PostLikeSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        like: PostLikeFailed(message: e.toString()),
+      ));
+    }
+  }
+
   Future<void> deletePost(int postId, String url) async {
     emit(state.copyWith(
       delete: PostDeleteLoading(),

@@ -30,9 +30,12 @@ class _Actions extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: actions(context, post).map((e) {
-                    return Padding(
-                      padding: Space.r.t20,
-                      child: e.icon,
+                    return GestureDetector(
+                      onTap: e.onTap,
+                      child: Padding(
+                        padding: Space.r.t20,
+                        child: e.icon,
+                      ),
                     );
                   }).toList(),
                 ),

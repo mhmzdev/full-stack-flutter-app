@@ -1,25 +1,34 @@
 part of '../post_card.dart';
 
-List<ActionModel> actions(BuildContext context, Post post) => [
-      ActionModel(
-        icon: CustomPaint(
-          painter: const HeartOutlineIconPainter(color: Colors.white),
-          size: HeartOutlineIconPainter.s(12.un()),
-        ),
-        onTap: () {},
+List<ActionModel> actions(BuildContext context, Post post) {
+  final postCubit = PostCubit.c(context, true);
+  final auth = AuthCubit.c(context);
+  final uid = auth.state.user!.id;
+  final isLiked = post.likes.contains(uid);
+
+  return [
+    ActionModel(
+      icon: CustomPaint(
+        painter: isLiked
+            ? const HeartFilledIconPainter(color: AppTheme.danger)
+            : const HeartOutlineIconPainter(color: Colors.white),
+        size: HeartOutlineIconPainter.s(12.un()),
       ),
-      ActionModel(
-        icon: CustomPaint(
-          painter: const CommentIconPainter(),
-          size: CommentIconPainter.s(12.un()),
-        ),
-        onTap: () {},
+      onTap: () => postCubit.like(post.id, uid),
+    ),
+    ActionModel(
+      icon: CustomPaint(
+        painter: const CommentIconPainter(),
+        size: CommentIconPainter.s(12.un()),
       ),
-      ActionModel(
-        icon: CustomPaint(
-          painter: const SendIconPainter(),
-          size: SendIconPainter.s(12.un()),
-        ),
-        onTap: () {},
+      onTap: () {},
+    ),
+    ActionModel(
+      icon: CustomPaint(
+        painter: const SendIconPainter(),
+        size: SendIconPainter.s(12.un()),
       ),
-    ];
+      onTap: () {},
+    ),
+  ];
+}

@@ -8,7 +8,9 @@ class _Body extends StatelessWidget {
     final authCubit = AuthCubit.c(context);
     final currentUser = authCubit.state.user!;
     final screenState = _ScreenState.s(context, true);
-    final post = screenState.post;
+    final postCubit = PostCubit.c(context, true);
+    final post = postCubit.state.posts!
+        .firstWhere((element) => element.id == screenState.post.id);
 
     final user = authCubit.state.users!.firstWhere((usr) => usr.id == post.uid);
     final isOwner = currentUser.id == post.uid;
@@ -49,9 +51,12 @@ class _Body extends StatelessWidget {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: actions(context, post).map((e) {
-                        return Padding(
-                          padding: Space.r.t20,
-                          child: e.icon,
+                        return GestureDetector(
+                          onTap: e.onTap,
+                          child: Padding(
+                            padding: Space.r.t20,
+                            child: e.icon,
+                          ),
                         );
                       }).toList(),
                     ),

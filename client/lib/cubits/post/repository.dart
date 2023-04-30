@@ -32,6 +32,16 @@ class _PostRepository {
     return _PostProvider.editPost(payload);
   }
 
+  Future<Post> like(int postId, int uid, bool doLike) {
+    final payload = {
+      'postId': postId,
+      'uid': uid,
+      'doLike': doLike,
+    };
+
+    return _PostProvider.like(payload);
+  }
+
   Future<void> deletePost(int postId, String imageUrl) {
     final payload = {
       'postId': postId,
