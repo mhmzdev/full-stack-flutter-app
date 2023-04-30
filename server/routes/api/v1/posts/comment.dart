@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
-import 'package:db/db.dart';
+import 'package:db/db.dart' as db;
+import 'package:shared/shared.dart';
 import 'package:stormberry/stormberry.dart';
 
 Future<Response> onRequest(RequestContext context) async {
@@ -28,33 +29,37 @@ Future<Response> onRequest(RequestContext context) async {
 }
 
 Future<Response> _put(RequestContext context) async {
-  final db = context.read<Database>();
+  final database = context.read<Database>();
   final body = await context.request.json() as Map<String, dynamic>;
   final postId = body['postId'] as int;
   final uid = body['uid'] as int;
   final content = body['content'] as String;
 
-  final comment = CommentInsertRequest(
+  final comment = db.CommentInsertRequest(
     uid: uid,
     content: content,
     createdAt: DateTime.now(),
   );
 
-  final commentId = await db.comments.insertOne(comment);
+  final commentId = await database.comments.insertOne(comment);
 
-  final post = await db.posts.queryPost(postId);
+  final post = await database.posts.queryPost(postId);
+  post!.comments.add(commentId);
 
-  final postUpdate = PostUpdateRequest(
+  final postUpdate = db.PostUpdateRequest(
     id: postId,
-    comments: [...post!.comments, commentId],
+    comments: post.comments,
   );
 
-  await db.posts.updateOne(postUpdate);
+  await database.posts.updateOne(postUpdate);
+
+  final sharedPost = Post.fromPostView(post);
 
   return Response.json(
     body: {
       'status': 'success',
       'message': 'Post has been commented!',
+      'data': sharedPost.toJson(),
     },
   );
 }
