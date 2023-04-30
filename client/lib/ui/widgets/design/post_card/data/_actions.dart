@@ -21,7 +21,12 @@ List<ActionModel> actions(BuildContext context, Post post) {
         painter: const CommentIconPainter(),
         size: CommentIconPainter.s(12.un()),
       ),
-      onTap: () {},
+      onTap: () async {
+        AppRoutes.comment.push(
+          context,
+          arguments: {'post': post},
+        );
+      },
     ),
     ActionModel(
       icon: CustomPaint(

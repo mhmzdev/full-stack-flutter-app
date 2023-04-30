@@ -129,6 +129,28 @@ class PostCubit extends Cubit<PostState> {
     }
   }
 
+  Future<void> comment(int postId, int uid, String content) async {
+    emit(state.copyWith(
+      comment: PostCommentLoading(),
+    ));
+    try {
+      final post = state.posts!.firstWhere((element) => element.id == postId);
+      final index = state.posts!.indexOf(post);
+
+      final updatedPost = await repo.comment(postId, uid, content);
+      state.posts!.removeAt(index);
+      state.posts!.insert(index, updatedPost);
+
+      emit(state.copyWith(
+        comment: const PostCommentSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        comment: PostCommentFailed(message: e.toString()),
+      ));
+    }
+  }
+
   Future<void> deletePost(int postId, String url) async {
     emit(state.copyWith(
       delete: PostDeleteLoading(),

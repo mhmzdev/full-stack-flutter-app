@@ -42,6 +42,16 @@ class _PostRepository {
     return _PostProvider.like(payload);
   }
 
+  Future<Post> comment(int postId, int uid, String content) {
+    final payload = {
+      'postId': postId,
+      'uid': uid,
+      'content': content,
+    };
+
+    return _PostProvider.comment(payload);
+  }
+
   Future<void> deletePost(int postId, String imageUrl) {
     final payload = {
       'postId': postId,

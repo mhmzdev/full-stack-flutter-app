@@ -104,6 +104,31 @@ class _PostProvider {
     }
   }
 
+  static Future<Post> comment(Map<String, dynamic> body) async {
+    try {
+      final resp = await Api.ins.put(
+        '/v1/posts/comment',
+        data: body,
+      );
+
+      final raw = resp.data as Map<String, dynamic>;
+      final post = Post.fromJson(raw['data']);
+
+      return post;
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception("Internal server error. Please try again!");
+    } catch (e) {
+      debugPrint('------ PostProvider ------');
+      debugPrint('------ $e ------');
+      throw Exception("Internal server error. Please try again!");
+    }
+  }
+
   static Future<void> deletePost(Map<String, dynamic> body) async {
     try {
       final postId = body['postId'] as int;
