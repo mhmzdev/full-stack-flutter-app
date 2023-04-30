@@ -12,8 +12,11 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
-    final postCubit = PostCubit.c(context);
+    final postCubit = PostCubit.c(context, true);
     final screenState = _ScreenState.s(context, true);
+
+    final currentPost = postCubit.state.posts!
+        .firstWhere((element) => element.id == screenState.post.id);
 
     final auth = AuthCubit.c(context, true);
     final user = auth.state.user!;
@@ -75,7 +78,86 @@ class _BodyState extends State<_Body> {
               Divider(
                 height: 15.un(),
               ),
-              Space.xm,
+              Expanded(
+                child: BlocConsumer<CommentCubit, CommentState>(
+                  listenWhen: CommentFetchAllState.match,
+                  listener: (context, state) {
+                    if (state.fetchAll is CommentFetchAllFailed) {
+                      final msg = state.fetchAll.message!.split(": ").last;
+                      SnackBars.failure(context, msg);
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state.fetchAll is CommentFetchAllLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state.fetchAll is CommentFetchAllSuccess) {
+                      final comments = state.comments
+                              ?.where((element) =>
+                                  currentPost.comments.contains(element.id))
+                              .toList() ??
+                          [];
+
+                      return ListView.separated(
+                        itemCount: comments.length,
+                        separatorBuilder: (context, index) => Space.y.t30,
+                        itemBuilder: (context, index) {
+                          final comment = comments[index];
+                          final commentedUser = auth.state.users!.firstWhere(
+                            (element) => element.id == comment.uid,
+                          );
+
+                          final isOwner = user.id == comment.uid;
+
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Avatar(
+                                user: commentedUser,
+                                size: 15.un(),
+                                showBorder: false,
+                              ),
+                              Space.x.t25,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Text(
+                                      comment.content,
+                                      style: AppText.s1,
+                                    ),
+                                    Space.y.t10,
+                                    Text(
+                                      timeago.format(comment.createdAt),
+                                      style: AppText.s2 + AppTheme.grey,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              if (isOwner) ...[
+                                Space.x.t20,
+                                AppIconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onTap: () {},
+                                )
+                              ],
+                            ],
+                          );
+                        },
+                      );
+                    }
+
+                    return Center(
+                      child: Text(
+                        'Something went wrong',
+                        style: AppText.b3 + AppTheme.danger,
+                      ),
+                    );
+                  },
+                ),
+              ),
               AppInputField(
                 name: _FormKeys.comment,
                 textCapitalization: TextCapitalization.sentences,
