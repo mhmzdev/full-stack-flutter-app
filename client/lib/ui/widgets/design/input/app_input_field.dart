@@ -15,6 +15,7 @@ class AppInputField extends StatefulWidget {
   final bool isPass;
 
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final String? initialValue;
 
   final bool readOnly;
@@ -40,6 +41,7 @@ class AppInputField extends StatefulWidget {
     this.onChanged,
     this.errorText,
     this.prefixIcon,
+    this.suffixIcon,
     this.initialValue,
     this.textInputType,
     this.isPass = false,
@@ -95,24 +97,25 @@ class AppInputFieldState extends State<AppInputField> {
               errorStyle: AppText.s1 + AppTheme.danger,
               errorText: widget.errorText,
               prefixIcon: widget.prefixIcon,
-              suffixIcon: widget.isPass
-                  ? IconButton(
-                      onPressed: _showPass,
-                      icon: showPass
-                          ? CustomPaint(
-                              painter: const EyeCloseIconPainter(
-                                color: AppTheme.grey,
-                              ),
-                              size: EyeCloseIconPainter.s(10.un()),
-                            )
-                          : CustomPaint(
-                              painter: const EyeIconPainter(
-                                color: AppTheme.grey,
-                              ),
-                              size: EyeIconPainter.s(10.un()),
-                            ),
-                    )
-                  : null,
+              suffixIcon: widget.suffixIcon ??
+                  (widget.isPass
+                      ? IconButton(
+                          onPressed: _showPass,
+                          icon: showPass
+                              ? CustomPaint(
+                                  painter: const EyeCloseIconPainter(
+                                    color: AppTheme.grey,
+                                  ),
+                                  size: EyeCloseIconPainter.s(10.un()),
+                                )
+                              : CustomPaint(
+                                  painter: const EyeIconPainter(
+                                    color: AppTheme.grey,
+                                  ),
+                                  size: EyeIconPainter.s(10.un()),
+                                ),
+                        )
+                      : null),
               filled: true,
               fillColor: AppTheme.backgroundLight,
               hintText: widget.hint,
