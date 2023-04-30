@@ -6,6 +6,7 @@ import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 <% if (formData) { %>
+import 'package:flutter/foundation.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 <% } %>
 
