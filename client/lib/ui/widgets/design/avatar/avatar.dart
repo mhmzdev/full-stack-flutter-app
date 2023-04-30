@@ -16,10 +16,12 @@ class Avatar extends StatelessWidget {
   final AvatarType type;
   final User user;
   final double? size;
+  final bool showBorder;
   const Avatar({
     super.key,
     required this.user,
     this.size,
+    this.showBorder = true,
     this.type = AvatarType.def,
   });
 
@@ -30,12 +32,14 @@ class Avatar extends StatelessWidget {
     if (type == AvatarType.detailed) {
       return _Detailed(
         user: user,
+        showBorder: showBorder,
       );
     }
 
     return _Def(
       user: user,
       size: size,
+      showBorder: showBorder,
     );
   }
 }

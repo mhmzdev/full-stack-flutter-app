@@ -2,7 +2,11 @@ part of '../avatar.dart';
 
 class _Detailed extends StatelessWidget {
   final User user;
-  const _Detailed({required this.user});
+  final bool showBorder;
+  const _Detailed({
+    required this.user,
+    this.showBorder = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +15,7 @@ class _Detailed extends StatelessWidget {
         Container(
           height: 20.un(),
           width: 20.un(),
-          padding: const EdgeInsets.all(2),
+          padding: showBorder ? const EdgeInsets.all(2) : Space.z,
           decoration: BoxDecoration(
             color: AppTheme.primary,
             borderRadius: BorderRadius.circular(360),

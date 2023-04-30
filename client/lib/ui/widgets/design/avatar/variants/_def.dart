@@ -3,7 +3,9 @@ part of '../avatar.dart';
 class _Def extends StatelessWidget {
   final User user;
   final double? size;
+  final bool showBorder;
   const _Def({
+    this.showBorder = true,
     required this.user,
     this.size,
   });
@@ -14,7 +16,7 @@ class _Def extends StatelessWidget {
       child: Container(
         height: size ?? 50.un(),
         width: size ?? 50.un(),
-        padding: Space.a.t05,
+        padding: showBorder ? Space.a.t05 : Space.z,
         decoration: BoxDecoration(
           color: AppTheme.primary,
           borderRadius: BorderRadius.circular(360),
