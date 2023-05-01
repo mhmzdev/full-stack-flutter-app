@@ -18,6 +18,8 @@ class _StoryCard extends StatelessWidget {
 
     final isCurrentUser = currentUser.id == userStories.firstOrNull?.uid;
 
+    if (userStories.isEmpty) return const SizedBox.shrink();
+
     return InkWell(
       highlightColor: Colors.transparent,
       onTap: () async {
@@ -46,16 +48,15 @@ class _StoryCard extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            if (userStories.isNotEmpty)
-              Positioned.fill(
-                child: ClipRRect(
-                  borderRadius: 12.radius(),
-                  child: CachedNetworkImage(
-                    imageUrl: userStories.last.imageUrl,
-                    fit: BoxFit.cover,
-                  ),
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: 12.radius(),
+                child: CachedNetworkImage(
+                  imageUrl: userStories.last.imageUrl,
+                  fit: BoxFit.cover,
                 ),
               ),
+            ),
             ClipRRect(
               borderRadius: 12.radius(),
               child: BackdropFilter(
