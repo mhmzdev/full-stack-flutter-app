@@ -210,13 +210,14 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> follow(int uid, int userToBeFollowedId) async {
+  Future<void> follow(int uid, int userToBeFollowedId,
+      [bool removeFollower = false]) async {
     emit(state.copyWith(
       follow: FollowLoading(),
     ));
 
     try {
-      await repo.follow(uid, userToBeFollowedId);
+      await repo.follow(uid, userToBeFollowedId, removeFollower);
 
       emit(state.copyWith(
         follow: const FollowSuccess(),

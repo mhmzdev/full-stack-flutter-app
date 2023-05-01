@@ -8,6 +8,9 @@ class _Following extends StatelessWidget {
   Widget build(BuildContext context) {
     App.init(context);
 
+    final auth = AuthCubit.c(context);
+    final uid = auth.state.user!.id;
+
     return Container(
       padding: Space.a.t25,
       decoration: AppProps.modalDec,
@@ -35,17 +38,20 @@ class _Following extends StatelessWidget {
               )
             else
               ...following.map(
-                (e) => Padding(
+                (f) => Padding(
                   padding: Space.v.t15,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Avatar(
-                        user: e,
+                        user: f,
                         type: AvatarType.detailed,
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          ''.pop(context);
+                          auth.follow(uid, f.id);
+                        },
                         child: Text(
                           'Unfollow',
                           style: AppText.s1 + AppTheme.danger,

@@ -30,6 +30,7 @@ Future<Response> _post(RequestContext context) async {
   final body = await context.request.json() as Map<String, dynamic>;
   final currentUserId = body['uid'] as int;
   final userTobeFollowedId = body['userToBeFollowedId'] as int;
+  final removeFollower = body['removeFollower'] as bool;
 
   final users = await database.users.queryUsers(
     QueryParams(
@@ -38,29 +39,47 @@ Future<Response> _post(RequestContext context) async {
   );
   final currentUser =
       users.firstWhere((element) => element.id == currentUserId);
-  if (currentUser.following.contains(userTobeFollowedId)) {
-    currentUser.following.remove(userTobeFollowedId);
+  if (!removeFollower) {
+    if (currentUser.following.contains(userTobeFollowedId)) {
+      currentUser.following.remove(userTobeFollowedId);
+    } else {
+      currentUser.following.add(userTobeFollowedId);
+    }
   } else {
-    currentUser.following.add(userTobeFollowedId);
+    if (currentUser.followers.contains(userTobeFollowedId)) {
+      currentUser.followers.remove(userTobeFollowedId);
+    } else {
+      currentUser.followers.add(userTobeFollowedId);
+    }
   }
 
   final userToBeFollowed =
       users.firstWhere((element) => element.id == userTobeFollowedId);
 
-  if (userToBeFollowed.followers.contains(currentUserId)) {
-    userToBeFollowed.followers.remove(currentUserId);
+  if (!removeFollower) {
+    if (userToBeFollowed.followers.contains(currentUserId)) {
+      userToBeFollowed.followers.remove(currentUserId);
+    } else {
+      userToBeFollowed.followers.add(currentUserId);
+    }
   } else {
-    userToBeFollowed.followers.add(currentUserId);
+    if (userToBeFollowed.following.contains(currentUserId)) {
+      userToBeFollowed.following.remove(currentUserId);
+    } else {
+      userToBeFollowed.following.add(currentUserId);
+    }
   }
 
   final currentUserUpdated = db.UserUpdateRequest(
     id: currentUserId,
     following: currentUser.following,
+    followers: currentUser.followers,
   );
 
   final userToBeFollowedUpdated = db.UserUpdateRequest(
     id: userTobeFollowedId,
     followers: userToBeFollowed.followers,
+    following: userToBeFollowed.following,
   );
 
   await database.users

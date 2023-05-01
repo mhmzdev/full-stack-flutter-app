@@ -7,6 +7,8 @@ class _Followers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     App.init(context);
+    final auth = AuthCubit.c(context);
+    final uid = auth.state.user!.id;
 
     return Container(
       padding: Space.a.t25,
@@ -35,17 +37,20 @@ class _Followers extends StatelessWidget {
               )
             else
               ...followers.map(
-                (e) => Padding(
+                (f) => Padding(
                   padding: Space.v.t15,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Avatar(
-                        user: e,
+                        user: f,
                         type: AvatarType.detailed,
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          ''.pop(context);
+                          auth.follow(uid, f.id, true);
+                        },
                         child: Text(
                           'Remove',
                           style: AppText.s1 + AppTheme.danger,

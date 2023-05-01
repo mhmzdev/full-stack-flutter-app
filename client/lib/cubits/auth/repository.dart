@@ -74,10 +74,15 @@ class _AuthRepository {
     return _AuthProvider.updatePicture(payload);
   }
 
-  Future<void> follow(int uid, int userToBeFollowedId) {
+  Future<void> follow(
+    int uid,
+    int userToBeFollowedId,
+    bool removeFollower,
+  ) {
     final payload = {
       'uid': uid,
       'userToBeFollowedId': userToBeFollowedId,
+      'removeFollower': removeFollower,
     };
 
     return _AuthProvider.follow(payload);
