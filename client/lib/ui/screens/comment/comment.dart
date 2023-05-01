@@ -11,7 +11,6 @@ import 'package:client/ui/widgets/design/loader/full_screen_loader.dart';
 import 'package:client/utils/snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 

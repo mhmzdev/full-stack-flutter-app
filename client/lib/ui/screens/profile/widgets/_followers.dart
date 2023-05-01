@@ -65,6 +65,5 @@ class _Followers extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
