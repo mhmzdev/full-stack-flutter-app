@@ -12,25 +12,33 @@ class _Detailed extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          height: 20.un(),
-          width: 20.un(),
-          padding: showBorder ? const EdgeInsets.all(2) : Space.z,
-          decoration: BoxDecoration(
-            color: AppTheme.primary,
-            borderRadius: BorderRadius.circular(360),
+        GestureDetector(
+          onTap: () => AppRoutes.profile.push(
+            context,
+            arguments: {
+              'profile': user,
+            },
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(360),
-            child: user.imageURL.isEmpty
-                ? Image.asset(
-                    StaticAssets.dp,
-                    fit: BoxFit.cover,
-                  )
-                : CachedNetworkImage(
-                    imageUrl: user.imageURL,
-                    fit: BoxFit.cover,
-                  ),
+          child: Container(
+            height: 20.un(),
+            width: 20.un(),
+            padding: showBorder ? const EdgeInsets.all(2) : Space.z,
+            decoration: BoxDecoration(
+              color: AppTheme.primary,
+              borderRadius: BorderRadius.circular(360),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(360),
+              child: user.imageURL.isEmpty
+                  ? Image.asset(
+                      StaticAssets.dp,
+                      fit: BoxFit.cover,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: user.imageURL,
+                      fit: BoxFit.cover,
+                    ),
+            ),
           ),
         ),
         Space.x.t15,

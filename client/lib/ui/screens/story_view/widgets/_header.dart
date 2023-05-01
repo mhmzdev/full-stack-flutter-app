@@ -6,6 +6,7 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = _ScreenState.s(context);
     final auth = AuthCubit.c(context, true);
     final users = auth.state.users ?? [];
     final user = users.firstWhere((element) => element.id == story.uid);
@@ -18,25 +19,36 @@ class _Header extends StatelessWidget {
             ''.pop(context);
           },
         ),
-        Container(
-          height: 20.un(),
-          width: 20.un(),
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            color: AppTheme.primary,
-            borderRadius: BorderRadius.circular(360),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(360),
-            child: user.imageURL.isEmpty
-                ? Image.asset(
-                    StaticAssets.dp,
-                    fit: BoxFit.cover,
-                  )
-                : CachedNetworkImage(
-                    imageUrl: user.imageURL,
-                    fit: BoxFit.cover,
-                  ),
+        GestureDetector(
+          onTap: () {
+            state.cancelTimer();
+            AppRoutes.profile.push(
+              context,
+              arguments: {
+                'profile': user,
+              },
+            );
+          },
+          child: Container(
+            height: 20.un(),
+            width: 20.un(),
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: AppTheme.primary,
+              borderRadius: BorderRadius.circular(360),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(360),
+              child: user.imageURL.isEmpty
+                  ? Image.asset(
+                      StaticAssets.dp,
+                      fit: BoxFit.cover,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: user.imageURL,
+                      fit: BoxFit.cover,
+                    ),
+            ),
           ),
         ),
         Space.x.t15,

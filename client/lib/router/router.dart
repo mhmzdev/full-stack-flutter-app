@@ -1,4 +1,3 @@
-import 'package:client/ui/screens/profile_view/profile_view.dart';
 import 'package:client/ui/screens/comment/comment.dart';
 import 'package:client/ui/screens/story_view/story_view.dart';
 import 'package:client/ui/screens/post_view/post_view.dart';
@@ -16,7 +15,6 @@ import 'package:client/ui/screens/splash/splash.dart';
 import 'package:flutter/material.dart';
 
 final appRoutes = {
-  AppRoutes.profileView: (_) => const ProfileViewScreen(),
   AppRoutes.comment: (_) => const CommentScreen(),
   AppRoutes.storyView: (_) => const StoryViewScreen(),
   AppRoutes.postView: (_) => const PostViewScreen(),

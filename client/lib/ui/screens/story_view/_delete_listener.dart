@@ -15,8 +15,8 @@ class _DeleteListener extends StatelessWidget {
       listener: (context, state) {
         if (state.delete is StoryDeleteSuccess) {
           authCubit.fetch(uid);
-          screenState.cancelTimer();
           storyCubit.fetchAll();
+          screenState.cancelTimer();
 
           ''.pop(context);
         } else if (state.delete is StoryDeleteFailed) {

@@ -6,11 +6,16 @@ enum ContentType {
 }
 
 class _ScreenState extends ChangeNotifier {
+  _ScreenState({Map<String, dynamic>? args}) {
+    profile = args?['profile'] as User?;
+  }
+
   static _ScreenState s(BuildContext context, [listen = false]) =>
       Provider.of<_ScreenState>(context, listen: listen);
 
-  ContentType _contentType = ContentType.images;
+  User? profile;
 
+  ContentType _contentType = ContentType.images;
   ContentType get contentType => _contentType;
 
   void setType(ContentType type) {

@@ -10,6 +10,9 @@ class _Body extends StatelessWidget {
     final authCubit = AuthCubit.c(context, true);
     final user = authCubit.state.user!;
 
+    final profile = screenState.profile ?? user;
+    final isCurrentUser = user.id == profile.id;
+
     return Screen(
       keyboardHandler: true,
       bottomBar: true,
@@ -23,7 +26,7 @@ class _Body extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: Stack(
                 children: [
-                  if (user.coverURL.isNotEmpty)
+                  if (profile.coverURL.isNotEmpty)
                     ShaderMask(
                       shaderCallback: (rect) {
                         return const LinearGradient(
@@ -46,41 +49,48 @@ class _Body extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: 12.radius(),
                           child: CachedNetworkImage(
-                            imageUrl: user.coverURL,
+                            imageUrl: profile.coverURL,
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
                     ),
-                  Positioned(
-                    top: 30.un(),
-                    left: 8.un(),
-                    right: 8.un(),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        AppIconButton(
-                          color: AppTheme.danger,
-                          icon: const Icon(Icons.logout_rounded),
-                          onTap: () => authCubit.logout(),
-                        ),
-                        AppIconButton(
-                          icon: CustomPaint(
-                            painter: const PersonEditIconPainter(),
-                            size: PersonEditIconPainter.s(10.un()),
-                          ),
-                          onTap: () => AppRoutes.editProfile.push(context),
-                        ),
-                      ],
+                  if (!isCurrentUser)
+                    Positioned(
+                      left: 8.un(),
+                      top: 30.un(),
+                      child: const AppBackButton(),
                     ),
-                  ),
+                  if (isCurrentUser)
+                    Positioned(
+                      top: 30.un(),
+                      left: 8.un(),
+                      right: 8.un(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          AppIconButton(
+                            color: AppTheme.danger,
+                            icon: const Icon(FontAwesomeIcons.powerOff),
+                            onTap: () => authCubit.logout(),
+                          ),
+                          AppIconButton(
+                            icon: CustomPaint(
+                              painter: const PersonEditIconPainter(),
+                              size: PersonEditIconPainter.s(10.un()),
+                            ),
+                            onTap: () => AppRoutes.editProfile.push(context),
+                          ),
+                        ],
+                      ),
+                    ),
                   Space.y.t100,
                   Positioned(
                     right: 0,
                     left: 0,
                     bottom: 0,
                     child: Avatar(
-                      user: user,
+                      user: profile,
                     ),
                   ),
                 ],
@@ -92,22 +102,46 @@ class _Body extends StatelessWidget {
                 children: [
                   Space.y.t25,
                   Text(
-                    '${user.firstName} ${user.lastName}',
+                    '${profile.firstName} ${profile.lastName}',
                     style: AppText.h3,
                   ),
                   Space.y.t10,
                   Text(
-                    "\"${user.bio}\"",
+                    "\"${profile.bio}\"",
                     style: AppText.s1 + AppTheme.grey,
                     textAlign: TextAlign.center,
                   ),
                   Space.y.t20,
-                  if (user.birthday != null) ...[
+                  if (profile.birthday != null) ...[
                     Text(
-                      "Birthday: ${DateFormat('dd MMM, yyyy').format(user.birthday!)}",
+                      "Birthday: ${DateFormat('dd MMM, yyyy').format(profile.birthday!)}",
                       style: AppText.s1 + AppTheme.grey,
                     ),
                     Space.y.t30,
+                  ],
+                  if (!isCurrentUser) ...[
+                    Space.y.t20,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AppButton(
+                            height: 18.un(),
+                            label: 'Follow',
+                            onPressed: () {},
+                          ),
+                        ),
+                        Space.x.t15,
+                        Expanded(
+                          child: AppButton(
+                            style: AppButtonStyle.dark,
+                            height: 18.un(),
+                            label: 'Message',
+                            onPressed: () {},
+                          ),
+                        )
+                      ],
+                    ),
+                    Space.y.t20,
                   ],
                   Container(
                     padding: Space.a.t20,
@@ -125,7 +159,7 @@ class _Body extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              user.posts.length.toString(),
+                              profile.posts.length.toString(),
                               style: AppText.b1,
                             ),
                             Text(
@@ -138,7 +172,7 @@ class _Body extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              user.followers.length.toString(),
+                              profile.followers.length.toString(),
                               style: AppText.b1,
                             ),
                             Text(
@@ -151,7 +185,7 @@ class _Body extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              user.following.length.toString(),
+                              profile.following.length.toString(),
                               style: AppText.b1,
                             ),
                             Text(
@@ -166,7 +200,7 @@ class _Body extends StatelessWidget {
                   Space.y.t30,
                   const _ContentCapsule(),
                   Space.y.t25,
-                  if (user.posts.isEmpty)
+                  if (profile.posts.isEmpty && isCurrentUser)
                     const Empty(
                       result: EmptyResult.emptyContent,
                     )
@@ -180,9 +214,9 @@ class _Body extends StatelessWidget {
                         crossAxisCount: 3,
                         childAspectRatio: 0.85,
                       ),
-                      itemCount: user.posts.length,
+                      itemCount: profile.posts.length,
                       itemBuilder: (context, index) {
-                        final id = user.posts.reversed.toList()[index];
+                        final id = profile.posts.reversed.toList()[index];
                         final filterImages =
                             screenState.contentType == ContentType.images;
 

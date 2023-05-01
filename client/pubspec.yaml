@@ -78,6 +78,7 @@ dependencies:
 
   # icons pack
   iconsax: ^0.0.8
+  font_awesome_flutter: ^10.4.0
 
   # utils
   timeago: ^3.1.0
