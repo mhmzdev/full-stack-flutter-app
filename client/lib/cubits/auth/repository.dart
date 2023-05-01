@@ -73,4 +73,13 @@ class _AuthRepository {
 
     return _AuthProvider.updatePicture(payload);
   }
+
+  Future<void> follow(int uid, int userToBeFollowedId) {
+    final payload = {
+      'uid': uid,
+      'userToBeFollowedId': userToBeFollowedId,
+    };
+
+    return _AuthProvider.follow(payload);
+  }
 }

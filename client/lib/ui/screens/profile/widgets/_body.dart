@@ -9,92 +9,24 @@ class _Body extends StatelessWidget {
     final postCubit = PostCubit.c(context, true);
     final authCubit = AuthCubit.c(context, true);
     final user = authCubit.state.user!;
+    final users = authCubit.state.users!;
 
-    final profile = screenState.profile ?? user;
+    final profile = users.firstWhereOrNull(
+            (element) => element.id == screenState.profile?.id) ??
+        user;
     final isCurrentUser = user.id == profile.id;
 
     return Screen(
       keyboardHandler: true,
       bottomBar: true,
-      overlayBuilders: const [_AuthListener()],
+      overlayBuilders: const [_AuthListener(), _FollowListener()],
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            SizedBox(
-              height: 110.un(),
-              width: MediaQuery.of(context).size.width,
-              child: Stack(
-                children: [
-                  if (profile.coverURL.isNotEmpty)
-                    ShaderMask(
-                      shaderCallback: (rect) {
-                        return const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Colors.black, Colors.transparent],
-                        ).createShader(
-                          Rect.fromLTRB(
-                            0,
-                            0,
-                            rect.width,
-                            rect.height,
-                          ),
-                        );
-                      },
-                      blendMode: BlendMode.dstIn,
-                      child: SizedBox(
-                        height: 110.un(),
-                        width: double.infinity,
-                        child: ClipRRect(
-                          borderRadius: 12.radius(),
-                          child: CachedNetworkImage(
-                            imageUrl: profile.coverURL,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  if (!isCurrentUser)
-                    Positioned(
-                      left: 8.un(),
-                      top: 30.un(),
-                      child: const AppBackButton(),
-                    ),
-                  if (isCurrentUser)
-                    Positioned(
-                      top: 30.un(),
-                      left: 8.un(),
-                      right: 8.un(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          AppIconButton(
-                            color: AppTheme.danger,
-                            icon: const Icon(FontAwesomeIcons.powerOff),
-                            onTap: () => authCubit.logout(),
-                          ),
-                          AppIconButton(
-                            icon: CustomPaint(
-                              painter: const PersonEditIconPainter(),
-                              size: PersonEditIconPainter.s(10.un()),
-                            ),
-                            onTap: () => AppRoutes.editProfile.push(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                  Space.y.t100,
-                  Positioned(
-                    right: 0,
-                    left: 0,
-                    bottom: 0,
-                    child: Avatar(
-                      user: profile,
-                    ),
-                  ),
-                ],
-              ),
+            _Header(
+              profile: profile,
+              isCurrentUser: isCurrentUser,
             ),
             Padding(
               padding: Space.h.t25,
@@ -125,9 +57,15 @@ class _Body extends StatelessWidget {
                       children: [
                         Expanded(
                           child: AppButton(
+                            style: profile.followers.contains(user.id)
+                                ? AppButtonStyle.danger
+                                : AppButtonStyle.blue,
                             height: 18.un(),
-                            label: 'Follow',
-                            onPressed: () {},
+                            label: profile.followers.contains(user.id)
+                                ? 'Unfollow'
+                                : 'Follow',
+                            onPressed: () =>
+                                authCubit.follow(user.id, profile.id),
                           ),
                         ),
                         Space.x.t15,
@@ -143,59 +81,8 @@ class _Body extends StatelessWidget {
                     ),
                     Space.y.t20,
                   ],
-                  Container(
-                    padding: Space.a.t20,
-                    decoration: BoxDecoration(
-                      color: AppTheme.backgroundLight,
-                      borderRadius: 12.radius(),
-                      border: Border.all(
-                        color: AppTheme.grey,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              profile.posts.length.toString(),
-                              style: AppText.b1,
-                            ),
-                            Text(
-                              'Posts',
-                              style: AppText.b3 + AppTheme.grey,
-                            )
-                          ],
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              profile.followers.length.toString(),
-                              style: AppText.b1,
-                            ),
-                            Text(
-                              'Followers',
-                              style: AppText.b3 + AppTheme.grey,
-                            )
-                          ],
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              profile.following.length.toString(),
-                              style: AppText.b1,
-                            ),
-                            Text(
-                              'Following',
-                              style: AppText.b3 + AppTheme.grey,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                  _Stats(
+                    profile: profile,
                   ),
                   Space.y.t30,
                   const _ContentCapsule(),

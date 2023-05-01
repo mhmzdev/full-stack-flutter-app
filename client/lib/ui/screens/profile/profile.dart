@@ -19,10 +19,13 @@ import 'package:provider/provider.dart';
 import 'package:shared/shared.dart';
 
 part 'widgets/_body.dart';
+part 'widgets/_stats.dart';
+part 'widgets/_header.dart';
 part 'widgets/_content_capsule.dart';
 
 part '_state.dart';
 part '_auth_listener.dart';
+part '_follow_listener.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);

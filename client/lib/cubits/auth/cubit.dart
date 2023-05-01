@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:shared/shared.dart';
 
 part 'states/_dp.dart';
+part 'states/_follow.dart';
 part 'states/_cover.dart';
 part 'states/_login.dart';
 part 'states/_fetch.dart';
@@ -205,6 +206,24 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(state.copyWith(
         logout: AuthLogoutFailed(message: e.toString()),
+      ));
+    }
+  }
+
+  Future<void> follow(int uid, int userToBeFollowedId) async {
+    emit(state.copyWith(
+      follow: FollowLoading(),
+    ));
+
+    try {
+      await repo.follow(uid, userToBeFollowedId);
+
+      emit(state.copyWith(
+        follow: const FollowSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        follow: FollowFailed(message: e.toString()),
       ));
     }
   }

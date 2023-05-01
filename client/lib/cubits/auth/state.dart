@@ -4,6 +4,7 @@ part of 'cubit.dart';
 @immutable
 class AuthState extends Equatable {
   final DPUploadState dp;
+  final FollowState follow;
   final AuthFetchState fetch;
   final AuthFetchAllState fetchAll;
   final AuthLoginState login;
@@ -21,6 +22,7 @@ class AuthState extends Equatable {
     required this.fetch,
     required this.cover,
     required this.login,
+    required this.follow,
     required this.logout,
     required this.update,
     required this.fetchAll,
@@ -35,6 +37,7 @@ class AuthState extends Equatable {
         login,
         cover,
         logout,
+        follow,
         update,
         fetchAll,
         register,
@@ -44,6 +47,7 @@ class AuthState extends Equatable {
     User? user,
     List<User>? users,
     DPUploadState? dp,
+    FollowState? follow,
     AuthFetchState? fetch,
     AuthLoginState? login,
     CoverUploadState? cover,
@@ -59,6 +63,7 @@ class AuthState extends Equatable {
       fetch: fetch ?? this.fetch,
       cover: cover ?? this.cover,
       login: login ?? this.login,
+      follow: follow ?? this.follow,
       logout: logout ?? this.logout,
       update: update ?? this.update,
       fetchAll: fetchAll ?? this.fetchAll,
@@ -73,6 +78,7 @@ class AuthStateDefault extends AuthState {
       : super(
           // root-state-init
           dp: const DPUploadState(),
+          follow: const FollowState(),
           fetch: const AuthFetchState(),
           login: const AuthLoginState(),
           logout: const AuthLogoutState(),

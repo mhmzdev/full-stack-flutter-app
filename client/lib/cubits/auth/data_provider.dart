@@ -183,4 +183,26 @@ class _AuthProvider {
       throw Exception(e.toString());
     }
   }
+
+  static Future<void> follow(Map<String, dynamic> body) async {
+    try {
+      final resp = await Api.ins.post(
+        '/v1/users/follow',
+        data: body,
+      );
+
+      debugPrint(resp.data.toString());
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectionError ||
+          e.type == DioErrorType.connectionTimeout ||
+          e.type == DioErrorType.unknown) {
+        throw Exception(Constants.connectionErrorMessage);
+      }
+      throw Exception(e.toString());
+    } catch (e) {
+      debugPrint('------ AuthProvider ------');
+      debugPrint('------ $e ------');
+      throw Exception(e.toString());
+    }
+  }
 }

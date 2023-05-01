@@ -20,7 +20,9 @@ class _Listener extends StatelessWidget {
               await FirebaseAuth.instance.signInAnonymously();
             }
 
-            navigator.pushNamed(AppRoutes.home);
+            if (AppRoutes.splash.sameRoute()) {
+              navigator.pushNamed(AppRoutes.home);
+            }
           } else {
             AppRoutes.welcome.push(context);
           }
