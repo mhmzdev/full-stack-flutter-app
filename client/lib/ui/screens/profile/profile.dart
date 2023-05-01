@@ -20,6 +20,8 @@ import 'package:shared/shared.dart';
 
 part 'widgets/_body.dart';
 part 'widgets/_stats.dart';
+part 'widgets/_following.dart';
+part 'widgets/_followers.dart';
 part 'widgets/_header.dart';
 part 'widgets/_content_capsule.dart';
 
