@@ -19,8 +19,8 @@ class _Body extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Space.y.t20,
-              Row(
-                children: const [
+              const Row(
+                children: [
                   AppBackButton(),
                 ],
               ),
