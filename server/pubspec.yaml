@@ -4,14 +4,14 @@ version: 1.0.0+1
 publish_to: none
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
+  sdk: ">=3.0.5 <4.0.0"
 
 dependencies:
   # hashing
   crypt: ^4.2.1
   
   # server
-  dart_frog: ^0.3.0
+  dart_frog: ^1.0.0
 
   # jwt
   dart_jsonwebtoken: ^2.7.1
