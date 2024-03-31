@@ -26,10 +26,10 @@ class _AuthProvider {
       final raw = resp.data;
       final Map<String, dynamic> data = raw['data'];
       return User.fromJson(data);
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.connectionError ||
-          e.type == DioErrorType.connectionTimeout ||
-          e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
       throw Exception(e.toString());
@@ -56,10 +56,10 @@ class _AuthProvider {
       );
 
       return users;
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.connectionError ||
-          e.type == DioErrorType.connectionTimeout ||
-          e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
       throw Exception(e.toString());
@@ -90,10 +90,10 @@ class _AuthProvider {
       await auth.FirebaseAuth.instance.signInAnonymously();
 
       return user;
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.connectionError ||
-          e.type == DioErrorType.connectionTimeout ||
-          e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
       throw Exception(e.toString());
@@ -118,10 +118,10 @@ class _AuthProvider {
       final raw = resp.data;
       final Map<String, dynamic> data = raw['data'];
       return User.fromJson(data);
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.connectionError ||
-          e.type == DioErrorType.connectionTimeout ||
-          e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
       throw Exception(e.toString());
@@ -146,10 +146,10 @@ class _AuthProvider {
       final raw = resp.data;
       final Map<String, dynamic> data = raw['data'];
       return User.fromJson(data);
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.connectionError ||
-          e.type == DioErrorType.connectionTimeout ||
-          e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
       throw Exception(e.toString());
@@ -170,10 +170,10 @@ class _AuthProvider {
       final raw = resp.data;
       final Map<String, dynamic> data = raw['data'];
       return User.fromJson(data);
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.connectionError ||
-          e.type == DioErrorType.connectionTimeout ||
-          e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
       throw Exception(e.toString());
@@ -192,10 +192,10 @@ class _AuthProvider {
       );
 
       debugPrint(resp.data.toString());
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.connectionError ||
-          e.type == DioErrorType.connectionTimeout ||
-          e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
       throw Exception(e.toString());
