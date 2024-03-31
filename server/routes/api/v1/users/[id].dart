@@ -29,14 +29,6 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
       final body = await request.json() as Map<String, dynamic>;
       return _update(context, body);
 
-    case HttpMethod.patch:
-      return _follow(context);
-
-    case HttpMethod.post:
-      final request = context.request;
-      final body = await request.json() as Map<String, dynamic>;
-      return _updatePhoto(context, body);
-
     case HttpMethod.delete:
       final request = context.request;
       final body = await request.json() as Map<String, dynamic>;
@@ -44,6 +36,8 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
       return _delete(context, id);
 
     //
+    case HttpMethod.patch:
+    case HttpMethod.post:
     case HttpMethod.head:
     case HttpMethod.options:
       return Response(statusCode: HttpStatus.methodNotAllowed);
@@ -115,104 +109,6 @@ Future<Response> _update(
     body: {
       'status': 'success',
       'message': 'profile has been updated successfully!',
-      'data': sharedUser.toJson(),
-    },
-  );
-}
-
-Future<Response> _follow(RequestContext context) async {
-  final database = context.read<Database>();
-  final body = await context.request.json() as Map<String, dynamic>;
-  final currentUserId = body['uid'] as int;
-  final userTobeFollowedId = body['userToBeFollowedId'] as int;
-  final removeFollower = body['removeFollower'] as bool;
-
-  final users = await database.users.queryUsers(
-    QueryParams(
-      where: 'id = $currentUserId or id = $userTobeFollowedId',
-    ),
-  );
-  final currentUser =
-      users.firstWhere((element) => element.id == currentUserId);
-  if (!removeFollower) {
-    if (currentUser.following.contains(userTobeFollowedId)) {
-      currentUser.following.remove(userTobeFollowedId);
-    } else {
-      currentUser.following.add(userTobeFollowedId);
-    }
-  } else {
-    if (currentUser.followers.contains(userTobeFollowedId)) {
-      currentUser.followers.remove(userTobeFollowedId);
-    } else {
-      currentUser.followers.add(userTobeFollowedId);
-    }
-  }
-
-  final userToBeFollowed =
-      users.firstWhere((element) => element.id == userTobeFollowedId);
-
-  if (!removeFollower) {
-    if (userToBeFollowed.followers.contains(currentUserId)) {
-      userToBeFollowed.followers.remove(currentUserId);
-    } else {
-      userToBeFollowed.followers.add(currentUserId);
-    }
-  } else {
-    if (userToBeFollowed.following.contains(currentUserId)) {
-      userToBeFollowed.following.remove(currentUserId);
-    } else {
-      userToBeFollowed.following.add(currentUserId);
-    }
-  }
-
-  final currentUserUpdated = db.UserUpdateRequest(
-    id: currentUserId,
-    following: currentUser.following,
-    followers: currentUser.followers,
-  );
-
-  final userToBeFollowedUpdated = db.UserUpdateRequest(
-    id: userTobeFollowedId,
-    followers: userToBeFollowed.followers,
-    following: userToBeFollowed.following,
-  );
-
-  await database.users
-      .updateMany([currentUserUpdated, userToBeFollowedUpdated]);
-
-  return Response.json(
-    body: {
-      'status': 'success',
-      'message': 'Action successful!',
-    },
-  );
-}
-
-Future<Response> _updatePhoto(
-  RequestContext context,
-  Map<String, dynamic> body,
-) async {
-  final database = context.read<Database>();
-  final id = body['uid'] as int;
-  final url = body['url'] as String;
-  final isProfilePhoto = body['isProfilePhoto'] as bool;
-
-  final oldUser = await database.users.queryUser(id);
-
-  final request = db.UserUpdateRequest(
-    id: id,
-    imageURL: isProfilePhoto ? url : oldUser?.imageURL,
-    coverURL: !isProfilePhoto ? url : oldUser?.coverURL,
-  );
-
-  await database.users.updateOne(request);
-  final user = await database.users.queryUser(id);
-  final sharedUser = User.fromUserView(user!);
-
-  return Response.json(
-    body: {
-      'status': 'success',
-      'message': 'Photo has been updated successfully!',
       'data': sharedUser.toJson(),
     },
   );

@@ -82,7 +82,7 @@ class _PostProvider {
   static Future<Post> like(Map<String, dynamic> body) async {
     try {
       final resp = await Api.ins.put(
-        '/v1/posts/like',
+        '/v1/posts/${body['postId']}/like',
         data: body,
       );
 
@@ -107,7 +107,7 @@ class _PostProvider {
   static Future<Post> comment(Map<String, dynamic> body) async {
     try {
       final resp = await Api.ins.put(
-        '/v1/posts/comment',
+        '/v1/posts/${body['postId']}/comment',
         data: body,
       );
 
