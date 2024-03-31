@@ -14,14 +14,14 @@ class AppDateTimeInput extends StatelessWidget {
   final DateTime? initialDate;
 
   const AppDateTimeInput({
-    Key? key,
+    super.key,
     this.hint,
     this.label,
     this.initialDate,
     required this.name,
     required this.firstDate,
     required this.lastDate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@
 
 part of 'story.dart';
 
-extension StoryRepositories on Database {
+extension StoryRepositories on Session {
   StoryRepository get stories => StoryRepository._(this);
 }
 
@@ -12,7 +12,7 @@ abstract class StoryRepository
         KeyedModelRepositoryInsert<StoryInsertRequest>,
         ModelRepositoryUpdate<StoryUpdateRequest>,
         ModelRepositoryDelete<int> {
-  factory StoryRepository._(Database db) = _StoryRepository;
+  factory StoryRepository._(Session db) = _StoryRepository;
 
   Future<StoryView?> queryStory(int id);
   Future<List<StoryView>> queryStorys([QueryParams? params]);
@@ -40,11 +40,12 @@ class _StoryRepository extends BaseRepository
   Future<List<int>> insert(List<StoryInsertRequest> requests) async {
     if (requests.isEmpty) return [];
     var values = QueryValues();
-    var rows = await db.query(
-      'INSERT INTO "stories" ( "uid", "has_image", "image_url", "has_video", "video_url", "created_at" )\n'
-      'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.hasImage)}:boolean, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:boolean, ${values.add(r.videoUrl)}:text, ${values.add(r.createdAt)}:timestamp )').join(', ')}\n'
-      'RETURNING "id"',
-      values.values,
+    var rows = await db.execute(
+      Sql.named(
+          'INSERT INTO "stories" ( "uid", "has_image", "image_url", "has_video", "video_url", "created_at" )\n'
+          'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.hasImage)}:boolean, ${values.add(r.imageUrl)}:text, ${values.add(r.hasVideo)}:boolean, ${values.add(r.videoUrl)}:text, ${values.add(r.createdAt)}:timestamp )').join(', ')}\n'
+          'RETURNING "id"'),
+      parameters: values.values,
     );
     var result = rows.map<int>((r) => TextEncoder.i.decode(r.toColumnMap()['id'])).toList();
 
@@ -55,13 +56,13 @@ class _StoryRepository extends BaseRepository
   Future<void> update(List<StoryUpdateRequest> requests) async {
     if (requests.isEmpty) return;
     var values = QueryValues();
-    await db.query(
-      'UPDATE "stories"\n'
-      'SET "uid" = COALESCE(UPDATED."uid", "stories"."uid"), "has_image" = COALESCE(UPDATED."has_image", "stories"."has_image"), "image_url" = COALESCE(UPDATED."image_url", "stories"."image_url"), "has_video" = COALESCE(UPDATED."has_video", "stories"."has_video"), "video_url" = COALESCE(UPDATED."video_url", "stories"."video_url"), "created_at" = COALESCE(UPDATED."created_at", "stories"."created_at")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8::int8, ${values.add(r.hasImage)}:boolean::boolean, ${values.add(r.imageUrl)}:text::text, ${values.add(r.hasVideo)}:boolean::boolean, ${values.add(r.videoUrl)}:text::text, ${values.add(r.createdAt)}:timestamp::timestamp )').join(', ')} )\n'
-      'AS UPDATED("id", "uid", "has_image", "image_url", "has_video", "video_url", "created_at")\n'
-      'WHERE "stories"."id" = UPDATED."id"',
-      values.values,
+    await db.execute(
+      Sql.named('UPDATE "stories"\n'
+          'SET "uid" = COALESCE(UPDATED."uid", "stories"."uid"), "has_image" = COALESCE(UPDATED."has_image", "stories"."has_image"), "image_url" = COALESCE(UPDATED."image_url", "stories"."image_url"), "has_video" = COALESCE(UPDATED."has_video", "stories"."has_video"), "video_url" = COALESCE(UPDATED."video_url", "stories"."video_url"), "created_at" = COALESCE(UPDATED."created_at", "stories"."created_at")\n'
+          'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8::int8, ${values.add(r.hasImage)}:boolean::boolean, ${values.add(r.imageUrl)}:text::text, ${values.add(r.hasVideo)}:boolean::boolean, ${values.add(r.videoUrl)}:text::text, ${values.add(r.createdAt)}:timestamp::timestamp )').join(', ')} )\n'
+          'AS UPDATED("id", "uid", "has_image", "image_url", "has_video", "video_url", "created_at")\n'
+          'WHERE "stories"."id" = UPDATED."id"'),
+      parameters: values.values,
     );
   }
 }

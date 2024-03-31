@@ -2,7 +2,7 @@
 
 part of 'comment.dart';
 
-extension CommentRepositories on Database {
+extension CommentRepositories on Session {
   CommentRepository get comments => CommentRepository._(this);
 }
 
@@ -12,7 +12,7 @@ abstract class CommentRepository
         KeyedModelRepositoryInsert<CommentInsertRequest>,
         ModelRepositoryUpdate<CommentUpdateRequest>,
         ModelRepositoryDelete<int> {
-  factory CommentRepository._(Database db) = _CommentRepository;
+  factory CommentRepository._(Session db) = _CommentRepository;
 
   Future<CommentView?> queryComment(int id);
   Future<List<CommentView>> queryComments([QueryParams? params]);
@@ -40,11 +40,11 @@ class _CommentRepository extends BaseRepository
   Future<List<int>> insert(List<CommentInsertRequest> requests) async {
     if (requests.isEmpty) return [];
     var values = QueryValues();
-    var rows = await db.query(
-      'INSERT INTO "comments" ( "uid", "content", "created_at" )\n'
-      'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.createdAt)}:timestamp )').join(', ')}\n'
-      'RETURNING "id"',
-      values.values,
+    var rows = await db.execute(
+      Sql.named('INSERT INTO "comments" ( "uid", "content", "created_at" )\n'
+          'VALUES ${requests.map((r) => '( ${values.add(r.uid)}:int8, ${values.add(r.content)}:text, ${values.add(r.createdAt)}:timestamp )').join(', ')}\n'
+          'RETURNING "id"'),
+      parameters: values.values,
     );
     var result = rows.map<int>((r) => TextEncoder.i.decode(r.toColumnMap()['id'])).toList();
 
@@ -55,13 +55,13 @@ class _CommentRepository extends BaseRepository
   Future<void> update(List<CommentUpdateRequest> requests) async {
     if (requests.isEmpty) return;
     var values = QueryValues();
-    await db.query(
-      'UPDATE "comments"\n'
-      'SET "uid" = COALESCE(UPDATED."uid", "comments"."uid"), "content" = COALESCE(UPDATED."content", "comments"."content"), "created_at" = COALESCE(UPDATED."created_at", "comments"."created_at")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8::int8, ${values.add(r.content)}:text::text, ${values.add(r.createdAt)}:timestamp::timestamp )').join(', ')} )\n'
-      'AS UPDATED("id", "uid", "content", "created_at")\n'
-      'WHERE "comments"."id" = UPDATED."id"',
-      values.values,
+    await db.execute(
+      Sql.named('UPDATE "comments"\n'
+          'SET "uid" = COALESCE(UPDATED."uid", "comments"."uid"), "content" = COALESCE(UPDATED."content", "comments"."content"), "created_at" = COALESCE(UPDATED."created_at", "comments"."created_at")\n'
+          'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:int8::int8, ${values.add(r.uid)}:int8::int8, ${values.add(r.content)}:text::text, ${values.add(r.createdAt)}:timestamp::timestamp )').join(', ')} )\n'
+          'AS UPDATED("id", "uid", "content", "created_at")\n'
+          'WHERE "comments"."id" = UPDATED."id"'),
+      parameters: values.values,
     );
   }
 }

@@ -13,7 +13,7 @@ final database = Database(
   host: 'localhost',
   port: 5432,
   database: 'postgres',
-  user: 'postgres',
+  username: 'postgres',
   password: 'changeme', // pull this from secret keys (cloud or .env)
   useSSL: false,
   isUnixSocket: false,

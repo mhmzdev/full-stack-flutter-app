@@ -35,7 +35,7 @@ part '_post_listener.dart';
 part '_media_listener.dart';
 
 class CreatePostScreen extends StatelessWidget {
-  const CreatePostScreen({Key? key}) : super(key: key);
+  const CreatePostScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

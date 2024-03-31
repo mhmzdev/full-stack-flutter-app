@@ -29,7 +29,7 @@ part 'widgets/_social_button.dart';
 part 'widgets/_social_login.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

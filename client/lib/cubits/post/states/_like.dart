@@ -29,5 +29,5 @@ class PostLikeSuccess extends PostLikeState {
 
 @immutable
 class PostLikeFailed extends PostLikeState {
-  const PostLikeFailed({String? message}) : super(message: message);
+  const PostLikeFailed({super.message});
 }

@@ -28,10 +28,10 @@ class <%= pascal %>FetchLoading extends <%= pascal %>State {
 
 @immutable
 class <%= pascal %>FetchSuccess extends <%= pascal %>State {
-    const <%= pascal %>FetchSuccess({required <%= h.changeCase.pascal(model) %> data}): super(data: data);
+    const <%= pascal %>FetchSuccess({super.data});
 }
 
 @immutable
 class <%= pascal %>FetchFailed extends <%= pascal %>State {
-    const <%= pascal %>FetchFailed({String? message}): super(message: message);
+    const <%= pascal %>FetchFailed({super.message});
 }

@@ -29,5 +29,5 @@ class PostCreateSuccess extends PostCreateState {
 
 @immutable
 class PostCreateFailed extends PostCreateState {
-  const PostCreateFailed({String? message}) : super(message: message);
+  const PostCreateFailed({super.message});
 }

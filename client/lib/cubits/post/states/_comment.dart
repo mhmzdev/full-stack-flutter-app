@@ -29,5 +29,5 @@ class PostCommentSuccess extends PostCommentState {
 
 @immutable
 class PostCommentFailed extends PostCommentState {
-  const PostCommentFailed({String? message}) : super(message: message);
+  const PostCommentFailed({super.message});
 }

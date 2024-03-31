@@ -1,0 +1,7 @@
+pubspec.lock
+podfile.lock
+.idea
+node_modules/
+
+.dart_tool/
+.env

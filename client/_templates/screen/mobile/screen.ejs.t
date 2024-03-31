@@ -18,7 +18,7 @@ part 'widgets/_body.dart';
 part '_state.dart';
 
 class <%=h.changeCase.pascal(name)%>Screen extends StatelessWidget {
-  const <%=h.changeCase.pascal(name)%>Screen({Key? key}) : super(key: key);
+  const <%=h.changeCase.pascal(name)%>Screen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,5 @@
+# melos_managed_dependency_overrides: db,analyzer
+dependency_overrides:
+  db:
+    path: ../db
+  analyzer: ^6.4.1

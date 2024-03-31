@@ -1,0 +1,6 @@
+# melos_managed_dependency_overrides: db,shared
+dependency_overrides:
+  db:
+    path: packages/db
+  shared:
+    path: packages/shared

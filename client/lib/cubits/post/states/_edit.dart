@@ -29,5 +29,5 @@ class PostEditSuccess extends PostEditState {
 
 @immutable
 class PostEditFailed extends PostEditState {
-  const PostEditFailed({String? message}) : super(message: message);
+  const PostEditFailed({super.message});
 }

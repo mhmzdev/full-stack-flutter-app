@@ -29,5 +29,5 @@ class StoryCreateSuccess extends StoryCreateState {
 
 @immutable
 class StoryCreateFailed extends StoryCreateState {
-  const StoryCreateFailed({String? message}) : super(message: message);
+  const StoryCreateFailed({super.message});
 }

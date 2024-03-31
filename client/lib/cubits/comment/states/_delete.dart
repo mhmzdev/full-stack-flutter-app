@@ -29,5 +29,5 @@ class CommentDeleteSuccess extends CommentDeleteState {
 
 @immutable
 class CommentDeleteFailed extends CommentDeleteState {
-  const CommentDeleteFailed({String? message}) : super(message: message);
+  const CommentDeleteFailed({super.message});
 }

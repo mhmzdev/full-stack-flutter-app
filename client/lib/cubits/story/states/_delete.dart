@@ -29,5 +29,5 @@ class StoryDeleteSuccess extends StoryDeleteState {
 
 @immutable
 class StoryDeleteFailed extends StoryDeleteState {
-  const StoryDeleteFailed({String? message}) : super(message: message);
+  const StoryDeleteFailed({super.message});
 }

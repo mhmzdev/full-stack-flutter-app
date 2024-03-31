@@ -12,7 +12,7 @@ part of 'story.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Story _$StoryFromJson(Map<String, dynamic> json) {
   return _Story.fromJson(json);
@@ -103,9 +103,10 @@ class _$StoryCopyWithImpl<$Res, $Val extends Story>
 }
 
 /// @nodoc
-abstract class _$$_StoryCopyWith<$Res> implements $StoryCopyWith<$Res> {
-  factory _$$_StoryCopyWith(_$_Story value, $Res Function(_$_Story) then) =
-      __$$_StoryCopyWithImpl<$Res>;
+abstract class _$$StoryImplCopyWith<$Res> implements $StoryCopyWith<$Res> {
+  factory _$$StoryImplCopyWith(
+          _$StoryImpl value, $Res Function(_$StoryImpl) then) =
+      __$$StoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -119,9 +120,11 @@ abstract class _$$_StoryCopyWith<$Res> implements $StoryCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_StoryCopyWithImpl<$Res> extends _$StoryCopyWithImpl<$Res, _$_Story>
-    implements _$$_StoryCopyWith<$Res> {
-  __$$_StoryCopyWithImpl(_$_Story _value, $Res Function(_$_Story) _then)
+class __$$StoryImplCopyWithImpl<$Res>
+    extends _$StoryCopyWithImpl<$Res, _$StoryImpl>
+    implements _$$StoryImplCopyWith<$Res> {
+  __$$StoryImplCopyWithImpl(
+      _$StoryImpl _value, $Res Function(_$StoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -135,7 +138,7 @@ class __$$_StoryCopyWithImpl<$Res> extends _$StoryCopyWithImpl<$Res, _$_Story>
     Object? videoUrl = null,
     Object? createdAt = null,
   }) {
-    return _then(_$_Story(
+    return _then(_$StoryImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -170,8 +173,8 @@ class __$$_StoryCopyWithImpl<$Res> extends _$StoryCopyWithImpl<$Res, _$_Story>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Story implements _Story {
-  const _$_Story(
+class _$StoryImpl implements _Story {
+  const _$StoryImpl(
       {required this.id,
       required this.uid,
       this.hasImage,
@@ -180,8 +183,8 @@ class _$_Story implements _Story {
       this.videoUrl = '',
       required this.createdAt});
 
-  factory _$_Story.fromJson(Map<String, dynamic> json) =>
-      _$$_StoryFromJson(json);
+  factory _$StoryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StoryImplFromJson(json);
 
   @override
   final int id;
@@ -206,10 +209,10 @@ class _$_Story implements _Story {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Story &&
+            other is _$StoryImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.hasImage, hasImage) ||
@@ -232,12 +235,12 @@ class _$_Story implements _Story {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StoryCopyWith<_$_Story> get copyWith =>
-      __$$_StoryCopyWithImpl<_$_Story>(this, _$identity);
+  _$$StoryImplCopyWith<_$StoryImpl> get copyWith =>
+      __$$StoryImplCopyWithImpl<_$StoryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StoryToJson(
+    return _$$StoryImplToJson(
       this,
     );
   }
@@ -251,9 +254,9 @@ abstract class _Story implements Story {
       final String imageUrl,
       final bool? hasVideo,
       final String videoUrl,
-      required final DateTime createdAt}) = _$_Story;
+      required final DateTime createdAt}) = _$StoryImpl;
 
-  factory _Story.fromJson(Map<String, dynamic> json) = _$_Story.fromJson;
+  factory _Story.fromJson(Map<String, dynamic> json) = _$StoryImpl.fromJson;
 
   @override
   int get id;
@@ -271,6 +274,6 @@ abstract class _Story implements Story {
   DateTime get createdAt;
   @override
   @JsonKey(ignore: true)
-  _$$_StoryCopyWith<_$_Story> get copyWith =>
+  _$$StoryImplCopyWith<_$StoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
