@@ -73,7 +73,7 @@ class _AuthProvider {
   static Future<User> login(Map<String, dynamic> body) async {
     try {
       final resp = await Api.ins.post(
-        '/v1/users/login',
+        '/v1/users/auth/login',
         data: body,
       );
 
@@ -107,7 +107,7 @@ class _AuthProvider {
   static Future<User> register(Map<String, dynamic> body) async {
     try {
       final resp = await Api.ins.post(
-        '/v1/users/register',
+        '/v1/users/auth/register',
         data: body,
       );
 
@@ -135,7 +135,7 @@ class _AuthProvider {
   static Future<User> update(Map<String, dynamic> body) async {
     try {
       final resp = await Api.ins.put(
-        '/v1/users/update',
+        '/v1/users/${body['id']}',
         data: body,
       );
 
@@ -163,7 +163,7 @@ class _AuthProvider {
   static Future<User> updatePicture(Map<String, dynamic> body) async {
     try {
       final resp = await Api.ins.post(
-        '/v1/users/photo',
+        '/v1/users/${body['id']}/photo',
         data: body,
       );
 
@@ -187,7 +187,7 @@ class _AuthProvider {
   static Future<void> follow(Map<String, dynamic> body) async {
     try {
       final resp = await Api.ins.post(
-        '/v1/users/follow',
+        '/v1/users/${body['uid']}/follow',
         data: body,
       );
 
