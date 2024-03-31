@@ -13,16 +13,10 @@ Future<Response> onRequest(RequestContext context) async {
 
     //
     case HttpMethod.get:
-      return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.post:
-      return Response(statusCode: HttpStatus.methodNotAllowed);
-
     case HttpMethod.delete:
-      return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.patch:
-      return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.head:
-      return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.options:
       return Response(statusCode: HttpStatus.methodNotAllowed);
   }

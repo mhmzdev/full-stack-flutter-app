@@ -30,11 +30,8 @@ Future<Response> onRequest(RequestContext context, String stringId) async {
 
     //
     case HttpMethod.post:
-      return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.patch:
-      return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.head:
-      return Response(statusCode: HttpStatus.methodNotAllowed);
     case HttpMethod.options:
       return Response(statusCode: HttpStatus.methodNotAllowed);
   }
