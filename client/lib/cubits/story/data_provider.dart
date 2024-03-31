@@ -14,10 +14,10 @@ class _StoryProvider {
       );
 
       return stories;
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.connectionError ||
-          e.type == DioErrorType.connectionTimeout ||
-          e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
       throw Exception("Internal server error. Please try again!");
@@ -40,10 +40,10 @@ class _StoryProvider {
 
       final story = Story.fromJson(data);
       return story;
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.connectionError ||
-          e.type == DioErrorType.connectionTimeout ||
-          e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
       debugPrint('------ PostProvider ------');
@@ -68,10 +68,10 @@ class _StoryProvider {
       FirebaseStorage.instance.refFromURL(imageUrl).delete();
 
       debugPrint(resp.data.toString());
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.connectionError ||
-          e.type == DioErrorType.connectionTimeout ||
-          e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.unknown) {
         throw Exception(Constants.connectionErrorMessage);
       }
       throw Exception("Internal server error. Please try again!");
