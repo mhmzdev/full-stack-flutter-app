@@ -29,5 +29,5 @@ class StoryFetchAllSuccess extends StoryFetchAllState {
 
 @immutable
 class StoryFetchAllFailed extends StoryFetchAllState {
-  const StoryFetchAllFailed({String? message}) : super(message: message);
+  const StoryFetchAllFailed({super.message});
 }

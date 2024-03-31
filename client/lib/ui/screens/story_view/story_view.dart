@@ -23,7 +23,7 @@ part '_state.dart';
 part '_delete_listener.dart';
 
 class StoryViewScreen extends StatelessWidget {
-  const StoryViewScreen({Key? key}) : super(key: key);
+  const StoryViewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

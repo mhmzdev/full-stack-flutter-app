@@ -29,5 +29,5 @@ class CoverUploadSuccess extends CoverUploadState {
 
 @immutable
 class CoverUploadFailed extends CoverUploadState {
-  const CoverUploadFailed({String? message}) : super(message: message);
+  const CoverUploadFailed({super.message});
 }

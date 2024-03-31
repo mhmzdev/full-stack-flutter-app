@@ -29,5 +29,5 @@ class DPUploadSuccess extends DPUploadState {
 
 @immutable
 class DPUploadFailed extends DPUploadState {
-  const DPUploadFailed({String? message}) : super(message: message);
+  const DPUploadFailed({super.message});
 }

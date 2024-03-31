@@ -31,7 +31,7 @@ class AppInputField extends StatefulWidget {
   final String? Function(String?)? validator;
 
   const AppInputField({
-    Key? key,
+    super.key,
     required this.name,
     this.node,
     this.hint,
@@ -49,7 +49,7 @@ class AppInputField extends StatefulWidget {
     this.readOnly = false,
     this.textInputAction = TextInputAction.done,
     this.textCapitalization = TextCapitalization.none,
-  }) : super(key: key);
+  });
 
   @override
   AppInputFieldState createState() => AppInputFieldState();

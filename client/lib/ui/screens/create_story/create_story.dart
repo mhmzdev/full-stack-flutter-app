@@ -26,7 +26,7 @@ part '_media_listener.dart';
 part '_story_listener.dart';
 
 class CreateStoryScreen extends StatelessWidget {
-  const CreateStoryScreen({Key? key}) : super(key: key);
+  const CreateStoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

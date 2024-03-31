@@ -29,5 +29,5 @@ class AuthFetchAllSuccess extends AuthFetchAllState {
 
 @immutable
 class AuthFetchAllFailed extends AuthFetchAllState {
-  const AuthFetchAllFailed({String? message}) : super(message: message);
+  const AuthFetchAllFailed({super.message});
 }

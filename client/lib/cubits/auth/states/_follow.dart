@@ -29,5 +29,5 @@ class FollowSuccess extends FollowState {
 
 @immutable
 class FollowFailed extends FollowState {
-  const FollowFailed({String? message}) : super(message: message);
+  const FollowFailed({super.message});
 }

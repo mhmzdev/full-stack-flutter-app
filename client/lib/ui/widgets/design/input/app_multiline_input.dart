@@ -30,7 +30,7 @@ class AppMultilineInputField extends StatelessWidget {
   final String? Function(String?)? validator;
 
   const AppMultilineInputField({
-    Key? key,
+    super.key,
     required this.name,
     this.maxLines = 5,
     this.node,
@@ -48,7 +48,7 @@ class AppMultilineInputField extends StatelessWidget {
     this.inputFormatters,
     this.readOnly = false,
     this.textCapitalization = TextCapitalization.sentences,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

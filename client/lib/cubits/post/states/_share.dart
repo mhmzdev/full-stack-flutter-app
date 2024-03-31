@@ -29,5 +29,5 @@ class PostShareSuccess extends PostShareState {
 
 @immutable
 class PostShareFailed extends PostShareState {
-  const PostShareFailed({String? message}) : super(message: message);
+  const PostShareFailed({super.message});
 }

@@ -29,5 +29,5 @@ class AuthRegisterSuccess extends AuthRegisterState {
 
 @immutable
 class AuthRegisterFailed extends AuthRegisterState {
-  const AuthRegisterFailed({String? message}) : super(message: message);
+  const AuthRegisterFailed({super.message});
 }

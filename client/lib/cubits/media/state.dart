@@ -31,17 +31,14 @@ class UploadMediaLoading extends MediaState {
 @immutable
 class UploadMediaSuccess extends MediaState {
   const UploadMediaSuccess({
-    required String url,
-    PictureType? pictureType,
-  }) : super(
-          url: url,
-          pictureType: pictureType,
-        );
+    required String super.url,
+    super.pictureType,
+  });
 }
 
 @immutable
 class UploadMediaFailed extends MediaState {
-  const UploadMediaFailed({String? message}) : super(message: message);
+  const UploadMediaFailed({super.message});
 }
 
 @immutable
@@ -60,7 +57,7 @@ class UploadDPSuccess extends MediaState {
 
 @immutable
 class UploadDPFailed extends MediaState {
-  const UploadDPFailed({String? message}) : super(message: message);
+  const UploadDPFailed({super.message});
 }
 
 @immutable
@@ -79,5 +76,5 @@ class UploadCoverSuccess extends MediaState {
 
 @immutable
 class UploadCoverFailed extends MediaState {
-  const UploadCoverFailed({String? message}) : super(message: message);
+  const UploadCoverFailed({super.message});
 }

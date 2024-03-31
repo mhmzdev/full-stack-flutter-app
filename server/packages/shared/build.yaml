@@ -17,11 +17,3 @@ targets:
           generic_argument_factories: false
           ignore_unannotated: false
           include_if_null: true
-      stormberry:
-        generate_for:
-
-          # path of model classes
-          - lib/src/models/user/user.dart
-          - lib/src/models/post/post.dart
-          - lib/src/models/story/story.dart
-          - lib/src/models/comment/comment.dart

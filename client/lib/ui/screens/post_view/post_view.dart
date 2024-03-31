@@ -22,7 +22,7 @@ part '_state.dart';
 part '_delete_listener.dart';
 
 class PostViewScreen extends StatelessWidget {
-  const PostViewScreen({Key? key}) : super(key: key);
+  const PostViewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

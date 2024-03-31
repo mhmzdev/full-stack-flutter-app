@@ -4,10 +4,9 @@ class _BottomBarIcon extends StatelessWidget {
   final _ItemModel item;
   final bool isSelected;
   const _BottomBarIcon({
-    Key? key,
     required this.item,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

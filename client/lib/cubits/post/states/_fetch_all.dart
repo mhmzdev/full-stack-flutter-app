@@ -29,5 +29,5 @@ class PostFetchAllSuccess extends PostFetchAllState {
 
 @immutable
 class PostFetchAllFailed extends PostFetchAllState {
-  const PostFetchAllFailed({String? message}) : super(message: message);
+  const PostFetchAllFailed({super.message});
 }

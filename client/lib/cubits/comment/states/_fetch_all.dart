@@ -29,5 +29,5 @@ class CommentFetchAllSuccess extends CommentFetchAllState {
 
 @immutable
 class CommentFetchAllFailed extends CommentFetchAllState {
-  const CommentFetchAllFailed({String? message}) : super(message: message);
+  const CommentFetchAllFailed({super.message});
 }

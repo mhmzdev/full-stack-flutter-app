@@ -20,7 +20,7 @@ part 'widgets/_body.dart';
 part '_state.dart';
 
 class ForgotScreen extends StatelessWidget {
-  const ForgotScreen({Key? key}) : super(key: key);
+  const ForgotScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

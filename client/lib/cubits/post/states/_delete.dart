@@ -29,5 +29,5 @@ class PostDeleteSuccess extends PostDeleteState {
 
 @immutable
 class PostDeleteFailed extends PostDeleteState {
-  const PostDeleteFailed({String? message}) : super(message: message);
+  const PostDeleteFailed({super.message});
 }

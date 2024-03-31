@@ -49,12 +49,12 @@ class <%= moduleClass %>Loading extends <%= baseClass %> {}
 
 @immutable
 class <%= moduleClass %>Success extends <%= baseClass %> {
-  const <%= moduleClass %>Success({required <%= model %> data}): super(data: data);
+  const <%= moduleClass %>Success({super.data});
 }
 
 @immutable
 class <%= moduleClass %>Failed extends <%= baseClass %> {
-  const <%= moduleClass %>Failed({String? message}): super(message: message);
+  const <%= moduleClass %>Failed({super.message});
 }
 <% }); %>
 

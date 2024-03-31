@@ -29,5 +29,5 @@ class AuthUpdateSuccess extends AuthUpdateState {
 
 @immutable
 class AuthUpdateFailed extends AuthUpdateState {
-  const AuthUpdateFailed({String? message}) : super(message: message);
+  const AuthUpdateFailed({super.message});
 }
