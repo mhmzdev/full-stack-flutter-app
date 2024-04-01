@@ -2,7 +2,6 @@ import 'package:client/configs/configs.dart';
 import 'package:client/ui/painter/base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 
 class AppDateTimeInput extends StatelessWidget {
@@ -12,6 +11,7 @@ class AppDateTimeInput extends StatelessWidget {
   final DateTime firstDate;
   final DateTime lastDate;
   final DateTime? initialDate;
+  final String? Function(DateTime?)? validator;
 
   const AppDateTimeInput({
     super.key,
@@ -21,6 +21,7 @@ class AppDateTimeInput extends StatelessWidget {
     required this.name,
     required this.firstDate,
     required this.lastDate,
+    this.validator,
   });
 
   @override
@@ -86,9 +87,7 @@ class AppDateTimeInput extends StatelessWidget {
               ),
             ),
           ),
-          validator: FormBuilderValidators.required(
-            errorText: 'Date of Birth is required',
-          ),
+          validator: validator,
         ),
       ],
     );

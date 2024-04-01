@@ -44,6 +44,9 @@ class AuthCubit extends Cubit<AuthState> {
         fetch: const AuthFetchSuccess(),
       ));
     } catch (e) {
+      await auth.FirebaseAuth.instance.signOut();
+      AppCache.resetUid();
+
       emit(state.copyWith(
         fetch: AuthFetchFailed(message: e.toString()),
       ));
@@ -120,20 +123,19 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> update(
-    int uid,
     String firstName,
     String lastName,
     String username,
     String newUserName,
     String bio,
-    DateTime birthday,
+    DateTime? birthday,
   ) async {
     emit(state.copyWith(
       update: AuthUpdateLoading(),
     ));
     try {
       final data = await repo.update(
-        uid,
+        state.user!.id,
         firstName,
         lastName,
         username,

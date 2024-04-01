@@ -47,7 +47,7 @@ class UploadMediaModal extends StatelessWidget {
           AppButton(
             onPressed: () => media.camera(context),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomPaint(
                   painter: const CameraIconPainter(),
@@ -66,7 +66,7 @@ class UploadMediaModal extends StatelessWidget {
             style: AppButtonStyle.dark,
             onPressed: () => media.gallery(context),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomPaint(
                   painter: const GalleryIconPainter(),
@@ -91,7 +91,6 @@ class UploadMediaModal extends StatelessWidget {
               onPressed: () => media.remove(context),
             ),
           ],
-          Space.y.t20,
           Space.bottom,
         ],
       ),

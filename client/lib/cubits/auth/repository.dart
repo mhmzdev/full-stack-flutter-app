@@ -45,7 +45,7 @@ class _AuthRepository {
     String username,
     String newUserName,
     String bio,
-    DateTime birthday,
+    DateTime? birthday,
   ) {
     final payload = {
       'id': uid,
@@ -54,7 +54,8 @@ class _AuthRepository {
       'username': username,
       'newUserName': newUserName,
       'bio': bio,
-      'birthday': DateFormat('yyyy-MM-dd HH:MM').format(birthday),
+      if (birthday != null)
+        'birthday': DateFormat('yyyy-MM-dd HH:MM').format(birthday),
     };
 
     return _AuthProvider.update(payload);

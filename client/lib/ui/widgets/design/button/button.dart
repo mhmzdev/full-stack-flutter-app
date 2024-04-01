@@ -1,15 +1,11 @@
 import 'package:client/configs/configs.dart';
 import 'package:flutter/material.dart';
+import 'package:touchable_opacity/touchable_opacity.dart';
 
 part '_enums.dart';
 part '_model.dart';
 
-part 'data/_blue.dart';
-part 'data/_danger.dart';
-part 'data/_dark.dart';
-part 'data/_data.dart';
-part 'data/_ghost.dart';
-part 'data/_white.dart';
+part '_data.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -19,88 +15,110 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.child,
     this.label,
+    this.labelStyle,
     this.iconToEnd = false,
     required this.onPressed,
     this.state = AppButtonState.plain,
     this.style = AppButtonStyle.blue,
+    this.radius = AppButtonRadius.medium,
+    this.size = AppButtonSize.medium,
+    this.mainAxisSize = MainAxisSize.max,
   });
 
   final double? width;
   final double? height;
 
   final String? label;
+  final TextStyle? labelStyle;
+
   final IconData? icon;
   final bool iconToEnd;
   final Widget? child;
 
   final VoidCallback onPressed;
+  final MainAxisSize mainAxisSize;
 
   final AppButtonStyle style;
   final AppButtonState state;
+  final AppButtonRadius radius;
+  final AppButtonSize size;
 
   @override
   Widget build(BuildContext context) {
     App.init(context);
     final data = _mapPropsToData()[style]!;
+    final borderRadius = _mapRadiusData()[radius];
+    final textStyle = _mapSizeToFontSize()[size]!;
+
     final color = data.backgroundColor[state]!;
     final textColor = data.text[state]!;
     final plain = state == AppButtonState.plain;
     final disabled = state == AppButtonState.disabled;
 
-    final iconSize = 12.un();
+    final iconSize = .55.un() * textStyle.fontSize!;
 
-    return SizedBox(
-      height: height ?? 22.un(),
-      width: width ?? double.infinity,
-      child: InkWell(
-        onTap: disabled ? null : onPressed,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(10.0),
-            boxShadow: (plain || disabled)
-                ? []
-                : [
-                    BoxShadow(
-                      color: color == Colors.white
-                          ? Colors.black.withOpacity(0.1)
-                          : color.withOpacity(0.5),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-          ),
-          child: Center(
-            child: (child != null && label == null)
-                ? child
-                : Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (icon != null && !iconToEnd) ...[
-                        Icon(
-                          icon,
-                          size: iconSize,
-                          color: textColor,
-                        ),
-                        Space.x.t10,
-                      ],
-                      Text(
-                        label!,
-                        style: AppText.b1 + textColor,
-                      ),
-                      if (icon != null && iconToEnd) ...[
-                        Space.x.t10,
-                        Icon(
-                          icon,
-                          size: iconSize,
-                          color: textColor,
-                        ),
-                      ],
-                    ],
-                  ),
-          ),
+    List<BoxShadow> boxShadows = [];
+    if (!plain && !disabled) {
+      boxShadows = [
+        BoxShadow(
+          color: color.withOpacity(0.5),
+          blurRadius: 8,
+          offset: const Offset(0, 4),
         ),
+      ];
+    }
+
+    final smallButton = size == AppButtonSize.tiny ||
+        size == AppButtonSize.mini ||
+        size == AppButtonSize.small;
+    final hPadding = smallButton ? Space.v.t20 : Space.v.t30;
+
+    return TouchableOpacity(
+      onTap: disabled ? null : onPressed,
+      child: AnimatedContainer(
+        duration: AppProps.duration,
+        padding: Space.h.t30 + hPadding,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: color,
+            width: 2,
+          ),
+          color: color,
+          borderRadius: borderRadius,
+          boxShadow: boxShadows,
+        ),
+        child: child ??
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: mainAxisSize,
+              children: [
+                if (icon != null && !iconToEnd) ...[
+                  Icon(
+                    icon,
+                    size: iconSize,
+                    color: textColor,
+                  ),
+                  Space.x.t10,
+                ],
+                if (label != null)
+                  Text(
+                    label!,
+                    style: labelStyle ??
+                        AppText.b2.copyWith(
+                              fontSize: textStyle.fontSize!,
+                            ) +
+                            textColor,
+                  ),
+                if (icon != null && iconToEnd) ...[
+                  Space.x.t10,
+                  Icon(
+                    icon,
+                    size: iconSize,
+                    color: textColor,
+                  ),
+                ],
+              ],
+            ),
       ),
     );
   }

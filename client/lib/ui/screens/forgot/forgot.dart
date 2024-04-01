@@ -4,6 +4,7 @@ import 'package:client/ui/widgets/core/screen/screen.dart';
 import 'package:client/ui/widgets/design/button/button.dart';
 import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:client/ui/widgets/design/input/app_input_field.dart';
+import 'package:client/ui/widgets/headless/scroll_column_expandable.dart';
 import 'package:client/utils/assets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

@@ -19,6 +19,7 @@ class _ContentCapsule extends StatelessWidget {
             .map(
               (type) => Expanded(
                 child: AppButton(
+                  size: AppButtonSize.small,
                   style: state.contentType == type
                       ? AppButtonStyle.blue
                       : AppButtonStyle.ghost,

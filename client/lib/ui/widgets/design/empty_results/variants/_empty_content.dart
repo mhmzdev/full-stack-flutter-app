@@ -22,6 +22,7 @@ class _EmptyContent extends StatelessWidget {
         Space.y.t20,
         Image.asset(
           StaticAssets.arrowWhirlDown,
+          height: 200,
         ),
       ],
     );

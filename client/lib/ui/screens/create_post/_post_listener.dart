@@ -7,7 +7,7 @@ class _PostListener extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenState = _ScreenState.s(context);
     final media = MediaProvider.state(context);
-    final authCubit = AuthCubit.c(context);
+    final authCubit = AuthCubit.c(context, true);
 
     final uid = AppCache.uid!;
 

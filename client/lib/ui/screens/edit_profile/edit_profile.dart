@@ -16,6 +16,7 @@ import 'package:client/ui/widgets/design/input/app_input_field.dart';
 import 'package:client/ui/widgets/design/input/app_multiline_input.dart';
 import 'package:client/ui/widgets/design/loader/full_screen_loader.dart';
 import 'package:client/ui/widgets/design/modals/upload_media.dart';
+import 'package:client/ui/widgets/headless/scroll_column_expandable.dart';
 import 'package:client/utils/snackbars.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';

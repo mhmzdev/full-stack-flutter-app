@@ -10,6 +10,11 @@ class _SocialLogin extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         _SocialLoginButton(
+          icon: const Icon(Icons.apple),
+          onTap: () {},
+        ),
+        Space.x.t25,
+        _SocialLoginButton(
           icon: CustomPaint(
             painter: GoogleIconPainter(),
             size: GoogleIconPainter.size(10.un()),

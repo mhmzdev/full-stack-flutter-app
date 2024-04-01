@@ -18,7 +18,7 @@ class BottomBar extends StatelessWidget {
     final currentPath = ModalRoute.of(context)!.settings.name;
 
     return SizedBox(
-      height: 140,
+      height: 120,
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
@@ -65,7 +65,7 @@ class BottomBar extends StatelessWidget {
                           );
                         }).toList(),
                       ),
-                      Space.bottom,
+                      Space.y.t25,
                     ],
                   ),
                 ),

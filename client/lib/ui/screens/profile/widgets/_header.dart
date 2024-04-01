@@ -62,7 +62,7 @@ class _Header extends StatelessWidget {
                 children: [
                   AppIconButton(
                     color: AppTheme.danger,
-                    icon: const Icon(FontAwesomeIcons.powerOff),
+                    icon: const Icon(Iconsax.logout_1),
                     onTap: () => authCubit.logout(),
                   ),
                   AppIconButton(

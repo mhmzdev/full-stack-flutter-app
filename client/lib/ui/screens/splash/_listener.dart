@@ -19,15 +19,16 @@ class _Listener extends StatelessWidget {
             CommentCubit.c(context).initUid();
             StoryCubit.c(context).fetchAll();
             StoryCubit.c(context).initUid();
+            AppCache.setUid(state.user!.id);
             if (firebaseAuth.currentUser == null) {
               await FirebaseAuth.instance.signInAnonymously();
             }
 
             if (AppRoutes.splash.sameRoute()) {
-              navigator.pushNamed(AppRoutes.home);
+              navigator.pushReplacementNamed(AppRoutes.home);
             }
           } else {
-            AppRoutes.welcome.push(context);
+            AppRoutes.welcome.pushReplace(context);
           }
         } else if (state.fetch is AuthFetchFailed) {
           final msg = state.fetch.message!.split(": ").last;

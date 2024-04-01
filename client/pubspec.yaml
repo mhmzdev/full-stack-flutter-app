@@ -89,6 +89,8 @@ dependencies:
 
   shared:
     path: ../server/packages/shared
+  
+  touchable_opacity: ^1.2.0
 
 dev_dependencies:
   flutter_test:

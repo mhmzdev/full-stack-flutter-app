@@ -17,6 +17,7 @@ class _FeedCapsule extends StatelessWidget {
         children: [
           Expanded(
             child: AppButton(
+              size: AppButtonSize.small,
               label: 'News Feed',
               onPressed: () {},
             ),
@@ -25,6 +26,7 @@ class _FeedCapsule extends StatelessWidget {
           Expanded(
             child: AppButton(
               label: 'Discover',
+              size: AppButtonSize.small,
               onPressed: () {},
               style: AppButtonStyle.ghost,
             ),
