@@ -2,10 +2,14 @@ import 'package:client/configs/configs.dart';
 import 'package:client/firebase_options.dart';
 import 'package:client/providers/media_provider.dart';
 import 'package:client/router/router.dart';
+import 'package:client/services/alice.dart';
+import 'package:client/services/api.dart';
 import 'package:client/services/cache.dart';
+import 'package:client/services/notification/notification.dart';
 import 'package:client/ui/screens/home/home.dart';
 import 'package:client/ui/screens/profile/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
@@ -22,17 +26,39 @@ import 'cubits/auth/cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AppCache.init();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  await AppCache.init();
+  AppAlice.init();
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      AppFCM.init(navigatorKey);
+      AppFCM.onReceiveRemoteMessage();
+    });
+    if (kDebugMode) {
+      AppAlice.setNavigatorKey(navigatorKey);
+      Api.ins.interceptors.add(AppAlice.getDioInterceptor());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +76,7 @@ class MyApp extends StatelessWidget {
         // bloc-initiate-end
       ],
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'Flutteram',
         navigatorObservers: [

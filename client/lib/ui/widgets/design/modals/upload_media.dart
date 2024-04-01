@@ -4,6 +4,7 @@ import 'package:client/ui/painter/base.dart';
 import 'package:client/ui/widgets/design/button/button.dart';
 import 'package:client/ui/widgets/design/buttons/app_back_button.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 class UploadMediaModal extends StatelessWidget {
   final bool hasRemoval;
@@ -86,7 +87,7 @@ class UploadMediaModal extends StatelessWidget {
             ),
             AppButton(
               style: AppButtonStyle.danger,
-              icon: Icons.delete_outline_rounded,
+              icon: Iconsax.trash,
               label: 'Remove',
               onPressed: () => media.remove(context),
             ),

@@ -40,8 +40,11 @@ dependencies:
   # firebase
   firebase_core: ^2.24.0
   firebase_auth: ^4.15.0
-  cloud_firestore: ^4.13.3
   firebase_storage: ^11.5.3
+
+  # notifications
+  firebase_messaging: ^14.7.21
+  flutter_local_notifications: ^16.3.3
 
   # configs
   intl: ^0.18.0
@@ -57,6 +60,7 @@ dependencies:
   # network
   dio: ^5.0.1
   http: ^1.2.1
+  alice: ^0.4.1
 
   # cache
   shared_preferences: ^2.0.18

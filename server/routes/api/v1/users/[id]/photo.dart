@@ -5,15 +5,17 @@ import 'package:db/db.dart' as db;
 import 'package:shared/shared.dart';
 import 'package:stormberry/stormberry.dart';
 
-Future<Response> onRequest(RequestContext context) async {
+Future<Response> onRequest(RequestContext context, String userId) async {
   switch (context.request.method) {
-    case HttpMethod.put:
+    case HttpMethod.post:
       final request = context.request;
       final body = await request.json() as Map<String, dynamic>;
+      body['uid'] = int.parse(userId);
+
       return _updatePhoto(context, body);
 
     case HttpMethod.get:
-    case HttpMethod.post:
+    case HttpMethod.put:
     case HttpMethod.delete:
     case HttpMethod.patch:
     case HttpMethod.head:

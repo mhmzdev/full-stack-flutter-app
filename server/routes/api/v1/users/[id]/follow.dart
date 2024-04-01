@@ -5,7 +5,7 @@ import 'package:db/db.dart' as db;
 
 import 'package:stormberry/stormberry.dart';
 
-Future<Response> onRequest(RequestContext context) async {
+Future<Response> onRequest(RequestContext context, String userId) async {
   switch (context.request.method) {
     case HttpMethod.put:
       return _follow(context);

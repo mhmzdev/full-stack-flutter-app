@@ -49,6 +49,7 @@ class _CoverPhoto extends StatelessWidget {
             }
             if (value is String && value.toString() == 'remove') {
               authCubit.uploadCoverPhoto('');
+              mediaCubit.removeMedia(user.coverURL);
             }
           },
           child: hasCoverPhoto &&

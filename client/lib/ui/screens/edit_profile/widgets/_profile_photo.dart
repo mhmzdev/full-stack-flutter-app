@@ -73,6 +73,7 @@ class _ProfilePhoto extends StatelessWidget {
 
                     if (value is String && value.toString() == 'remove') {
                       authCubit.uploadProfilePhoto('');
+                      mediaCubit.removeMedia(user.imageURL);
                     }
                   },
                 );

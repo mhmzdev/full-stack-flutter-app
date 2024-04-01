@@ -163,7 +163,7 @@ class _AuthProvider {
   static Future<User> updatePicture(Map<String, dynamic> body) async {
     try {
       final resp = await Api.ins.post(
-        '/v1/users/${body['id']}/photo',
+        '/v1/users/${body['uid']}/photo',
         data: body,
       );
 

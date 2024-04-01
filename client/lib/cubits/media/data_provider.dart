@@ -35,7 +35,7 @@ class _MediaProvider {
         // delete the one on storage, and replace it with new one
         if ((type == PictureType.dp || type == PictureType.cover) &&
             path.isNotEmpty) {
-          await FirebaseStorage.instance.refFromURL(path).delete();
+          await storage.refFromURL(path).delete();
         }
 
         // set path to a base `users/id` to re-upload dp or cover
@@ -46,12 +46,12 @@ class _MediaProvider {
         final fileName = DateTime.now().millisecondsSinceEpoch.toString();
         path = '$path/$fileName';
 
-        // if image size > 5 Mbs
-        // 5,000,000 bytes == 5 megabytes
+        // if image size > 3 Mbs
+        // 3,000,000 bytes == 3 megabytes
         final size = await file.length();
-        if (size > 5000000) {
+        if (size > 3000000) {
           throw Exception(
-            'File size cannot be more than 5 MBs. Reduce the size and try again!',
+            'File size cannot be more than 3 MBs. Reduce the size and try again!',
           );
         }
 

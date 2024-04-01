@@ -64,5 +64,11 @@ class MediaCubit extends Cubit<MediaState> {
       emit(UploadCoverFailed(message: e.toString()));
     }
   }
+
+  void removeMedia(String path) {
+    if (path.isEmpty) return;
+    
+    FirebaseStorage.instance.refFromURL(path).delete();
+  }
 }
 // end-cubit
