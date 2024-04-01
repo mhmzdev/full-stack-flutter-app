@@ -1,4 +1,5 @@
 import 'dart:ui' as ui;
+import 'package:client/configs/configs.dart';
 import 'package:flutter/material.dart';
 
 class FullScreenLoader extends StatelessWidget {
@@ -20,8 +21,8 @@ class FullScreenLoader extends StatelessWidget {
       child: BackdropFilter(
         filter: ui.ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
         child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: AppMedia.width,
+          height: AppMedia.height,
           child: Center(
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color?>(color),

@@ -11,6 +11,7 @@ class PostState extends Equatable {
   final PostEditState edit;
   final PostLikeState like;
   final PostShareState share;
+  final int? uid;
 
   const PostState({
     this.posts,
@@ -21,6 +22,7 @@ class PostState extends Equatable {
     required this.edit,
     required this.like,
     required this.share,
+    this.uid,
   });
 
   @override
@@ -34,6 +36,7 @@ class PostState extends Equatable {
         edit,
         like,
         share,
+        uid,
       ];
 
   PostState copyWith({
@@ -45,6 +48,7 @@ class PostState extends Equatable {
     PostEditState? edit,
     PostLikeState? like,
     PostShareState? share,
+    int? uid,
   }) {
     return PostState(
       posts: posts ?? this.posts,
@@ -55,6 +59,7 @@ class PostState extends Equatable {
       edit: edit ?? this.edit,
       like: like ?? this.like,
       share: share ?? this.share,
+      uid: uid ?? this.uid,
     );
   }
 }

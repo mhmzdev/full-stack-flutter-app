@@ -6,11 +6,13 @@ class CommentState extends Equatable {
   final CommentFetchAllState fetchAll;
   final CommentDeleteState delete;
   final List<Comment>? comments;
+  final int? uid;
 
   const CommentState({
     required this.fetchAll,
     required this.delete,
     this.comments,
+    this.uid,
   });
 
   @override
@@ -19,17 +21,20 @@ class CommentState extends Equatable {
         delete,
         fetchAll,
         comments,
+        uid,
       ];
 
   CommentState copyWith({
     CommentFetchAllState? fetchAll,
     CommentDeleteState? delete,
     List<Comment>? comments,
+    int? uid,
   }) {
     return CommentState(
       delete: delete ?? this.delete,
       comments: comments ?? this.comments,
       fetchAll: fetchAll ?? this.fetchAll,
+      uid: uid ?? this.uid,
     );
   }
 }

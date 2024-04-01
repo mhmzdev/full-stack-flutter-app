@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Cache {
+class AppCache {
   static const _uidKey = "UID";
 
   static SharedPreferences? _prefs;

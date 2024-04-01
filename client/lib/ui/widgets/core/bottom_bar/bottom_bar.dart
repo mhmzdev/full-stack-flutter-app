@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:client/configs/configs.dart';
 import 'package:client/ui/painter/base.dart';
 import 'package:flutter/material.dart';
-import 'package:navigation_history_observer/navigation_history_observer.dart';
 
 part '_data.dart';
 part '_model.dart';
@@ -16,8 +15,7 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     App.init(context);
-    final currentRoute = NavigationHistoryObserver().top;
-    final currentPath = currentRoute!.settings.name;
+    final currentPath = ModalRoute.of(context)!.settings.name;
 
     return SizedBox(
       height: 140,

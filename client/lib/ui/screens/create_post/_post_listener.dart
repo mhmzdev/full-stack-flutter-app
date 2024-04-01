@@ -9,7 +9,7 @@ class _PostListener extends StatelessWidget {
     final media = MediaProvider.state(context);
     final authCubit = AuthCubit.c(context);
 
-    final uid = Cache.uid!;
+    final uid = AppCache.uid!;
 
     return BlocConsumer<PostCubit, PostState>(
       listenWhen: PostCreateState.match,

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:client/constants/constants.dart';
 import 'package:client/services/api.dart';
+import 'package:client/services/cache.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -24,6 +25,14 @@ class StoryCubit extends Cubit<StoryState> {
   StoryCubit() : super(const StoryStateDefault());
 
   final repo = _StoryRepository();
+
+  void initUid() {
+    emit(state.copyWith(uid: AppCache.uid));
+  }
+
+  void resetUid() {
+    emit(state.copyWith(uid: null));
+  }
 
   Future<void> fetchAll() async {
     emit(state.copyWith(

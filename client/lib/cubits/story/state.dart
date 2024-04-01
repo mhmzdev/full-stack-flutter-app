@@ -7,12 +7,14 @@ class StoryState extends Equatable {
   final StoryCreateState create;
   final StoryDeleteState delete;
   final List<Story>? stories;
+  final int? uid;
 
   const StoryState({
     required this.create,
     required this.delete,
     required this.fetchAll,
     this.stories,
+    this.uid,
   });
 
   @override
@@ -22,6 +24,7 @@ class StoryState extends Equatable {
         create,
         fetchAll,
         stories,
+        uid,
       ];
 
   StoryState copyWith({
@@ -29,12 +32,14 @@ class StoryState extends Equatable {
     StoryDeleteState? delete,
     StoryCreateState? create,
     List<Story>? stories,
+    int? uid,
   }) {
     return StoryState(
       delete: delete ?? this.delete,
       create: create ?? this.create,
       fetchAll: fetchAll ?? this.fetchAll,
       stories: stories ?? this.stories,
+      uid: uid ?? this.uid,
     );
   }
 }

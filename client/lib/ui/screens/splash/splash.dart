@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     await 3.seconds.delay;
 
-    final uid = Cache.uid;
+    final uid = AppCache.uid;
     if (uid != null) {
       await authCubit.fetch(uid);
       return;

@@ -6,7 +6,7 @@ class _DeleteListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authCubit = AuthCubit.c(context);
-    final uid = Cache.uid!;
+    final uid = AppCache.uid!;
 
     return BlocConsumer<PostCubit, PostState>(
       listenWhen: PostDeleteState.match,

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:client/constants/constants.dart';
 import 'package:client/services/api.dart';
+import 'package:client/services/cache.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,14 @@ class CommentCubit extends Cubit<CommentState> {
   CommentCubit() : super(const CommentStateDefault());
 
   final repo = _CommentRepository();
+
+  void initUid() {
+    emit(state.copyWith(uid: AppCache.uid));
+  }
+
+  void resetUid() {
+    emit(state.copyWith(uid: null));
+  }
 
   Future<void> fetchAll() async {
     emit(state.copyWith(

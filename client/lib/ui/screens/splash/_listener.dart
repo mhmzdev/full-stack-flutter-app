@@ -14,8 +14,11 @@ class _Listener extends StatelessWidget {
 
           if (state.user != null) {
             PostCubit.c(context).fetchAll();
+            PostCubit.c(context).initUid();
             CommentCubit.c(context).fetchAll();
+            CommentCubit.c(context).initUid();
             StoryCubit.c(context).fetchAll();
+            StoryCubit.c(context).initUid();
             if (firebaseAuth.currentUser == null) {
               await FirebaseAuth.instance.signInAnonymously();
             }

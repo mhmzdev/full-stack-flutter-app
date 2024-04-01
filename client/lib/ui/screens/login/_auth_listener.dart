@@ -10,8 +10,12 @@ class _AuthListener extends StatelessWidget {
       listener: (context, state) async {
         if (state.login is AuthLoginSuccess) {
           PostCubit.c(context).fetchAll();
+          PostCubit.c(context).initUid();
           StoryCubit.c(context).fetchAll();
+          StoryCubit.c(context).initUid();
           CommentCubit.c(context).fetchAll();
+          CommentCubit.c(context).initUid();
+
           AuthCubit.c(context).fetchAll();
 
           await FirebaseAuth.instance.signInAnonymously();

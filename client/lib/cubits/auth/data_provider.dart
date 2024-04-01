@@ -18,7 +18,7 @@ class _AuthProvider {
 
       if (resp.statusCode != 200) {
         if (resp.statusCode == 205) {
-          Cache.resetUid();
+          AppCache.resetUid();
         }
         throw Exception(resp.data['message']);
       }
@@ -85,7 +85,7 @@ class _AuthProvider {
       final Map<String, dynamic> data = raw['data'];
       final user = User.fromJson(data);
 
-      Cache.setUid(user.id);
+      AppCache.setUid(user.id);
 
       await auth.FirebaseAuth.instance.signInAnonymously();
 

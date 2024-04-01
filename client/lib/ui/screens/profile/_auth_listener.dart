@@ -9,7 +9,12 @@ class _AuthListener extends StatelessWidget {
       listenWhen: AuthLogoutState.match,
       listener: (context, state) {
         if (state.logout is AuthLogoutSuccess) {
+          PostCubit.c(context).resetUid();
+          StoryCubit.c(context).resetUid();
+          CommentCubit.c(context).resetUid();
+
           AppRoutes.login.pushReplace(context);
+
           SnackBars.success(
             context,
             'You have been logged out successfully! See you soon again :)',

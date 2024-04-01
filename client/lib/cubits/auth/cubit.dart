@@ -197,7 +197,7 @@ class AuthCubit extends Cubit<AuthState> {
     ));
 
     try {
-      Cache.resetUid();
+      AppCache.resetUid();
       await auth.FirebaseAuth.instance.signOut();
 
       emit(state.copyWith(

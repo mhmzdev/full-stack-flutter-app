@@ -22,7 +22,7 @@ import 'cubits/auth/cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Cache.init();
+  await AppCache.init();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

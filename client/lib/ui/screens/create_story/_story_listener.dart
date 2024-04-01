@@ -8,7 +8,7 @@ class _StoryListener extends StatelessWidget {
     final media = MediaProvider.state(context);
     final authCubit = AuthCubit.c(context);
 
-    final uid = Cache.uid!;
+    final uid = AppCache.uid!;
 
     return BlocConsumer<StoryCubit, StoryState>(
       listenWhen: StoryCreateState.match,
