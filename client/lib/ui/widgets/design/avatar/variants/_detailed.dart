@@ -34,16 +34,10 @@ class _Detailed extends StatelessWidget {
                       StaticAssets.dp,
                       fit: BoxFit.cover,
                     )
-                  : Image.asset(
-                      user.imageURL,
+                  : CachedNetworkImage(
+                      imageUrl: user.imageURL,
                       fit: BoxFit.cover,
                     ),
-
-              /// Feature: Need this from actual URL via firebase strorage
-              // : CachedNetworkImage(
-              //     imageUrl: user.imageURL,
-              //     fit: BoxFit.cover,
-              //   ),
             ),
           ),
         ),
