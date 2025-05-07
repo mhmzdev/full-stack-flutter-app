@@ -61,14 +61,15 @@ class AppButton extends StatelessWidget {
     if (!plain && !disabled) {
       boxShadows = [
         BoxShadow(
-          color: color.withOpacity(0.5),
+          color: color.withValues(alpha: 0.5),
           blurRadius: 8,
           offset: const Offset(0, 4),
         ),
       ];
     }
 
-    final smallButton = size == AppButtonSize.tiny ||
+    final smallButton =
+        size == AppButtonSize.tiny ||
         size == AppButtonSize.mini ||
         size == AppButtonSize.small;
     final hPadding = smallButton ? Space.v.t20 : Space.v.t30;
@@ -79,43 +80,32 @@ class AppButton extends StatelessWidget {
         duration: AppProps.duration,
         padding: Space.h.t30 + hPadding,
         decoration: BoxDecoration(
-          border: Border.all(
-            color: color,
-            width: 2,
-          ),
+          border: Border.all(color: color, width: 2),
           color: color,
           borderRadius: borderRadius,
           boxShadow: boxShadows,
         ),
-        child: child ??
+        child:
+            child ??
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: mainAxisSize,
               children: [
                 if (icon != null && !iconToEnd) ...[
-                  Icon(
-                    icon,
-                    size: iconSize,
-                    color: textColor,
-                  ),
+                  Icon(icon, size: iconSize, color: textColor),
                   Space.x.t10,
                 ],
                 if (label != null)
                   Text(
                     label!,
-                    style: labelStyle ??
-                        AppText.b2.copyWith(
-                              fontSize: textStyle.fontSize!,
-                            ) +
+                    style:
+                        labelStyle ??
+                        AppText.b2.copyWith(fontSize: textStyle.fontSize!) +
                             textColor,
                   ),
                 if (icon != null && iconToEnd) ...[
                   Space.x.t10,
-                  Icon(
-                    icon,
-                    size: iconSize,
-                    color: textColor,
-                  ),
+                  Icon(icon, size: iconSize, color: textColor),
                 ],
               ],
             ),

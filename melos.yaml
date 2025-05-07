@@ -1,4 +1,4 @@
-name: hop_maldives
+name: flutteram
 
 scripts:
   pub-get:
@@ -11,5 +11,6 @@ scripts:
 
 packages:
   - client/
+  - client/packages/*
   - server/
   - server/packages/*

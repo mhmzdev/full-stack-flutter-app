@@ -4,33 +4,31 @@ version: 1.0.0+1
 publish_to: none
 
 environment:
-  sdk: '>=3.3.2 <4.0.0'
+  sdk: 3.7.2
 
 dependencies:
   # hashing
-  crypt: ^4.2.1
+  crypt: 4.2.1
   
   # server
-  dart_frog: ^1.0.0
+  dart_frog: 1.2.0
 
   # jwt
-  dart_jsonwebtoken: ^2.7.1
+  dart_frog_auth: 1.2.0
+  dart_jsonwebtoken: 3.2.0
 
   # local
   db:
     path: packages/db
-
-  # env
-  dotenv: ^4.1.0
 
   # local
   shared:
     path: packages/shared
 
   # ORM
-  stormberry: ^0.14.0
+  stormberry: 0.15.0
 
 dev_dependencies:
-  mocktail: ^1.0.3
-  test: ^1.19.2
-  very_good_analysis: ^5.1.0
+  mocktail: 1.0.4
+  test: 1.25.15
+  very_good_analysis: 7.0.0

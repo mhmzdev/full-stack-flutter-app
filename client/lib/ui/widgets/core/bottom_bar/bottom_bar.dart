@@ -35,7 +35,7 @@ class BottomBar extends StatelessWidget {
                   child: Container(
                     padding: Space.a.t15 + Space.t.t15,
                     decoration: BoxDecoration(
-                      color: AppTheme.backgroundDark.withOpacity(.9),
+                      color: AppTheme.backgroundDark.withValues(alpha: .9),
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(5.un()),
                       ),
@@ -45,28 +45,32 @@ class BottomBar extends StatelessWidget {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: _items.asMap().entries.map((e) {
-                            final isSelected = currentPath == e.value.path;
-      
-                            if (e.key == 1) {
-                              return Space.x.t100;
-                            }
-      
-                            return Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  if (!isSelected) {
-                                    final path = e.value.path;
-                                    Navigator.pushReplacementNamed(context, path);
-                                  }
-                                },
-                                child: _BottomBarIcon(
-                                  item: e.value,
-                                  isSelected: isSelected,
-                                ),
-                              ),
-                            );
-                          }).toList(),
+                          children:
+                              _items.asMap().entries.map((e) {
+                                final isSelected = currentPath == e.value.path;
+
+                                if (e.key == 1) {
+                                  return Space.x.t100;
+                                }
+
+                                return Expanded(
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (!isSelected) {
+                                        final path = e.value.path;
+                                        Navigator.pushReplacementNamed(
+                                          context,
+                                          path,
+                                        );
+                                      }
+                                    },
+                                    child: _BottomBarIcon(
+                                      item: e.value,
+                                      isSelected: isSelected,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
                         ),
                         Space.y.t25,
                       ],
@@ -77,12 +81,11 @@ class BottomBar extends StatelessWidget {
             ),
             InkWell(
               borderRadius: BorderRadius.circular(360),
-              onTap: () => AppRoutes.createPost.push(
-                context,
-                arguments: {
-                  'source': currentPath,
-                },
-              ),
+              onTap:
+                  () => AppRoutes.createPost.push(
+                    context,
+                    arguments: {'source': currentPath},
+                  ),
               child: Container(
                 height: 30.un(),
                 width: 30.un(),
@@ -90,9 +93,7 @@ class BottomBar extends StatelessWidget {
                   color: AppTheme.primary,
                   shape: BoxShape.circle,
                 ),
-                child: Center(
-                  child: _items[1].active,
-                ),
+                child: Center(child: _items[1].active),
               ),
             ),
           ],

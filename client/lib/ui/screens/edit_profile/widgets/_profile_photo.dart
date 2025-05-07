@@ -16,9 +16,7 @@ class _ProfilePhoto extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Avatar(
-            user: user,
-          ),
+          Avatar(user: user),
           Positioned(
             right: 0,
             bottom: 0,
@@ -32,22 +30,23 @@ class _ProfilePhoto extends StatelessWidget {
               builder: (context, state) {
                 return AppIconButton(
                   color: AppTheme.primary,
-                  icon: state.dp is DPUploadLoading ||
-                          mediaCubit.state is UploadDPLoading
-                      ? SizedBox(
-                          height: 10.un(),
-                          width: 10.un(),
-                          child: const CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 3,
-                          ),
-                        )
-                      : const Icon(
-                          Icons.edit,
-                        ),
+                  icon:
+                      state.dp is DPUploadLoading ||
+                              mediaCubit.state is UploadDPLoading
+                          ? SizedBox(
+                            height: 10.un(),
+                            width: 10.un(),
+                            child: const CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 3,
+                            ),
+                          )
+                          : const Icon(Icons.edit),
                   onTap: () async {
                     if (state.dp is DPUploadLoading ||
-                        mediaCubit.state is UploadDPLoading) return;
+                        mediaCubit.state is UploadDPLoading) {
+                      return;
+                    }
 
                     final hasProfile = user.imageURL.isNotEmpty;
                     final value = await showModalBottomSheet(

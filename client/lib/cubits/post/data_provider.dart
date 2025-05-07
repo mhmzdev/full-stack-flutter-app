@@ -8,9 +8,7 @@ class _PostProvider {
 
       final posts = List.generate(
         raw.length,
-        (index) => Post.fromJson(
-          raw[index],
-        ),
+        (index) => Post.fromJson(raw[index]),
       );
 
       return posts;
@@ -30,10 +28,7 @@ class _PostProvider {
 
   static Future<Post> createPost(Map<String, dynamic> body) async {
     try {
-      final resp = await Api.ins.post(
-        '/v1/posts',
-        data: body,
-      );
+      final resp = await Api.ins.post('/v1/posts', data: body);
 
       final raw = resp.data as Map<String, dynamic>;
       final data = raw['data'] as Map<String, dynamic>;
@@ -59,10 +54,7 @@ class _PostProvider {
   static Future<void> editPost(Map<String, dynamic> body) async {
     try {
       final postId = body['id'] as int;
-      final resp = await Api.ins.put(
-        '/v1/posts/$postId',
-        data: body,
-      );
+      final resp = await Api.ins.put('/v1/posts/$postId', data: body);
 
       debugPrint(resp.data.toString());
     } on DioException catch (e) {
@@ -134,9 +126,7 @@ class _PostProvider {
       final postId = body['postId'] as int;
       final imageUrl = body['imageURL'] as String;
 
-      final resp = await Api.ins.delete(
-        '/v1/posts/$postId',
-      );
+      final resp = await Api.ins.delete('/v1/posts/$postId');
 
       FirebaseStorage.instance.refFromURL(imageUrl).delete();
 

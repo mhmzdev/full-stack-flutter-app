@@ -11,7 +11,7 @@ class _AuthRepository {
 
   Future<List<User>> fetchAll() => _AuthProvider.fetchAll();
 
-  Future<User> login(String email, String password) {
+  Future<UserResponse> login(String email, String password) {
     final payload = {
       'email': email,
       'password': password,

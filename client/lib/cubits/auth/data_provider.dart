@@ -1,24 +1,16 @@
 part of 'cubit.dart';
 
-enum PictureType {
-  dp,
-  cover,
-  post,
-  story,
-}
+enum PictureType { dp, cover, post, story }
 
 class _AuthProvider {
   static Future<User> fetch(Map<String, dynamic> body) async {
     try {
       final uid = body['uid'];
-      final resp = await Api.ins.get(
-        '/v1/users/$uid',
-        data: body,
-      );
+      final resp = await Api.ins.get('/v1/users/$uid', data: body);
 
       if (resp.statusCode != 200) {
         if (resp.statusCode == 205) {
-          AppCache.resetUid();
+          AppCache.reset();
         }
         throw Exception(resp.data['message']);
       }
@@ -42,17 +34,13 @@ class _AuthProvider {
 
   static Future<List<User>> fetchAll() async {
     try {
-      final resp = await Api.ins.get(
-        '/v1/users',
-      );
+      final resp = await Api.ins.get('/v1/users');
 
       final raw = resp.data;
       final data = raw['data'] as List;
       final users = List.generate(
         data.length,
-        (index) => User.fromJson(
-          data[index],
-        ),
+        (index) => User.fromJson(data[index]),
       );
 
       return users;
@@ -70,12 +58,9 @@ class _AuthProvider {
     }
   }
 
-  static Future<User> login(Map<String, dynamic> body) async {
+  static Future<UserResponse> login(Map<String, dynamic> body) async {
     try {
-      final resp = await Api.ins.post(
-        '/v1/users/auth/login',
-        data: body,
-      );
+      final resp = await Api.ins.post('/v1/users/auth/login', data: body);
 
       if (resp.statusCode != 200) {
         throw Exception(resp.data['message']);
@@ -83,13 +68,11 @@ class _AuthProvider {
 
       final raw = resp.data;
       final Map<String, dynamic> data = raw['data'];
-      final user = User.fromJson(data);
-
-      AppCache.setUid(user.id);
+      final userResponse = UserResponse.fromJson(data);
 
       await auth.FirebaseAuth.instance.signInAnonymously();
 
-      return user;
+      return userResponse;
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionError ||
           e.type == DioExceptionType.connectionTimeout ||
@@ -106,10 +89,7 @@ class _AuthProvider {
 
   static Future<User> register(Map<String, dynamic> body) async {
     try {
-      final resp = await Api.ins.post(
-        '/v1/users/auth/register',
-        data: body,
-      );
+      final resp = await Api.ins.post('/v1/users/auth/register', data: body);
 
       if (resp.statusCode != 200) {
         throw Exception(resp.data['message']);
@@ -134,10 +114,7 @@ class _AuthProvider {
 
   static Future<User> update(Map<String, dynamic> body) async {
     try {
-      final resp = await Api.ins.put(
-        '/v1/users/${body['id']}',
-        data: body,
-      );
+      final resp = await Api.ins.put('/v1/users/${body['id']}', data: body);
 
       if (resp.statusCode != 200) {
         throw Exception(resp.data['message']);

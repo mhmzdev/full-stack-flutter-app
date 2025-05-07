@@ -8,9 +8,7 @@ class _StoryProvider {
 
       final stories = List.generate(
         raw.length,
-        (index) => Story.fromJson(
-          raw[index],
-        ),
+        (index) => Story.fromJson(raw[index]),
       );
 
       return stories;
@@ -30,10 +28,7 @@ class _StoryProvider {
 
   static Future<Story> createStory(Map<String, dynamic> body) async {
     try {
-      final resp = await Api.ins.post(
-        '/v1/stories',
-        data: body,
-      );
+      final resp = await Api.ins.post('/v1/stories', data: body);
 
       final raw = resp.data as Map<String, dynamic>;
       final data = raw['data'] as Map<String, dynamic>;
@@ -61,9 +56,7 @@ class _StoryProvider {
       final storyId = body['storyId'] as int;
       final imageUrl = body['imageURL'] as String;
 
-      final resp = await Api.ins.delete(
-        '/v1/stories/$storyId',
-      );
+      final resp = await Api.ins.delete('/v1/stories/$storyId');
 
       FirebaseStorage.instance.refFromURL(imageUrl).delete();
 

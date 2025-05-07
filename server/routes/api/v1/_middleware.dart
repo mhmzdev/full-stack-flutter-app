@@ -1,5 +1,9 @@
 import 'package:dart_frog/dart_frog.dart';
+import 'package:dart_frog_auth/dart_frog_auth.dart';
+import 'package:shared/shared.dart';
 import 'package:stormberry/stormberry.dart';
+
+import 'authy.dart';
 
 /*
 NOTE: This won't be readable while migration in stormberry, so requires
@@ -19,33 +23,17 @@ final database = Database(
   isUnixSocket: false,
 );
 
-Future<Response?> auth(RequestContext context) async {
-  // final env = DotEnv()..load();
-
-  final headers = context.request.headers;
-  final auth = headers['Authorization'];
-  final token = auth?.split(' ').last;
-
-  if (token == null) {
-    return Response.json(
-      statusCode: 401,
-      body: {
-        'message': 'NOT Authorized!',
-      },
-    );
-  }
-
-  // final secretKey = env['JWT_SECRET']!;
-  // final jwt = JWT.verify(token, SecretKey(secretKey));
-  return null;
-
-  // if TOKEN is invalid
-}
-
 Handler middleware(Handler handler) {
   return handler.use(
-    provider<Database>((RequestContext context) {
+    provider<Database>((context) {
       return database;
     }),
+  ).use(
+    bearerAuthentication<User>(
+      authenticator: (context, token) async {
+        final authy = context.read<Authy>();
+        return authy.verifyToken(token);
+      },
+    ),
   );
 }
