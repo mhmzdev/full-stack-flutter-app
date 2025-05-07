@@ -45,7 +45,7 @@ class AuthCubit extends Cubit<AuthState> {
       ));
     } catch (e) {
       await auth.FirebaseAuth.instance.signOut();
-      AppCache.resetUid();
+      AppCache.reset();
 
       emit(state.copyWith(
         fetch: AuthFetchFailed(message: e.toString()),
@@ -81,8 +81,13 @@ class AuthCubit extends Cubit<AuthState> {
         password,
       );
 
+      final user = data.data;
+
+      AppCache.setUid(user.id);
+      AppCache.setToken(data.token);
+
       emit(state.copyWith(
-        user: data,
+        user: data.data,
         login: const AuthLoginSuccess(),
       ));
     } catch (e) {
@@ -199,7 +204,7 @@ class AuthCubit extends Cubit<AuthState> {
     ));
 
     try {
-      AppCache.resetUid();
+      AppCache.reset();
       await auth.FirebaseAuth.instance.signOut();
 
       emit(state.copyWith(

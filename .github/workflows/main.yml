@@ -1,0 +1,55 @@
+name: "Pull Request Labeler"
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review, review_requested, review_request_removed]
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+
+jobs:
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/labeler@v5
+    
+    - name: Remove review labels when approved
+      if: github.event.review.state == 'approved'
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const prNumber = context.payload.pull_request ? context.payload.pull_request.number : context.payload.review.pull_request.number;
+          const labelsToRemove = ['code review required', 'design approval pending'];
+          
+          // Get current labels
+          const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: prNumber
+          });
+          
+          // Check if any labels to remove are present
+          for (const labelName of labelsToRemove) {
+            if (currentLabels.some(label => label.name === labelName)) {
+              console.log(`Removing label: ${labelName}`);
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                name: labelName
+              });
+            }
+          }
+          
+          // Add the approved label if it doesn't exist
+          if (!currentLabels.some(label => label.name === 'approved')) {
+            console.log('Adding approved label');
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              labels: ['approved']
+            });
+          }

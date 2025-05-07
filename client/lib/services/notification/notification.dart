@@ -2,65 +2,48 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:client/services/alice.dart';
+import 'package:client/services/log.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-part 'local.dart';
 part 'configs.dart';
+part 'local.dart';
 
 Future<void> _onBackgroundMessageHandler(RemoteMessage message) async {
   // print("Handling a background message: ${message.notification?.title}");
 }
 
 class AppFCM {
+  static late GlobalKey<NavigatorState> _navigator;
   static final ins = FirebaseMessaging.instance;
 
   static void init(GlobalKey<NavigatorState> state) async {
-    LocalNotification.init();
+    _navigator = state;
+    LocalNotification.init(_navigator);
     await _requestPermission();
-    await ins.setForegroundNotificationPresentationOptions(
-        alert: true, badge: true, sound: true);
+    await AppFCM.ins.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
     FirebaseMessaging.onBackgroundMessage(_onBackgroundMessageHandler);
-  }
-
-  static Future<String?> getToken() {
-    return ins.getToken();
-  }
-
-  static void refreshFCM(String uid) {
-    ins.onTokenRefresh.listen((token) {
-      updateUserFCM(token, uid);
-    }, onError: ((err) {
-      debugPrint('---- FCM Listener Error -----');
-      debugPrint('---- $err -----');
-    }));
-  }
-
-  static void updateUserFCM(String? token, String uid) async {
-    // if (token == null) return;
-
-    // final ref =
-    //     FirebaseFirestore.instance.collection(Collections.users).doc(uid);
-
-    // final doc = await ref.get();
-    // if (doc.exists) {
-    //   await ref.update(
-    //     {'deviceToken': token},
-    //   );
-    // }
+    AppLog.log('Notifications initialized');
   }
 
   static void onReceiveRemoteMessage() async {
     debugPrint('----- Notification listener -----');
     _handleForeground();
     _handleBackground();
-    _handleTerminated();
   }
 
   static void _handleForeground() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       LocalNotification.showNotification(message);
+      final context = _navigator.currentContext;
+      if (context != null && context.mounted) {
+        // NotifyCubit.c(context).updateUnreadNotification(true);
+      }
     });
   }
 
@@ -70,11 +53,20 @@ class AppFCM {
     });
   }
 
-  static void _handleTerminated() async {
-    final message = await AppFCM.ins.getInitialMessage();
-    if (message == null) return;
-
-    LocalNotification.handleNotificationAction(message.data);
+  static Future<String?> updateFCM(String? deviceToken) async {
+    try {
+      String? token;
+      if (Platform.isIOS) {
+        token = await ins.getAPNSToken();
+      } else {
+        token = await ins.getToken();
+      }
+      if (token == deviceToken) return null;
+      return token;
+    } catch (e) {
+      AppLog.log('Error updating FCM: $e');
+      return null;
+    }
   }
 
   static Future<NotificationSettings> _requestPermission() async {
@@ -89,5 +81,9 @@ class AppFCM {
     );
 
     return settings;
+  }
+
+  static Future<NotificationSettings> getNotificationSettings() async {
+    return await ins.getNotificationSettings();
   }
 }

@@ -25,9 +25,6 @@ class _MediaProvider {
         case PictureType.story:
           path = 'users/${profile.id}/stories';
           break;
-        default:
-          path = '';
-          break;
       }
 
       if (file != null) {
@@ -59,7 +56,6 @@ class _MediaProvider {
         final task = await ref.putFile(file);
         url = await task.ref.getDownloadURL();
       }
-
       // if file is null, it means the function is REMOVING image
       // delete image path from storage and return empty URL
       // only for DP and Cover case

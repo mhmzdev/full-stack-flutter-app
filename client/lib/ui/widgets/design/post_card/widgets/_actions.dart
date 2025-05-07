@@ -18,7 +18,7 @@ class _Actions extends StatelessWidget {
             padding: Space.a.t20,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: AppTheme.backgroundLight.withOpacity(0.8),
+              color: AppTheme.backgroundLight.withValues(alpha: 0.8),
               borderRadius: BorderRadius.vertical(
                 bottom: Radius.circular(5.un()),
               ),
@@ -29,15 +29,13 @@ class _Actions extends StatelessWidget {
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: actions(context, post).map((e) {
-                    return GestureDetector(
-                      onTap: e.onTap,
-                      child: Padding(
-                        padding: Space.r.t20,
-                        child: e.icon,
-                      ),
-                    );
-                  }).toList(),
+                  children:
+                      actions(context, post).map((e) {
+                        return GestureDetector(
+                          onTap: e.onTap,
+                          child: Padding(padding: Space.r.t20, child: e.icon),
+                        );
+                      }).toList(),
                 ),
                 Space.y.t10,
                 Row(
@@ -67,7 +65,7 @@ class _Actions extends StatelessWidget {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
                 Space.y.t10,
@@ -83,12 +81,14 @@ class _Actions extends StatelessWidget {
                           TextSpan(
                             text: ' more',
                             style: AppText.s1 + FontWeight.w800,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => AppRoutes.postView.push(
-                                    context,
-                                    arguments: {'post': post},
-                                  ),
-                          )
+                            recognizer:
+                                TapGestureRecognizer()
+                                  ..onTap =
+                                      () => AppRoutes.postView.push(
+                                        context,
+                                        arguments: {'post': post},
+                                      ),
+                          ),
                         ],
                       ),
                     )
@@ -99,7 +99,7 @@ class _Actions extends StatelessWidget {
                 Text(
                   timeago.format(post.createdAt),
                   style: AppText.s1 + AppTheme.grey,
-                )
+                ),
               ],
             ),
           ),

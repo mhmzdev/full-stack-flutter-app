@@ -2,9 +2,7 @@ part of '../home.dart';
 
 class _StoryCard extends StatelessWidget {
   final User user;
-  const _StoryCard({
-    required this.user,
-  });
+  const _StoryCard({required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +33,7 @@ class _StoryCard extends StatelessWidget {
         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
           AppRoutes.storyView.push(
             context,
-            arguments: {
-              'stories': userStories,
-            },
+            arguments: {'stories': userStories},
           );
         });
       },
@@ -65,10 +61,8 @@ class _StoryCard extends StatelessWidget {
                   height: 25.un(),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: AppTheme.backgroundLight.withOpacity(0.8),
-                    border: Border.all(
-                      color: AppTheme.grey,
-                    ),
+                    color: AppTheme.backgroundLight.withValues(alpha: 0.8),
+                    border: Border.all(color: AppTheme.grey),
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(1.un()),
                       bottom: Radius.circular(5.un()),
@@ -85,21 +79,17 @@ class _StoryCard extends StatelessWidget {
                   width: 15.un(),
                   child: ClipRRect(
                     borderRadius: 150.radius(),
-                    child: user.imageURL.isEmpty
-                        ? Image.asset(
-                            StaticAssets.dp,
-                            fit: BoxFit.cover,
-                          )
-                        : CachedNetworkImage(
-                            imageUrl: user.imageURL,
-                            fit: BoxFit.cover,
-                          ),
+                    child:
+                        user.imageURL.isEmpty
+                            ? Image.asset(StaticAssets.dp, fit: BoxFit.cover)
+                            : CachedNetworkImage(
+                              imageUrl: user.imageURL,
+                              fit: BoxFit.cover,
+                            ),
                   ),
                 ),
                 Space.y.t10,
-                Text(
-                  '${user.firstName} ${user.lastName.substring(0, 1)}.',
-                ),
+                Text('${user.firstName} ${user.lastName.substring(0, 1)}.'),
                 Space.y.t30,
               ],
             ),

@@ -13,10 +13,12 @@ class ArrowLeftIconPainter extends CustomPainter {
     path_0.lineTo(size.width * 0.1600000, size.height * 0.5000080);
     path_0.lineTo(size.width * 0.4028000, size.height * 0.7428080);
 
-    Paint paint0Stroke = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = size.width * 0.06000000;
-    paint0Stroke.color = color ?? const Color(0xffABABAB).withOpacity(1.0);
+    Paint paint0Stroke =
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = size.width * 0.06000000;
+    paint0Stroke.color =
+        color ?? const Color(0xffABABAB).withValues(alpha: 1.0);
     paint0Stroke.strokeCap = StrokeCap.round;
     paint0Stroke.strokeJoin = StrokeJoin.round;
     canvas.drawPath(path_0, paint0Stroke);
@@ -29,10 +31,12 @@ class ArrowLeftIconPainter extends CustomPainter {
     path_1.moveTo(size.width * 0.8399960, size.height * 0.5000000);
     path_1.lineTo(size.width * 0.1667968, size.height * 0.5000000);
 
-    Paint paint1Stroke = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = size.width * 0.06000000;
-    paint1Stroke.color = color ?? const Color(0xffABABAB).withOpacity(1.0);
+    Paint paint1Stroke =
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = size.width * 0.06000000;
+    paint1Stroke.color =
+        color ?? const Color(0xffABABAB).withValues(alpha: 1.0);
     paint1Stroke.strokeCap = StrokeCap.round;
     paint1Stroke.strokeJoin = StrokeJoin.round;
     canvas.drawPath(path_1, paint1Stroke);

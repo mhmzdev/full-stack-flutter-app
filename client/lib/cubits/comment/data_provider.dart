@@ -8,9 +8,7 @@ class _CommentProvider {
 
       final comments = List.generate(
         raw.length,
-        (index) => Comment.fromJson(
-          raw[index],
-        ),
+        (index) => Comment.fromJson(raw[index]),
       );
 
       return comments;

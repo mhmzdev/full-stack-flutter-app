@@ -8,7 +8,7 @@ class AppAlice {
   static void init() {
     ins = Alice(
       showNotification: true,
-      notificationIcon: '@drawable/ic_nofitication',
+      notificationIcon: '@drawable/ic_notify',
     );
   }
 
