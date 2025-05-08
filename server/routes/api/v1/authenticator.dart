@@ -4,8 +4,7 @@ import 'package:dart_frog/dart_frog.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:db/db.dart' as db;
 import 'package:shared/shared.dart';
-
-import '_middleware.dart';
+import 'package:stormberry/stormberry.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
@@ -20,14 +19,18 @@ Future<Response> onRequest(RequestContext context) async {
   }
 }
 
-class Authy {
+class Authenticator {
+  Authenticator({required this.database});
+
+  final Database database;
+
   static const String jwtSecret =
       // ignore: lines_longer_than_80_chars
       'JWT SECRET AUTH KEY, I AM SORRY IF THIS GOT HACKED.NOT A PRO BACKEND DEVELOPER XD';
 
-  Future<User?> verifyToken(String? token) async {
+  Future<bool> verifyToken(String? token) async {
     if (token == null) {
-      return null;
+      return false;
     }
 
     final users = await database.users.queryUsers();
@@ -39,11 +42,11 @@ class Authy {
 
     for (final u in users) {
       if (u.id == (payload['uid'] as int)) {
-        return User.fromUserView(u);
+        return true;
       }
     }
 
-    return null;
+    return false;
   }
 
   Future<String> generateToken(User user) async {
