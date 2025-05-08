@@ -32,12 +32,12 @@ Step 2: Fire up the docker app once its installed
 
 Step 3: Run the comment in `server/`
 ```
-docker-compose up -d
+docker compose up -d
 ```
 You should see the following outputs that shows your database has been created and ready to use!
 
 ```
-hamza@M1-Max server % docker-compose up -d
+hamza@M1-Max server % docker compose up -d
 [+] Running 15/1
  ✔ postgres 14 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                   76.5s 
 [+] Running 1/3
