@@ -67,11 +67,7 @@ Future<Response> _update(
   final email = sharedUserTemp.email;
   final password = sharedUserTemp.password;
 
-  final raw = {
-    ...body,
-    'email': email,
-    'password': password,
-  };
+  final raw = {...body, 'email': email, 'password': password};
 
   final user = User.fromJson(raw);
   final newUserName = body['newUserName'] as String;

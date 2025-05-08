@@ -60,7 +60,7 @@ class _AuthProvider {
 
   static Future<UserResponse> login(Map<String, dynamic> body) async {
     try {
-      final resp = await Api.ins.post('/v1/users/auth/login', data: body);
+      final resp = await Api.ins.post('/v1/auth/login', data: body);
 
       if (resp.statusCode != 200) {
         throw Exception(resp.data['message']);
@@ -89,7 +89,7 @@ class _AuthProvider {
 
   static Future<User> register(Map<String, dynamic> body) async {
     try {
-      final resp = await Api.ins.post('/v1/users/auth/register', data: body);
+      final resp = await Api.ins.post('/v1/auth/register', data: body);
 
       if (resp.statusCode != 200) {
         throw Exception(resp.data['message']);
