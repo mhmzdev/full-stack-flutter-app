@@ -1,9 +1,7 @@
 import 'package:dart_frog/dart_frog.dart';
-import 'package:dart_frog_auth/dart_frog_auth.dart';
-import 'package:shared/shared.dart';
 import 'package:stormberry/stormberry.dart';
 
-import 'authy.dart';
+import 'authenticator.dart';
 
 /*
 NOTE: This won't be readable while migration in stormberry, so requires
@@ -24,16 +22,16 @@ final database = Database(
 );
 
 Handler middleware(Handler handler) {
-  return handler.use(
-    provider<Database>((context) {
-      return database;
-    }),
-  ).use(
-    bearerAuthentication<User>(
-      authenticator: (context, token) async {
-        final authy = context.read<Authy>();
-        return authy.verifyToken(token);
-      },
-    ),
-  );
+  final authy = Authenticator(database: database);
+  return handler
+      .use(
+        provider<Authenticator>((context) {
+          return authy;
+        }),
+      )
+      .use(
+        provider<Database>((context) {
+          return database;
+        }),
+      );
 }

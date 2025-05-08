@@ -6,7 +6,7 @@ import 'package:db/db.dart' as db;
 import 'package:shared/shared.dart';
 import 'package:stormberry/stormberry.dart';
 
-import '../authy.dart';
+import '../authenticator.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
@@ -66,7 +66,7 @@ Future<Response> _login(
     );
   }
 
-  final authy = context.read<Authy>();
+  final authy = context.read<Authenticator>();
   final token = await authy.generateToken(User.fromUserView(user));
 
   return Response.json(

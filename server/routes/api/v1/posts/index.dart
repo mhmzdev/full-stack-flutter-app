@@ -37,12 +37,7 @@ Future<Response> _get(RequestContext context) async {
     sharedPosts = dbPosts.map(Post.fromPostView).toList();
   }
 
-  return Response.json(
-    body: {
-      'status': 'success',
-      'data': sharedPosts,
-    },
-  );
+  return Response.json(body: {'status': 'success', 'data': sharedPosts});
 }
 
 Future<Response> _post(
@@ -76,9 +71,6 @@ Future<Response> _post(
   final sharedPost = Post.fromPostView(dbPost!);
 
   return Response.json(
-    body: {
-      'status': 'success',
-      'data': sharedPost.toJson(),
-    },
+    body: {'status': 'success', 'data': sharedPost.toJson()},
   );
 }

@@ -37,7 +37,9 @@ Future<Response> _register(
         statusCode: 205,
         body: {
           'status': 'failed',
-          'message': 'username ${body['username']} is already taken!',
+          'message':
+              // ignore: lines_longer_than_80_chars
+              'username ${body['username']} or email ${body['email']} is already taken!',
         },
       );
     }
@@ -62,10 +64,7 @@ Future<Response> _register(
 
   final id = await database.users.insertOne(request);
 
-  final sharedUser = User.fromJson({
-    ...body,
-    'id': id,
-  });
+  final sharedUser = User.fromJson({...body, 'id': id});
 
   return Response.json(
     body: {
