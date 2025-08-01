@@ -4,8 +4,12 @@ import 'package:client/configs/configs.dart';
 import 'package:flutter/material.dart';
 
 class SnackBars {
-  static failure(BuildContext context, String message,
-      {Color? color, String? title}) {
+  static ScaffoldMessengerState failure(
+    BuildContext context,
+    String message, {
+    Color? color,
+    String? title,
+  }) {
     final snackBar = SnackBar(
       elevation: 0,
       duration: const Duration(seconds: 4),
@@ -24,8 +28,13 @@ class SnackBars {
       ..showSnackBar(snackBar);
   }
 
-  static success(BuildContext context, String message,
-      {Color? color, String? title, ContentType? contentType}) {
+  static ScaffoldMessengerState success(
+    BuildContext context,
+    String message, {
+    Color? color,
+    String? title,
+    ContentType? contentType,
+  }) {
     final snackBar = SnackBar(
       elevation: 0,
       duration: const Duration(seconds: 4),

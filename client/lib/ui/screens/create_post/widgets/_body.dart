@@ -20,7 +20,7 @@ class _Body extends StatelessWidget {
       overlayBuilders: const [
         _MediaListener(),
         _PostListener(),
-        _EditListener()
+        _EditListener(),
       ],
       child: SafeArea(
         child: SingleChildScrollView(
@@ -35,14 +35,11 @@ class _Body extends StatelessWidget {
                   Text(
                     screenState.post != null ? 'Edit Post' : 'Create Post',
                     style: AppText.b1,
-                  )
+                  ),
                 ],
               ),
               Space.y.t60,
-              Avatar(
-                user: user,
-                type: AvatarType.detailed,
-              ),
+              Avatar(user: user, type: AvatarType.detailed),
               Space.y.t30,
               AppMultilineInputField(
                 name: _FormKeys.caption,
@@ -73,52 +70,50 @@ class _Body extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: 12.radius(),
                               image: DecorationImage(
-                                image: FileImage(
-                                  File(media.xFile!.path),
-                                ),
+                                image: FileImage(File(media.xFile!.path)),
                                 fit: BoxFit.cover,
                               ),
                             ),
                           )
                         : screenState.post != null
-                            ? SizedBox(
-                                height: 65.un(),
-                                width: 50.un(),
-                                child: ClipRRect(
-                                  borderRadius: 12.radius(),
-                                  child: CachedNetworkImage(
-                                    imageUrl: screenState.post!.imageUrl,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              )
-                            : DottedBorder(
-                                borderType: BorderType.RRect,
-                                radius: const Radius.circular(12),
-                                strokeWidth: 2,
-                                dashPattern: const [10],
-                                color: AppTheme.grey,
-                                child: SizedBox(
-                                  height: 65.un(),
-                                  width: 50.un(),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Iconsax.gallery_add,
-                                        color: AppTheme.grey,
-                                        size: 12.un(),
-                                      ),
-                                      Space.y.t20,
-                                      Text(
-                                        'Add Photo',
-                                        style: AppText.b3 + AppTheme.grey,
-                                      )
-                                    ],
-                                  ),
-                                ),
+                        ? SizedBox(
+                            height: 65.un(),
+                            width: 50.un(),
+                            child: ClipRRect(
+                              borderRadius: 12.radius(),
+                              child: CachedNetworkImage(
+                                imageUrl: screenState.post!.imageUrl,
+                                fit: BoxFit.cover,
                               ),
+                            ),
+                          )
+                        : DottedBorder(
+                            borderType: BorderType.RRect,
+                            radius: const Radius.circular(12),
+                            strokeWidth: 2,
+                            dashPattern: const [10],
+                            color: AppTheme.grey,
+                            child: SizedBox(
+                              height: 65.un(),
+                              width: 50.un(),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Iconsax.gallery_add,
+                                    color: AppTheme.grey,
+                                    size: 12.un(),
+                                  ),
+                                  Space.y.t20,
+                                  Text(
+                                    'Add Photo',
+                                    style: AppText.b3 + AppTheme.grey,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                   ),
                 ],
               ),
@@ -129,7 +124,9 @@ class _Body extends StatelessWidget {
                   screenState.formKey.currentState!.save();
 
                   final caption = screenState
-                      .formKey.currentState!.value[_FormKeys.caption];
+                      .formKey
+                      .currentState!
+                      .value[_FormKeys.caption];
 
                   if (media.xFile == null && caption == null) return;
 
