@@ -1,7 +1,7 @@
 name: flutteram
 
 environment:
-  sdk: 3.7.2
+  sdk: 3.8.1
 
 dev_dependencies:
-  melos: ^3.4.0
+  melos: 6.3.3

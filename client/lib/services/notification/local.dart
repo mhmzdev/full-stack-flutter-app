@@ -1,11 +1,11 @@
 part of 'notification.dart';
 
 class LocalNotification {
-  static late GlobalKey<NavigatorState> _navigator;
+  // static late GlobalKey<NavigatorState> _navigator;
   static final ins = FlutterLocalNotificationsPlugin();
 
   static void init(GlobalKey<NavigatorState> state) async {
-    _navigator = state;
+    // _navigator = state;
     const initializationSettings = InitializationSettings(
       android: AndroidInitializationSettings('@drawable/ic_notify'),
       iOS: DarwinInitializationSettings(

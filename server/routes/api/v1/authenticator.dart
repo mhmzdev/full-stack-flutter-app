@@ -28,9 +28,9 @@ class Authenticator {
       // ignore: lines_longer_than_80_chars
       'JWT SECRET AUTH KEY, I AM SORRY IF THIS GOT HACKED.NOT A PRO BACKEND DEVELOPER XD';
 
-  Future<bool> verifyToken(String? token) async {
+  Future<int> verifyToken(String? token) async {
     if (token == null) {
-      return false;
+      return -1;
     }
 
     final users = await database.users.queryUsers();
@@ -42,11 +42,11 @@ class Authenticator {
 
     for (final u in users) {
       if (u.id == (payload['uid'] as int)) {
-        return true;
+        return u.id;
       }
     }
 
-    return false;
+    return -1;
   }
 
   Future<String> generateToken(User user) async {

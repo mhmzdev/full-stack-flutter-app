@@ -14,7 +14,7 @@ Handler middleware(Handler handler) {
         }),
       )
       .use(
-        bearerAuthentication<bool>(
+        bearerAuthentication<int>(
           authenticator: (context, token) {
             return authy.verifyToken(token);
           },
